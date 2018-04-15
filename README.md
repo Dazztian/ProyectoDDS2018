@@ -16,3 +16,8 @@ Herramientas colaborativas:
 https://drive.google.com/open?id=10PPqcSJqN0CJicFjxxpY76vfKmDPEJCC
 https://www.lucidchart.com/documents/edit/3d57b928-3bb8-449d-a7df-e92a96564552/0
 https://trello.com/b/X8bjZaPh/tablero-scrum
+
+
+Sitios útiles:
+
+https://www.w3schools.com (Tiene info de como laburar con js y json)
