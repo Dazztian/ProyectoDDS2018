@@ -21,3 +21,5 @@ https://trello.com/b/X8bjZaPh/tablero-scrum
 Sitios útiles:
 
 https://www.w3schools.com (Tiene info de como laburar con js y json)
+http://www.notodocodigo.com/blog/diagrama-de-componentes-y-diagrama-de-distribucion/ 
+http://diagramasdecomponentes.blogspot.com.ar/ (Info. sobre diagrama de componentes y distribucion)
