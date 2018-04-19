@@ -11,11 +11,7 @@ public class Administrador {
 	private String contrasenia;
 	
 	//A la fecha de creacion en el constructor le "resto" lo de abajo.
-	
 	private LocalDateTime fechaActual = LocalDateTime.now( );
-	
-	
-	
 	
 		private int cantMesesAdmin()
 		{

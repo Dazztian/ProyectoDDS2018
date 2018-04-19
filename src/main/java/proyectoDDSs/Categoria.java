@@ -1,21 +1,20 @@
 package proyectoDDSs;
 
-import proyectoDDSs.Cliente;
-
-public abstract class Categoria {
+public class Categoria {
 	
 	protected float cargoFijo;
 	protected float cargoAdicional;
 	
-	
-	protected float estimativoFacturacion(Cliente unCliente)
-	{
-	return cargoFijo + (cargoAdicional *1/*lo que consumió cada dispositivo*/) ;	
+	public Categoria(float cargoFijo,float cargoAdicional) {
+		this.cargoFijo=cargoFijo;
+		this.cargoAdicional=cargoAdicional;
 	}
 	
-	public Categoria() {
-		// TODO Auto-generated constructor stub
+	protected float estimativoFacturacion(Cliente unCliente){
+		return cargoFijo + (cargoAdicional*unCliente.consumoMensual()/*lo que consumió cada dispositivo*/) ;	
 	}
+	
+	
 }
 
 //Los demas casos de categorias van a hacer instancias de la original.
@@ -23,5 +22,5 @@ public abstract class Categoria {
 /*protected float estimativoFacturacion(Cliente unCliente)
 {
 	//A lo que consumio cada dispositivo x hora debo multiplicarle el cargoAdicional
-return cargoFijo + (cargoAdicional *1/*lo que consumió cada dispositivo*/) ;	
-}
+return cargoFijo + (cargoAdicional *1/*lo que consumió cada dispositivo) ;	
+}*/
