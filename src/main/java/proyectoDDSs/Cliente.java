@@ -16,7 +16,9 @@ public class Cliente {
 	private Date fechaAlta;
 	protected ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
-	//Constructor a desarrollar
+	//Los clientes tienen una categoria
+	protected CategoriaR1 categoria; 
+	
 	//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
 	public Cliente(String nombre,String apellido,String tipoDocumento,int documento,int telefono,String domicilio,GregorianCalendar fecha) {
 		this.nombre=nombre;
@@ -25,8 +27,19 @@ public class Cliente {
 		this.numeroDocumento=documento;
 		this.telefono=telefono;
 		this.domicilio=domicilio;
-		this.fechaAlta=fecha.getTime(); //getTime devuelve una fecha del tipo Date
+		this.fechaAlta=fecha.getTime();//getTime devuelve una fecha del tipo Date
+		this.obtenerCategoria();
 	}
+	protected void obtenerCategoria()
+	{	//Setea el tipo de categoria del cliente basado en su consumo.
+		if(this.consumoMensual()<=150) {CategoriaR1 categoria;}
+		if(this.consumoMensual()>150 && this.consumoMensual()<=325) {CategoriaR2 categoria;}
+		//Seguir desarrollando las demás
+	}
+	
+	protected void estimativoFacturacion()
+	{ this.categoria.CalcularMonto(categoria.cargoFijo, categoria.cargoAdicional, this.consumoMensual()); }
+		
 	
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
 	protected void addDispositivo(Dispositivo dispo) {
@@ -46,7 +59,6 @@ public class Cliente {
 				 collect(Collectors.toList()).
 				 size();
 	}
-	
 	protected int cantDispositivosApagados()
 	{
 		 return 
@@ -57,12 +69,12 @@ public class Cliente {
 	}
 	//la cantidad total de dispositivos la podemos saber directamente de la lista de dispositivos 
 	protected int cantDispositivos() {
-		return dispositivos.size();//this.cantDispositivosEncendidos() + this.cantDispositivosApagados();
+		return dispositivos.size();
 	}
 	
-	protected float consumoMensual()
+	protected double consumoMensual()
 	{
-		//A cada cliente le calculo cuanto consume cada dispositivo
+		//Al cliente le calculo cuanto consume cada dispositivo
 		//Sumo uno a uno su consumo y luego devuelvo el resultado
 		return 
 				dispositivos.stream().
