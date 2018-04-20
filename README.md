@@ -24,3 +24,5 @@ https://www.w3schools.com (Tiene info de como laburar con js y json)
 http://www.notodocodigo.com/blog/diagrama-de-componentes-y-diagrama-de-distribucion/ 
 http://diagramasdecomponentes.blogspot.com.ar/ (Info. sobre diagrama de componentes y distribucion)
 https://ingenieriadesoftwareutmachala.wordpress.com/2017/01/20/requerimientos-funcionales-y-no-funcionales/ (info de requerimientos)
+
+https://www.journaldev.com/1751/state-design-pattern-java
