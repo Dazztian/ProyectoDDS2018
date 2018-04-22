@@ -20,9 +20,15 @@ https://trello.com/b/X8bjZaPh/tablero-scrum
 
 Sitios útiles:
 
-https://www.w3schools.com (Tiene info de como laburar con js y json)
 http://www.notodocodigo.com/blog/diagrama-de-componentes-y-diagrama-de-distribucion/ 
 http://diagramasdecomponentes.blogspot.com.ar/ (Info. sobre diagrama de componentes y distribucion)
 https://ingenieriadesoftwareutmachala.wordpress.com/2017/01/20/requerimientos-funcionales-y-no-funcionales/ (info de requerimientos)
 
-https://www.journaldev.com/1751/state-design-pattern-java
+*JSON, 
+https://www.w3schools.com (Tiene info de como laburar con js y json)
+http://jason.sourceforge.net/mini-tutorial/eclipse-plugin/ (Como instalarlo)
+https://crunchify.com/how-to-read-json-object-from-file-in-java/ (Como leer Json)
+https://stackoverflow.com/questions/31728446/write-a-json-file-in-java (Como escribir JSON)
+
+
+*Patrones de diseño, https://www.journaldev.com/1751/state-design-pattern-java
