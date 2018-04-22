@@ -1,0 +1,86 @@
+package proyectoDDSs;
+
+import proyectoDDSs.Dispositivo;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Cliente {
+	
+	private String nombre;
+	private String apellido;
+	private int numeroDocumento;
+	private String tipoDocumento;
+	private int telefono;
+	private String domicilio;
+	private Date fechaAlta;
+	protected ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	
+	//Los clientes tienen una categoria
+	protected CategoriaR1 categoria; 
+	
+	//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
+	public Cliente(String nombre,String apellido,String tipoDocumento,int documento,int telefono,String domicilio,GregorianCalendar fecha) {
+		this.nombre=nombre;
+		this.apellido=apellido;
+		this.tipoDocumento=tipoDocumento;
+		this.numeroDocumento=documento;
+		this.telefono=telefono;
+		this.domicilio=domicilio;
+		this.fechaAlta=fecha.getTime();//getTime devuelve una fecha del tipo Date
+		this.obtenerCategoria();
+	}
+	protected void obtenerCategoria()
+	{	//Setea el tipo de categoria del cliente basado en su consumo.
+		if(this.consumoMensual()<=150) {CategoriaR1 categoria;}
+		if(this.consumoMensual()>150 && this.consumoMensual()<=325) {CategoriaR2 categoria;}
+		//Seguir desarrollando las demás
+	}
+	
+	protected void estimativoFacturacion()
+	{ this.categoria.CalcularMonto(categoria.cargoFijo, categoria.cargoAdicional, this.consumoMensual()); }
+		
+	
+	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
+	protected void addDispositivo(Dispositivo dispo) {
+		dispositivos.add(dispo);
+	}
+	
+	
+	protected boolean algunDispositivoEncendido() 
+	{
+		return dispositivos.stream().anyMatch(dispositivo-> dispositivo.estaEncendido());
+	}
+	protected int cantDispositivosEncendidos() 
+	{
+		 return 
+				 dispositivos.stream().
+				 filter(dispositivo-> dispositivo.estaEncendido()).
+				 collect(Collectors.toList()).
+				 size();
+	}
+	protected int cantDispositivosApagados()
+	{
+		 return 
+				 dispositivos.stream().
+				 filter(dispositivo-> !dispositivo.estaEncendido()).
+				 collect(Collectors.toList()).
+				 size();
+	}
+	//la cantidad total de dispositivos la podemos saber directamente de la lista de dispositivos 
+	protected int cantDispositivos() {
+		return dispositivos.size();
+	}
+	
+	protected double consumoMensual()
+	{
+		//Al cliente le calculo cuanto consume cada dispositivo
+		//Sumo uno a uno su consumo y luego devuelvo el resultado
+		return 
+				dispositivos.stream().
+				mapToInt( elem -> elem.kwhConsumeXHora())
+				.sum();
+	}
+	
+	
+}
