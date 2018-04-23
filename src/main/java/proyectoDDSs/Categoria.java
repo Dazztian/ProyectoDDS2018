@@ -9,8 +9,8 @@ public class Categoria {
 	{ return  (cargoFijo + (CargoVariable * consumoMensual)) ;}
 		
 	//Constructor
-		public Categoria(double cargoFijo,double cargoAdicional) {
-			this.cargoFijo=cargoFijo;
-			this.cargoAdicional=cargoAdicional;
-		}
+	public Categoria(double cargoFijo,double cargoAdicional) {
+		this.cargoFijo=cargoFijo;
+		this.cargoAdicional=cargoAdicional;
+	}
 }

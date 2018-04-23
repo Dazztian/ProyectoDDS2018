@@ -17,7 +17,7 @@ public class Cliente {
 	protected ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	//Los clientes tienen una categoria
-	protected CategoriaR1 categoria; 
+	protected Categoria categoria; 
 	
 	//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
 	public Cliente(String nombre,String apellido,String tipoDocumento,int documento,int telefono,String domicilio,GregorianCalendar fecha) {
@@ -32,9 +32,10 @@ public class Cliente {
 	}
 	protected void obtenerCategoria()
 	{	//Setea el tipo de categoria del cliente basado en su consumo.
-		if(this.consumoMensual()<=150) {CategoriaR1 categoria;}
-		if(this.consumoMensual()>150 && this.consumoMensual()<=325) {CategoriaR2 categoria;}
-		//Seguir desarrollando las demás
+		//if (this.consumoMensual() 
+		//if(this.consumoMensual()<=150) {CategoriaR1 categoria;}
+		//if(this.consumoMensual()>150 && this.consumoMensual()<=325) {CategoriaR2 categoria;}
+		//Seguir desarrollando las demï¿½s
 	}
 	
 	protected void estimativoFacturacion()

@@ -1,12 +1,12 @@
 package proyectoDDSs;
 
-public class DispositivoEncendido implements DispositivoEstado {
+public class EstadoEncendido implements EstadoDispositivo {
 
 	@Override
 	public boolean estaEncendido() {return true;}
 
 	@Override
-	//Acá le cargamos lo que diga el JSON
+	//Acï¿½ le cargamos lo que diga el JSON
 	public int kwhConsumeXHora() {
 		return 0;
 	}

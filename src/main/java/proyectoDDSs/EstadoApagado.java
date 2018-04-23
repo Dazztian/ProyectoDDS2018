@@ -1,6 +1,6 @@
 package proyectoDDSs;
 
-public class DispositivoApagado implements DispositivoEstado {
+public class EstadoApagado implements EstadoDispositivo {
 
 	@Override
 	public boolean estaEncendido() {return false;}

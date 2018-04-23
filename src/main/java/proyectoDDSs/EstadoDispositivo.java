@@ -1,6 +1,6 @@
 package proyectoDDSs;
 
-public interface DispositivoEstado {
+public interface EstadoDispositivo {
 	
 	boolean estaEncendido();
 	int kwhConsumeXHora() ;
