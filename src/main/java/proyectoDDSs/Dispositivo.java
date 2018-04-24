@@ -3,21 +3,21 @@ package proyectoDDSs;
 public class Dispositivo {
 	
 	private String nombre;
-	private EstadoDispositivo estado; 
-	protected int kwhConsumeXHora; //cheuqear que onda si es un valor fijo
+	//private EstadoDispositivo estado;
+	private boolean estado;
+	protected long kwhConsumeXHora; 
 	
-	public Dispositivo(String unNombre, EstadoDispositivo unEstado,int electricidadQConsume)
+	public Dispositivo(String unNombre, boolean unEstado,long electricidadQConsume)
 	{
-		//Le seteamos los datos del JSON
 		estado= unEstado;
 		nombre= unNombre;
 		kwhConsumeXHora = electricidadQConsume;
 	}
+	protected boolean estaEncendido() {return this.estado;}
+	protected int kwhConsumeXHora(){ if(estado) {return (int) this.kwhConsumeXHora; } else return 0;}
 	
-	protected boolean estaEncendido() {  return this.estado.estaEncendido(); }
-	
-	protected int kwhConsumeXHora()
-	{ return this.estado.kwhConsumeXHora();	}
+	//protected boolean estaEncendido() {  return this.estado.estaEncendido(); }
+	//protected int kwhConsumeXHora(){ return this.estado.kwhConsumeXHora();	}
 	
 	
 

@@ -9,12 +9,13 @@ import org.json.simple.parser.JSONParser;
 public class jason {
 	
 	//@SuppressWarnings("unchecked")
-    public static void main(String[] args) {
+	public static void main(String[] args) {
         JSONParser parser = new JSONParser();
  
         try {
- 
-        	 JSONArray arrayJSON = (JSONArray) parser.parse(new FileReader("C:\\Users\\FedeHazama\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\categorias.json"));
+
+        	 JSONArray a = (JSONArray) parser.parse(new FileReader("C:\\Users\\PC\\Desktop\\mis cosas\\UTN\\2018\\Materias\\DISEÑO\\TP\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\categorias.json"));
+
  
         	 for (Object object : arrayJSON)
         	  {
