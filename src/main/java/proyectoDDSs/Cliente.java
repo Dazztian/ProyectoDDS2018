@@ -36,10 +36,8 @@ public class Cliente {
 	protected void estimativoFacturacion()
 	{ this.categoria.CalcularMonto(categoria.cargoFijo, categoria.cargoAdicional, this.consumoMensual()); }
 		
-	
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
 	protected void addDispositivo(Dispositivo dispo) {dispositivos.add(dispo);}
-	
 	
 	protected boolean algunDispositivoEncendido() 
 	{
