@@ -8,12 +8,12 @@
 	"domicilio" : "SiempreAlegre478",
 	"dispositivos": 
 		[{
-		"nombre":"microondas","estado": true,"kwhConsumeXHora":45
+		"nombreDispo":"microondas","estado": true,"kwhConsumeXHora":45
 		}],
 	"categoria":
-		[{
-		"categoria" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
-		}]	
+		{
+		"tipo" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
+		}	
  	},
  	{
 		"nombre": "martin",
@@ -27,8 +27,8 @@
 		"nombreDispo":"microondas","estado": false,"kwhConsumeXHora":1000
 		}],
 	"categoria":
-		[{
-		"categoriaTipo" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
-		}]	
+		{
+		"tipo" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
+		}	
  	}
 ]

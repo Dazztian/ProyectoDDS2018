@@ -14,12 +14,12 @@ public class JsonCliente {
 		{
 	        JSONParser parser = new JSONParser();
 	 	        try {
-	 	        	 JSONArray a = (JSONArray) parser.parse(new FileReader("C:\\Users\\PC\\Desktop\\mis cosas\\UTN\\2018\\Materias\\DISEÑO\\TP\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\Clientes.json"));
+	 	        	 JSONArray a = (JSONArray) parser.parse(new FileReader("c:\\Users\\FedeHazama\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\Clientes.json"));
 	 	        	ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	 	        	 for (Object o : a)
 	        	  {
 	        	    JSONObject cliente = (JSONObject) o;
-	        	    //Lo que está en Objeto.get("nombre") debe coincidir con el nombre "" del JSON!
+	        	    //Lo que estï¿½ en Objeto.get("nombre") debe coincidir con el nombre "" del JSON!
 	        	    String nombre = (String) cliente.get("nombre");
 	        	    String apellido = (String) cliente.get("apellido");
 	        	    String tipoDocumento = (String) cliente.get("tipoDocumento");
@@ -39,7 +39,7 @@ public class JsonCliente {
 	        	    
 	        	    JSONArray dispositivos = (JSONArray) cliente.get("dispositivos");
 	        	    
-	        	    //Creo la list dónde guardaré todos los dispositivos que voy a levantar del JSON
+	        	    //Creo la list dï¿½nde guardarï¿½ todos los dispositivos que voy a levantar del JSON
 	        	    ArrayList<Dispositivo> listaDispositivos = new ArrayList<Dispositivo>();	
 	        	    
 	        	    for (Object d :dispositivos)
@@ -58,35 +58,28 @@ public class JsonCliente {
 		        	    	        	    
 		        	}
 	        	    //Resuelvo la categoria asociada al cliente
-	        	    JSONArray categoria = (JSONArray) cliente.get("categoria");
-	        	    ArrayList<Categoria> categoriaCliente = new ArrayList<Categoria>();
-	        	    for (Object c :categoria)
-	        	    {
-	        	    	 JSONObject cat = (JSONObject) c;
-	        	    	 String categoriaTipo = (String) cat.get("categoriaTipo");
-	        	    	 double cargoFijo = (double) cat.get("cargoFijo");
-	        	    	 double cargoVariable = (double) cat.get("cargoVariable");
-	        	    	 
-	        	    	  System.out.println(categoriaTipo);
-			        	  System.out.println(cargoFijo);
-			        	  System.out.println(cargoVariable);
-			        	  
-			        	  categoriaCliente.add(new Categoria(categoriaTipo,cargoFijo,cargoVariable));
-	        	    	
-	        	    }
-	        	    	 
 	        	    
-	        	  
+	        	    JSONObject cat = (JSONObject) cliente.get("categoria");;
+	        	    String categoriaTipo = (String) cat.get("tipo");
+	        	    double cargoFijo = (double) cat.get("cargoFijo");
+	        	    double cargoVariable = (double) cat.get("cargoVariable");
+	        	    	 
+	        	    System.out.println(categoriaTipo);
+			        System.out.println(cargoFijo);
+			        System.out.println(cargoVariable);
+			        	  
+			        Categoria categoriaCliente=(new Categoria(categoriaTipo,cargoFijo,cargoVariable));
+	        
 	        	   clientes.add( new Cliente (nombre,apellido,tipoDocumento,numeroDocumento,telefono,domicilio, listaDispositivos, categoriaCliente));
 	        	   }	        	    
-	        } //Acá termina el try
+	        } //Acï¿½ termina el try
 	 	        catch (Exception e) { e.printStackTrace(); }
 	 	        
         	    
 
 	 	            
 	 	        
-		}//Acá termina el main
+		}//Acï¿½ termina el main
 		
 }
 

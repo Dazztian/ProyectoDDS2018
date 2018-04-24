@@ -14,10 +14,10 @@ public class jason {
  
         try {
 
-        	 JSONArray a = (JSONArray) parser.parse(new FileReader("C:\\Users\\PC\\Desktop\\mis cosas\\UTN\\2018\\Materias\\DISEÑO\\TP\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\categorias.json"));
+        	 JSONArray a = (JSONArray) parser.parse(new FileReader("C:\\Users\\PC\\Desktop\\mis cosas\\UTN\\2018\\Materias\\DISEï¿½O\\TP\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\categorias.json"));
 
  
-        	 for (Object object : arrayJSON)
+        	 for (Object object : a)
         	  {
         	    JSONObject categoria = (JSONObject) object;
 

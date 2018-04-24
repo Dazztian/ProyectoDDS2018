@@ -21,7 +21,7 @@ public class Cliente {
 	
 	//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
 	public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
-			domicilio,ArrayList<Dispositivo> unosDispositivos/*,GregorianCalendar fecha*/,ArrayList<Categoria> unaCategoria) {
+			domicilio,ArrayList<Dispositivo> unosDispositivos/*,GregorianCalendar fecha*/,Categoria unaCategoria) {
 		this.nombre=nombre;
 		this.apellido=apellido;
 		this.tipoDocumento=tipoDocumento;
@@ -67,7 +67,7 @@ public class Cliente {
 	protected double consumoMensual()
 	{
 		//Al cliente le calculo cuanto consume cada dispositivo sumo uno a uno su consumo y luego devuelvo el resultado,
-		//Se realiza el cálculo suponiendo que están siempre funcionando.
+		//Se realiza el cï¿½lculo suponiendo que estï¿½n siempre funcionando.
 		return 
 				dispositivos.stream().
 				mapToInt( elem -> elem.kwhConsumeXHora())
