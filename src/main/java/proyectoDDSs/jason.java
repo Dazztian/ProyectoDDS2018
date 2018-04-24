@@ -14,11 +14,11 @@ public class jason {
  
         try {
  
-        	 JSONArray a = (JSONArray) parser.parse(new FileReader("C:\\Users\\P4BLO\\Desktop\\ProyectoDDS2018-Entrega0\\src\\main\\java\\proyectoDDSs\\datos.json"));
+        	 JSONArray arrayJSON = (JSONArray) parser.parse(new FileReader("C:\\Users\\FedeHazama\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\categorias.json"));
  
-        	 for (Object o : a)
+        	 for (Object object : arrayJSON)
         	  {
-        	    JSONObject categoria = (JSONObject) o;
+        	    JSONObject categoria = (JSONObject) object;
 
         	    String nombreCategoria = (String) categoria.get("categoria");
         	    System.out.println(nombreCategoria);
@@ -28,7 +28,8 @@ public class jason {
 
         	    Double cargoVariable = (Double) categoria.get("cargoVariable");
         	    System.out.println(cargoVariable + "\n");
-
+        	    
+        	    
         	  }
  
         } catch (Exception e) {
