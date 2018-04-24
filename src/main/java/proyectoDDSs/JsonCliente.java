@@ -14,7 +14,7 @@ public class JsonCliente {
 		{
 	        JSONParser parser = new JSONParser();
 	 	        try {
-	 	        	 JSONArray a = (JSONArray) parser.parse(new FileReader("c:\\Users\\FedeHazama\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\Clientes.json"));
+	 	        	 JSONArray a = (JSONArray) parser.parse(new FileReader("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\Clientes.json"));
 	 	        	ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	 	        	 for (Object o : a)
 	        	  {
