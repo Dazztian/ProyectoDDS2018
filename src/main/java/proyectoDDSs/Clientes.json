@@ -28,7 +28,7 @@
 		}],
 	"categoria":
 		[{
-		"categoria" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
+		"categoriaTipo" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
 		}]	
  	}
 ]

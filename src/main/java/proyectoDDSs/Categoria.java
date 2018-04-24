@@ -2,6 +2,7 @@ package proyectoDDSs;
 
 public class Categoria {
 	
+	protected String tipo;
 	protected double cargoFijo;
 	protected double cargoAdicional;
 		
@@ -9,7 +10,8 @@ public class Categoria {
 	{ return  (cargoFijo + (CargoVariable * consumoMensual)) ;}
 		
 	//Constructor
-	public Categoria(double cargoFijo,double cargoAdicional) {
+	public Categoria(String unTipo,double cargoFijo,double cargoAdicional) {
+		this.tipo=unTipo;
 		this.cargoFijo=cargoFijo;
 		this.cargoAdicional=cargoAdicional;
 	}

@@ -50,17 +50,34 @@ public class JsonCliente {
 		        	    boolean estado = (boolean) dispo.get("estado");
 		        	    long kwhConsumeXHora = (long) dispo.get("kwhConsumeXHora");
 		        	    
-		        	    
 		        	    System.out.println(nombreDispo);
 		        	    System.out.println(estado);
-		        	    System.out.println(kwhConsumeXHora);
-	        	    		        	    
+		        	    System.out.println(kwhConsumeXHora);        	    
 		        	            	    
 		        	    listaDispositivos.add( new Dispositivo(nombreDispo,estado,kwhConsumeXHora) );
 		        	    	        	    
 		        	}
+	        	    //Resuelvo la categoria asociada al cliente
+	        	    JSONArray categoria = (JSONArray) cliente.get("categoria");
+	        	    ArrayList<Categoria> categoriaCliente = new ArrayList<Categoria>();
+	        	    for (Object c :categoria)
+	        	    {
+	        	    	 JSONObject cat = (JSONObject) c;
+	        	    	 String categoriaTipo = (String) cat.get("categoriaTipo");
+	        	    	 double cargoFijo = (double) cat.get("cargoFijo");
+	        	    	 double cargoVariable = (double) cat.get("cargoVariable");
+	        	    	 
+	        	    	  System.out.println(categoriaTipo);
+			        	  System.out.println(cargoFijo);
+			        	  System.out.println(cargoVariable);
+			        	  
+			        	  categoriaCliente.add(new Categoria(categoriaTipo,cargoFijo,cargoVariable));
+	        	    	
+	        	    }
+	        	    	 
+	        	    
 	        	  
-	        	   clientes.add( new Cliente (nombre,apellido,tipoDocumento,numeroDocumento,telefono,domicilio, listaDispositivos));
+	        	   clientes.add( new Cliente (nombre,apellido,tipoDocumento,numeroDocumento,telefono,domicilio, listaDispositivos, categoriaCliente));
 	        	   }	        	    
 	        } //Acá termina el try
 	 	        catch (Exception e) { e.printStackTrace(); }
