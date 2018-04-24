@@ -1,7 +1,12 @@
 package proyectoDDSs;
 
 import java.util.*;
+
+import static org.junit.Assert.assertEquals;
+
 import java.io.FileReader;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -14,7 +19,7 @@ public class JsonCliente {
 		{
 	        JSONParser parser = new JSONParser();
 	 	        try {
-	 	        	 JSONArray a = (JSONArray) parser.parse(new FileReader("c:\\Users\\FedeHazama\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\Clientes.json"));
+	 	        	JSONArray a = (JSONArray) parser.parse(new FileReader("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\Clientes.json"));
 	 	        	ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	 	        	 for (Object o : a)
 	        	  {
@@ -76,7 +81,7 @@ public class JsonCliente {
 	 	        catch (Exception e) { e.printStackTrace(); }
 	 	        
         	    
-
+	 	      
 	 	            
 	 	        
 		}//Ac� termina el main

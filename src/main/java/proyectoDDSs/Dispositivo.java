@@ -3,7 +3,6 @@ package proyectoDDSs;
 public class Dispositivo {
 	
 	private String nombre;
-	//private EstadoDispositivo estado;
 	private boolean estado;
 	protected long kwhConsumeXHora; 
 	
@@ -15,11 +14,5 @@ public class Dispositivo {
 	}
 	protected boolean estaEncendido() {return this.estado;}
 	protected int kwhConsumeXHora(){ if(estado) {return (int) this.kwhConsumeXHora; } else return 0;}
-	
-	//protected boolean estaEncendido() {  return this.estado.estaEncendido(); }
-	//protected int kwhConsumeXHora(){ return this.estado.kwhConsumeXHora();	}
-	
-	
-
 
 }
