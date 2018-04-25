@@ -33,6 +33,8 @@ public class JsonCliente {
 	        	    long numeroDocumento = (long) cliente.get("numeroDocumento");
 	        	    long telefono = (long) cliente.get("telefono");
 	        	    String domicilio = (String) cliente.get("domicilio");
+	        	    String fechaAlta =(String) cliente.get("fechaAlta");
+	        	    Calendar fechaObtenida= ISO8601.toCalendar(fechaAlta);
 
 	        	    //Imprimo los datos que acabo de agarrar del JSON, lo hago para ver que 
 	        	    //los datos se levantaron correctamente.
@@ -77,7 +79,7 @@ public class JsonCliente {
 			        	  
 			        Categoria categoriaCliente=(new Categoria(categoriaTipo,cargoFijo,cargoVariable));
 	        
-	        	   clientes.add( new Cliente (nombre,apellido,tipoDocumento,numeroDocumento,telefono,domicilio, listaDispositivos, categoriaCliente));
+		        	  clientes.add( new Cliente (nombre,apellido,tipoDocumento,numeroDocumento,telefono,domicilio, listaDispositivos,fechaObtenida, categoriaCliente));
 	        	   }	        	    
 	        } //Ac� termina el try
 	 	        catch (Exception e) { e.printStackTrace(); }

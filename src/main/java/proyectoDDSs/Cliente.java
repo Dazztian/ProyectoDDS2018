@@ -15,29 +15,31 @@ public class Cliente {
 	private String domicilio;
 	private String usuario;
 	private String contrasenia;
-	//private Date fechaAlta;
+	//pattern "yyyy-MM-dd'T'HH:mm:ssZ" to be ISO8601
+	private Calendar fechaAlta;
 	protected ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
-	
+		
 	//Los clientes tienen una categoria
 	protected Categoria categoria; 
-	
-	//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
-	public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
-			domicilio,ArrayList<Dispositivo> unosDispositivos/*,GregorianCalendar fecha*/,Categoria unaCategoria) {
-		this.nombre=nombre;
-		this.apellido=apellido;
-		this.tipoDocumento=tipoDocumento;
-		this.numeroDocumento=documento;
-		this.telefono=telefono;
-		this.domicilio=domicilio;
-		//this.fechaAlta=fecha.getTime();//getTime devuelve una fecha del tipo Date
-		this.dispositivos=unosDispositivos;
-		this.categoria = unaCategoria;
-	}
+		
+		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
+		public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
+				domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria) {
+			this.nombre=nombre;
+			this.apellido=apellido;
+			this.tipoDocumento=tipoDocumento;
+			this.numeroDocumento=documento;
+			this.telefono=telefono;
+			this.domicilio=domicilio;
+			this.fechaAlta = unaFecha;
+			this.dispositivos=unosDispositivos;
+			this.categoria = unaCategoria;
+		}
 	public ArrayList<Dispositivo> dispositivos() {return dispositivos;}
 	
 	public double estimativoFacturacion()
-	{ return(categoria.getCargoFijo() + (categoria.getCargoAdicional() * this.consumoMensual())); }
+	{ return
+			categoria.getCargoFijo() + (categoria.getCargoAdicional() * this.consumoMensual()); }
 		
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
 	public void addDispositivo(Dispositivo dispo) {dispositivos.add(dispo);}

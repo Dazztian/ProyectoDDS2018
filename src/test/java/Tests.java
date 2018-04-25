@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
 import java.time.*;
 import java.util.*;
 
@@ -10,13 +11,32 @@ import proyectoDDSs.Administrador;
 import proyectoDDSs.Categoria;
 import proyectoDDSs.Cliente;
 import proyectoDDSs.Dispositivo;
+import proyectoDDSs.ISO8601;
+
 
 public class Tests {
 	//Creo un par de instancias
-	private Cliente pepe = new Cliente("pepe","gonzales","dni",4012939,40239401,"Yrigoyen",
-			new ArrayList<Dispositivo>(),new Categoria("R1",18.56,0.86));
-	private Cliente rosa = new Cliente("rosa","Perez","dni",4012339,40239401,"Yrigoyen",
-			new ArrayList<Dispositivo>(),new Categoria("R2",21.36,1.2));
+	private Cliente pepe;
+	private Cliente rosa;
+
+	public Tests() {
+		try {
+			pepe=new Cliente("pepe","gonzales","dni",4012939,40239401,"Yrigoyen",
+					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),new Categoria("R1",18.56,0.86));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			rosa=new Cliente("rosa","Perez","dni",4012339,40239401,"Yrigoyen",
+					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-02-01T12:00:00+01:00"),new Categoria("R2",21.36,1.2));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	private Dispositivo dispositivo1 = new Dispositivo("Heladera",true,50);
 	private Dispositivo dispositivo2 = new Dispositivo("TV",true,50);
 	private Dispositivo dispositivo3 = new Dispositivo("Aire",true,100);
@@ -31,9 +51,9 @@ public class Tests {
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
 			rosa.addDispositivo(dispositivo4);
-			assertEquals(200, rosa.consumoMensual(), 0);
-		
+			assertEquals(200, rosa.consumoMensual(), 0);		
 	}
+	
 	
 	@Test
 		public void estimativoFacturacionDeRosa() {
@@ -42,18 +62,15 @@ public class Tests {
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
 			rosa.addDispositivo(dispositivo4);
-			assertEquals(261.36, rosa.estimativoFacturacion(), 0);
-	
+			assertEquals(261.36, rosa.estimativoFacturacion(), 0);	
 }
-	
-	@Test
+		@Test
 	 	public void testCantDispositivos()	{
 		 //Le agrego los dispositivos y testeo la cantidad de dispositivos que tiene Rosa
 		 	rosa.addDispositivo(dispositivo1);
 		 	rosa.addDispositivo(dispositivo2);
 		 	rosa.addDispositivo(dispositivo3);
-		 	assertEquals(3,rosa.cantDispositivos());
-		 
+		 	assertEquals(3,rosa.cantDispositivos());		 
 	 }
 	
 	@Test
