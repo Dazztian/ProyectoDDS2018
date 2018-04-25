@@ -22,14 +22,20 @@ public class Administrador {
 		fechaCreacion=LocalDateTime.now();
 		
 	}
-		private long cantMesesAdmin()
+		public long cantMesesAdmin()
 		{
 			LocalDateTime fechaActual=LocalDateTime.now();
 			Duration duration = Duration.between(fechaActual, fechaCreacion);
 		    //Diferencia en cantDeDias -- Lo divido por 30 para que tire los meses
-			return Math.abs(duration.toDays()/30);
+			return (long)Math.abs(duration.toDays()/30); //Hago un casteo para que no me de nº con coma
 		   
 		}
-				
+		
+		//Metodo auxiliar para el test
+		public long cantMesesAdmin(LocalDateTime fechaActual) {
+			Duration duracion=Duration.between(fechaActual, fechaCreacion);
+			return (long)Math.abs(duracion.toDays()/30);
+		}
+		
 	
 }
