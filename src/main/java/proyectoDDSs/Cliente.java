@@ -13,6 +13,8 @@ public class Cliente {
 	private String tipoDocumento;
 	private long telefono;
 	private String domicilio;
+	private String usuario;
+	private String contrasenia;
 	//private Date fechaAlta;
 	protected ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	

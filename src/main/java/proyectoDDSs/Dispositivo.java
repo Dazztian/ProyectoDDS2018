@@ -12,6 +12,7 @@ public class Dispositivo {
 		nombre= unNombre;
 		kwhConsumeXHora = electricidadQConsume;
 	}
+	public void setEstado(boolean unEstado) {estado = unEstado;};
 	protected boolean estaEncendido() {return this.estado;}
 	public int kwhConsumeXHora(){ if(estado) {return (int) this.kwhConsumeXHora; } else return 0;}
 
