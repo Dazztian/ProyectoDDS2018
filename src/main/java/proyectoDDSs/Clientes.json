@@ -1,34 +1,34 @@
 [
 	{
 		"nombre": "Juan",
-	"apellido" : "Reynoso",
-	"numeroDocumento" : 45876294,
-	"tipoDocumento" :"dni",
-	"telefono":78789868,
-	"domicilio" : "SiempreAlegre478",
-	"dispositivos": 
-		[{
-		"nombreDispo":"microondas","estado": true,"kwhConsumeXHora":45
-		}],
-	"categoria":
-		{
-		"tipo" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
-		}	
+		"apellido" : "Reynoso",
+		"numeroDocumento" : 45876294,
+		"tipoDocumento" :"dni",
+		"telefono":78789868,
+		"domicilio" : "SiempreAlegre478",
+		"dispositivos": 
+			[{
+			"nombreDispo":"microondas","estado": true,"kwhConsumeXHora":45
+			}],
+		"categoria":
+			{
+			"tipo" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
+			}	
  	},
  	{
 		"nombre": "martin",
-	"apellido" : "Reynoso",
-	"numeroDocumento" : 45876876,
-	"tipoDocumento" :"dni",
-	"telefono":132254,
-	"domicilio" : "dddee44",
-	"dispositivos": 
-		[{
-		"nombreDispo":"microondas","estado": false,"kwhConsumeXHora":1000
-		}],
-	"categoria":
-		{
-		"tipo" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
-		}	
+		"apellido" : "Reynoso",
+		"numeroDocumento" : 45876876,
+		"tipoDocumento" :"dni",
+		"telefono":132254,
+		"domicilio" : "dddee44",
+		"dispositivos": 
+			[{
+			"nombreDispo":"microondas","estado": false,"kwhConsumeXHora":1000
+			}],
+		"categoria":
+			{
+			"tipo" : "R1","cargoFijo" : 18.76,"cargoVariable" : 0.644 
+			}	
  	}
 ]

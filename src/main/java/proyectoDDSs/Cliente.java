@@ -33,8 +33,8 @@ public class Cliente {
 		//this.categoria = unaCategoria;
 	}
 	
-	protected void estimativoFacturacion()
-	{ this.categoria.CalcularMonto(categoria.cargoFijo, categoria.cargoAdicional, this.consumoMensual()); }
+	protected double estimativoFacturacion()
+	{ return(categoria.getCargoFijo() + (categoria.getCargoAdicional() * this.consumoMensual())); }
 		
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
 	protected void addDispositivo(Dispositivo dispo) {dispositivos.add(dispo);}

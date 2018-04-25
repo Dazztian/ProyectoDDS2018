@@ -6,8 +6,13 @@ public class Categoria {
 	protected double cargoFijo;
 	protected double cargoAdicional;
 		
-	protected double CalcularMonto( double cargoFijo, double CargoVariable, double consumoMensual)
-	{ return  (cargoFijo + (CargoVariable * consumoMensual)) ;}
+	public double getCargoFijo() {
+		return cargoFijo;
+	}
+
+	public double getCargoAdicional() {
+		return cargoAdicional;
+	}
 		
 	//Constructor
 	public Categoria(String unTipo,double cargoFijo,double cargoAdicional) {
