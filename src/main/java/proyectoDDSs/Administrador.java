@@ -10,25 +10,24 @@ public class Administrador {
 	private int id;
 	private String nombreUsuario;
 	private String contrasenia;
-	private LocalDate fechaCreacion;
+	private LocalDateTime fechaCreacion;
 	
-	public Administrador(String unNombre, String unApellido, int unId, String unNombreUsuario, String unaContrasenia,
-			LocalDate unaFechaCreacion) 
+	public Administrador(String unNombre, String unApellido, int unId, String unNombreUsuario, String unaContrasenia) 
 	{
 		nombre = unNombre;
 		apellido=unApellido;
 		id=unId;
 		nombreUsuario=unNombreUsuario;
 		contrasenia=unaContrasenia;
-		fechaCreacion=unaFechaCreacion;
+		fechaCreacion=LocalDateTime.now();
 		
 	}
 		private long cantMesesAdmin()
 		{
 			LocalDateTime fechaActual=LocalDateTime.now();
 			Duration duration = Duration.between(fechaActual, fechaCreacion);
-		    //Diferencia en cantDeDias
-			return Math.abs(duration.toDays());
+		    //Diferencia en cantDeDias -- Lo divido por 30 para que tire los meses
+			return Math.abs(duration.toDays()/30);
 		   
 		}
 				
