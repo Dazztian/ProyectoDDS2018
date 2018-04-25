@@ -6,6 +6,7 @@ public class Categoria {
 	protected double cargoFijo;
 	protected double cargoAdicional;
 		
+	//getters
 	public double getCargoFijo() {
 		return cargoFijo;
 	}
@@ -13,7 +14,7 @@ public class Categoria {
 	public double getCargoAdicional() {
 		return cargoAdicional;
 	}
-		
+
 	//Constructor
 	public Categoria(String unTipo,double cargoFijo,double cargoAdicional) {
 		this.tipo=unTipo;
