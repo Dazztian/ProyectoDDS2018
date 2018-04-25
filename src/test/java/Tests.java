@@ -7,18 +7,21 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 
+
 public class Tests {
 
 	 @Test
 	    public void testCantMesesAdmin() 
 	    { 
-	    		LocalDateTime now = LocalDateTime.now();
-	    	    LocalDateTime sixDaysBehind = now.minusDays(6);
+	    	LocalDateTime now = LocalDateTime.now();
+	    	LocalDateTime sixDaysBehind = now.minusDays(6);
+	    	
+	    	Duration duration = Duration.between(now, sixDaysBehind);
+	    	long diff = Math.abs(duration.toDays());
 	    	 
-	    	    Duration duration = Duration.between(now, sixDaysBehind);
-	    	    long diff = Math.abs(duration.toDays());
-	    	 
-	    	    assertEquals(diff, 6);
-	    }
+	    	assertEquals(diff, 6);
+	    
+	    }	 
+	
 	
 }
