@@ -31,7 +31,7 @@ public class Administrador {
 		   
 		}
 		
-		//Metodo auxiliar para el test
+		//Metodo auxiliar para poder realizar el testeo
 		public long cantMesesAdmin(LocalDateTime fechaActual) {
 			Duration duracion=Duration.between(fechaActual, fechaCreacion);
 			return (long)Math.abs(duracion.toDays()/30);

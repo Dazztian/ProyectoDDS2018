@@ -37,7 +37,7 @@ public class Cliente {
 	{ return(categoria.getCargoFijo() + (categoria.getCargoAdicional() * this.consumoMensual())); }
 		
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
-	protected void addDispositivo(Dispositivo dispo) {dispositivos.add(dispo);}
+	public void addDispositivo(Dispositivo dispo) {dispositivos.add(dispo);}
 	
 	protected boolean algunDispositivoEncendido() 
 	{
@@ -60,7 +60,7 @@ public class Cliente {
 				 size();
 	}
 	//la cantidad total de dispositivos la podemos saber directamente de la lista de dispositivos 
-	protected int cantDispositivos() {return dispositivos.size();}
+	public int cantDispositivos() {return dispositivos.size();}
 	
 	protected double consumoMensual()
 	{
