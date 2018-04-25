@@ -30,20 +30,22 @@ public class Cliente {
 		this.domicilio=domicilio;
 		//this.fechaAlta=fecha.getTime();//getTime devuelve una fecha del tipo Date
 		this.dispositivos=unosDispositivos;
-		//this.categoria = unaCategoria;
+		this.categoria = unaCategoria;
 	}
+	public ArrayList<Dispositivo> dispositivos() {return dispositivos;}
 	
-	protected double estimativoFacturacion()
+	public double estimativoFacturacion()
 	{ return(categoria.getCargoFijo() + (categoria.getCargoAdicional() * this.consumoMensual())); }
 		
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
 	public void addDispositivo(Dispositivo dispo) {dispositivos.add(dispo);}
+	public void bajaDispositivo(Dispositivo unDispositivo) {dispositivos.remove(unDispositivo);}
 	
-	protected boolean algunDispositivoEncendido() 
+	public boolean algunDispositivoEncendido() 
 	{
 		return dispositivos.stream().anyMatch(dispositivo-> dispositivo.estaEncendido());
 	}
-	protected int cantDispositivosEncendidos() 
+	public int cantDispositivosEncendidos() 
 	{
 		 return 
 				 dispositivos.stream().
@@ -51,7 +53,7 @@ public class Cliente {
 				 collect(Collectors.toList()).
 				 size();
 	}
-	protected int cantDispositivosApagados()
+	public int cantDispositivosApagados()
 	{
 		 return 
 				 dispositivos.stream().
@@ -62,7 +64,7 @@ public class Cliente {
 	//la cantidad total de dispositivos la podemos saber directamente de la lista de dispositivos 
 	public int cantDispositivos() {return dispositivos.size();}
 	
-	protected double consumoMensual()
+	public double consumoMensual()
 	{
 		//Al cliente le calculo cuanto consume cada dispositivo sumo uno a uno su consumo y luego devuelvo el resultado,
 		//Se realiza el c�lculo suponiendo que est�n siempre funcionando.

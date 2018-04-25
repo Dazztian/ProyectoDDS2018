@@ -13,6 +13,6 @@ public class Dispositivo {
 		kwhConsumeXHora = electricidadQConsume;
 	}
 	protected boolean estaEncendido() {return this.estado;}
-	protected int kwhConsumeXHora(){ if(estado) {return (int) this.kwhConsumeXHora; } else return 0;}
+	public int kwhConsumeXHora(){ if(estado) {return (int) this.kwhConsumeXHora; } else return 0;}
 
 }
