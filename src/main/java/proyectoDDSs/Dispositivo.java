@@ -14,6 +14,7 @@ public class Dispositivo {
 	}
 	public void setEstado(boolean unEstado) {estado = unEstado;};
 	protected boolean estaEncendido() {return this.estado;}
-	public int kwhConsumeXHora(){ if(estado) {return (int) this.kwhConsumeXHora; } else return 0;}
+	public int kwhConsumeXHora(){ return estado? (int)this.kwhConsumeXHora : 0;
+		/*if(estado) {return (int) this.kwhConsumeXHora; } else return 0;*/}
 
 }

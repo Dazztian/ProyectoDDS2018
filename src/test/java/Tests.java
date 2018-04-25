@@ -37,7 +37,7 @@ public class Tests {
 	
 	@Test
 		public void estimativoFacturacionDeRosa() {
-		//Le agrego los dispositivos y testeo el consumo mensual que tiene Rosa
+		//Le agrego los dispositivos y testeo el precio estimativo de la factura de Rosa
 			rosa.addDispositivo(dispositivo1);
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
