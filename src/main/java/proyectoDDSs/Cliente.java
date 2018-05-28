@@ -18,6 +18,7 @@ public class Cliente {
 	//pattern "yyyy-MM-dd'T'HH:mm:ssZ" to be ISO8601
 	private Calendar fechaAlta;
 	protected ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	public int puntos;
 		
 	//Los clientes tienen una categoria
 	protected Categoria categoria; 
@@ -42,17 +43,24 @@ public class Cliente {
 			categoria.getCargoFijo() + (categoria.getCargoAdicional() * this.consumoMensual()); }
 		
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
-	public void addDispositivo(Dispositivo dispo) {dispositivos.add(dispo);}
+	public void addDispositivo(Dispositivo dispo) {
+		dispositivos.add(dispo);
+		if(dispo.esInteligente()) {
+			puntos +=15;
+		}
+		
+	}
 	public void bajaDispositivo(Dispositivo unDispositivo) {dispositivos.remove(unDispositivo);}
 	
 	public boolean algunDispositivoEncendido() 
 	{
-		return dispositivos.stream().anyMatch(dispositivo-> dispositivo.estaEncendido());
+		return dispositivos.stream().filter(dispositivo->dispositivo.esInteligente()).anyMatch(dispositivo-> dispositivo.estaEncendido());
 	}
 	public int cantDispositivosEncendidos() 
 	{
 		 return 
 				 dispositivos.stream().
+				 filter(dispositivo->dispositivo.esInteligente()).
 				 filter(dispositivo-> dispositivo.estaEncendido()).
 				 collect(Collectors.toList()).
 				 size();
@@ -61,6 +69,7 @@ public class Cliente {
 	{
 		 return 
 				 dispositivos.stream().
+				 filter(dispositivo-> dispositivo.esInteligente()).
 				 filter(dispositivo-> !dispositivo.estaEncendido()).
 				 collect(Collectors.toList()).
 				 size();
@@ -74,9 +83,14 @@ public class Cliente {
 		//Se realiza el c�lculo suponiendo que est�n siempre funcionando.
 		return 
 				dispositivos.stream().
-				mapToInt( elem -> elem.kwhConsumeXHora())
-				.sum();
+				map(dispositivo -> dispositivo.consumoMensual()).count();
 	}
 	
+	public void adaptarDispositivo(DispositivoEstandar unDispositivo) {
+		ModuloAdaptador dispositivoAdaptado = unDispositivo.adaptar();
+		dispositivos.remove(unDispositivo);
+		dispositivos.add(dispositivoAdaptado);
+		puntos += 10;
+	}
 	
 }
