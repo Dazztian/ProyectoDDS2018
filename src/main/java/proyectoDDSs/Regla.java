@@ -1,25 +1,35 @@
 package proyectoDDSs;
 
 import proyectoDDSs.Actuador;
-
-import java.util.*;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Regla {
 	
-	double condicionDeAccion;
-	protected ArrayList<Actuador> ActuadoresAAccionar = new ArrayList<Actuador>();
+	private double condicionDeAccion;
+	private ArrayList<Actuador> ActuadoresAAccionar = new ArrayList<Actuador>();
 	
-	public void actualizarMedicion(double medicion){
-		if (medicion<condicionDeAccion){
-			this.accionarActuadores();
+	public void actualizarMedicion(double valor) {
+		if (valor>condicionDeAccion){
+			accionarActuadores();
 		}
 	}
 	
-	public void accionarActuadores() {
-		ActuadoresAAccionar.stream().map(actuador->actuador.execute());
+	private void accionarActuadores() {
+		for(Actuador a:ActuadoresAAccionar) {
+			a.disparar();
+		}
 	}
+	
+	public void agregarActuador(Actuador a) {
+		ActuadoresAAccionar.add(a);
+	}
+	
+	public void removerActuador(Actuador a) {
+		ActuadoresAAccionar.remove(a);
+	}
+	
+	
+>>>>>>> 2410431219ffe1222e1587afd4aa4cc9be54f436
 	
 }
 
