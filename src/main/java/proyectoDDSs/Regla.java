@@ -20,7 +20,7 @@ public class Regla {
 	
 	private void accionarActuadores() {
 		for(Actuador a:actuadores) {
-			
+			a.disparar();
 		}
 	}
 	
