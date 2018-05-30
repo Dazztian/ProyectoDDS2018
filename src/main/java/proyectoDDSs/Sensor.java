@@ -3,7 +3,9 @@ package proyectoDDSs;
 import java.util.*;
 
 public class Sensor {
-
+	private double valor; //aca se almacena lo que mide el sensor
+	private ArrayList<Regla> reglas;
+	
 	public Sensor() {
 		reglas = new ArrayList<Regla>();
 		
@@ -28,8 +30,4 @@ public class Sensor {
 		reglas.remove(r);
 	}
 	
-	
-	private double valor; //aca se almacena lo que mide el sensor
-	
-	private ArrayList<Regla> reglas;
 }

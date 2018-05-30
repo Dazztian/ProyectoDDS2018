@@ -1,4 +1,5 @@
 package proyectoDDSs;
+import proyectoDDSs.DispositivoInteligente;
 
 public class ModuloAdaptador extends DispositivoInteligente {
 	

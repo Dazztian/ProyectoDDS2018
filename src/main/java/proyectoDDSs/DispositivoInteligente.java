@@ -10,14 +10,12 @@ public class DispositivoInteligente extends Dispositivo {
 	private Timer temporizador;
 	private double magnitud;
 	public LinkedList<Log> logDeConsumo;
+	int intervalo=100;
 	
-	
-	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado, Sensor sensor,int intervalo) {
+	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado) {
+		
 		super(unNombre, electricidadQConsume);
-		estado = unEstado;
-		
-		this.sensor=sensor;
-		
+		estado = unEstado;	
 		temporizador=new Timer();
 		
 		temporizador.scheduleAtFixedRate(new TimerTask() {
@@ -71,7 +69,9 @@ public class DispositivoInteligente extends Dispositivo {
 	public double consumoMensual() {
 		return this.consumoEnLasUltimasNHoras(720);
 	}
-
+	public void enlazarSensor(Sensor unSensor){
+		this.sensor=unSensor;
+	}
 	public void notificarSensor() {
 		sensor.medirMagnitud(this.magnitud);
 	}
