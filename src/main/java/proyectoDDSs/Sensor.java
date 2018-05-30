@@ -9,7 +9,6 @@ public class Sensor {
 		
 	}
 	
-	
 	public void medirMagnitud(double magnitud) {
 		valor=magnitud;
 	}
