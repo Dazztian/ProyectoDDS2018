@@ -6,11 +6,27 @@ import java.time.*;
 public class DispositivoInteligente extends Dispositivo {
 	
 	private Estado estado;
+	private Sensor sensor;
+	private Timer temporizador;
+	private double magnitud;
 	public LinkedList<Log> logDeConsumo;
-
-	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado) {
+	
+	
+	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado, Sensor sensor,int intervalo) {
 		super(unNombre, electricidadQConsume);
 		estado = unEstado;
+		
+		this.sensor=sensor;
+		
+		temporizador=new Timer();
+		
+		temporizador.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				
+				informarMagnitud();
+				
+			}
+		}, 0, intervalo*1000);
 	}
 
 	public boolean esInteligente() {
@@ -56,4 +72,12 @@ public class DispositivoInteligente extends Dispositivo {
 		return this.consumoEnLasUltimasNHoras(720);
 	}
 
+	public void informarMagnitud() {
+		sensor.medirMagnitud(this.magnitud);
+	}
+	
+	public void setMagnitud(double m) {
+		this.magnitud=m;
+	}
+	
 }
