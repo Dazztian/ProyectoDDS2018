@@ -28,8 +28,5 @@ public class Regla {
 		ActuadoresAAccionar.remove(a);
 	}
 	
-	
->>>>>>> 2410431219ffe1222e1587afd4aa4cc9be54f436
-	
 }
 
