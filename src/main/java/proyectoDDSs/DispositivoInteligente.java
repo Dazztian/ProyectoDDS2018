@@ -1,6 +1,8 @@
 package proyectoDDSs;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.time.*;
 
 public class DispositivoInteligente extends Dispositivo {
@@ -9,7 +11,7 @@ public class DispositivoInteligente extends Dispositivo {
 	private Sensor sensor;
 	private Timer temporizador;
 	private double magnitud;
-	public LinkedList<Log> logDeConsumo;
+	public LinkedList<Log> logDeConsumo = new LinkedList<Log>();
 	int intervalo=100;
 	
 	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado) {
@@ -59,7 +61,13 @@ public class DispositivoInteligente extends Dispositivo {
 		if(logDeConsumo.size() < n) {
 			n = logDeConsumo.size();
 		}
-		return logDeConsumo.subList(0, n).stream().map(log -> log.consumo).count();
+		
+		//List<Log> logDePrueba = logDeConsumo.subList(0, n);
+		
+		//Stream<Object> listaDePrueba = logDeConsumo.subList(0, n).stream().map(log -> log.consumo());
+		
+		//double numeroDePrueba = logDeConsumo.subList(0, n).stream().map(log -> log.consumo()).count();
+		return logDeConsumo.subList(0, n).stream().mapToDouble(log -> log.consumo()).sum();
 	}
 	
 	public double consumoEnElSiguenteIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {

@@ -83,7 +83,7 @@ public class Cliente {
 		//Se realiza el c�lculo suponiendo que est�n siempre funcionando.
 		return 
 				dispositivos.stream().
-				map(dispositivo -> dispositivo.consumoMensual()).count();
+				mapToDouble(dispositivo -> dispositivo.consumoMensual()).sum();
 	}
 	
 	public void adaptarDispositivo(DispositivoEstandar unDispositivo) {
