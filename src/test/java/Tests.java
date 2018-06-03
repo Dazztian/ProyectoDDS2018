@@ -11,6 +11,9 @@ import proyectoDDSs.Administrador;
 import proyectoDDSs.Categoria;
 import proyectoDDSs.Cliente;
 import proyectoDDSs.Dispositivo;
+import proyectoDDSs.DispositivoEstandar;
+import proyectoDDSs.DispositivoInteligente;
+import proyectoDDSs.Encendido;
 import proyectoDDSs.ISO8601;
 
 
@@ -37,31 +40,65 @@ public class Tests {
 		
 	}
 	
-	private Dispositivo dispositivo1 = new Dispositivo("Heladera",true,50);
-	private Dispositivo dispositivo2 = new Dispositivo("TV",true,50);
-	private Dispositivo dispositivo3 = new Dispositivo("Aire",true,100);
-	private Dispositivo dispositivo4 = new Dispositivo("Microondas", false, 100);
+	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido());
+	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido());
+	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire",100, new Encendido());
+	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido());
+	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8);
 	private	Administrador juan = new Administrador("Juan","Lopez",123231,"Juancito","asd123");
 	
 	
+
+
+	@Test
+	public void consumoMensualDispo1() {
+		dispositivo1.guardarConsumo();
+		dispositivo1.guardarConsumo();
+		dispositivo1.guardarConsumo();
+		dispositivo1.guardarConsumo();
+		
+		assertEquals(200, dispositivo1.consumoMensual(), 0);
+	}
+
+	@Test
+	public void adaptarUnDispositivo() {
+		//Cuando Rosa adapta su ventilador, este deberia salir de su lista de dispositivos y en su lugar estar el moduloAdaptador
+		//Tambien se deberian poder entender todos los metodos de un DI
+		rosa.addDispositivo(dispositivo5);
+		assertEquals(12000, rosa.consumoMensual(), 0);
+		rosa.adaptarDispositivo(dispositivo5);
+		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).prender());
+		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).guardarConsumo());
+		assertEquals(50, rosa.consumoMensual(), 0);
+		
+	}
+	
 	@Test
 		public void consumoMensualDeRosa() {
-		 //Le agrego los dispositivos y testeo el consumo mensual que tiene Rosa
+		//Le agrego los dispositivos y testeo el consumo mensual que tiene Rosa
+		//Por motivos de testeo se asume que Rosa solo utilizo sus dispositivos por 1 hora este mes
+			dispositivo1.guardarConsumo();
+			dispositivo2.guardarConsumo();
+			dispositivo3.guardarConsumo();
+			dispositivo4.guardarConsumo();
 			rosa.addDispositivo(dispositivo1);
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
 			rosa.addDispositivo(dispositivo4);
-			assertEquals(200, rosa.consumoMensual(), 0);		
+			assertEquals(300, rosa.consumoMensual(), 0);		
 	}
 	
 	
 	@Test
 		public void estimativoFacturacionDeRosa() {
 		//Le agrego los dispositivos y testeo el precio estimativo de la factura de Rosa
+		//Por motivos de testeo se asume que Rosa solo utilizo sus dispositivos por 1 hora este mes
+			dispositivo1.guardarConsumo();
+			dispositivo2.guardarConsumo();
+			dispositivo3.guardarConsumo();
 			rosa.addDispositivo(dispositivo1);
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
 			assertEquals(261.36, rosa.estimativoFacturacion(), 0);	
 }
 		@Test
@@ -77,6 +114,7 @@ public class Tests {
 	
 		public void testCantDispositivosEncendidos(){
 		//Se agregan dispositivos a Rosa y se comprueba cuantos de ellos estan encendidos
+			dispositivo4.apagar();
 			rosa.addDispositivo(dispositivo1);
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
@@ -87,6 +125,7 @@ public class Tests {
 	@Test
 		public void testCantDispositivosApagados() {
 		//Se agregan dispositivos a Rosa y se comprueba cuantos de ellos estan apagados
+			dispositivo4.apagar();
 			rosa.addDispositivo(dispositivo1);
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
@@ -132,17 +171,23 @@ public class Tests {
 	 
 	@Test
 		public void testDispositivoApagado() {
-		 //Cuando un dispositivo esta apagado, este no consume energia
-		 	
-		 	assertEquals(0, dispositivo4.kwhConsumeXHora());
+		 //Cuando un dispositivo esta apagado, este no consume energia una fraccion minima de energia
+		 	dispositivo4.apagar();
+		 	assertEquals(1, dispositivo4.consumoPorHora(), 0);
 	 }
 	 
 	@Test
 		public void testDispositivoEncendido() {
-		 //Cuando un dispositivo esta encendido, este si consume energia
-		 
-			assertEquals(50, dispositivo1.kwhConsumeXHora());
+		 //Cuando un dispositivo esta encendido, este consume energia completamente
+		 	dispositivo4.prender();
+			assertEquals(100, dispositivo4.consumoPorHora(), 0);
 	 }
+	@Test
+	public void testDispositivoAhorroDeEnergia() {
+		//Cuando un dispositivo esta en modo ahorro de energia, este consume la mitad de energia
+			dispositivo4.ahorrarEnergia();
+			assertEquals(50, dispositivo4.consumoPorHora(), 0);
+	}
 	 
 	
 }

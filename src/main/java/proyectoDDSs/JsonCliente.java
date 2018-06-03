@@ -63,7 +63,7 @@ public class JsonCliente {
 		        	    System.out.println(estado);
 		        	    System.out.println(kwhConsumeXHora);        	    
 		        	            	    
-		        	    listaDispositivos.add( new Dispositivo(nombreDispo,estado,kwhConsumeXHora) );
+		        	    listaDispositivos.add( new DispositivoEstandar(nombreDispo/*,estado*/,kwhConsumeXHora,1) );
 		        	    	        	    
 		        	}
 	        	    //Resuelvo la categoria asociada al cliente
