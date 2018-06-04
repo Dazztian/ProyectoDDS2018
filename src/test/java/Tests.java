@@ -7,7 +7,9 @@ import java.util.*;
 import org.junit.Test;
 
 import junit.framework.Assert;
+import proyectoDDSs.Actuador;
 import proyectoDDSs.Administrador;
+import proyectoDDSs.Apagar;
 import proyectoDDSs.Categoria;
 import proyectoDDSs.Cliente;
 import proyectoDDSs.Dispositivo;
@@ -15,6 +17,8 @@ import proyectoDDSs.DispositivoEstandar;
 import proyectoDDSs.DispositivoInteligente;
 import proyectoDDSs.Encendido;
 import proyectoDDSs.ISO8601;
+import proyectoDDSs.Traductor;
+import proyectoDDSs.TraductorDeMensajesAJSON;
 
 
 public class Tests {
@@ -188,6 +192,14 @@ public class Tests {
 			dispositivo4.ahorrarEnergia();
 			assertEquals(50, dispositivo4.consumoPorHora(), 0);
 	}
-	 
+	
+	/*											 TESTS		 DE			 ENTREGA 1											 */
+	@Test
+	public void tesTraductorDeMensajesAJSON() 
+	{
+		Traductor probandoTraductor = new TraductorDeMensajesAJSON();
+		Apagar probandoActuador = new Apagar( dispositivo1,"apagar",probandoTraductor);
+		assertEquals(probandoActuador.traducir(),"apagar");
+	}
 	
 }

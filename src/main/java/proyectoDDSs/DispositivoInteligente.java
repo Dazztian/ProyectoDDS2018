@@ -23,7 +23,7 @@ public class DispositivoInteligente extends Dispositivo {
 		temporizador.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				
-				notificarSensor();
+				//notificarSensor();
 				
 			}
 		}, 0, intervalo*1000);
@@ -80,9 +80,9 @@ public class DispositivoInteligente extends Dispositivo {
 	public void enlazarSensor(Sensor unSensor){
 		this.sensor=unSensor;
 	}
-	public void notificarSensor() {
+	/*public void notificarSensor() {
 		sensor.medirMagnitud(this.magnitud);
-	}
+	}*/
 	
 	public void setMagnitud(double m) {
 		this.magnitud=m;
