@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.*;
 import java.util.*;
@@ -19,6 +21,7 @@ import proyectoDDSs.DispositivoEstandar;
 import proyectoDDSs.DispositivoInteligente;
 import proyectoDDSs.Encendido;
 import proyectoDDSs.ISO8601;
+import proyectoDDSs.ParserCategoria;
 import proyectoDDSs.Traductor;
 import proyectoDDSs.TraductorDeMensajesAJSON;
 
@@ -195,16 +198,30 @@ public class Tests {
 			assertEquals(50, dispositivo4.consumoPorHora(), 0);
 	}
 	
-	/*											 TESTS		 DE			 ENTREGA 1											 */
+	//-------------------------------------------TESTS--------DE--------ENTREGA 1--------------------------------------------------------------------	
 	@Test
 	public void tesTraductorDeMensajesAJSON() 
-	{	//Como el nombre bien lo indica, con este mecanismo es posible traducir cualquier mensaje a JSON, 
-		//el 2 argumento de la accion será lo que traduzca a JSON.
-		Traductor probandoTraductor = new TraductorDeMensajesAJSON();
-		Apagar probandoActuador = new Apagar( dispositivo1,"mensaje:apagar",probandoTraductor);
-		//OBS: NO podemos comparar directamente un JSON con un STRING, SON 2 COSAS DIFERENTES
-		//X eso al usar equals debemos laburar si o si con 2 elementos del mismo tipo  
+	{	Traductor probandoTraductor = new TraductorDeMensajesAJSON();
+		Apagar probandoActuador = new Apagar( dispositivo1,"mensaje:apagar",probandoTraductor);  
 		assertEquals(probandoActuador.traducir(),new Gson().toJson("mensaje:apagar"));
 	}
+	@Test
+	public void JSONAcodigo() 
+	{
+		File archivoPrueba = new File ("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\categorias.json");
+     	try {
+			List<Categoria> listaCategory =  new ParserCategoria().load(archivoPrueba);
+			assertEquals(listaCategory.size(),9);
+			//Aca se corrobora que se cargaron las 9 categorias
+     		} 
+     	catch (IOException e) {
+			e.printStackTrace();
+		}
+     	
+
+	
+	}
+	
+	
 	
 }
