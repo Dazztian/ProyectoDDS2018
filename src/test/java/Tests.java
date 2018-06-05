@@ -6,6 +6,8 @@ import java.util.*;
 
 import org.junit.Test;
 
+import com.google.gson.Gson;
+
 import junit.framework.Assert;
 import proyectoDDSs.Actuador;
 import proyectoDDSs.Administrador;
@@ -196,10 +198,13 @@ public class Tests {
 	/*											 TESTS		 DE			 ENTREGA 1											 */
 	@Test
 	public void tesTraductorDeMensajesAJSON() 
-	{
+	{	//Como el nombre bien lo indica, con este mecanismo es posible traducir cualquier mensaje a JSON, 
+		//el 2 argumento de la accion será lo que traduzca a JSON.
 		Traductor probandoTraductor = new TraductorDeMensajesAJSON();
-		Apagar probandoActuador = new Apagar( dispositivo1,"apagar",probandoTraductor);
-		assertEquals(probandoActuador.traducir(),"apagar");
+		Apagar probandoActuador = new Apagar( dispositivo1,"mensaje:apagar",probandoTraductor);
+		//OBS: NO podemos comparar directamente un JSON con un STRING, SON 2 COSAS DIFERENTES
+		//X eso al usar equals debemos laburar si o si con 2 elementos del mismo tipo  
+		assertEquals(probandoActuador.traducir(),new Gson().toJson("mensaje:apagar"));
 	}
 	
 }
