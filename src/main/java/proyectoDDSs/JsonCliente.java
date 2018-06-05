@@ -1,10 +1,16 @@
 package proyectoDDSs;
 
 import java.util.*;
+import junit.framework.Assert;
+import proyectoDDSs.Actuador;
+import proyectoDDSs.Apagar;
+
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.io.FileReader;
+import java.lang.ProcessBuilder.Redirect.Type;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,6 +19,9 @@ import java.util.GregorianCalendar;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class JsonCliente {
 		public static void main(String[] args)
@@ -81,11 +90,11 @@ public class JsonCliente {
 	        
 		        	  clientes.add( new Cliente (nombre,apellido,tipoDocumento,numeroDocumento,telefono,domicilio, listaDispositivos,fechaObtenida, categoriaCliente));
 	        	   }	        	    
+	 	        	 
+
+	 	        	
 	        } //Ac� termina el try
-	 	        catch (Exception e) { e.printStackTrace(); }
-	 	        
-        	    
-	 	      
+	 	        catch (Exception e) { e.printStackTrace(); }  
 	 	            
 	 	        
 		}//Ac� termina el main

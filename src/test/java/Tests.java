@@ -1,13 +1,19 @@
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.*;
 import java.util.*;
 
 import org.junit.Test;
 
+import com.google.gson.Gson;
+
 import junit.framework.Assert;
+import proyectoDDSs.Actuador;
 import proyectoDDSs.Administrador;
+import proyectoDDSs.Apagar;
 import proyectoDDSs.Categoria;
 import proyectoDDSs.Cliente;
 import proyectoDDSs.Dispositivo;
@@ -15,6 +21,9 @@ import proyectoDDSs.DispositivoEstandar;
 import proyectoDDSs.DispositivoInteligente;
 import proyectoDDSs.Encendido;
 import proyectoDDSs.ISO8601;
+import proyectoDDSs.ParserCategoria;
+import proyectoDDSs.Traductor;
+import proyectoDDSs.TraductorDeMensajesAJSON;
 
 
 public class Tests {
@@ -188,6 +197,31 @@ public class Tests {
 			dispositivo4.ahorrarEnergia();
 			assertEquals(50, dispositivo4.consumoPorHora(), 0);
 	}
-	 
+	
+	//-------------------------------------------TESTS--------DE--------ENTREGA 1--------------------------------------------------------------------	
+	@Test
+	public void tesTraductorDeMensajesAJSON() 
+	{	Traductor probandoTraductor = new TraductorDeMensajesAJSON();
+		Apagar probandoActuador = new Apagar( dispositivo1,"mensaje:apagar",probandoTraductor);  
+		assertEquals(probandoActuador.traducir(),new Gson().toJson("mensaje:apagar"));
+	}
+	@Test
+	public void JSONAcodigo() 
+	{
+		File archivoPrueba = new File ("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\categorias.json");
+     	try {
+			List<Categoria> listaCategory =  new ParserCategoria().load(archivoPrueba);
+			assertEquals(listaCategory.size(),9);
+			//Aca se corrobora que se cargaron las 9 categorias
+     		} 
+     	catch (IOException e) {
+			e.printStackTrace();
+		}
+     	
+
+	
+	}
+	
+	
 	
 }

@@ -14,11 +14,11 @@ import json.*;
 
 public class ParserCategoria {
 	
-	public List<Category> load(File file) throws IOException {
+	public List<Categoria> load(File file) throws IOException {
         final String json = new JsonFile(file.getAbsolutePath()).read();
-        final java.lang.reflect.Type listType = new TypeToken<ArrayList<Category>>(){}.getType();
-        //final es tipo de dato que será asignado una única vez, algo parecido a un singleton...
+        final java.lang.reflect.Type listType = new TypeToken<ArrayList<Categoria>>(){}.getType();
         return  new GsonBuilder().create().fromJson(json, listType);
+        //Me construirá un obj basado en el json que reciba
     }
 
 }

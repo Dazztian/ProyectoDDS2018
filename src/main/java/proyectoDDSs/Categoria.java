@@ -1,10 +1,14 @@
 package proyectoDDSs;
+import com.google.gson.annotations.Expose;
 
-public class Categoria {
+import json.*;
+
+
+public class Categoria extends BeanToJson<Categoria>{
 	
-	protected String tipo;
-	protected double cargoFijo;
-	protected double cargoAdicional;
+	@Expose protected String tipo;
+	@Expose protected double cargoFijo;
+	@Expose protected double cargoAdicional;
 		
 	//getters
 	public double getCargoFijo() {
@@ -21,4 +25,9 @@ public class Categoria {
 		this.cargoFijo=cargoFijo;
 		this.cargoAdicional=cargoAdicional;
 	}
+	@Override
+	public Categoria getObj() {
+		return this;
+	}
+
 }
