@@ -73,7 +73,7 @@ public class Tests {
 	public void adaptarUnDispositivo() {
 		//Cuando Rosa adapta su ventilador, este deberia salir de su lista de dispositivos y en su lugar estar el moduloAdaptador
 		//Tambien se deberian poder entender todos los metodos de un DI
-		rosa.addDispositivo(dispositivo5);
+		rosa.suscribirDispositivo(dispositivo5);
 		assertEquals(12000, rosa.consumoMensual(), 0);
 		rosa.adaptarDispositivo(dispositivo5);
 		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).prender());
@@ -90,10 +90,10 @@ public class Tests {
 			dispositivo2.guardarConsumo();
 			dispositivo3.guardarConsumo();
 			dispositivo4.guardarConsumo();
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
+			rosa.suscribirDispositivo(dispositivo1);
+			rosa.suscribirDispositivo(dispositivo2);
+			rosa.suscribirDispositivo(dispositivo3);
+			rosa.suscribirDispositivo(dispositivo4);
 			assertEquals(300, rosa.consumoMensual(), 0);		
 	}
 	
@@ -105,17 +105,17 @@ public class Tests {
 			dispositivo1.guardarConsumo();
 			dispositivo2.guardarConsumo();
 			dispositivo3.guardarConsumo();
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
+			rosa.suscribirDispositivo(dispositivo1);
+			rosa.suscribirDispositivo(dispositivo2);
+			rosa.suscribirDispositivo(dispositivo3);
 			assertEquals(261.36, rosa.estimativoFacturacion(), 0);	
 }
 		@Test
 	 	public void testCantDispositivos()	{
 		 //Le agrego los dispositivos y testeo la cantidad de dispositivos que tiene Rosa
-		 	rosa.addDispositivo(dispositivo1);
-		 	rosa.addDispositivo(dispositivo2);
-		 	rosa.addDispositivo(dispositivo3);
+		 	rosa.suscribirDispositivo(dispositivo1);
+		 	rosa.suscribirDispositivo(dispositivo2);
+		 	rosa.suscribirDispositivo(dispositivo3);
 		 	assertEquals(3,rosa.cantDispositivos());		 
 	 }
 	
@@ -124,10 +124,10 @@ public class Tests {
 		public void testCantDispositivosEncendidos(){
 		//Se agregan dispositivos a Rosa y se comprueba cuantos de ellos estan encendidos
 			dispositivo4.apagar();
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
+			rosa.suscribirDispositivo(dispositivo1);
+			rosa.suscribirDispositivo(dispositivo2);
+			rosa.suscribirDispositivo(dispositivo3);
+			rosa.suscribirDispositivo(dispositivo4);
 			assertEquals(3, rosa.cantDispositivosEncendidos());
 	}
 	
@@ -135,20 +135,20 @@ public class Tests {
 		public void testCantDispositivosApagados() {
 		//Se agregan dispositivos a Rosa y se comprueba cuantos de ellos estan apagados
 			dispositivo4.apagar();
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
+			rosa.suscribirDispositivo(dispositivo1);
+			rosa.suscribirDispositivo(dispositivo2);
+			rosa.suscribirDispositivo(dispositivo3);
+			rosa.suscribirDispositivo(dispositivo4);
 			assertEquals(1, rosa.cantDispositivosApagados());
 	}
 	
 	@Test
 		public void tieneRosaAlgunDispositivoEncendido() {
 		//Se agregan dispositivos a Rosa y se comprueba si alguno de ellos esta encendido
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
+			rosa.suscribirDispositivo(dispositivo1);
+			rosa.suscribirDispositivo(dispositivo2);
+			rosa.suscribirDispositivo(dispositivo3);
+			rosa.suscribirDispositivo(dispositivo4);
 			assert(rosa.algunDispositivoEncendido());
 		
 	}
@@ -156,8 +156,8 @@ public class Tests {
 	@Test
 		public void rosaDaDeBajaUnDispositivo() {
 		//Se agrega un dispositivo a Rosa y se lo da de baja, luego se comprueba que ya no este mas en sus dispositivos
-			rosa.addDispositivo(dispositivo1);
-			rosa.bajaDispositivo(dispositivo1);
+			rosa.suscribirDispositivo(dispositivo1);
+			rosa.desuscribirDispositivo(dispositivo1);
 			assert(!rosa.dispositivos().contains(dispositivo1));
 	}
 	

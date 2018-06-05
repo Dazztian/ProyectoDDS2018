@@ -43,14 +43,14 @@ public class Cliente {
 			categoria.getCargoFijo() + (categoria.getCargoAdicional() * this.consumoMensual()); }
 		
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
-	public void addDispositivo(Dispositivo dispo) {
+	public void suscribirDispositivo(Dispositivo dispo) {
 		dispositivos.add(dispo);
 		if(dispo.esInteligente()) {
 			puntos +=15;
 		}
 		
 	}
-	public void bajaDispositivo(Dispositivo unDispositivo) {dispositivos.remove(unDispositivo);}
+	public void desuscribirDispositivo(Dispositivo unDispositivo) {dispositivos.remove(unDispositivo);}
 	
 	public boolean algunDispositivoEncendido() 
 	{
