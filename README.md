@@ -20,6 +20,8 @@ https://trello.com/b/X8bjZaPh/tablero-scrum
 
 Sitios útiles:
 
+https://dzone.com/articles/java-8-springboot-angularjs-bootstrap-springdata-j Creating a FULL web page from scratch
+
 http://www.notodocodigo.com/blog/diagrama-de-componentes-y-diagrama-de-distribucion/ 
 http://diagramasdecomponentes.blogspot.com.ar/ (Info. sobre diagrama de componentes y distribucion)
 https://ingenieriadesoftwareutmachala.wordpress.com/2017/01/20/requerimientos-funcionales-y-no-funcionales/ (info de requerimientos)
