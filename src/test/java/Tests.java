@@ -22,8 +22,12 @@ import proyectoDDSs.DispositivoInteligente;
 import proyectoDDSs.Encendido;
 import proyectoDDSs.ISO8601;
 import proyectoDDSs.ParserCategoria;
+import proyectoDDSs.ParserTransformador;
+import proyectoDDSs.ParserZonasGeograficas;
 import proyectoDDSs.Traductor;
 import proyectoDDSs.TraductorDeMensajesAJSON;
+import proyectoDDSs.Transformador;
+import proyectoDDSs.ZonaGeografica;
 
 
 public class Tests {
@@ -216,11 +220,40 @@ public class Tests {
      		} 
      	catch (IOException e) {
 			e.printStackTrace();
+		}	
+	}
+	
+	//-------------------------------------------TESTS--------DE--------ENTREGA 2--------------------------------------------------------------------
+	@Test //Test para verificar que se logro levantar el JSON de  ZonasGeograficas
+	public void JSONZonasAcodigo() 
+	{
+		File archivoPruebaZonas = new File ("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\ZonasGeograficas.json");
+     	try {
+			List<ZonaGeografica> listaZonas =  new ParserZonasGeograficas().load(archivoPruebaZonas);
+			assertEquals(listaZonas.size(),2);
+			//Aca se corrobora que se cargaron las 2 zonas
+     		} 
+     	catch (IOException e) {
+			e.printStackTrace();
 		}
+	}
+     	
+    @Test //Test para verificar que se logro levantar el JSON de Transformadores
+    public void JSONTransformadoresACodigo()
+    {
+    	File archivoTransformadores = new File ("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\Transformadores.json");
+     	try {
+			List<Transformador> listaTransformadores =  new ParserTransformador().load(archivoTransformadores);
+			assertEquals(listaTransformadores.size(),3);
+			//Aca se corrobora que se cargaron las 2 zonas
+     		} 
+     	catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    	
      	
 
-	
-	}
 	
 	
 	

@@ -57,7 +57,7 @@ public class JsonCliente {
 	        	    
 	        	    JSONArray dispositivos = (JSONArray) cliente.get("dispositivos");
 	        	    
-	        	    //Creo la list d�nde guardar� todos los dispositivos que voy a levantar del JSON
+	        	    //Creo la list donde guardare todos los dispositivos que voy a levantar del JSON
 	        	    ArrayList<Dispositivo> listaDispositivos = new ArrayList<Dispositivo>();	
 	        	    
 	        	    for (Object d :dispositivos)
@@ -93,11 +93,11 @@ public class JsonCliente {
 	 	        	 
 
 	 	        	
-	        } //Ac� termina el try
+	        } //Aca termina el try
 	 	        catch (Exception e) { e.printStackTrace(); }  
 	 	            
 	 	        
-		}//Ac� termina el main
+		}//Aca termina el main
 		
 }
 
