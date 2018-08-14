@@ -2,15 +2,15 @@
 {
 "equipo":"aire_acondicionado",
 "tipo": "3500",
-"inteligente" : "si",
-"bajo_consumo" : "no",
+"inteligente" : true,
+"bajo_consumo" : false,
 "consumo" : 1.613
 },
 {
 "equipo":"aire_acondicionado",
 "tipo": "2200",
-"inteligente" : "no",
-"bajo_consumo" : "si",
+"inteligente" : true,
+"bajo_consumo" : true,
 "consumo" : 1.013
 }
 ]
