@@ -2,8 +2,13 @@ package proyectoDDSs;
 
 import proyectoDDSs.Dispositivo;
 
+import java.io.FileReader;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class Cliente {
 	
@@ -17,8 +22,9 @@ public class Cliente {
 	private String contrasenia;
 	//pattern "yyyy-MM-dd'T'HH:mm:ssZ" to be ISO8601
 	private Calendar fechaAlta;
-	protected ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	public ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	public int puntos;
+		
 		
 	//Los clientes tienen una categoria
 	protected Categoria categoria; 
@@ -35,6 +41,8 @@ public class Cliente {
 			this.fechaAlta = unaFecha;
 			this.dispositivos=unosDispositivos;
 			this.categoria = unaCategoria;
+			
+			
 		}
 	public ArrayList<Dispositivo> dispositivos() {return dispositivos;}
 	
@@ -42,14 +50,77 @@ public class Cliente {
 	{ return
 			categoria.getCargoFijo() + (categoria.getCargoAdicional() * this.consumoMensual()); }
 		
+	// --------------------------------------------------------------------------------VERSION ENTREGA1 DE AGREGAR DISPOSITIVO--------------------------------------------------------------------------------
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
-	public void addDispositivo(Dispositivo dispo) {
+	public void addDispositivo(Dispositivo dispo) 
+	{
 		dispositivos.add(dispo);
-		if(dispo.esInteligente()) {
+		if(dispo.esInteligente()) 
+		{
 			puntos +=15;
 		}
-		
 	}
+	// --------------------------------------------------------------------------------VERSION ENTREGA1 DE AGREGAR DISPOSITIVO--------------------------------------------------------------------------------
+	
+	//---------------------------------------------------------------------------------VERSION ENTREGA2 DE AGREGAR DISPOSITIVO----------------------------------------------------------------------------------
+
+	public void agregarDipositivo( String tipoDispo)
+	{
+		 JSONParser parser = new JSONParser();
+	        try 
+	        {
+	        	JSONArray tablaDispositivos = (JSONArray) parser.parse(new FileReader("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\tablaDeDispositivos.json"));
+	        
+	        	//Todo lo que "cargue" del JSON lo guardo en o
+	        	for (Object o : tablaDispositivos)
+	          	  {
+			       	    JSONObject unDispo = (JSONObject) o;
+			       	    
+			       	    //¿Es este el dispositivo que busco?
+			       	    String dispoTipo = (String) unDispo.get("tipo");
+			       	    
+			       	    if(dispoTipo== tipoDispo)
+			       	    {
+			       	    	String dispoNombre = (String) unDispo.get("equipo");
+			       	    	Boolean dispoInteligente = (Boolean) unDispo.get("inteligente");
+					       	Boolean dispoBajo_Consumo = (Boolean) unDispo.get("bajo_consumo");
+					       	double dispoConsumo = (double) unDispo.get("consumo");
+					       	
+					       	String dispoNombreCompleto = dispoNombre.concat(dispoTipo);
+			       	    	
+			       	    	if(dispoInteligente)
+			       	    	{			       	    		
+						       	DispositivoInteligente dispositivoEncontrado = new DispositivoInteligente(dispoNombreCompleto, dispoConsumo, new Encendido());
+						       	dispositivos.add(dispositivoEncontrado);
+						       	puntos +=15;
+			       	    	}
+			       	    	else
+			       	    	{
+			       	    		DispositivoEstandar dispositivoEncontrado = new DispositivoEstandar(dispoNombreCompleto, dispoConsumo , 10);
+						       	dispositivos.add(dispositivoEncontrado);
+			       	    	}
+			       	    }
+			       	    
+			      }
+	   	    }
+	        	catch (Exception e) { e.printStackTrace(); }
+ }
+	
+	//---------------------------------------------------------------------------------VERSION ENTREGA2 DE AGREGAR DISPOSITIVO----------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void bajaDispositivo(Dispositivo unDispositivo) {dispositivos.remove(unDispositivo);}
 	
 	public boolean algunDispositivoEncendido() 

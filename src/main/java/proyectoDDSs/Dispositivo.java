@@ -3,7 +3,11 @@ package proyectoDDSs;
 public abstract class Dispositivo {
 	
 	public String nombre;
-	protected double kwhConsumeXHora; 
+	protected double kwhConsumeXHora;
+	public Boolean inteligente;
+	public Boolean bajoConsumo;
+	public String equipo;
+	
 	
 	public Dispositivo(String unNombre, double electricidadQConsume)
 	{

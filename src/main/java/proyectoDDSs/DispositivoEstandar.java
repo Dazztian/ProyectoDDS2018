@@ -4,7 +4,7 @@ public class DispositivoEstandar extends Dispositivo {
 	
 	int usoDiarioEnHoras;
 
-	public DispositivoEstandar(String unNombre, long electricidadQConsume, int unaCantidadDeHoras) {
+	public DispositivoEstandar(String unNombre, double electricidadQConsume, int unaCantidadDeHoras) {
 		super(unNombre ,electricidadQConsume);
 		usoDiarioEnHoras = unaCantidadDeHoras;
 	}

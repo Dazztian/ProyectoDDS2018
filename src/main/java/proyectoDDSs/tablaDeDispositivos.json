@@ -1,0 +1,16 @@
+[
+{
+"equipo":"aire_acondicionado",
+"tipo": "3500",
+"inteligente" : "si",
+"bajo_consumo" : "no",
+"consumo" : 1.613
+},
+{
+"equipo":"aire_acondicionado",
+"tipo": "2200",
+"inteligente" : "no",
+"bajo_consumo" : "si",
+"consumo" : 1.013
+}
+]
