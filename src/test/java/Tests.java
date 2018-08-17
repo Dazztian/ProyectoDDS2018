@@ -227,7 +227,7 @@ public class Tests {
 	@Test //Test para verificar que se logro agregar un dispo desde el json tablaDispositivos
 	public void agregarDispo()
 	{
-		rosa.agregarDipositivo("3500");
+		rosa.agregarDipositivo("tubo_21");
 		assertEquals(0,rosa.dispositivos.size(),1);
 		
 	}
