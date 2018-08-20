@@ -7,12 +7,16 @@ public abstract class Dispositivo {
 	public Boolean inteligente;
 	public Boolean bajoConsumo;
 	public String equipo;
+	public double consumoMinimo;
+	public double consumoMaximo;
 	
 	
-	public Dispositivo(String unNombre, double electricidadQConsume)
+	public Dispositivo(String unNombre, double electricidadQConsume, double unConsumoMinimo, double unConsumoMaximo)
 	{
 		nombre= unNombre;
 		kwhConsumeXHora = electricidadQConsume;
+		consumoMinimo = unConsumoMinimo;
+		consumoMaximo = unConsumoMaximo;
 	}
 	public abstract boolean esInteligente();
 	public abstract double consumoMensual();

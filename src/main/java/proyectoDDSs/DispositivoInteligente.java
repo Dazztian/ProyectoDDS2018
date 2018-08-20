@@ -14,9 +14,9 @@ public class DispositivoInteligente extends Dispositivo {
 	public LinkedList<Log> logDeConsumo = new LinkedList<Log>();
 	int intervalo=100;
 	
-	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado) {
+	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado, double unConsumoMinimo, double unConsumoMaximo) {
 		
-		super(unNombre, electricidadQConsume);
+		super(unNombre, electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
 		estado = unEstado;	
 		temporizador=new Timer();
 		

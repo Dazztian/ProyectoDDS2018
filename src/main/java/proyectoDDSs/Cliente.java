@@ -6,9 +6,14 @@ import java.io.FileReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.apache.commons.math3.optim.PointValuePair;
+import org.apache.commons.math3.optim.linear.Relationship;
+import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import simplex.facade.*;
+
 
 public class Cliente {
 	
@@ -64,7 +69,7 @@ public class Cliente {
 	
 	//---------------------------------------------------------------------------------VERSION ENTREGA2 DE AGREGAR DISPOSITIVO----------------------------------------------------------------------------------
 
-	public void agregarDipositivo( String tipoDispo)
+	public void agregarDispositivo( String tipoDispo)
 	{
 		 JSONParser parser = new JSONParser();
 	        try 
@@ -79,24 +84,26 @@ public class Cliente {
 			       	    //¿Es este el dispositivo que busco?
 			       	    String dispoTipo = (String) unDispo.get("tipo");
 			       	    
-			       	    if(dispoTipo== tipoDispo)
+			       	    if(dispoTipo.equals(tipoDispo))
 			       	    {
 			       	    	String dispoNombre = (String) unDispo.get("equipo");
 			       	    	Boolean dispoInteligente = (Boolean) unDispo.get("inteligente");
 					       	Boolean dispoBajo_Consumo = (Boolean) unDispo.get("bajo_consumo");
 					       	double dispoConsumo = (double) unDispo.get("consumo");
+					       	double consumoMin = (double) unDispo.get("consumoMin");
+					       	double consumoMax = (double) unDispo.get("consumoMax");
 					       	
 					       	String dispoNombreCompleto = dispoNombre.concat(dispoTipo);
 			       	    	
 			       	    	if(dispoInteligente)
 			       	    	{			       	    		
-						       	DispositivoInteligente dispositivoEncontrado = new DispositivoInteligente(dispoNombreCompleto, dispoConsumo, new Encendido());
+						       	DispositivoInteligente dispositivoEncontrado = new DispositivoInteligente(dispoNombreCompleto, dispoConsumo, new Encendido(), consumoMin, consumoMax);
 						       	dispositivos.add(dispositivoEncontrado);
 						       	puntos +=15;
 			       	    	}
 			       	    	else
 			       	    	{
-			       	    		DispositivoEstandar dispositivoEncontrado = new DispositivoEstandar(dispoNombreCompleto, dispoConsumo , 10);
+			       	    		DispositivoEstandar dispositivoEncontrado = new DispositivoEstandar(dispoNombreCompleto, dispoConsumo , 10, consumoMin, consumoMax);
 						       	dispositivos.add(dispositivoEncontrado);
 			       	    	}
 			       	    }
@@ -163,5 +170,27 @@ public class Cliente {
 		dispositivos.add(dispositivoAdaptado);
 		puntos += 10;
 	}
-	
+
+	public void consumoOptimo(){
+		
+		  SimplexFacade consumoOptimo = new SimplexFacade (GoalType.MAXIMIZE, true);
+		  double[] auxLista = new double[100];
+		  consumoOptimo.crearFuncionEconomica(auxLista);
+		  for(int i = 0; i < dispositivos.size(); i++){
+			  
+		  		for(int j = 0; j < dispositivos.size(); j++) {
+		  			auxLista[j] = 0;
+		  		}
+		  		auxLista[i] = 1;
+		  		consumoOptimo.agregarRestriccion(Relationship.GEQ, dispositivos.get(i).consumoMinimo, auxLista);
+		  		consumoOptimo.agregarRestriccion(Relationship.LEQ, dispositivos.get(i).consumoMaximo, auxLista);
+				}
+			PointValuePair solucion = consumoOptimo.resolver();
+			for(int i = 0; i < dispositivos.size(); i++){
+				System.out.format("El consumo Maximo para el dispositivo %d es: \n", i); 
+				System.out.format(" %f \n ", (float) solucion.getPoint()[i]);
+				}
+		   
+		 
+	}
 }
