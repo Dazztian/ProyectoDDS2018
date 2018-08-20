@@ -37,6 +37,10 @@ public class DispositivoInteligente extends Dispositivo {
 		return estado.estadoEncendido();
 	}
 	
+	public void cambiarEstado(Estado unEstado) {
+		estado = unEstado;
+	}
+	
 	public void apagar() {
 		estado = new Apagado();
 	}
@@ -86,6 +90,10 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	public void setMagnitud(double m) {
 		this.magnitud=m;
+	}
+	
+	public double horasDeUsoMensuales() {
+		return this.consumoEnLasUltimasNHoras(720)/this.kwhConsumeXHora();
 	}
 	
 }

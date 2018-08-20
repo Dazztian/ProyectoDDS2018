@@ -29,6 +29,7 @@ public class Cliente {
 	private Calendar fechaAlta;
 	public ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	public int puntos;
+	public Estado estadoParaSimplex = new Apagado();
 		
 		
 	//Los clientes tienen una categoria
@@ -155,6 +156,7 @@ public class Cliente {
 	//la cantidad total de dispositivos la podemos saber directamente de la lista de dispositivos 
 	public int cantDispositivos() {return dispositivos.size();}
 	
+	
 	public double consumoMensual()
 	{
 		//Al cliente le calculo cuanto consume cada dispositivo sumo uno a uno su consumo y luego devuelvo el resultado,
@@ -171,7 +173,7 @@ public class Cliente {
 		puntos += 10;
 	}
 
-	public void consumoOptimo(){
+	public PointValuePair consumoOptimo(){
 		
 		  SimplexFacade consumoOptimo = new SimplexFacade (GoalType.MAXIMIZE, true);
 		  double[] auxLista = new double[dispositivos.size()];
@@ -190,11 +192,37 @@ public class Cliente {
 		  		consumoOptimo.agregarRestriccion(Relationship.LEQ, dispositivos.get(i).consumoMaximo, auxLista);
 				}
 			PointValuePair solucion = consumoOptimo.resolver();
-			for(int i = 0; i < dispositivos.size(); i++){
-				System.out.format("El consumo Maximo para el dispositivo %d es: \n", i); 
-				System.out.format(" %f \n ", (float) solucion.getPoint()[i]);
-				}
+			return solucion;
 		   
 		 
+	}
+	
+	public void mostrarConsumoOptimo() {
+		
+		PointValuePair solucion = this.consumoOptimo();
+		
+		for(int i = 0; i < dispositivos.size(); i++){
+			System.out.format("El consumo Maximo para el dispositivo %d es: \n", i); 
+			System.out.format(" %f \n ", (float) solucion.getPoint()[i]);
+			}
+		
+	}
+	
+	public void cambiarConfigAccionConsumoOptimo(Estado unEstado) {
+		estadoParaSimplex = unEstado;
+	}
+	
+	public void accionarConsumoOptimo() {
+		
+		PointValuePair consumosOptimos = this.consumoOptimo();
+		
+		for(int i = 0; i < dispositivos.size(); i++) {
+			if(dispositivos.get(i).esInteligente()) {
+				if(consumosOptimos.getPoint()[i] <= ((DispositivoInteligente) dispositivos.get(i)).horasDeUsoMensuales()) {
+					((DispositivoInteligente) dispositivos.get(i)).cambiarEstado(this.estadoParaSimplex);
+				}
+			}
+		}
+		
 	}
 }
