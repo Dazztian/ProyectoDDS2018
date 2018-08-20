@@ -53,11 +53,11 @@ public class Tests {
 		
 	}
 	
-	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido());
-	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido());
-	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire",100, new Encendido());
-	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido());
-	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8);
+	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 800000.0);
+	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido(), 30.0, 360.0);
+	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire",100, new Encendido(), 30.0, 360.0);
+	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido(), 30.0, 360.0);
+	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8, 30.0, 360.0);
 	private	Administrador juan = new Administrador("Juan","Lopez",123231,"Juancito","asd123");
 	
 	
@@ -227,7 +227,7 @@ public class Tests {
 	@Test //Test para verificar que se logro agregar un dispo desde el json tablaDispositivos
 	public void agregarDispo()
 	{
-		rosa.agregarDipositivo("tubo_21");
+		rosa.agregarDispositivo("tubo_21");
 		assertEquals(0,rosa.dispositivos.size(),1);
 		
 	}
