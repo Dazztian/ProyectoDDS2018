@@ -174,8 +174,12 @@ public class Cliente {
 	public void consumoOptimo(){
 		
 		  SimplexFacade consumoOptimo = new SimplexFacade (GoalType.MAXIMIZE, true);
-		  double[] auxLista = new double[100];
+		  double[] auxLista = new double[dispositivos.size()];
+		  for(int i = 0; i < dispositivos.size(); i++) {
+			  auxLista[i] = dispositivos.get(i).kwhConsumeXHora();
+		  }
 		  consumoOptimo.crearFuncionEconomica(auxLista);
+		  consumoOptimo.agregarRestriccion(Relationship.LEQ, 612, auxLista);
 		  for(int i = 0; i < dispositivos.size(); i++){
 			  
 		  		for(int j = 0; j < dispositivos.size(); j++) {
