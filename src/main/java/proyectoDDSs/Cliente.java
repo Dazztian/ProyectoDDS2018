@@ -25,19 +25,23 @@ public class Cliente {
 	private String domicilio;
 	private String usuario;
 	private String contrasenia;
+	private double longitud;
+	private double latitud;
+	
 	//pattern "yyyy-MM-dd'T'HH:mm:ssZ" to be ISO8601
 	private Calendar fechaAlta;
 	public ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	public int puntos;
 	public Estado estadoParaSimplex = new Apagado();
-		
+	
 		
 	//Los clientes tienen una categoria
 	protected Categoria categoria; 
 		
 		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
 		public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
-				domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria) {
+				domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria, 
+				double latitud, double longitud, ArrayList<Transformador> trafos) {
 			this.nombre=nombre;
 			this.apellido=apellido;
 			this.tipoDocumento=tipoDocumento;
@@ -47,8 +51,33 @@ public class Cliente {
 			this.fechaAlta = unaFecha;
 			this.dispositivos=unosDispositivos;
 			this.categoria = unaCategoria;
+			this.latitud=latitud;
+			this.longitud=longitud;
+			
+			asignarTrafoMasCercano(trafos);
 			
 			
+		}
+	private void asignarTrafoMasCercano(ArrayList<Transformador> trafos) {
+			double distanciaMasCorta, distanciaActual;
+			Transformador trafoMasCercano;
+			
+			distanciaMasCorta=DistanceCalculator.calcularDistancia(this.latitud, this.longitud, 
+					trafos.get(0).getLat(), trafos.get(0).getLong(), "K");
+			trafoMasCercano=trafos.get(0);
+			
+			for(int i=1;i<trafos.size();i++) {
+					distanciaActual=DistanceCalculator.calcularDistancia(this.latitud, this.longitud, 
+							trafos.get(i).getLat(), trafos.get(i).getLong(), "K");
+					
+					if(distanciaActual < distanciaMasCorta) {
+						trafoMasCercano=trafos.get(i);
+					}
+				
+			}
+			
+			trafoMasCercano.addCliente(this);
+		
 		}
 	public ArrayList<Dispositivo> dispositivos() {return dispositivos;}
 	
