@@ -82,7 +82,7 @@ public class Cliente {
 	          	  {
 			       	    JSONObject unDispo = (JSONObject) o;
 			       	    
-			       	    //¿Es este el dispositivo que busco?
+			       	    //ï¿½Es este el dispositivo que busco?
 			       	    String dispoTipo = (String) unDispo.get("tipo");
 			       	    
 			       	    if(dispoTipo.equals(tipoDispo))
@@ -115,17 +115,6 @@ public class Cliente {
  }
 	
 	//---------------------------------------------------------------------------------VERSION ENTREGA2 DE AGREGAR DISPOSITIVO----------------------------------------------------------------------------------
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -212,7 +201,7 @@ public class Cliente {
 		estadoParaSimplex = unEstado;
 	}
 	
-	public void accionarConsumoOptimo() {
+	public void accionarSegunConsumoOptimo() {
 		
 		PointValuePair consumosOptimos = this.consumoOptimo();
 		
@@ -223,6 +212,15 @@ public class Cliente {
 				}
 			}
 		}
-		
+	}
+	
+	public void suscribirseAlSimplexAutomatico() {
+		SimplexAutomatico simplex = SimplexAutomatico.getObserver();
+		simplex.suscribirASimplexAutomatico(this);
+	}
+	
+	public void desuscribirseAlSimplexAutomatico() {
+		SimplexAutomatico simplex = SimplexAutomatico.getObserver();
+		simplex.desuscribirASimplexAutomatico(this);
 	}
 }
