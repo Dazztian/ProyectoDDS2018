@@ -1,0 +1,218 @@
+[
+{
+"equipo": "aire_acondicionado",
+"tipo" : "3500",
+"inteligente" : true,
+"bajo_consumo" : false,
+"consumo" : 1.613,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "aire_acondicionado",
+"tipo" : "2200",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 1.013,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "televisor",
+"tipo" : "tubo_21",
+"inteligente" : false,
+"bajo_consumo" : false,
+"consumo" : 0.075,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "televisor",
+"tipo" : "tubo_29a34",
+"inteligente" : false,
+"bajo_consumo" : false,
+"consumo" : 0.175,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "televisor",
+"tipo" : "lcd_40",
+"inteligente" : false,
+"bajo_consumo" : false,
+"consumo" : 0.18,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "televisor",
+"tipo" : "led_24",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.04,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "televisor",
+"tipo" : "led_32",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.055,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "televisor",
+"tipo" : "led_40",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.08,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "heladera",
+"tipo" : "conFreezer",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.09,
+"consumoMin" : 0.0,
+"consumoMax" : 800000.0
+},
+{
+"equipo": "heladera",
+"tipo" : "sinFreezer",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.075,
+"consumoMin" : 0.0,
+"consumoMax" : 800000.0
+},
+{
+"equipo": "lavarropas",
+"tipo" : "automatico_con_calentamiento_agua",
+"inteligente" : false,
+"bajo_consumo" : false,
+"consumo" : 0.875,
+"consumoMin" : 6.0,
+"consumoMax" : 30.0
+},
+{
+"equipo": "lavarropas",
+"tipo" : "automatico",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.175,
+"consumoMin" : 6.0,
+"consumoMax" : 30.0
+},
+{
+"equipo": "lavarropas",
+"tipo" : "semi_automatico",
+"inteligente" : false,
+"bajo_consumo" : true,
+"consumo" : 0.1275,
+"consumoMin" : 6.0,
+"consumoMax" : 30.0
+},
+{
+"equipo": "ventilador",
+"tipo" : "pie",
+"inteligente" : false,
+"bajo_consumo" : true,
+"consumo" : 0.09,
+"consumoMin" : 120.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "ventilador",
+"tipo" : "techo",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.06,
+"consumoMin" : 120.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "lampara",
+"tipo" : "40w",
+"inteligente" : true,
+"bajo_consumo" : false,
+"consumo" : 0.04,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "lampara",
+"tipo" : "60w",
+"inteligente" : true,
+"bajo_consumo" : false,
+"consumo" : 0.06,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "lampara",
+"tipo" : "100w",
+"inteligente" : true,
+"bajo_consumo" : false,
+"consumo" : 0.015,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "lampara",
+"tipo" : "11w",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.011,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "lampara",
+"tipo" : "15w",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.015,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "lampara",
+"tipo" : "20w",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.02,
+"consumoMin" : 90.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "pc",
+"tipo" : "escritorio",
+"inteligente" : true,
+"bajo_consumo" : true,
+"consumo" : 0.4,
+"consumoMin" : 60.0,
+"consumoMax" : 360.0
+},
+{
+"equipo": "microondas",
+"tipo" : "convencional",
+"inteligente" : false,
+"bajo_consumo" : true,
+"consumo" : 0.64,
+"consumoMin" : 3.0,
+"consumoMax" : 15.0
+},
+{
+"equipo": "plancha",
+"tipo" : "vapor",
+"inteligente" : false,
+"bajo_consumo" : true,
+"consumo" : 0.75,
+"consumoMin" : 3.0,
+"consumoMax" : 30.0
+}
+]

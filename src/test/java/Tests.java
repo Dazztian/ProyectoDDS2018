@@ -38,14 +38,14 @@ public class Tests {
 	public Tests() {
 		try {
 			pepe=new Cliente("pepe","gonzales","dni",4012939,40239401,"Yrigoyen",
-					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),new Categoria("R1",18.56,0.86));
+					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),new Categoria("R1",18.56,0.86), 8.0, 8.0);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			rosa=new Cliente("rosa","Perez","dni",4012339,40239401,"Yrigoyen",
-					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-02-01T12:00:00+01:00"),new Categoria("R2",21.36,1.2));
+					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-02-01T12:00:00+01:00"),new Categoria("R2",21.36,1.2),8.0, 8.0);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,11 +53,11 @@ public class Tests {
 		
 	}
 	
-	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido());
-	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido());
-	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire",100, new Encendido());
-	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido());
-	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8);
+	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 800000.0);
+	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido(), 30.0, 360.0);
+	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire",100, new Encendido(), 30.0, 360.0);
+	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido(), 30.0, 360.0);
+	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8, 30.0, 360.0);
 	private	Administrador juan = new Administrador("Juan","Lopez",123231,"Juancito","asd123");
 	
 	
@@ -77,7 +77,7 @@ public class Tests {
 	public void adaptarUnDispositivo() {
 		//Cuando Rosa adapta su ventilador, este deberia salir de su lista de dispositivos y en su lugar estar el moduloAdaptador
 		//Tambien se deberian poder entender todos los metodos de un DI
-		rosa.suscribirDispositivo(dispositivo5);
+		rosa.addDispositivo(dispositivo5);
 		assertEquals(12000, rosa.consumoMensual(), 0);
 		rosa.adaptarDispositivo(dispositivo5);
 		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).prender());
@@ -94,10 +94,10 @@ public class Tests {
 			dispositivo2.guardarConsumo();
 			dispositivo3.guardarConsumo();
 			dispositivo4.guardarConsumo();
-			rosa.suscribirDispositivo(dispositivo1);
-			rosa.suscribirDispositivo(dispositivo2);
-			rosa.suscribirDispositivo(dispositivo3);
-			rosa.suscribirDispositivo(dispositivo4);
+			rosa.addDispositivo(dispositivo1);
+			rosa.addDispositivo(dispositivo2);
+			rosa.addDispositivo(dispositivo3);
+			rosa.addDispositivo(dispositivo4);
 			assertEquals(300, rosa.consumoMensual(), 0);		
 	}
 	
@@ -109,17 +109,17 @@ public class Tests {
 			dispositivo1.guardarConsumo();
 			dispositivo2.guardarConsumo();
 			dispositivo3.guardarConsumo();
-			rosa.suscribirDispositivo(dispositivo1);
-			rosa.suscribirDispositivo(dispositivo2);
-			rosa.suscribirDispositivo(dispositivo3);
+			rosa.addDispositivo(dispositivo1);
+			rosa.addDispositivo(dispositivo2);
+			rosa.addDispositivo(dispositivo3);
 			assertEquals(261.36, rosa.estimativoFacturacion(), 0);	
 }
 		@Test
 	 	public void testCantDispositivos()	{
 		 //Le agrego los dispositivos y testeo la cantidad de dispositivos que tiene Rosa
-		 	rosa.suscribirDispositivo(dispositivo1);
-		 	rosa.suscribirDispositivo(dispositivo2);
-		 	rosa.suscribirDispositivo(dispositivo3);
+		 	rosa.addDispositivo(dispositivo1);
+		 	rosa.addDispositivo(dispositivo2);
+		 	rosa.addDispositivo(dispositivo3);
 		 	assertEquals(3,rosa.cantDispositivos());		 
 	 }
 	
@@ -128,10 +128,10 @@ public class Tests {
 		public void testCantDispositivosEncendidos(){
 		//Se agregan dispositivos a Rosa y se comprueba cuantos de ellos estan encendidos
 			dispositivo4.apagar();
-			rosa.suscribirDispositivo(dispositivo1);
-			rosa.suscribirDispositivo(dispositivo2);
-			rosa.suscribirDispositivo(dispositivo3);
-			rosa.suscribirDispositivo(dispositivo4);
+			rosa.addDispositivo(dispositivo1);
+			rosa.addDispositivo(dispositivo2);
+			rosa.addDispositivo(dispositivo3);
+			rosa.addDispositivo(dispositivo4);
 			assertEquals(3, rosa.cantDispositivosEncendidos());
 	}
 	
@@ -139,20 +139,20 @@ public class Tests {
 		public void testCantDispositivosApagados() {
 		//Se agregan dispositivos a Rosa y se comprueba cuantos de ellos estan apagados
 			dispositivo4.apagar();
-			rosa.suscribirDispositivo(dispositivo1);
-			rosa.suscribirDispositivo(dispositivo2);
-			rosa.suscribirDispositivo(dispositivo3);
-			rosa.suscribirDispositivo(dispositivo4);
+			rosa.addDispositivo(dispositivo1);
+			rosa.addDispositivo(dispositivo2);
+			rosa.addDispositivo(dispositivo3);
+			rosa.addDispositivo(dispositivo4);
 			assertEquals(1, rosa.cantDispositivosApagados());
 	}
 	
 	@Test
 		public void tieneRosaAlgunDispositivoEncendido() {
 		//Se agregan dispositivos a Rosa y se comprueba si alguno de ellos esta encendido
-			rosa.suscribirDispositivo(dispositivo1);
-			rosa.suscribirDispositivo(dispositivo2);
-			rosa.suscribirDispositivo(dispositivo3);
-			rosa.suscribirDispositivo(dispositivo4);
+			rosa.addDispositivo(dispositivo1);
+			rosa.addDispositivo(dispositivo2);
+			rosa.addDispositivo(dispositivo3);
+			rosa.addDispositivo(dispositivo4);
 			assert(rosa.algunDispositivoEncendido());
 		
 	}
@@ -160,8 +160,8 @@ public class Tests {
 	@Test
 		public void rosaDaDeBajaUnDispositivo() {
 		//Se agrega un dispositivo a Rosa y se lo da de baja, luego se comprueba que ya no este mas en sus dispositivos
-			rosa.suscribirDispositivo(dispositivo1);
-			rosa.desuscribirDispositivo(dispositivo1);
+			rosa.addDispositivo(dispositivo1);
+			rosa.bajaDispositivo(dispositivo1);
 			assert(!rosa.dispositivos().contains(dispositivo1));
 	}
 	
@@ -224,6 +224,15 @@ public class Tests {
 	}
 	
 	//-------------------------------------------TESTS--------DE--------ENTREGA 2--------------------------------------------------------------------
+	@Test //Test para verificar que se logro agregar un dispo desde el json tablaDispositivos
+	public void agregarDispo()
+	{
+		rosa.agregarDispositivo("tubo_21");
+		assertEquals(0,rosa.dispositivos.size(),1);
+		
+	}
+	
+	
 	@Test //Test para verificar que se logro levantar el JSON de  ZonasGeograficas
 	public void JSONZonasAcodigo() 
 	{
@@ -251,9 +260,6 @@ public class Tests {
 			e.printStackTrace();
 		}
     }
-    	
-     	
-
 	
 	
 	

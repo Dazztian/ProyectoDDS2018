@@ -14,9 +14,9 @@ public class DispositivoInteligente extends Dispositivo {
 	public LinkedList<Log> logDeConsumo = new LinkedList<Log>();
 	int intervalo=100;
 	
-	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado) {
+	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado, double unConsumoMinimo, double unConsumoMaximo) {
 		
-		super(unNombre, electricidadQConsume);
+		super(unNombre, electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
 		estado = unEstado;	
 		temporizador=new Timer();
 		
@@ -35,6 +35,10 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	public boolean estaEncendido(){
 		return estado.estadoEncendido();
+	}
+	
+	public void cambiarEstado(Estado unEstado) {
+		estado = unEstado;
 	}
 	
 	public void apagar() {
@@ -81,6 +85,10 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	public void setMagnitud(double m) {
 		this.magnitud=m;
+	}
+	
+	public double horasDeUsoMensuales() {
+		return this.consumoEnLasUltimasNHoras(720)/this.kwhConsumeXHora();
 	}
 	
 }
