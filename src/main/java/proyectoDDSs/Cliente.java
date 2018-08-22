@@ -174,6 +174,15 @@ public class Cliente {
 	//la cantidad total de dispositivos la podemos saber directamente de la lista de dispositivos 
 	public int cantDispositivos() {return dispositivos.size();}
 	
+	public double consumoEnLaUltimaHora()
+	{
+		//Al cliente le calculo cuanto consume cada dispositivo sumo uno a uno su consumo y luego devuelvo el resultado,
+		//Se realiza el c�lculo suponiendo que est�n siempre funcionando.
+		return 
+				dispositivos.stream().
+				mapToDouble(dispositivo -> dispositivo.consumoEnLasUltimasNHoras(1)).sum();
+				
+	}
 	
 	public double consumoMensual()
 	{

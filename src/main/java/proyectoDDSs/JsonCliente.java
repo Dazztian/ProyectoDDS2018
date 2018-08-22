@@ -72,7 +72,7 @@ public class JsonCliente {
 		        	    System.out.println(estado);
 		        	    System.out.println(kwhConsumeXHora);        	    
 		        	            	    
-		        	    listaDispositivos.add( new DispositivoEstandar(nombreDispo/*,estado*/,kwhConsumeXHora,1) );
+		        	    listaDispositivos.add( new DispositivoEstandar(nombreDispo/*,estado*/,kwhConsumeXHora,1,1,1) );
 		        	    	        	    
 		        	}
 	        	    //Resuelvo la categoria asociada al cliente
@@ -87,8 +87,8 @@ public class JsonCliente {
 			        System.out.println(cargoVariable);
 			        	  
 			        Categoria categoriaCliente=(new Categoria(categoriaTipo,cargoFijo,cargoVariable));
-	        
-		        	  clientes.add( new Cliente (nombre,apellido,tipoDocumento,numeroDocumento,telefono,domicilio, listaDispositivos,fechaObtenida, categoriaCliente));
+			        	// fijarse como pasar los trafos o si esto si quiera sigue sirviendo
+		        	  //clientes.add( new Cliente (nombre,apellido,tipoDocumento,numeroDocumento,telefono,domicilio, listaDispositivos,fechaObtenida, categoriaCliente));
 	        	   }	        	    
 	 	        	 
 

@@ -28,5 +28,7 @@ public class DispositivoEstandar extends Dispositivo {
 	public boolean estaEncendido() {
 		throw new Error();
 	}
+	
+	public double consumoEnLasUltimasNHoras(int n) {return kwhConsumeXHora * n;}
 
 }

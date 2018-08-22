@@ -21,6 +21,7 @@ public abstract class Dispositivo {
 	public abstract boolean esInteligente();
 	public abstract double consumoMensual();
 	public abstract boolean estaEncendido();
+	public abstract double consumoEnLasUltimasNHoras(int n);
 	
 	public double kwhConsumeXHora() {
 		return kwhConsumeXHora;

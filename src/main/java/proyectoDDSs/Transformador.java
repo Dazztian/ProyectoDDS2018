@@ -55,7 +55,7 @@ public class Transformador extends BeanToJson<Transformador> {
 		
 		public double consumoTotal() {
 			
-			return clientes.stream().mapToDouble(cliente -> cliente.consumoMensual()).sum();
+			return clientes.stream().mapToDouble(cliente -> cliente.consumoEnLaUltimaHora()).sum();
 			
 		}
 
