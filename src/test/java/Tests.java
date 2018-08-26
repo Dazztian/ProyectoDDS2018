@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.time.*;
 import java.util.*;
 
+import org.apache.commons.math3.optim.PointValuePair;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -28,12 +29,14 @@ import proyectoDDSs.Traductor;
 import proyectoDDSs.TraductorDeMensajesAJSON;
 import proyectoDDSs.Transformador;
 import proyectoDDSs.ZonaGeografica;
+import simplex.facade.*;
 
 
 public class Tests {
 	//Creo un par de instancias
 	private Cliente pepe;
 	private Cliente rosa;
+	private Cliente pedro;
 
 	public Tests() {
 		try {
@@ -50,10 +53,23 @@ public class Tests {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+			
+		try {
+			pedro = new Cliente("Pedro", "Perez","DNI", 40740740, 011450450,
+				"casa",new ArrayList<Dispositivo>(),
+				ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), new Categoria("R1",18.56,0.86), 30.0, 30.0);
+		} catch(ParseException e1) {
+			e1.printStackTrace();
+	}
 	}
 	
-	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 800000.0);
+	//Dispositivos para el Simplex
+	DispositivoInteligente disp1 = new DispositivoInteligente("Dispo1", 0.06, new Encendido(), 120.0, 360.0);
+	DispositivoInteligente disp2 = new DispositivoInteligente("Dispo2", 0.875, new Encendido(), 6.0, 30.0);
+	DispositivoInteligente disp3 = new DispositivoInteligente("Dispo3", 0.18, new Encendido(), 90.0, 370.0);
+	DispositivoInteligente disp4 = new DispositivoInteligente("Dispo1", 4.5, new Encendido(), 120.0, 360.0);
+	
+	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 0.0);
 	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido(), 30.0, 360.0);
 	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire",100, new Encendido(), 30.0, 360.0);
 	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido(), 30.0, 360.0);
@@ -261,6 +277,31 @@ public class Tests {
 		}
     }
 	
+	@Test //Test de Simplex, es posible obtener los usos maximos de los dispositivos
+	public void seTienenLosUsosMaximos()
+	{
+		pedro.addDispositivo(disp1);
+		pedro.addDispositivo(disp2);
+		pedro.addDispositivo(disp3);
+		
+		PointValuePair consumosOptimos = pedro.consumoOptimo();
+		
+		assertEquals(360.0, consumosOptimos.getPoint()[0], 0.01);
+		assertEquals(30.0, consumosOptimos.getPoint()[1], 0.01);
+		assertEquals(370.0, consumosOptimos.getPoint()[2], 0.01);
+	}
 	
-	
+	@Test //Test de Simplex, al aumentar el consumo, cambia las horas maximas recomendadas
+	public void seAlteraronLasHorasMaximas()
+	{
+		pedro.addDispositivo(disp4);
+		pedro.addDispositivo(disp2);
+		pedro.addDispositivo(disp3);
+		
+		PointValuePair consumosOptimos = pedro.consumoOptimo();
+		
+		assertEquals(131.0, consumosOptimos.getPoint()[0], 0.5);
+		assertEquals(6.0, consumosOptimos.getPoint()[1], 0.01);
+		assertEquals(90.0, consumosOptimos.getPoint()[2], 0.01);
+	}
 }
