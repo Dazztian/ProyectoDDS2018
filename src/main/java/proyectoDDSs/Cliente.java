@@ -1,6 +1,7 @@
 package proyectoDDSs;
 
 import proyectoDDSs.Dispositivo;
+import proyectoDDSs.DistanceCalculator;
 
 import java.io.FileReader;
 import java.util.*;
