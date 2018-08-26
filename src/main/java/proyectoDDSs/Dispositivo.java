@@ -26,5 +26,8 @@ public abstract class Dispositivo {
 	public double kwhConsumeXHora() {
 		return kwhConsumeXHora;
 	}
-
+	
+	public boolean noEsHeladera() {
+		return (!this.nombre.contains("heladera"));
+	}
 }

@@ -78,7 +78,7 @@
 "bajo_consumo" : true,
 "consumo" : 0.09,
 "consumoMin" : 0.0,
-"consumoMax" : 800000.0
+"consumoMax" : 0.0
 },
 {
 "equipo": "heladera",
@@ -87,7 +87,7 @@
 "bajo_consumo" : true,
 "consumo" : 0.075,
 "consumoMin" : 0.0,
-"consumoMax" : 800000.0
+"consumoMax" : 0.0
 },
 {
 "equipo": "lavarropas",

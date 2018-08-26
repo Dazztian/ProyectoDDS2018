@@ -6,6 +6,7 @@ import proyectoDDSs.DistanceCalculator;
 import java.io.FileReader;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.commons.math3.optim.linear.Relationship;
@@ -226,20 +227,21 @@ public class Cliente {
 	public PointValuePair consumoOptimo(){
 		
 		  SimplexFacade consumoOptimo = new SimplexFacade (GoalType.MAXIMIZE, true);
+		  Object[] dispositivosSinHeladeras = dispositivos.stream().filter(elem -> elem.noEsHeladera()).toArray();
 		  double[] auxLista = new double[dispositivos.size()];
-		  for(int i = 0; i < dispositivos.size(); i++) {
-			  auxLista[i] = dispositivos.get(i).kwhConsumeXHora();
+		  for(int i = 0; i < dispositivosSinHeladeras.length; i++) {
+			  auxLista[i] = ((Dispositivo) dispositivosSinHeladeras[i]).kwhConsumeXHora();
 		  }
 		  consumoOptimo.crearFuncionEconomica(auxLista);
 		  consumoOptimo.agregarRestriccion(Relationship.LEQ, 612, auxLista);
-		  for(int i = 0; i < dispositivos.size(); i++){
+		  for(int i = 0; i < dispositivosSinHeladeras.length; i++){
 			  
-		  		for(int j = 0; j < dispositivos.size(); j++) {
+		  		for(int j = 0; j < dispositivosSinHeladeras.length; j++) {
 		  			auxLista[j] = 0;
 		  		}
 		  		auxLista[i] = 1;
-		  		consumoOptimo.agregarRestriccion(Relationship.GEQ, dispositivos.get(i).consumoMinimo, auxLista);
-		  		consumoOptimo.agregarRestriccion(Relationship.LEQ, dispositivos.get(i).consumoMaximo, auxLista);
+		  		consumoOptimo.agregarRestriccion(Relationship.GEQ, ((Dispositivo) dispositivosSinHeladeras[i]).consumoMinimo, auxLista);
+		  		consumoOptimo.agregarRestriccion(Relationship.LEQ, ((Dispositivo) dispositivosSinHeladeras[i]).consumoMaximo, auxLista);
 				}
 			PointValuePair solucion = consumoOptimo.resolver();
 			return solucion;
@@ -250,8 +252,9 @@ public class Cliente {
 	public void mostrarConsumoOptimo() {
 		
 		PointValuePair solucion = this.consumoOptimo();
+		Object[] dispositivosSinHeladeras = dispositivos.stream().filter(elem -> elem.noEsHeladera()).toArray();
 		
-		for(int i = 0; i < dispositivos.size(); i++){
+		for(int i = 0; i < dispositivosSinHeladeras.length; i++){
 			System.out.format("El consumo Maximo para el dispositivo %d es: \n", i); 
 			System.out.format(" %f \n ", (float) solucion.getPoint()[i]);
 			}
