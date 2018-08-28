@@ -82,6 +82,7 @@ public class Tests {
 	DispositivoInteligente disp2 = new DispositivoInteligente("Dispo2", 0.875, new Encendido(), 6.0, 30.0);
 	DispositivoInteligente disp3 = new DispositivoInteligente("Dispo3", 0.18, new Encendido(), 90.0, 370.0);
 	DispositivoInteligente disp4 = new DispositivoInteligente("Dispo1", 4.5, new Encendido(), 120.0, 360.0);
+	DispositivoInteligente disp5 = new DispositivoInteligente("Dispo1", 400.0, new Encendido(), 120.0, 360.0);
 	
 	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 0.0);
 	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido(), 30.0, 360.0);
@@ -317,6 +318,23 @@ public class Tests {
 		assertEquals(131.0, consumosOptimos.getPoint()[0], 0.5);
 		assertEquals(6.0, consumosOptimos.getPoint()[1], 0.01);
 		assertEquals(90.0, consumosOptimos.getPoint()[2], 0.01);
+	}
+	
+	@Test //Test de Simplex, al tener un consumo excesivo, el hogar no es optimizable
+	public void elHogarNoEsOptimizable()
+	{
+		pedro.addDispositivo(disp5);
+		pedro.addDispositivo(disp2);
+		pedro.addDispositivo(disp3);
+		
+		pedro.mostrarConsumoOptimo();
+		
+		//try {
+		//PointValuePair consumosOptimos = pedro.consumoOptimo();
+		//}
+		//catch (Exception e) {
+		//	System.out.format("Su hogar no es compatible");
+		//}
 	}
 	
 	@Test

@@ -230,7 +230,13 @@ public class Cliente {
 	}
 	
 	public void mostrarConsumoOptimo() {
-		
+		try {
+		PointValuePair solucion = this.consumoOptimo();
+		}
+		catch (Exception e) {
+			System.out.format("Su hogar no es optimizable");
+			return;
+		}
 		PointValuePair solucion = this.consumoOptimo();
 		Object[] dispositivosSinHeladeras = dispositivos.stream().filter(elem -> elem.noEsHeladera()).toArray();
 		
