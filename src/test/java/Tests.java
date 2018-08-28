@@ -400,16 +400,22 @@ public class Tests {
 		jose.asignarTrafoMasCercano(trafos);
 		
 		rosa.addDispositivo(new DispositivoEstandar("heladera", 30, 12, 100, 220));
+		rosa.addDispositivo(dispositivo1);
 		pepe.addDispositivo(new DispositivoEstandar("lavarropa", 100, 2, 100, 300));
+		pepe.addDispositivo(dispositivo2);
 		pedro.addDispositivo(new DispositivoEstandar("notebook", 20, 5, 50, 180));
 		jose.addDispositivo(new DispositivoEstandar("TV", 60.5, 10, 80, 240));
+		jose.addDispositivo(dispositivo4);
 		jose.addDispositivo(dispositivo5);
+		
+		dispositivo1.guardarConsumo();
+		dispositivo2.guardarConsumo();
+		dispositivo4.guardarConsumo();
 		
 		//Calculo del consumo total de una zona
 		
-		Assert.assertEquals(260.5, zonas.get(0).consumoMomentaneo(), 1e-15);
-		
-		
+		Assert.assertEquals(460.5, zonas.get(0).consumoMomentaneo(), 1e-15);
+
 		
 	}
 	
