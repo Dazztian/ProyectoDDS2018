@@ -37,18 +37,24 @@ public class Tests {
 	private Cliente pepe;
 	private Cliente rosa;
 	private Cliente pedro;
-
+	
+	List<ZonaGeografica> listaZonas;
+	List<Transformador> listaTransformadores;
+	
+	
 	public Tests() {
 		try {
 			pepe=new Cliente("pepe","gonzales","dni",4012939,40239401,"Yrigoyen",
-					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),new Categoria("R1",18.56,0.86), 8.0, 8.0);
+					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
+							new Categoria("R1",18.56,0.86), -1.542, 7.1245);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			rosa=new Cliente("rosa","Perez","dni",4012339,40239401,"Yrigoyen",
-					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-02-01T12:00:00+01:00"),new Categoria("R2",21.36,1.2),8.0, 8.0);
+					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-02-01T12:00:00+01:00"),
+							new Categoria("R2",21.36,1.2),-5.653, 10.5020);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +63,7 @@ public class Tests {
 		try {
 			pedro = new Cliente("Pedro", "Perez","DNI", 40740740, 011450450,
 				"casa",new ArrayList<Dispositivo>(),
-				ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), new Categoria("R1",18.56,0.86), 30.0, 30.0);
+				ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), new Categoria("R1",18.56,0.86), 7.1235, -5.4820);
 		} catch(ParseException e1) {
 			e1.printStackTrace();
 	}
@@ -304,4 +310,53 @@ public class Tests {
 		assertEquals(6.0, consumosOptimos.getPoint()[1], 0.01);
 		assertEquals(90.0, consumosOptimos.getPoint()[2], 0.01);
 	}
+	
+	@Test
+	public void testAsignacionDeTrafos() {
+		
+		ArrayList<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
+		zonas.add(new ZonaGeografica(1, "zona1", 1.31, 2.13));
+		zonas.add(new ZonaGeografica(2, "zona2", 4.31, 3.25));
+		zonas.add(new ZonaGeografica(3, "zona3", 7.70, 1.01));
+		
+		Transformador trafo1 = new Transformador(5, -1.3414, -2.657, 3);
+		Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 2);
+		Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
+		Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 2);
+		
+		
+		
+		trafo1.asignarZona(zonas);
+		trafo2.asignarZona(zonas);
+		trafo3.asignarZona(zonas);
+		trafo4.asignarZona(zonas);
+		
+		assertEquals(1, zonas.get(2).cantidadTrafos());
+		
+		assertEquals(2, zonas.get(1).cantidadTrafos());
+		
+		assertEquals(1, zonas.get(0).cantidadTrafos());
+		
+	}
+	
+	@Test
+	public void testAsignacionDeClientes() {
+		
+		ArrayList<Transformador> trafos=new ArrayList<Transformador>();
+		
+		trafos.add(new Transformador(5, -1.3414, -2.657, 3));
+		trafos.add(new Transformador(6, -5.3314, 6.657, 2));
+		trafos.add(new Transformador(7, 23.551, -3.657, 1));
+		trafos.add(new Transformador(8, -1.412, 7.657, 2));
+		
+		rosa.asignarTrafoMasCercano(trafos);
+		pepe.asignarTrafoMasCercano(trafos);
+		pedro.asignarTrafoMasCercano(trafos);
+		
+		assertEquals(2, trafos.get(3).numeroClientes());
+			
+	}
+	
+	
+	
 }

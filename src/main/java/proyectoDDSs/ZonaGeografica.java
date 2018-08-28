@@ -8,7 +8,7 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 	@Expose protected String nombre;
 	@Expose protected double latitud;
 	@Expose protected double longitud;
-			private ArrayList<Transformador> trafos;
+			private ArrayList<Transformador> trafos=new ArrayList<Transformador>();;
 	
 	//Constructor
 		public ZonaGeografica(int unId,String unNombre, double unaLatitud,double unaLongitud) {
@@ -16,7 +16,6 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 			this.nombre = unNombre;
 			this.latitud=unaLatitud;
 			this.longitud=unaLongitud;
-			trafos=new ArrayList<Transformador>();
 		}
 		@Override
 		public ZonaGeografica getObj() {

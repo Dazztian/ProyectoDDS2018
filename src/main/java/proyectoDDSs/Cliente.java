@@ -62,27 +62,7 @@ public class Cliente {
 	}	
 	
 	
-	
-	public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
-				domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria, 
-				double latitud, double longitud, ArrayList<Transformador> trafos) {
-			this.nombre=nombre;
-			this.apellido=apellido;
-			this.tipoDocumento=tipoDocumento;
-			this.numeroDocumento=documento;
-			this.telefono=telefono;
-			this.domicilio=domicilio;
-			this.fechaAlta = unaFecha;
-			this.dispositivos=unosDispositivos;
-			this.categoria = unaCategoria;
-			this.latitud=latitud;
-			this.longitud=longitud;
-			
-			asignarTrafoMasCercano(trafos);
-			
-			
-		}
-	private void asignarTrafoMasCercano(ArrayList<Transformador> trafos) {
+	public void asignarTrafoMasCercano(ArrayList<Transformador> trafos) {
 			double distanciaMasCorta, distanciaActual;
 			Transformador trafoMasCercano;
 			

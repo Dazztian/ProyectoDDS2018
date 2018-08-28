@@ -14,7 +14,7 @@ public class Transformador extends BeanToJson<Transformador> {
 			private ArrayList<Cliente> clientes;
 	
 	//Constructor
-		public Transformador(int unId,  double unaLatitud,double unaLongitud, int unaZona, ArrayList <ZonaGeografica> zonas) {
+		public Transformador(int unId,  double unaLatitud,double unaLongitud, int unaZona) {
 			this.id=unId;
 			this.latitud=unaLatitud;
 			this.longitud=unaLongitud;
@@ -22,15 +22,13 @@ public class Transformador extends BeanToJson<Transformador> {
 			
 			this.clientes=new ArrayList<Cliente>();
 			
-			asignarZona(zonas);
-			
 		}
 		@Override
 		public Transformador getObj() {
 			return this;
 		}
 		
-		private void asignarZona(ArrayList <ZonaGeografica> zonas) {
+		public void asignarZona(ArrayList <ZonaGeografica> zonas) {
 			
 			for(ZonaGeografica zona:zonas) {
 				
@@ -51,6 +49,14 @@ public class Transformador extends BeanToJson<Transformador> {
 			
 			clientes.add(cliente);
 			
+		}
+		
+		public int numeroClientes() {
+			return clientes.size();
+		}
+		
+		public ArrayList<Cliente> getClientes(){
+			return this.clientes;
 		}
 		
 		public double consumoMomentaneo() {
