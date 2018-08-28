@@ -37,6 +37,7 @@ public class Tests {
 	private Cliente pepe;
 	private Cliente rosa;
 	private Cliente pedro;
+	private Cliente jose;
 	
 	List<ZonaGeografica> listaZonas;
 	List<Transformador> listaTransformadores;
@@ -66,7 +67,14 @@ public class Tests {
 				ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), new Categoria("R1",18.56,0.86), 7.1235, -5.4820);
 		} catch(ParseException e1) {
 			e1.printStackTrace();
-	}
+		}
+		try {
+			jose = new Cliente("Jose","Lopez","dni",10598212,1134913412,"25 de mayo",new ArrayList<Dispositivo>(),
+								ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),new Categoria("R1",18.56,0.86),
+								-34.704966, -58.412315);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//Dispositivos para el Simplex
@@ -324,8 +332,6 @@ public class Tests {
 		Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
 		Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 2);
 		
-		
-		
 		trafo1.asignarZona(zonas);
 		trafo2.asignarZona(zonas);
 		trafo3.asignarZona(zonas);
@@ -357,6 +363,55 @@ public class Tests {
 			
 	}
 	
+	@Test
+	public void testAsisgnacionDelTrafoMasCercano() {
+		
+		ArrayList<Transformador> trafos=new ArrayList<Transformador>();
+		
+		trafos.add(new Transformador(5, -34.705797, -58.404736, 3)); //Lanus Oeste - mas cercano a jose
+		trafos.add(new Transformador(6, -34.721041, -58.396010, 2)); //Escalada
+		trafos.add(new Transformador(7, -34.707652, -58.438311, 1)); //Fiorito
+		trafos.add(new Transformador(8, -34.689638, -58.402254, 2)); //Alsina
+		
+		jose.asignarTrafoMasCercano(trafos);
+		
+		//Me fijo si al trafo de Lanus se le asigno a jose como cliente ya que es el mas cercano
+		assertEquals(jose, trafos.get(0).getClientes().get(0));
+	}
+	
+	@Test
+	public void testConsumoTotalDeUnaZona() {
+		
+		ArrayList<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
+		zonas.add(new ZonaGeografica(1, "zona1", 1.31, 2.13));
+		
+		ArrayList<Transformador> trafos=new ArrayList<Transformador>();
+		
+		trafos.add(new Transformador(5, -34.705797, -58.404736, 1)); //Lanus Oeste - mas cercano a jose
+		trafos.add(new Transformador(6, -34.721041, -58.396010, 1)); //Escalada
+		trafos.add(new Transformador(7, -34.707652, -58.438311, 1)); //Fiorito
+		trafos.add(new Transformador(8, -34.689638, -58.402254, 1)); //Alsina
+		
+		trafos.stream().forEach(trafo -> trafo.asignarZona(zonas));
+		
+		rosa.asignarTrafoMasCercano(trafos);
+		pepe.asignarTrafoMasCercano(trafos);
+		pedro.asignarTrafoMasCercano(trafos);
+		jose.asignarTrafoMasCercano(trafos);
+		
+		rosa.addDispositivo(new DispositivoEstandar("heladera", 30, 12, 100, 220));
+		pepe.addDispositivo(new DispositivoEstandar("lavarropa", 100, 2, 100, 300));
+		pedro.addDispositivo(new DispositivoEstandar("notebook", 20, 5, 50, 180));
+		jose.addDispositivo(new DispositivoEstandar("TV", 60.5, 10, 80, 240));
+		jose.addDispositivo(dispositivo5);
+		
+		//Calculo del consumo total de una zona
+		
+		Assert.assertEquals(260.5, zonas.get(0).consumoMomentaneo(), 1e-15);
+		
+		
+		
+	}
 	
 	
 }
