@@ -234,7 +234,7 @@ public class Cliente {
 		PointValuePair solucion = this.consumoOptimo();
 		}
 		catch (Exception e) {
-			System.out.format("Su hogar no es optimizable");
+			System.out.format("Su hogar no es optimizable \n");
 			return;
 		}
 		PointValuePair solucion = this.consumoOptimo();
@@ -254,11 +254,12 @@ public class Cliente {
 	public void accionarSegunConsumoOptimo() {
 		
 		PointValuePair consumosOptimos = this.consumoOptimo();
+		Object[] dispositivosSinHeladeras = dispositivos.stream().filter(elem -> elem.noEsHeladera()).toArray();
 		
-		for(int i = 0; i < dispositivos.size(); i++) {
-			if(dispositivos.get(i).esInteligente()) {
-				if(consumosOptimos.getPoint()[i] <= ((DispositivoInteligente) dispositivos.get(i)).horasDeUsoMensuales()) {
-					((DispositivoInteligente) dispositivos.get(i)).cambiarEstado(this.estadoParaSimplex);
+		for(int i = 0; i < dispositivosSinHeladeras.length; i++) {
+			if(((Dispositivo) dispositivosSinHeladeras[i]).esInteligente()) {
+				if(consumosOptimos.getPoint()[i] <= ((DispositivoInteligente) dispositivosSinHeladeras[i]).horasDeUsoMensuales()) {
+					((DispositivoInteligente) dispositivosSinHeladeras[i]).cambiarEstado(this.estadoParaSimplex);
 				}
 			}
 		}

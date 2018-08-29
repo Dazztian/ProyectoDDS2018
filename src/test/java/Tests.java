@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import junit.framework.Assert;
 import proyectoDDSs.Actuador;
 import proyectoDDSs.Administrador;
+import proyectoDDSs.Apagado;
 import proyectoDDSs.Apagar;
 import proyectoDDSs.Categoria;
 import proyectoDDSs.Cliente;
@@ -83,6 +84,8 @@ public class Tests {
 	DispositivoInteligente disp3 = new DispositivoInteligente("Dispo3", 0.18, new Encendido(), 90.0, 370.0);
 	DispositivoInteligente disp4 = new DispositivoInteligente("Dispo1", 4.5, new Encendido(), 120.0, 360.0);
 	DispositivoInteligente disp5 = new DispositivoInteligente("Dispo1", 400.0, new Encendido(), 120.0, 360.0);
+	DispositivoInteligente disp6 = new DispositivoInteligente("Dispo6", 50.0, new Encendido(), 6.0, 30.0);
+	DispositivoInteligente disp7 = new DispositivoInteligente("Dispo7", 50.0, new Encendido(), 6.0, 30.0);
 	
 	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 0.0);
 	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido(), 30.0, 360.0);
@@ -327,6 +330,8 @@ public class Tests {
 		pedro.addDispositivo(disp2);
 		pedro.addDispositivo(disp3);
 		
+		System.out.format("TEST HOGAR NO OPTIMIZABLE \n");
+		
 		pedro.mostrarConsumoOptimo();
 		
 		//try {
@@ -336,6 +341,40 @@ public class Tests {
 		//	System.out.format("Su hogar no es compatible");
 		//}
 	}
+	
+	@Test //Test de Simplex, al excederse de los consumos recomendados, el disp6 se apaga. Tambien se ignora al dispositivo que es una heladera.
+	public void seCambiaElEstadoSegunElConsumo()
+	{
+		pedro.addDispositivo(disp6);
+		pedro.addDispositivo(disp7);
+		pedro.agregarDispositivo("conFreezer");
+		
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		
+		disp7.guardarConsumo();
+		disp7.guardarConsumo();
+		disp7.guardarConsumo();
+		
+		System.out.format("TEST ACCIONAR SEGUN CONSUMOS \n");
+		
+		pedro.mostrarConsumoOptimo();
+		
+		pedro.accionarSegunConsumoOptimo();
+		
+		
+		assertEquals(0.5, disp6.consumoPorHora(), 0.0);
+		assertEquals(50.0, disp7.consumoPorHora(), 0.0);
+		
+	}
+	
 	
 	@Test
 	public void testAsignacionDeTrafos() {
