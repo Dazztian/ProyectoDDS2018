@@ -14,6 +14,7 @@ Gonzalo Delaguardia gonzalodelaguardia@hotmail.com 159672-0 (Profe Daniel)
 Herramientas colaborativas:
 
 https://drive.google.com/open?id=10PPqcSJqN0CJicFjxxpY76vfKmDPEJCC
+https://www.draw.io/#G1i0ewiJxFkl7xgROWA_q0xn-I2bZgThHb Diagrama entidad relacion
 https://www.lucidchart.com/documents/edit/3d57b928-3bb8-449d-a7df-e92a96564552/0
 https://trello.com/b/X8bjZaPh/tablero-scrum
 
