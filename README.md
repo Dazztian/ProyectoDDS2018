@@ -29,6 +29,8 @@ https://ingenieriadesoftwareutmachala.wordpress.com/2017/01/20/requerimientos-fu
 https://stackoverflow.com/questions/8751553/how-to-write-a-unit-test HOW TO TEST IN JAVA
 https://stackoverflow.com/questions/8751553/how-to-write-a-unit-test HOW TO WRITE UNI TEST
 
+https://www.tutorialspoint.com/hibernate TEORÍA DE HIBERNATE
+
 *JSON, 
 https://www.w3schools.com (Tiene info de como laburar con js y json)
 http://jason.sourceforge.net/mini-tutorial/eclipse-plugin/ (Como instalarlo)
