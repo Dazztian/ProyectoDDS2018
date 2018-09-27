@@ -1,5 +1,7 @@
 package proyectoDDSs;
 
+import java.time.LocalDateTime;
+
 public class DispositivoEstandar extends Dispositivo {
 	
 	int usoDiarioEnHoras;
@@ -29,6 +31,25 @@ public class DispositivoEstandar extends Dispositivo {
 		throw new Error();
 	}
 	
-	public double consumoEnLasUltimasNHoras(int n) {return kwhConsumeXHora * n;}
-
+	public double consumoEnLasUltimasNHoras(int n) {
+		if (n < usoDiarioEnHoras) {
+			return kwhConsumeXHora * n;
+		}
+		else {
+			return this.consumoDiario();
+		}
+	}
+	
+	public double consumoEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
+		int cantidadDeDias = ((fechaLimiteMaxima.getYear() - fechaLimiteMinima.getYear()) * 365) +
+							 ((fechaLimiteMaxima.getMonthValue() - fechaLimiteMinima.getMonthValue()) * 30) +
+							 (fechaLimiteMaxima.getDayOfMonth() - fechaLimiteMinima.getDayOfMonth());
+		return this.consumoDiario() * cantidadDeDias;
+				
+	}
+	
+	public double consumoPromedioEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
+		return kwhConsumeXHora;
+	}
+	
 }

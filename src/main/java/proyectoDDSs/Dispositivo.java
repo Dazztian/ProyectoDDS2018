@@ -1,5 +1,7 @@
 package proyectoDDSs;
 
+import java.time.LocalDateTime;
+
 public abstract class Dispositivo {
 	
 	public String nombre;
@@ -22,6 +24,8 @@ public abstract class Dispositivo {
 	public abstract double consumoMensual();
 	public abstract boolean estaEncendido();
 	public abstract double consumoEnLasUltimasNHoras(int n);
+	public abstract double consumoEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima);
+	public abstract double consumoPromedioEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima);
 	
 	public double kwhConsumeXHora() {
 		return kwhConsumeXHora;

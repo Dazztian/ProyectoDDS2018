@@ -48,7 +48,7 @@ public class Tests {
 		try {
 			pepe=new Cliente("pepe","gonzales","dni",4012939,40239401,"Yrigoyen",
 					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
-							new Categoria("R1",18.56,0.86), -1.542, 7.1245);
+							new Categoria("R1",18.56,0.86), -1.542, 7.1245, "pepe10", "pepe");
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -56,7 +56,7 @@ public class Tests {
 		try {
 			rosa=new Cliente("rosa","Perez","dni",4012339,40239401,"Yrigoyen",
 					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-02-01T12:00:00+01:00"),
-							new Categoria("R2",21.36,1.2),-5.653, 10.5020);
+							new Categoria("R2",21.36,1.2),-5.653, 10.5020, "rosa20", "rosa");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,14 +65,14 @@ public class Tests {
 		try {
 			pedro = new Cliente("Pedro", "Perez","DNI", 40740740, 011450450,
 				"casa",new ArrayList<Dispositivo>(),
-				ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), new Categoria("R1",18.56,0.86), 7.1235, -5.4820);
+				ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), new Categoria("R1",18.56,0.86), 7.1235, -5.4820, "rosa20", "rosa");
 		} catch(ParseException e1) {
 			e1.printStackTrace();
 		}
 		try {
 			jose = new Cliente("Jose","Lopez","dni",10598212,1134913412,"25 de mayo",new ArrayList<Dispositivo>(),
 								ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),new Categoria("R1",18.56,0.86),
-								-34.704966, -58.412315);
+								-34.704966, -58.412315, "rosa20", "rosa");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

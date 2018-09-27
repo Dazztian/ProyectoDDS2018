@@ -3,22 +3,19 @@ package proyectoDDSs;
 import java.time.*;
 import java.util.*;
 
-public class Administrador {
+public class Administrador extends Usuario {
 	
 	private String nombre;
 	private String apellido;
 	private int id;
-	private String nombreUsuario;
-	private String contrasenia;
 	private LocalDateTime fechaCreacion;
 	
-	public Administrador(String unNombre, String unApellido, int unId, String unNombreUsuario, String unaContrasenia) 
+	public Administrador(String unNombre, String unApellido, int unId, String usuario, String contrasenia) 
 	{
+		super(usuario, contrasenia);
 		nombre = unNombre;
 		apellido=unApellido;
 		id=unId;
-		nombreUsuario=unNombreUsuario;
-		contrasenia=unaContrasenia;
 		fechaCreacion=LocalDateTime.now();
 		
 	}

@@ -73,8 +73,13 @@ public class DispositivoInteligente extends Dispositivo {
 
 	}
 	
-	public double consumoEnElSiguenteIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
+	public double consumoEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
 		return logDeConsumo.stream().filter(log -> log.ocurreEntre(fechaLimiteMaxima, fechaLimiteMinima)).mapToDouble(log -> log.consumo).sum();
+	}
+	
+	public double consumoPromedioEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
+		long size = logDeConsumo.stream().filter(log -> log.ocurreEntre(fechaLimiteMaxima, fechaLimiteMinima)).count();
+		return (logDeConsumo.stream().filter(log -> log.ocurreEntre(fechaLimiteMaxima, fechaLimiteMinima)).mapToDouble(log -> log.consumo).sum()) / size;
 	}
 	
 	public double consumoMensual() {

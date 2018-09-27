@@ -4,6 +4,7 @@ import proyectoDDSs.Dispositivo;
 import proyectoDDSs.DistanceCalculator;
 
 import java.io.FileReader;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,7 +18,7 @@ import org.json.simple.parser.JSONParser;
 import simplex.facade.*;
 
 
-public class Cliente {
+public class Cliente extends Usuario {
 	
 	private String nombre;
 	private String apellido;
@@ -25,8 +26,6 @@ public class Cliente {
 	private String tipoDocumento;
 	private long telefono;
 	private String domicilio;
-	private String usuario;
-	private String contrasenia;
 	private double longitud;
 	private double latitud;
 	
@@ -43,7 +42,8 @@ public class Cliente {
 		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
 	public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
 			domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria, 
-			double latitud, double longitud) {
+			double latitud, double longitud, String usuario, String contrasenia) {
+		super(usuario, contrasenia);
 		this.nombre=nombre;
 		this.apellido=apellido;
 		this.tipoDocumento=tipoDocumento;
@@ -274,4 +274,10 @@ public class Cliente {
 		SimplexAutomatico simplex = SimplexAutomatico.getObserver();
 		simplex.desuscribirASimplexAutomatico(this);
 	}
+	
+	public double consumoEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
+		return dispositivos.stream().mapToDouble(disp -> disp.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima)).sum();
+	}
+	
+	
 }

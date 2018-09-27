@@ -1,4 +1,5 @@
 package proyectoDDSs;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import com.google.gson.annotations.Expose;
@@ -63,6 +64,10 @@ public class Transformador extends BeanToJson<Transformador> {
 			
 			return clientes.stream().mapToDouble(cliente -> cliente.consumoEnLaUltimaHora()).sum();
 			
+		}
+		
+		public double consumoPromedioEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
+			return clientes.stream().mapToDouble(cliente -> cliente.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima)).sum();
 		}
 
 }
