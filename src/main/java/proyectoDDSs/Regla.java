@@ -8,6 +8,15 @@ public class Regla {
 	private double condicionDeAccion;
 	private ArrayList<Actuador> ActuadoresAAccionar = new ArrayList<Actuador>();
 	
+	public Regla(double unaCondicion) {
+		condicionDeAccion = unaCondicion;
+	}
+	
+	public Regla (double unaCondicion, ArrayList<Actuador> unosActuadores) {
+		condicionDeAccion = unaCondicion;
+		ActuadoresAAccionar = unosActuadores;
+	}
+	
 	public void actualizarMedicion(double valor) {
 		if (valor>condicionDeAccion){
 			accionarActuadores();

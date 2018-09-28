@@ -279,5 +279,17 @@ public class Cliente extends Usuario {
 		return dispositivos.stream().mapToDouble(disp -> disp.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima)).sum();
 	}
 	
+	public void cambiarGeolocalizacion (double nuevaLatitud, double nuevaLongitud) {
+		latitud = nuevaLatitud;
+		longitud = nuevaLongitud;
+	}
+
+
+	public double latitud() {
+		return latitud;
+	}
+	public double longitud() {
+		return longitud;
+	}
 	
 }

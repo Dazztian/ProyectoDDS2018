@@ -37,6 +37,10 @@ public class DispositivoInteligente extends Dispositivo {
 		return estado.estadoEncendido();
 	}
 	
+	public boolean estabaEncendido(Log unConsumo) {
+		return unConsumo.consumo() == kwhConsumeXHora;
+	}
+	
 	public Estado getEstado () {
 		return this.estado;
 	}
@@ -98,6 +102,20 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	public double horasDeUsoMensuales() {
 		return (this.consumoEnLasUltimasNHoras(720)/this.kwhConsumeXHora());
+	}
+	
+	public void intervalosEncendidoEnPeriodo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
+		Stream<Log> consumosDelPeriodo = logDeConsumo.stream().filter(log -> log.ocurreEntre(fechaLimiteMaxima, fechaLimiteMinima));
+		
+		//FALTA TERMINAR
+		
+	}
+	
+	public void intervalosEncendidosEnElUltimoMes() {
+		LocalDateTime aux = LocalDateTime.now().minusMonths(1);
+		LocalDateTime fechaLimiteMaxima = LocalDateTime.of(aux.getYear(), aux.getMonthValue(), 1, 0, 0);
+		LocalDateTime fechaLimiteMinima = LocalDateTime.of(aux.getYear(), aux.getMonthValue(), 30, 0, 0);
+		this.intervalosEncendidoEnPeriodo(fechaLimiteMaxima, fechaLimiteMinima);
 	}
 	
 }

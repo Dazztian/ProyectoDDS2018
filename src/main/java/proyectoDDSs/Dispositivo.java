@@ -34,4 +34,8 @@ public abstract class Dispositivo {
 	public boolean noEsHeladera() {
 		return (!this.nombre.contains("heladera"));
 	}
+	
+	public void cambiarConsumo(double unConsumo) {
+		kwhConsumeXHora = unConsumo;
+	}
 }

@@ -26,6 +26,7 @@ import proyectoDDSs.ISO8601;
 import proyectoDDSs.ParserCategoria;
 import proyectoDDSs.ParserTransformador;
 import proyectoDDSs.ParserZonasGeograficas;
+import proyectoDDSs.Regla;
 import proyectoDDSs.Traductor;
 import proyectoDDSs.TraductorDeMensajesAJSON;
 import proyectoDDSs.Transformador;
@@ -93,6 +94,10 @@ public class Tests {
 	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido(), 30.0, 360.0);
 	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8, 30.0, 360.0);
 	private	Administrador juan = new Administrador("Juan","Lopez",123231,"Juancito","asd123");
+	Transformador trafo1 = new Transformador(5, -1.3414, -2.657, 3);
+	Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 2);
+	Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
+	Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 2);
 	
 	
 
@@ -384,11 +389,6 @@ public class Tests {
 		zonas.add(new ZonaGeografica(2, "zona2", 4.31, 3.25));
 		zonas.add(new ZonaGeografica(3, "zona3", 7.70, 1.01));
 		
-		Transformador trafo1 = new Transformador(5, -1.3414, -2.657, 3);
-		Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 2);
-		Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
-		Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 2);
-		
 		trafo1.asignarZona(zonas);
 		trafo2.asignarZona(zonas);
 		trafo3.asignarZona(zonas);
@@ -476,5 +476,82 @@ public class Tests {
 		
 	}
 	
+	//-------------------------------------------TESTS--------DE--------ENTREGA PERSISTENCIA--------------------------------------------------------------------
+	
+	@Test //Crear 1 usuario nuevo. Persistirlo. Recuperarlo, modificar la geolocalización y
+		  //grabarlo. Recuperarlo y evaluar que el cambio se haya realizado.
+	public void casoDePrueba1() {
+		Cliente roberto = new Cliente("Roberto","Gomez","dni",4012939,40239401,"Yrigoyen",
+				new ArrayList<Dispositivo>(),Calendar.getInstance(),
+				new Categoria("R1",18.56,0.86), -1.542, 7.1245, "Roberto11", "robertito");
+		//PERSISTIR CLIENTE
+		//RECUPERAR CLIENTE
+		roberto.cambiarGeolocalizacion(-20.05, 25.01);
+		//GRABAR CLIENTE
+		//RECUPERAR CLIENTE
+		assertEquals(-20.05, roberto.latitud(), 0);
+		assertEquals(25.01, roberto.longitud(), 0);
+		//ROLLBACK A LA DB
+		
+	}
+	@Test //Recuperar un dispositivo. Mostrar por consola todos los intervalos que estuvo
+		  //encendido durante el último mes. Modificar su nombre (o cualquier otro atributo
+		  //editable) y grabarlo. Recuperarlo y evaluar que el nombre coincida con el
+		  //esperado.
+	public void casoDePrueba2() {
+		//RECUPERAR DISPOSITIVO
+		// disp1.intervalosEncendidoEnElUltimoMes() <---- HACER METODO PARA MOSTRAR INTERVALOS POR CONSOLA
+		disp1.cambiarConsumo(5.0);
+		//PERSISTIR
+		//RECUPERAR
+		assertEquals(5.0, disp1.kwhConsumeXHora(), 0);
+		//ROLLBACK DE LA DB
+	}
+	@Test //Crear una nueva regla. Asociarla a un dispositivo. Agregar condiciones y
+		  //acciones. Persistirla. Recuperarla y ejecutarla. Modificar alguna condición y
+		  //persistirla. Recuperarla y evaluar que la condición modificada posea la última
+		  //modificación.
+	public void casoDePrueba3() {
+		Regla regla = new Regla (30.0);
+		//ASOCIAR REGLA
+		//AGREGAR CONDICIONES Y ACCIONES
+		//PERSISTIR
+		//RECUPERAR Y EJECUTAR
+		//MODIFICAR Y PERSISTIR
+		//RECUPERAR
+		//assertThat([MODIFICACION] == regla.condicion());
+		//ROLLBACK DE LA DB
+	}
+	@Test //Recuperar todos los transformadores persistidos. Registrar la cantidad.
+		  //Agregar una instancia de Transformador al JSON de entradas. Ejecutar el
+		  //método de lectura y persistencia. Evaluar que la cantidad actual sea la anterior
+		  //+ 1.
+	public void casoDePrueba4() {
+		//RECUPERAR TRANSFORMADORES
+		// int i = transformadores.size();
+		//AGREGAR TRANSFO AL JSON
+		//HACER LECTURA Y PERSISTENCIA DEL JSON DE NUEVO
+		//assertThat(transformadores.size() == i + 1);
+		//ROLLBACK DE LA DB
+	}
+	@Test //Dado un hogar y un período, mostrar por consola (interfaz de comandos) el
+		  //consumo total. Dado un dispositivo y un período, mostrar por consola su
+		  //consumo promedio. Dado un transformador y un período, mostrar su consumo
+		  //promedio. Recuperar un dispositivo asociado a un hogar de ese transformador e
+		  //incrementar un 1000 % el consumo para ese período. Persistir el dispositivo.
+		  //Nuevamente mostrar el consumo para ese transformador.
+	public void casoDePrueba5() {
+		LocalDateTime fechaLimiteMinima = LocalDateTime.now();
+		LocalDateTime fechaLimiteMaxima = fechaLimiteMinima.plusDays(10);
+		System.out.format("El consumo del hogar en el periodo fue de %f \n", (float) pedro.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		//HACER UN PAR DE CONSUMOS
+		System.out.format("El consumo del dispositivo fue de %f \n", (float) disp1.consumoPromedioEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		System.out.format("El consumo del transformador fue de %f \n", (float) trafo1.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		//RECUPERAR UN DISPO QUE ESTE EN ESTE TRANSFORMADOR
+		disp1.cambiarConsumo( disp1.kwhConsumeXHora() * 1000);
+		//PERSISTIR DISPOSITIVO
+		System.out.format("El consumo del transformador fue de %f \n", (float) trafo1.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		//ROLLBACK DE LA DB
+	}
 	
 }

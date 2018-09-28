@@ -66,7 +66,7 @@ public class Transformador extends BeanToJson<Transformador> {
 			
 		}
 		
-		public double consumoPromedioEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
+		public double consumoEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
 			return clientes.stream().mapToDouble(cliente -> cliente.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima)).sum();
 		}
 
