@@ -22,8 +22,10 @@ public class DispositivoInteligente extends Dispositivo {
 		
 		temporizador.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-				
-				//notificarSensor();
+				/*
+				sensor.medirMagnitud(0);//aca no sabria bien que poner porque la magnitud que mide podria ser algo fisico del cual no se de donde sacarlo
+				sensor.notificarMedicion();
+				*/
 				
 			}
 		}, 0, intervalo*1000);
