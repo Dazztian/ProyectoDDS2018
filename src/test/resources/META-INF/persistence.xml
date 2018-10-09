@@ -16,7 +16,7 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/entrega_persistencia?serverTimezone=UTC" /> 
             <property name="hibernate.connection.username" value="root" />
-            <property name="hibernate.connection.password" value="hola1234" /> 
+            <property name="hibernate.connection.password" value="paso1576" /> 
 
 <!-- 
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
