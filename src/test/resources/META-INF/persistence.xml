@@ -9,17 +9,17 @@
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
     	
-    	<class>proyectoDDSs.Dispositivos</class>
+    	
    		<class>proyectoDDSs.Actuador</class>
-   		<class>proyectoDDSs.Estado</class>
-   		<class>proyectoDDSs.Sensor</class>
-   		<class>proyectoDDSs.Regla</class>
-   		<class>proyectoDDSs.Transformador</class>
-   		<class>proyectoDDSs.ZonaGeografica</class>
-   		<class>proyectoDDSs.Usuario</class>
-   		<class>proyectoDDSs.Categoria</class>
+  		<class>proyectoDDSs.Categoria</class>  		
    		<class>proyectoDDSs.Cliente</class>
-   		
+   		<class>proyectoDDSs.Dispositivos</class>
+   		<class>proyectoDDSs.Estado</class>
+   		<class>proyectoDDSs.Regla</class>   		
+   		<class>proyectoDDSs.Sensor</class>
+   		<class>proyectoDDSs.Transformador</class>
+   		<class>proyectoDDSs.Usuario</class>
+   		<class>proyectoDDSs.ZonaGeografica</class>
     	
     	
     	 
