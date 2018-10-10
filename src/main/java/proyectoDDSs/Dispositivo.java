@@ -3,15 +3,20 @@ package proyectoDDSs;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
+@Entity(name="Dispositivos")
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Dispositivo {
 	
 	@Id
 	@GeneratedValue
+	@Column(name="id",nullable=false)
 	private int id;
 	@Column(name="nombre")
 	public String nombre;

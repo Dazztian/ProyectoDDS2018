@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -51,8 +52,11 @@ public class Cliente extends Usuario {
 	//pattern "yyyy-MM-dd'T'HH:mm:ssZ" to be ISO8601
 	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
-	@Transient
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_Cliente",nullable=false)
 	public List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	
 	@Column(name="puntos")
 	public int puntos;
 	@Transient

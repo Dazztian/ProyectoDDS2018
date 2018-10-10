@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Sensor {
 	
 	@Id 
+	@GeneratedValue
 	@Column(name = "id")
 	private int id;
 	
@@ -16,10 +17,10 @@ public class Sensor {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="id_Sensor",nullable=false)
-	private List<Regla> reglas = new ArrayList<Regla>();
+	private List<Regla> reglas;
 	
 	public Sensor() {
-		
+		this.reglas=new ArrayList<>();
 	}
 	
 	public void medirMagnitud(double magnitud) {

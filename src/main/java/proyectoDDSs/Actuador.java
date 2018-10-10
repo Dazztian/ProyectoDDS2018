@@ -9,11 +9,13 @@ import org.junit.Test;
 public class Actuador{
 	
 	@Id 
+	@GeneratedValue
 	@Column(name = "id")
 	private int id;
 	
 	//@Column(name = "dispositivoSobreElQueActuo")
-	@Transient
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="dispositivo_asignado")
 	protected DispositivoInteligente dispositivoSobreElQActuo;
 	
 	@Column(name ="accion")

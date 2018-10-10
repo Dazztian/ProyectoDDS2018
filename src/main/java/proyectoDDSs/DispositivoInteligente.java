@@ -14,20 +14,21 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import java.time.*;
 
-@Entity
+@Entity(name="dispositivos_inteligentes")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TipoDispositivo")
 @DiscriminatorValue("Inteligente")
-@Table(name="dispositivos_inteligentes")
 public class DispositivoInteligente extends Dispositivo {
 	
 	//private Estado estado;
-	@Transient
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="sensor_asignado")
 	private Sensor sensor;
 	@Transient
 	private Timer temporizador;

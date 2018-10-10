@@ -6,8 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="dispositivos_estandar")
+@Entity(name="dispositivos_estandar")
 public class DispositivoEstandar extends Dispositivo {
 	@Column(name="uso_diario")
 	int usoDiarioEnHoras;

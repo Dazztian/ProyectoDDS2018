@@ -12,7 +12,8 @@ import com.google.gson.annotations.Expose;
 @Table(name = "Regla")
 public class Regla {
 	
-	@Id 
+	@Id
+	@GeneratedValue
 	@Column(name = "id")
 	private int id;
 	
