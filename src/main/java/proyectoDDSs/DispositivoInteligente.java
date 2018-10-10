@@ -5,13 +5,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import java.time.*;
 
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TipoDispositivo")
+@DiscriminatorValue("Inteligente")
 @Table(name="dispositivos_inteligentes")
 public class DispositivoInteligente extends Dispositivo {
 	
