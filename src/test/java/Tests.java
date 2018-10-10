@@ -471,7 +471,7 @@ public class Tests {
 	}
 	
 	//-------------------------------------------TESTS--------DE--------ENTREGA PERSISTENCIA--------------------------------------------------------------------
-	/*
+	
 	@Test //Crear 1 usuario nuevo. Persistirlo. Recuperarlo, modificar la geolocalización y
 		  //grabarlo. Recuperarlo y evaluar que el cambio se haya realizado.
 	public void casoDePrueba1() {
@@ -505,7 +505,7 @@ public class Tests {
 		assertEquals(25.01, robertoCopyCopy.longitud(), 0);
 		//ROLLBACK A LA DB
 		
-	}*/
+	}
 	@Test //Recuperar un dispositivo. Mostrar por consola todos los intervalos que estuvo
 		  //encendido durante el último mes. Modificar su nombre (o cualquier otro atributo
 		  //editable) y grabarlo. Recuperarlo y evaluar que el nombre coincida con el

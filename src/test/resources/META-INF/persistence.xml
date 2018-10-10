@@ -16,6 +16,7 @@
    		<class>proyectoDDSs.Administrador</class>
    		<class>proyectoDDSs.Dispositivo</class>
    		<class>proyectoDDSs.DispositivoInteligente</class>
+   		<class>proyectoDDSs.DispositivoEstandar</class>
    		<class>proyectoDDSs.DispositivoDispositivo</class>
    		<class>proyectoDDSs.ModuloAdaptador</class>			
    		<class>proyectoDDSs.Apagado</class>
