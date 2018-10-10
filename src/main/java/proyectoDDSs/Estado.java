@@ -1,10 +1,22 @@
 package proyectoDDSs;
 
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "Estado")
+@Table(name = "Estado")
 public abstract class Estado {
 	
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column(name = "fechaDeInicio")
 	public LocalDateTime fechaDeInicio;
+	
+	@Column(name = "fechaDeFin")
 	public LocalDateTime fechaDeFin = null;
 	
 	public Estado () {

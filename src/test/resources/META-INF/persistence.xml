@@ -15,7 +15,9 @@
    		<class>proyectoDDSs.Cliente</class>
    		<class>proyectoDDSs.Administrador</class>
    		<class>proyectoDDSs.Dispositivo</class>
-   		<class>proyectoDDSs.Estado</class>
+   		<class>proyectoDDSs.Apagado</class>
+   		<class>proyectoDDSs.Encendido</class>
+   		<class>proyectoDDSs.AhorroDeEnergia</class>
    		<class>proyectoDDSs.Regla</class>   		
    		<class>proyectoDDSs.Sensor</class>
    		<class>proyectoDDSs.Transformador</class>
