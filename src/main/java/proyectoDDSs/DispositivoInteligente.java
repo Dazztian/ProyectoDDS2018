@@ -21,9 +21,6 @@ import javax.persistence.Transient;
 import java.time.*;
 
 @Entity(name="dispositivos_inteligentes")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TipoDispositivo")
-@DiscriminatorValue("Inteligente")
 public class DispositivoInteligente extends Dispositivo {
 	
 	//private Estado estado;

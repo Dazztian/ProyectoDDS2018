@@ -34,7 +34,6 @@ public abstract class Dispositivo {
 	public double consumoMaximo;
 	
 	public Dispositivo() {
-		
 	}
 	
 	
