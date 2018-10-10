@@ -40,7 +40,7 @@ public class Transformador extends BeanToJson<Transformador> {
 			return this;
 		}
 		
-		public void asignarZona(ArrayList <ZonaGeografica> zonas) {
+		public void asignarZona(List <ZonaGeografica> zonas) {
 			
 			for(ZonaGeografica zona:zonas) {
 				

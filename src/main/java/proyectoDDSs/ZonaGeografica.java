@@ -51,6 +51,7 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 			this.nombre = unNombre;
 			this.latitud=unaLatitud;
 			this.longitud=unaLongitud;
+			this.trafos=new ArrayList<>();
 		}
 		@Override
 		public ZonaGeografica getObj() {
