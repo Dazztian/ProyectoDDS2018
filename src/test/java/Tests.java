@@ -16,6 +16,8 @@ import modelsPersistencia.ClienteModel;
 import modelsPersistencia.DispositivoModel;
 import modelsPersistencia.ModelHelperPersistencia;
 import modelsPersistencia.ReglaModel;
+import modelsPersistencia.TransformadorModel;
+import modelsPersistencia.ZonaGeograficaModel;
 import proyectoDDSs.Actuador;
 import proyectoDDSs.Administrador;
 import proyectoDDSs.Apagado;
@@ -102,10 +104,10 @@ public class Tests {
 	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido(), 30.0, 360.0);
 	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8, 30.0, 360.0);
 	private	Administrador juan = new Administrador("Juan","Lopez",123231,"Juancito","asd123");
-	Transformador trafo1 = new Transformador(5, -1.3414, -2.657, 3);
-	Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 2);
+	Transformador trafo1 = new Transformador(5, -1.3414, -2.657, 1);
+	Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 1);
 	Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
-	Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 2);
+	Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 1);
 	
 	
 
@@ -472,72 +474,73 @@ public class Tests {
 	}
 	
 	//-------------------------------------------TESTS--------DE--------ENTREGA PERSISTENCIA--------------------------------------------------------------------
-//	
-//	@Test //Crear 1 usuario nuevo. Persistirlo. Recuperarlo, modificar la geolocalización y
-//		  //grabarlo. Recuperarlo y evaluar que el cambio se haya realizado.
-//	public void casoDePrueba1() {
-//		//CREAR CLIENTE NUEVO
-//		Cliente roberto = new Cliente("Roberto","Gomez","dni",4012939,40239401,"Yrigoyen",
-//				new ArrayList<Dispositivo>(),Calendar.getInstance(),
-//				new Categoria("R1",18.56,0.86), -1.542, 7.1245, "Roberto11", "robertito");
-//		ClienteModel modelCliente = new ClienteModel();
-//		
-//		//PERSISTIR CLIENTE
-//		model.agregar(roberto);
-//		
-//		System.out.format("Persisti a roberto \n");
-//		
-//		//RECUPERAR CLIENTE
-//		Cliente robertoCopy = modelCliente.buscarCliente(1);
-//		System.out.format("Recupere a roberto \n");
-//		
-//		//MODIFICAR CLIENTE
-//		robertoCopy.cambiarGeolocalizacion(-20.05, 25.01);
-//		model.modificar(robertoCopy);
-//		
-//		System.out.format("Modifique a roberto \n");
-//		
-//		//RECUPERAR CLIENTE
-//		Cliente robertoCopyCopy = modelCliente.buscarCliente(1);
-//		System.out.format("Recupere a roberto de nuevo \n");
-//		
-//		
-//		assertEquals(-20.05, robertoCopyCopy.latitud(), 0);
-//		assertEquals(25.01, robertoCopyCopy.longitud(), 0);
-//		//ROLLBACK A LA DB
-//		
-//	}
-//	@Test //Recuperar un dispositivo. Mostrar por consola todos los intervalos que estuvo
-//		  //encendido durante el último mes. Modificar su nombre (o cualquier otro atributo
-//		  //editable) y grabarlo. Recuperarlo y evaluar que el nombre coincida con el
-//		  //esperado.
-//	public void casoDePrueba2() {
-//		
-//		DispositivoModel dispo_model = new DispositivoModel();
-//		
-//		disp1.apagar();
-//		disp1.prender();
-//		disp1.apagar();
-//		disp1.prender();
-//		
-////		pepe.addDispositivo(disp1);
-//		
-////		model.agregar(pepe);
-//		
-//		
-//		//RECUPERAR DISPOSITIVO
-//		DispositivoInteligente disp1Copy = (DispositivoInteligente)dispo_model.buscarDispositivo(1);
-//				
-//		//MOSTRAR INTERVALOS Y MODIFICAR CONSUMO
-////		disp1Copy.intervalosEncendidosEnElUltimoMes();
-//		disp1Copy.cambiarConsumo(5.0);
-//		model.modificar(disp1Copy);
-//		
-//		//RECUPERAR
-//		DispositivoInteligente disp1CopyCopy =(DispositivoInteligente)dispo_model.buscarDispositivo(1);
-//		assertEquals(5.0, disp1CopyCopy.kwhConsumeXHora(), 0);
-//		//ROLLBACK DE LA DB
-//	}
+	
+	@Test //Crear 1 usuario nuevo. Persistirlo. Recuperarlo, modificar la geolocalización y
+		  //grabarlo. Recuperarlo y evaluar que el cambio se haya realizado.
+	public void casoDePrueba1() {
+		//CREAR CLIENTE NUEVO
+		Cliente roberto = new Cliente("Roberto","Gomez","dni",4012939,40239401,"Yrigoyen",
+				new ArrayList<Dispositivo>(),Calendar.getInstance(),
+				new Categoria("R1",18.56,0.86), -1.542, 7.1245, "Roberto11", "robertito");
+		ClienteModel modelCliente = new ClienteModel();
+		
+		//PERSISTIR CLIENTE
+		model.agregar(roberto);
+		
+		System.out.format("Persisti a roberto \n");
+		
+		//RECUPERAR CLIENTE
+		Cliente robertoCopy = modelCliente.buscarCliente(1);
+		System.out.format("Recupere a roberto \n");
+		
+		//MODIFICAR CLIENTE
+		robertoCopy.cambiarGeolocalizacion(-20.05, 25.01);
+		model.modificar(robertoCopy);
+		
+		System.out.format("Modifique a roberto \n");
+		
+		//RECUPERAR CLIENTE
+		Cliente robertoCopyCopy = modelCliente.buscarCliente(1);
+		System.out.format("Recupere a roberto de nuevo \n");
+		
+		ModelHelperPersistencia.rollback();
+		
+		assertEquals(-20.05, robertoCopyCopy.latitud(), 0);
+		assertEquals(25.01, robertoCopyCopy.longitud(), 0);
+		//ROLLBACK A LA DB
+		
+	}
+	@Test //Recuperar un dispositivo. Mostrar por consola todos los intervalos que estuvo
+		  //encendido durante el último mes. Modificar su nombre (o cualquier otro atributo
+		  //editable) y grabarlo. Recuperarlo y evaluar que el nombre coincida con el
+		  //esperado.
+	public void casoDePrueba2() {
+		
+		DispositivoModel dispo_model = new DispositivoModel();
+		
+		disp1.apagar();
+		disp1.prender();
+		disp1.apagar();
+		disp1.prender();
+		
+//		pepe.addDispositivo(disp1);
+		
+//		model.agregar(pepe);
+		
+		
+		//RECUPERAR DISPOSITIVO
+		DispositivoInteligente disp1Copy = (DispositivoInteligente)dispo_model.buscarDispositivo(1);
+				
+		//MOSTRAR INTERVALOS Y MODIFICAR CONSUMO
+//		disp1Copy.intervalosEncendidosEnElUltimoMes();
+		disp1Copy.cambiarConsumo(5.0);
+		model.modificar(disp1Copy);
+		
+		//RECUPERAR
+		DispositivoInteligente disp1CopyCopy =(DispositivoInteligente)dispo_model.buscarDispositivo(1);
+		assertEquals(5.0, disp1CopyCopy.kwhConsumeXHora(), 0);
+		//ROLLBACK DE LA DB
+	}
 	@Test //Crear una nueva regla. Asociarla a un dispositivo. Agregar condiciones y
 		  //acciones. Persistirla. Recuperarla y ejecutarla. Modificar alguna condición y
 		  //persistirla. Recuperarla y evaluar que la condición modificada posea la última
@@ -572,12 +575,12 @@ public class Tests {
 		
 		
 		
-//		//Elimina todo lo persistido
-//		ClienteModel c_model = new ClienteModel();
-//		
-//		Cliente c1=c_model.buscarCliente(1);
-//		
-//		c_model.eliminar(c1);
+		//Elimina todo lo persistido
+		ClienteModel c_model = new ClienteModel();
+		
+		Cliente c1=c_model.buscarCliente(1);
+		
+		c_model.eliminar(c1);
   
 		
 //		//MODIFICAR Y PERSISTIR
@@ -590,12 +593,59 @@ public class Tests {
 //		assertEquals(20.0, regla.condicionDeAccion(), 0);
 //		//ROLLBACK DE LA DB
 	}
-	/*@Test //Recuperar todos los transformadores persistidos. Registrar la cantidad.
+	@Test //Recuperar todos los transformadores persistidos. Registrar la cantidad.
 		  //Agregar una instancia de Transformador al JSON de entradas. Ejecutar el
 		  //método de lectura y persistencia. Evaluar que la cantidad actual sea la anterior
 		  //+ 1.
 	public void casoDePrueba4() {
 		//RECUPERAR TRANSFORMADORES
+		
+		ZonaGeograficaModel zona_model = new ZonaGeograficaModel();
+		
+		TransformadorModel trafo_model = new TransformadorModel();
+		
+		List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
+		
+		List<Transformador> trafos = new ArrayList<Transformador>();
+		
+		zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
+		
+		trafo1.asignarZona(zonas);
+		trafo2.asignarZona(zonas);
+		trafo3.asignarZona(zonas);
+		trafo4.asignarZona(zonas);
+		
+		zonas.stream().forEach(zona -> zona_model.agregar(zona));
+		
+		trafos=trafo_model.buscarTodasLasTransformador();
+		
+		System.out.println("Cantidad de trafos actuales: "+trafos.size());
+		
+		//Recupero la zona con los trafos
+		ZonaGeografica zona1 = zona_model.buscarZonaGeografica(1);
+		
+		
+		//Ahora le asigno a la zona el trafo nuevo
+		
+		zonas.clear();
+		
+		zonas.add(zona1);
+		
+		Transformador trafonuevo = new Transformador(10,1.23,4.123,1);
+		
+		trafonuevo.asignarZona(zonas);
+		
+		//Persisto la zona con el trafo nuevo
+		
+		zonas.stream().forEach(zona -> zona_model.modificar(zona));
+
+		trafos.clear();
+		
+		//Recupero la nueva lista de trafos
+		
+		trafos=trafo_model.buscarTodasLasTransformador();
+		
+		System.out.println("Cantidad de trafos actualizada: "+trafos.size());
 		
 		
 		// int i = transformadores.size();
@@ -612,7 +662,7 @@ public class Tests {
 		
 		//ROLLBACK DE LA DB
 	}
-	@Test //Dado un hogar y un período, mostrar por consola (interfaz de comandos) el
+	/*@Test //Dado un hogar y un período, mostrar por consola (interfaz de comandos) el
 		  //consumo total. Dado un dispositivo y un período, mostrar por consola su
 		  //consumo promedio. Dado un transformador y un período, mostrar su consumo
 		  //promedio. Recuperar un dispositivo asociado a un hogar de ese transformador e
