@@ -57,7 +57,11 @@ public abstract class Estado {
 	}
 	
 	public boolean ocurreEntre (LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
-		return (fechaDeFin.isBefore(fechaLimiteMinima) && fechaDeInicio.isAfter(fechaLimiteMinima));
+		LocalDateTime aux = fechaDeFin;
+		if(fechaDeFin == null){
+			aux = LocalDateTime.now();
+		}
+		return (aux.isBefore(fechaLimiteMinima) && fechaDeInicio.isAfter(fechaLimiteMinima));
 	}
 	public void mostrarPeriodoPorConsola() {
 		System.out.format("El estado empezo el %s y termino el %s \n", fechaDeInicio.toString(), fechaDeFin.toString());
