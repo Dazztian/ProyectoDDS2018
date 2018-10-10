@@ -10,7 +10,7 @@ public class DispositivoInteligente extends Dispositivo {
 	//private Estado estado;
 	private Sensor sensor;
 	private Timer temporizador;
-	private double magnitud;
+	private Double magnitud;
 	public LinkedList<Estado> estados = new LinkedList<Estado>();
 	int intervalo=100;
 	
