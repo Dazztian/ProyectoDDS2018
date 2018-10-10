@@ -37,5 +37,7 @@ http://jason.sourceforge.net/mini-tutorial/eclipse-plugin/ (Como instalarlo)
 https://crunchify.com/how-to-read-json-object-from-file-in-java/ (Como leer Json)
 https://stackoverflow.com/questions/31728446/write-a-json-file-in-java (Como escribir JSON)
 
+*Hibernate
+https://www.thoughts-on-java.org/complete-guide-inheritance-strategies-jpa-hibernate/
 
 *Patrones de diseño, https://www.journaldev.com/1751/state-design-pattern-java
