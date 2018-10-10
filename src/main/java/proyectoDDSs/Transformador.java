@@ -32,7 +32,11 @@ public class Transformador extends BeanToJson<Transformador> {
 			private List<Cliente> clientes;
 	
 	//Constructor	
-		
+		public Transformador() {
+			this.clientes=new ArrayList<>();
+		}
+			
+			
 		public Transformador(int unId,  double unaLatitud,double unaLongitud, int unaZona) {
 			this.id=unId;
 			this.latitud=unaLatitud;
@@ -51,6 +55,9 @@ public class Transformador extends BeanToJson<Transformador> {
 			for(ZonaGeografica zona:zonas) {
 				
 				if(this.zona == zona.getId()) {
+					if(zona.getTrafos().stream().anyMatch(trafo->trafo.getId()==this.id)) {
+						break;
+					}
 					zona.addTranformador(this);
 				}
 				
@@ -71,6 +78,10 @@ public class Transformador extends BeanToJson<Transformador> {
 		
 		public int numeroClientes() {
 			return clientes.size();
+		}
+		
+		public int getId() {
+			return this.id;
 		}
 		
 		public List<Cliente> getClientes(){

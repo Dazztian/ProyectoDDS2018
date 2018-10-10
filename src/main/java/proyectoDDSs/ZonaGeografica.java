@@ -21,7 +21,7 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 	protected Double longitud;
 	//Esto también hay que ver como resolver
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="id_Zona",nullable=false)
 	private List<Transformador> trafos;
 		
@@ -84,13 +84,12 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 		public void setLongitud(Double longitud) {
 			this.longitud = longitud;
 		}
-
-		/*
-		 * public ArrayList<Transformador> getTrafos() {
+		
+		public List<Transformador> getTrafos() {
 			return trafos;
 		}
 
-		public void setTrafos(ArrayList<Transformador> trafos) {
+		/*public void setTrafos(ArrayList<Transformador> trafos) {
 			this.trafos = trafos;
 		}
 		 */

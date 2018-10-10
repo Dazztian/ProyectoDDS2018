@@ -60,7 +60,12 @@ public class Cliente extends Usuario {
 	@Transient
 	protected Categoria categoria; 
 		
-		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)
+	
+	public Cliente() {
+		
+	}
+	
+		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)	
 	public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
 			domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria, 
 			double latitud, double longitud, String usuario, String contrasenia) {
