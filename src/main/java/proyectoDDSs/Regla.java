@@ -23,6 +23,14 @@ public class Regla {
 		}
 	}
 	
+	public double condicionDeAccion() {
+		return condicionDeAccion;
+	}
+	
+	public void modificarCondicion (double unaCondicion) {
+		condicionDeAccion = unaCondicion;
+	}
+	
 	private void accionarActuadores() {
 		for(Actuador a:ActuadoresAAccionar) {
 			a.disparar();

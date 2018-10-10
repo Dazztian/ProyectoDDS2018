@@ -12,6 +12,9 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import junit.framework.Assert;
+import modelsPersistencia.ClienteModel;
+import modelsPersistencia.ModelHelperPersistencia;
+import modelsPersistencia.ReglaModel;
 import proyectoDDSs.Actuador;
 import proyectoDDSs.Administrador;
 import proyectoDDSs.Apagado;
@@ -78,6 +81,9 @@ public class Tests {
 			e.printStackTrace();
 		}
 	}
+	
+	//ModelHelper para los tests de Persistencia
+	ModelHelperPersistencia model = new ModelHelperPersistencia();
 	
 	//Dispositivos para el Simplex
 	DispositivoInteligente disp1 = new DispositivoInteligente("Dispo1", 0.06, new Encendido(), 120.0, 360.0);
@@ -468,16 +474,34 @@ public class Tests {
 	@Test //Crear 1 usuario nuevo. Persistirlo. Recuperarlo, modificar la geolocalización y
 		  //grabarlo. Recuperarlo y evaluar que el cambio se haya realizado.
 	public void casoDePrueba1() {
+		//CREAR CLIENTE NUEVO
 		Cliente roberto = new Cliente("Roberto","Gomez","dni",4012939,40239401,"Yrigoyen",
 				new ArrayList<Dispositivo>(),Calendar.getInstance(),
 				new Categoria("R1",18.56,0.86), -1.542, 7.1245, "Roberto11", "robertito");
+		ClienteModel modelCliente = new ClienteModel();
+		
 		//PERSISTIR CLIENTE
+		model.agregar(roberto);
+		
+		System.out.format("Persisti a roberto \n");
+		
 		//RECUPERAR CLIENTE
-		roberto.cambiarGeolocalizacion(-20.05, 25.01);
-		//GRABAR CLIENTE
+		Cliente robertoCopy = modelCliente.buscarCliente(1);
+		System.out.format("Recupere a roberto \n");
+		
+		//MODIFICAR CLIENTE
+		robertoCopy.cambiarGeolocalizacion(-20.05, 25.01);
+		model.modificar(robertoCopy);
+		
+		System.out.format("Modifique a roberto \n");
+		
 		//RECUPERAR CLIENTE
-		assertEquals(-20.05, roberto.latitud(), 0);
-		assertEquals(25.01, roberto.longitud(), 0);
+		Cliente robertoCopyCopy = modelCliente.buscarCliente(1);
+		System.out.format("Recupere a roberto de nuevo \n");
+		
+		
+		assertEquals(-20.05, robertoCopyCopy.latitud(), 0);
+		assertEquals(25.01, robertoCopyCopy.longitud(), 0);
 		//ROLLBACK A LA DB
 		
 	}
@@ -486,12 +510,24 @@ public class Tests {
 		  //editable) y grabarlo. Recuperarlo y evaluar que el nombre coincida con el
 		  //esperado.
 	public void casoDePrueba2() {
+		disp1.apagar();
+		disp1.prender();
+		disp1.apagar();
+		disp1.prender();
+		model.agregar(disp1);
+		
+		
 		//RECUPERAR DISPOSITIVO
-		disp1.intervalosEncendidosEnElUltimoMes();
-		disp1.cambiarConsumo(5.0);
-		//PERSISTIR
+		DispositivoInteligente disp1Copy = model.buscar(DispositivoInteligente.class, 1);
+		
+		//MOSTRAR INTERVALOS Y MODIFICAR CONSUMO
+		disp1Copy.intervalosEncendidosEnElUltimoMes();
+		disp1Copy.cambiarConsumo(5.0);
+		model.modificar(disp1Copy);
+		
 		//RECUPERAR
-		assertEquals(5.0, disp1.kwhConsumeXHora(), 0);
+		DispositivoInteligente disp1CopyCopy = model.buscar(DispositivoInteligente.class, 1);
+		assertEquals(5.0, disp1CopyCopy.kwhConsumeXHora(), 0);
 		//ROLLBACK DE LA DB
 	}
 	@Test //Crear una nueva regla. Asociarla a un dispositivo. Agregar condiciones y
@@ -499,14 +535,29 @@ public class Tests {
 		  //persistirla. Recuperarla y evaluar que la condición modificada posea la última
 		  //modificación.
 	public void casoDePrueba3() {
+		ReglaModel modelRegla = new ReglaModel();
+		//CREAR REGLA
 		Regla regla = new Regla (30.0);
+		
 		//ASOCIAR REGLA
+		
 		//AGREGAR CONDICIONES Y ACCIONES
+		
 		//PERSISTIR
+		model.agregar(regla);
+		
 		//RECUPERAR Y EJECUTAR
+		Regla reglaCopy = modelRegla.buscarRegla(1);
+		
+		
 		//MODIFICAR Y PERSISTIR
+		reglaCopy.modificarCondicion(20.0);
+		model.modificar(reglaCopy);
+		
 		//RECUPERAR
-		//assertThat([MODIFICACION] == regla.condicion());
+		Regla reglaCopyCopy = modelRegla.buscarRegla(1);
+		
+		assertEquals(20.0, regla.condicionDeAccion(), 0);
 		//ROLLBACK DE LA DB
 	}
 	@Test //Recuperar todos los transformadores persistidos. Registrar la cantidad.
@@ -515,10 +566,20 @@ public class Tests {
 		  //+ 1.
 	public void casoDePrueba4() {
 		//RECUPERAR TRANSFORMADORES
+		
+		
 		// int i = transformadores.size();
-		//AGREGAR TRANSFO AL JSON
+		
+		
+		//AGREGAR TRANSFO AL JSON (Recomendacion, tener 2 archivos json, el original y otro con el tranfo agregado)
+		
+		
 		//HACER LECTURA Y PERSISTENCIA DEL JSON DE NUEVO
+		
+		
 		//assertThat(transformadores.size() == i + 1);
+		
+		
 		//ROLLBACK DE LA DB
 	}
 	@Test //Dado un hogar y un período, mostrar por consola (interfaz de comandos) el
@@ -528,16 +589,35 @@ public class Tests {
 		  //incrementar un 1000 % el consumo para ese período. Persistir el dispositivo.
 		  //Nuevamente mostrar el consumo para ese transformador.
 	public void casoDePrueba5() {
+	
+		//HACER UN PAR DE CONSUMOS
 		LocalDateTime fechaLimiteMinima = LocalDateTime.now();
 		LocalDateTime fechaLimiteMaxima = fechaLimiteMinima.plusDays(10);
+		dispositivo1.cambiarEstado(new Encendido(fechaLimiteMinima, fechaLimiteMaxima));
+		dispositivo2.cambiarEstado(new Encendido(fechaLimiteMinima, fechaLimiteMaxima));
+		dispositivo3.cambiarEstado(new Encendido(fechaLimiteMinima, fechaLimiteMaxima));
+		pedro.addDispositivo(dispositivo1);
+		pedro.addDispositivo(dispositivo2);
+		pedro.addDispositivo(dispositivo3);
+		trafo1.addCliente(pedro);
+		
 		System.out.format("El consumo del hogar en el periodo fue de %f \n", (float) pedro.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
-		//HACER UN PAR DE CONSUMOS
-		System.out.format("El consumo del dispositivo fue de %f \n", (float) disp1.consumoPromedioEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		System.out.format("El consumo del dispositivo fue de %f \n", (float) dispositivo1.consumoPromedioEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
 		System.out.format("El consumo del transformador fue de %f \n", (float) trafo1.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		
+		
 		//RECUPERAR UN DISPO QUE ESTE EN ESTE TRANSFORMADOR
+		
+		//CAMBIAR CONSUMO
 		disp1.cambiarConsumo( disp1.kwhConsumeXHora() * 1000);
+		
+		
 		//PERSISTIR DISPOSITIVO
+		
+		
 		System.out.format("El consumo del transformador fue de %f \n", (float) trafo1.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		
+		
 		//ROLLBACK DE LA DB
 	}
 	

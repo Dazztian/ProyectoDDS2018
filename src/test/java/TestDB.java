@@ -15,6 +15,12 @@ public class TestDB {
 		
 		ModelHelperPersistencia m = new ModelHelperPersistencia();
 		
+		Categoria cat1 = new Categoria("R1",18.56,0.86);
+		Apagado estado1 = new Apagado();
+		//m.agregar(cat1);
+		m.agregar(estado1);
+		
+		
 //		List<Transformador> trafos = new ArrayList<>();
 //		
 //		List<ZonaGeografica> zonas = new ArrayList<>();
