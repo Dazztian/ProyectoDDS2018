@@ -16,7 +16,7 @@ public class Categoria extends BeanToJson<Categoria>{
 	@Id
 	@GeneratedValue
 	private int id;
-	
+
 	@Column(name = "tipo")
 	@Expose protected String tipo;
 	
