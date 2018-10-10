@@ -10,7 +10,6 @@ import json.*;
 public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 	
 	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	

@@ -9,10 +9,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.commons.math3.optim.linear.Relationship;
@@ -25,28 +27,37 @@ import simplex.facade.*;
 @Entity
 @Table(name="Clientes")
 public class Cliente extends Usuario {
-	
-	@Id
-	@GeneratedValue
-	private int id;
-	
+		
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="apellido")
 	private String apellido;
+	@Column(name="numero_dni")
 	private long numeroDocumento;
+	@Column(name="tipo_dni")
 	private String tipoDocumento;
+	@Column(name="telefono")
 	private long telefono;
+	@Column(name="domicilio")
 	private String domicilio;
+	@Column(name="longitud")
 	private double longitud;
+	@Column(name="latitud")
 	private double latitud;
 	
 	//pattern "yyyy-MM-dd'T'HH:mm:ssZ" to be ISO8601
+	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
+	@Transient
 	public ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	@Column(name="puntos")
 	public int puntos;
+	@Transient
 	public Estado estadoParaSimplex = new Apagado();
 	
 		
 	//Los clientes tienen una categoria
+	@Transient
 	protected Categoria categoria; 
 		
 		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)

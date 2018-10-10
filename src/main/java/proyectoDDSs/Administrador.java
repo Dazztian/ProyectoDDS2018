@@ -3,19 +3,30 @@ package proyectoDDSs;
 import java.time.*;
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Administradores")
 public class Administrador extends Usuario {
 	
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="apellido")
 	private String apellido;
-	private int id;
+	@Column(name="id_admin")
+	private int id_admin;
+	@Column(name="fecha_alta")
 	private LocalDateTime fechaCreacion;
+	
 	
 	public Administrador(String unNombre, String unApellido, int unId, String usuario, String contrasenia) 
 	{
 		super(usuario, contrasenia);
 		nombre = unNombre;
 		apellido=unApellido;
-		id=unId;
+		id_admin=unId;
 		fechaCreacion=LocalDateTime.now();
 		
 	}
