@@ -572,6 +572,14 @@ public class Tests {
 		
 		
 		
+//		//Elimina todo lo persistido
+//		ClienteModel c_model = new ClienteModel();
+//		
+//		Cliente c1=c_model.buscarCliente(1);
+//		
+//		c_model.eliminar(c1);
+  
+		
 //		//MODIFICAR Y PERSISTIR
 //		reglaCopy.modificarCondicion(20.0);
 //		model.modificar(reglaCopy);

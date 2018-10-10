@@ -28,6 +28,10 @@ public class Regla {
 	@JoinColumn(name="id_Regla",nullable=false)
 	private List<Actuador> actuadoresAAccionar = new ArrayList<Actuador>();
 	
+	public Regla() {
+		
+	}
+	
 	public Regla(double unaCondicion) {
 		condicionDeAccion = unaCondicion;
 	}
