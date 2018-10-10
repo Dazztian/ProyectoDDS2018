@@ -33,6 +33,10 @@ public abstract class Dispositivo {
 	@Column(name="consumo_maximo")
 	public double consumoMaximo;
 	
+	public Dispositivo() {
+		
+	}
+	
 	
 	public Dispositivo(String unNombre, double electricidadQConsume, double unConsumoMinimo, double unConsumoMaximo)
 	{

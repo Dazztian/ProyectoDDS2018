@@ -34,11 +34,15 @@ public class DispositivoInteligente extends Dispositivo {
 	private Timer temporizador;
 	@Column(name="magnitud")
 	private Double magnitud;
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
 	@JoinColumn(name="id_Dispositivo",nullable=false)
 	public List<Estado> estados = new LinkedList<Estado>();
 	@Transient
 	int intervalo=100;
+	
+	public DispositivoInteligente() {
+		
+	}
 	
 	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado, double unConsumoMinimo, double unConsumoMaximo) {
 		
@@ -143,6 +147,10 @@ public class DispositivoInteligente extends Dispositivo {
 		LocalDateTime fechaLimiteMaxima = LocalDateTime.of(aux.getYear(), aux.getMonthValue(), 1, 0, 0);
 		LocalDateTime fechaLimiteMinima = LocalDateTime.of(aux.getYear(), aux.getMonthValue(), 30, 0, 0);
 		this.intervalosEncendidoEnPeriodo(fechaLimiteMaxima, fechaLimiteMinima);
+	}
+	
+	public int cantidadEstados() {
+		return this.estados.size();
 	}
 	
 }
