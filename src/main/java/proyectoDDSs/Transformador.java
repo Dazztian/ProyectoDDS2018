@@ -2,16 +2,28 @@ package proyectoDDSs;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.google.gson.annotations.Expose;
 
 import json.*;
 
+
+@Entity
+@Table(name="Transformadores")
 public class Transformador extends BeanToJson<Transformador> {
-	
+			
+			@Id
+			@Column(name="id_transformador")
 	@Expose protected int id;
 	@Expose protected double latitud;
 	@Expose protected double longitud;
 	@Expose protected int zona;
+			@Transient
 			private ArrayList<Cliente> clientes;
 	
 	//Constructor
@@ -20,7 +32,6 @@ public class Transformador extends BeanToJson<Transformador> {
 			this.latitud=unaLatitud;
 			this.longitud=unaLongitud;
 			this.zona = unaZona;
-			
 			this.clientes=new ArrayList<Cliente>();
 			
 		}

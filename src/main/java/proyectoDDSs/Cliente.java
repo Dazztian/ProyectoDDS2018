@@ -9,6 +9,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
@@ -17,8 +22,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import simplex.facade.*;
 
-
+@Entity
+@Table(name="Clientes")
 public class Cliente extends Usuario {
+	
+	@Id
+	@GeneratedValue
+	private int id;
 	
 	private String nombre;
 	private String apellido;

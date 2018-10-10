@@ -9,7 +9,11 @@ import json.*;
 @Table(name = "ZonaGeografica")
 public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 	
-
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	
 	@Expose @Column(name = "nombre")
 	protected String nombre;
 	@Expose @Column(name = "latitud")
@@ -17,20 +21,17 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 	@Expose @Column(name = "longitud")
 	protected Double longitud;
 	//Esto también hay que ver como resolver
-	@Transient
-	private ArrayList<Transformador> trafos=new ArrayList<Transformador>();;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_Zona",nullable=false)
+	private List<Transformador> trafos;
+		
 	
 			
-			/*@Id @GeneratedValue
-			   @Column(name = "id")*/
-			
-			@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-			@Column(name = "id")
-
-			   private int id;
-			
 	//Constructor
-		public ZonaGeografica() {};
+		public ZonaGeografica() {
+			this.trafos=new ArrayList<>();
+		};
 		
 		
 		
@@ -41,6 +42,7 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 		this.longitud = longitud;
 		this.trafos = trafos;
 		this.id = id;
+		this.trafos=new ArrayList<>();
 	}
 
 
