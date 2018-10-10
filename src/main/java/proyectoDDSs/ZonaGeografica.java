@@ -19,9 +19,8 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 	protected Double latitud;
 	@Expose @Column(name = "longitud")
 	protected Double longitud;
-	//Esto también hay que ver como resolver
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
 	@JoinColumn(name="id_Zona",nullable=false)
 	private List<Transformador> trafos;
 		
@@ -101,6 +100,10 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 			
 			trafos.add(trafo);
 			
+		}
+		
+		public void resetTrafos() {
+			this.trafos.clear();
 		}
 		
 		public double consumoMomentaneo() {

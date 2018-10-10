@@ -55,9 +55,6 @@ public class Transformador extends BeanToJson<Transformador> {
 			for(ZonaGeografica zona:zonas) {
 				
 				if(this.zona == zona.getId()) {
-					if(zona.getTrafos().stream().anyMatch(trafo->trafo.getId()==this.id)) {
-						break;
-					}
 					zona.addTranformador(this);
 				}
 				

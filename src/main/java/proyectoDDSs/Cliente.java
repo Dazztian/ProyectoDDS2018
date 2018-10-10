@@ -9,10 +9,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -55,9 +58,10 @@ public class Cliente extends Usuario {
 	@Transient
 	public Estado estadoParaSimplex = new Apagado();
 	
-		
+	
 	//Los clientes tienen una categoria
-	@Transient
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="categoria")
 	protected Categoria categoria; 
 		
 	
