@@ -2,19 +2,39 @@ package proyectoDDSs;
 
 import proyectoDDSs.Actuador;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
+
+@Entity
+@Table(name = "Regla")
 public class Regla {
 	
+	@Id 
+	@Column(name = "id")
+	private int id;
+	
+	@Expose @Column(name = "condicionDeAccion")
 	private double condicionDeAccion;
-	private ArrayList<Actuador> ActuadoresAAccionar = new ArrayList<Actuador>();
+	
+	//@Column(name = "estadoAAccionar")
+	@Transient
+	public Estado estadoAAccionar;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="id_Regla",nullable=false)
+	private List<Actuador> actuadoresAAccionar = new ArrayList<Actuador>();
 	
 	public Regla(double unaCondicion) {
 		condicionDeAccion = unaCondicion;
 	}
 	
-	public Regla (double unaCondicion, ArrayList<Actuador> unosActuadores) {
+	public Regla (double unaCondicion, List<Actuador> unosActuadores) {
 		condicionDeAccion = unaCondicion;
-		ActuadoresAAccionar = unosActuadores;
+		actuadoresAAccionar = unosActuadores;
+		//estadoAAccionar = new Apagado();
 	}
 	
 	public void actualizarMedicion(double valor) {
@@ -32,17 +52,17 @@ public class Regla {
 	}
 	
 	private void accionarActuadores() {
-		for(Actuador a:ActuadoresAAccionar) {
-			a.disparar();
+		for(Actuador a:actuadoresAAccionar) {
+			a.disparar(new Apagado());
 		}
 	}
 	
 	public void agregarActuador(Actuador a) {
-		ActuadoresAAccionar.add(a);
+		actuadoresAAccionar.add(a);
 	}
 	
 	public void removerActuador(Actuador a) {
-		ActuadoresAAccionar.remove(a);
+		actuadoresAAccionar.remove(a);
 	}
 	
 }

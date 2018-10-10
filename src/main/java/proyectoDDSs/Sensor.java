@@ -1,13 +1,24 @@
 package proyectoDDSs;
 
 import java.util.*;
+import javax.persistence.*;
 
+@Entity
+@Table(name= "Sensor")
 public class Sensor {
+	
+	@Id 
+	@Column(name = "id")
+	private int id;
+	
+	@Column(name= "valor")
 	private double valor; //aca se almacena lo que mide el sensor
-	private ArrayList<Regla> reglas;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="id_Sensor",nullable=false)
+	private List<Regla> reglas = new ArrayList<Regla>();
 	
 	public Sensor() {
-		reglas = new ArrayList<Regla>();
 		
 	}
 	
