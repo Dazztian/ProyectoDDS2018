@@ -15,12 +15,15 @@
    		<class>proyectoDDSs.Cliente</class>
    		<class>proyectoDDSs.Administrador</class>
    		<class>proyectoDDSs.Dispositivo</class>
+   		<class>proyectoDDSs.DispositivoEstandar</class>
    		<class>proyectoDDSs.DispositivoInteligente</class>
    		<class>proyectoDDSs.Apagado</class>
    		<class>proyectoDDSs.Encendido</class>
    		<class>proyectoDDSs.AhorroDeEnergia</class>
+   		<class>proyectoDDSs.Estado</class>
    		<class>proyectoDDSs.Regla</class>   		
    		<class>proyectoDDSs.Sensor</class>
+   		<class>proyectoDDSs.Traductor</class>
    		<class>proyectoDDSs.Transformador</class>
    		<class>proyectoDDSs.ZonaGeografica</class>
     	

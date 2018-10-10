@@ -15,6 +15,18 @@ public class TestDB {
 		
 		ModelHelperPersistencia m = new ModelHelperPersistencia();
 		
+		DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 0.0);
+		
+		m.agregar(dispositivo1);
+		
+		Actuador actuador = new Actuador(dispositivo1, "mensaje:apagar");
+		Regla regla = new Regla(30.0);
+		regla.agregarActuador(actuador);
+		Sensor sensor = new Sensor();
+		sensor.agregarRegla(regla);
+		
+		m.agregar(sensor);
+		
 //		Dispositivo d = new DispositivoEstandar("heladera", 312, 1, 10, 20);
 //		
 //		m.agregar(d);
