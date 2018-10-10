@@ -3,15 +3,28 @@ package proyectoDDSs;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import java.time.*;
 
+@Entity
+@Table(name="dispositivos_inteligentes")
 public class DispositivoInteligente extends Dispositivo {
 	
 	//private Estado estado;
+	@Transient
 	private Sensor sensor;
+	@Transient
 	private Timer temporizador;
+	@Column(name="magnitud")
 	private Double magnitud;
+	@Transient
 	public LinkedList<Estado> estados = new LinkedList<Estado>();
+	@Transient
 	int intervalo=100;
 	
 	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado, double unConsumoMinimo, double unConsumoMaximo) {

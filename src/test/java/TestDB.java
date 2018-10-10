@@ -15,6 +15,10 @@ public class TestDB {
 		
 		ModelHelperPersistencia m = new ModelHelperPersistencia();
 		
+		Dispositivo d = new DispositivoEstandar("heladera", 312, 1, 10, 20);
+		
+		m.agregar(d);
+		
 //		Categoria cat1 = new Categoria("R1",18.56,0.86);
 //
 //		Cliente c=new Cliente("pepe","gonzales","dni",4012939,40239401,"Yrigoyen",

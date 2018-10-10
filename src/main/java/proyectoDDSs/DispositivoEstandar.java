@@ -2,8 +2,14 @@ package proyectoDDSs;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dispositivos_estandar")
 public class DispositivoEstandar extends Dispositivo {
-	
+	@Column(name="uso_diario")
 	int usoDiarioEnHoras;
 
 	public DispositivoEstandar(String unNombre, double electricidadQConsume, int unaCantidadDeHoras, double unConsumoMinimo, double unConsumoMaximo) {

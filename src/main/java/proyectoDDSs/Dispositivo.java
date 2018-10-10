@@ -2,14 +2,30 @@ package proyectoDDSs;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Dispositivo {
 	
+	@Id
+	@GeneratedValue
+	private int id;
+	@Column(name="nombre")
 	public String nombre;
+	@Column(name="kw_hora")
 	protected double kwhConsumeXHora;
+	@Column(name="es_inteligente")
 	public Boolean inteligente;
+	@Column(name="es_bajoConsumo")
 	public Boolean bajoConsumo;
+	@Column(name="equipo")
 	public String equipo;
+	@Column(name="consumo_minimo")
 	public double consumoMinimo;
+	@Column(name="consumo_maximo")
 	public double consumoMaximo;
 	
 	
