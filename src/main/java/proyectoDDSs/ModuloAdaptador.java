@@ -9,8 +9,7 @@ import javax.persistence.Transient;
 import proyectoDDSs.DispositivoInteligente;
 
 
-@Entity
-@DiscriminatorValue("Adaptador")
+@Entity(name="modulos_adaptadores")
 public class ModuloAdaptador extends DispositivoInteligente {
 	
 	@OneToOne(cascade=CascadeType.ALL)

@@ -23,6 +23,10 @@ public class Sensor {
 		this.reglas=new ArrayList<>();
 	}
 	
+	public void setMedicion(double m) {
+		this.valor=m;
+	}
+	
 	public void medirMagnitud(double magnitud) {
 		valor=magnitud;
 	}
