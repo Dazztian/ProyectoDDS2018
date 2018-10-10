@@ -63,18 +63,18 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	public boolean estaEncendido(){
-		return ((LinkedList<Estado>) estados).getFirst().estadoEncendido();
+		return estados.get(0).estadoEncendido();
 	}
 	
 	public Estado getEstadoActual () {
-		return ((LinkedList<Estado>) this.estados).getFirst();
+		return this.estados.get(0);
 	}
 	
 	public void cambiarEstado(Estado unEstado) {
-		Estado aux = ((LinkedList<Estado>) estados).removeFirst();
+		Estado aux = estados.remove(0);
 		aux.finalizarEstado();
-		((LinkedList<Estado>) estados).addFirst(aux);
-		((LinkedList<Estado>) estados).addFirst(unEstado);
+		estados.add(0, aux);
+		estados.add(0, unEstado);
 	}
 	
 	public void apagar() {
@@ -89,7 +89,7 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	public double consumoPorHora() {
-		return kwhConsumeXHora * ((LinkedList<Estado>) estados).getFirst().coeficienteDeConsumo();
+		return kwhConsumeXHora * estados.get(0).coeficienteDeConsumo();
 	}
 	
 /*	public void guardarConsumo() {
