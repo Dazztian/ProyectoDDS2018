@@ -83,7 +83,7 @@ public class Cliente extends Usuario {
 	}	
 	
 	
-	public void asignarTrafoMasCercano(ArrayList<Transformador> trafos) {
+	public void asignarTrafoMasCercano(List<Transformador> trafos) {
 			double distanciaMasCorta, distanciaActual;
 			Transformador trafoMasCercano;
 			

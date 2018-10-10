@@ -2,9 +2,12 @@ package proyectoDDSs;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,15 +21,18 @@ import json.*;
 public class Transformador extends BeanToJson<Transformador> {
 			
 			@Id
-			@Column(name="id_transformador")
+			@Column(name="id")
 	@Expose protected int id;
 	@Expose protected double latitud;
 	@Expose protected double longitud;
 	@Expose protected int zona;
-			@Transient
-			private ArrayList<Cliente> clientes;
+			
+			@OneToMany(cascade=CascadeType.ALL)
+			@JoinColumn(name="id_Transformador")
+			private List<Cliente> clientes;
 	
-	//Constructor
+	//Constructor	
+		
 		public Transformador(int unId,  double unaLatitud,double unaLongitud, int unaZona) {
 			this.id=unId;
 			this.latitud=unaLatitud;
@@ -67,7 +73,7 @@ public class Transformador extends BeanToJson<Transformador> {
 			return clientes.size();
 		}
 		
-		public ArrayList<Cliente> getClientes(){
+		public List<Cliente> getClientes(){
 			return this.clientes;
 		}
 		
