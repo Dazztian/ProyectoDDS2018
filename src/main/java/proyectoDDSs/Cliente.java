@@ -52,7 +52,7 @@ public class Cliente extends Usuario {
 	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
 	@Transient
-	public ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	public List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	@Column(name="puntos")
 	public int puntos;
 	@Transient
@@ -113,7 +113,7 @@ public class Cliente extends Usuario {
 			trafoMasCercano.addCliente(this);
 		
 		}
-	public ArrayList<Dispositivo> dispositivos() {return dispositivos;}
+	public List<Dispositivo> dispositivos() {return dispositivos;}
 	
 	public double estimativoFacturacion()
 	{ return

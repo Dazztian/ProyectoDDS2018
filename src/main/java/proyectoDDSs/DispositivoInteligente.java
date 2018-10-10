@@ -4,12 +4,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -29,8 +33,9 @@ public class DispositivoInteligente extends Dispositivo {
 	private Timer temporizador;
 	@Column(name="magnitud")
 	private Double magnitud;
-	@Transient
-	public LinkedList<Estado> estados = new LinkedList<Estado>();
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
+	@JoinColumn(name="id_Dispositivo",nullable=false)
+	public List<Estado> estados = new LinkedList<Estado>();
 	@Transient
 	int intervalo=100;
 	
@@ -56,18 +61,18 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	public boolean estaEncendido(){
-		return estados.getFirst().estadoEncendido();
+		return ((LinkedList<Estado>) estados).getFirst().estadoEncendido();
 	}
 	
 	public Estado getEstadoActual () {
-		return this.estados.getFirst();
+		return ((LinkedList<Estado>) this.estados).getFirst();
 	}
 	
 	public void cambiarEstado(Estado unEstado) {
-		Estado aux = estados.removeFirst();
+		Estado aux = ((LinkedList<Estado>) estados).removeFirst();
 		aux.finalizarEstado();
-		estados.addFirst(aux);
-		estados.addFirst(unEstado);
+		((LinkedList<Estado>) estados).addFirst(aux);
+		((LinkedList<Estado>) estados).addFirst(unEstado);
 	}
 	
 	public void apagar() {
@@ -82,7 +87,7 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	public double consumoPorHora() {
-		return kwhConsumeXHora * estados.getFirst().coeficienteDeConsumo();
+		return kwhConsumeXHora * ((LinkedList<Estado>) estados).getFirst().coeficienteDeConsumo();
 	}
 	
 /*	public void guardarConsumo() {
