@@ -14,7 +14,13 @@ public class TestDB {
 		EntityManager e = ModelHelperPersistencia.getEntityManager();
 		
 		ModelHelperPersistencia m = new ModelHelperPersistencia();
-				
+		
+		
+		
+		
+		
+		
+		
 //		DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 0.0);
 //		
 //		m.agregar(dispositivo1);

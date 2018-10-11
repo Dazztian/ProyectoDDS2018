@@ -58,7 +58,7 @@ public class Regla {
 	
 	private void accionarActuadores() {
 		for(Actuador a:actuadoresAAccionar) {
-			a.disparar(new Apagado());
+			a.disparar();
 		}
 	}
 	
