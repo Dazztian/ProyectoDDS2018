@@ -12,32 +12,8 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import junit.framework.Assert;
-import modelsPersistencia.ClienteModel;
-import modelsPersistencia.DispositivoModel;
-import modelsPersistencia.ModelHelperPersistencia;
-import modelsPersistencia.ReglaModel;
-import modelsPersistencia.TransformadorModel;
-import modelsPersistencia.ZonaGeograficaModel;
-import proyectoDDSs.Actuador;
-import proyectoDDSs.Administrador;
-import proyectoDDSs.Apagado;
-import proyectoDDSs.Apagar;
-import proyectoDDSs.Categoria;
-import proyectoDDSs.Cliente;
-import proyectoDDSs.Dispositivo;
-import proyectoDDSs.DispositivoEstandar;
-import proyectoDDSs.DispositivoInteligente;
-import proyectoDDSs.Encendido;
-import proyectoDDSs.ISO8601;
-import proyectoDDSs.ParserCategoria;
-import proyectoDDSs.ParserTransformador;
-import proyectoDDSs.ParserZonasGeograficas;
-import proyectoDDSs.Regla;
-import proyectoDDSs.Sensor;
-import proyectoDDSs.Traductor;
-import proyectoDDSs.TraductorDeMensajesAJSON;
-import proyectoDDSs.Transformador;
-import proyectoDDSs.ZonaGeografica;
+import modelsPersistencia.*;
+import proyectoDDSs.*;
 import simplex.facade.*;
 
 
@@ -600,6 +576,7 @@ public class Tests {
 		  //Agregar una instancia de Transformador al JSON de entradas. Ejecutar el
 		  //método de lectura y persistencia. Evaluar que la cantidad actual sea la anterior
 		  //+ 1.
+	
 	public void casoDePrueba4() {
 		//RECUPERAR TRANSFORMADORES
 		
