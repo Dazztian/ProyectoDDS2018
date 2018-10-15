@@ -25,12 +25,15 @@ public class Actuador{
 	@Transient
 	protected Traductor adaptadorDeMsjsSegunFabricante;
 	
-	public void disparar(Estado unEstado) {
-		dispositivoSobreElQActuo.cambiarEstado(unEstado);
+	public void disparar() {
 	}
 
 	public  Object traducir() { return adaptadorDeMsjsSegunFabricante.traduccion(accion); }
-
+	
+	public Actuador() {
+		
+	}
+	
 	public Actuador( String unaAccion) {accion = unaAccion;	}
 	
 	public Actuador(DispositivoInteligente unDispo, String unaAccion) 

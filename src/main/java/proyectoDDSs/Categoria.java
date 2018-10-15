@@ -36,6 +36,10 @@ public class Categoria extends BeanToJson<Categoria>{
 	}
 
 	//Constructor
+	public Categoria() {
+		
+	}
+	
 	public Categoria(String unTipo,double cargoFijo,double cargoAdicional) {
 		this.tipo=unTipo;
 		this.cargoFijo=cargoFijo;

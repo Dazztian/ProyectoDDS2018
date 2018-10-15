@@ -28,6 +28,10 @@ public class Regla {
 	@JoinColumn(name="id_Regla",nullable=false)
 	private List<Actuador> actuadoresAAccionar = new ArrayList<Actuador>();
 	
+	public Regla() {
+		
+	}
+	
 	public Regla(double unaCondicion) {
 		condicionDeAccion = unaCondicion;
 	}
@@ -54,7 +58,7 @@ public class Regla {
 	
 	private void accionarActuadores() {
 		for(Actuador a:actuadoresAAccionar) {
-			a.disparar(new Apagado());
+			a.disparar();
 		}
 	}
 	

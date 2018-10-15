@@ -12,29 +12,8 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import junit.framework.Assert;
-import modelsPersistencia.ClienteModel;
-import modelsPersistencia.DispositivoModel;
-import modelsPersistencia.ModelHelperPersistencia;
-import modelsPersistencia.ReglaModel;
-import proyectoDDSs.Actuador;
-import proyectoDDSs.Administrador;
-import proyectoDDSs.Apagado;
-import proyectoDDSs.Apagar;
-import proyectoDDSs.Categoria;
-import proyectoDDSs.Cliente;
-import proyectoDDSs.Dispositivo;
-import proyectoDDSs.DispositivoEstandar;
-import proyectoDDSs.DispositivoInteligente;
-import proyectoDDSs.Encendido;
-import proyectoDDSs.ISO8601;
-import proyectoDDSs.ParserCategoria;
-import proyectoDDSs.ParserTransformador;
-import proyectoDDSs.ParserZonasGeograficas;
-import proyectoDDSs.Regla;
-import proyectoDDSs.Traductor;
-import proyectoDDSs.TraductorDeMensajesAJSON;
-import proyectoDDSs.Transformador;
-import proyectoDDSs.ZonaGeografica;
+import modelsPersistencia.*;
+import proyectoDDSs.*;
 import simplex.facade.*;
 
 
@@ -100,12 +79,14 @@ public class Tests {
 	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire",100, new Encendido(), 30.0, 360.0);
 	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido(), 30.0, 360.0);
 	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8, 30.0, 360.0);
+	private DispositivoEstandar dispositivo6 = new DispositivoEstandar("Heladera", 20, 8, 30.0, 360.0);
+	private DispositivoEstandar dispositivo7 = new DispositivoEstandar("TV", 10, 8, 30.0, 360.0);
 	private	Administrador juan = new Administrador("Juan","Lopez",123231,"Juancito","asd123");
-	Transformador trafo1 = new Transformador(5, -1.3414, -2.657, 3);
-	Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 2);
+	Transformador trafo1 = new Transformador(2, -1.3414, -2.657, 1);
+	Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 1);
 	Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
-	Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 2);
-	
+	Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 1);
+	Transformador trafo5= new Transformador(10,-1.123,4.132,2);
 	
 
 
@@ -375,26 +356,26 @@ public class Tests {
 	}
 	
 	
-	@Test
-	public void testAsignacionDeTrafos() {
-		
-		ArrayList<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
-		zonas.add(new ZonaGeografica(1, "zona1", 1.31, 2.13));
-		zonas.add(new ZonaGeografica(2, "zona2", 4.31, 3.25));
-		zonas.add(new ZonaGeografica(3, "zona3", 7.70, 1.01));
-		
-		trafo1.asignarZona(zonas);
-		trafo2.asignarZona(zonas);
-		trafo3.asignarZona(zonas);
-		trafo4.asignarZona(zonas);
-		
-		assertEquals(1, zonas.get(2).cantidadTrafos());
-		
-		assertEquals(2, zonas.get(1).cantidadTrafos());
-		
-		assertEquals(1, zonas.get(0).cantidadTrafos());
-		
-	}
+//	@Test
+//	public void testAsignacionDeTrafos() {
+//		
+//		ArrayList<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
+//		zonas.add(new ZonaGeografica(1, "zona1", 1.31, 2.13));
+//		zonas.add(new ZonaGeografica(2, "zona2", 4.31, 3.25));
+//		zonas.add(new ZonaGeografica(3, "zona3", 7.70, 1.01));
+//		
+//		trafo1.asignarZona(zonas);
+//		trafo2.asignarZona(zonas);
+//		trafo3.asignarZona(zonas);
+//		trafo4.asignarZona(zonas);
+//		
+//		assertEquals(1, zonas.get(2).cantidadTrafos());
+//		
+//		assertEquals(2, zonas.get(1).cantidadTrafos());
+//		
+//		assertEquals(1, zonas.get(0).cantidadTrafos());
+//		
+//	}
 	
 	@Test
 	public void testAsignacionDeClientes() {
@@ -500,7 +481,6 @@ public class Tests {
 		Cliente robertoCopyCopy = modelCliente.buscarCliente(1);
 		System.out.format("Recupere a roberto de nuevo \n");
 		
-		
 		assertEquals(-20.05, robertoCopyCopy.latitud(), 0);
 		assertEquals(25.01, robertoCopyCopy.longitud(), 0);
 		//ROLLBACK A LA DB
@@ -514,65 +494,140 @@ public class Tests {
 		
 		DispositivoModel dispo_model = new DispositivoModel();
 		
+		ClienteModel cliente_model = new ClienteModel();
+		
 		disp1.apagar();
 		disp1.prender();
 		disp1.apagar();
 		disp1.prender();
 		
-//		pepe.addDispositivo(disp1);
+		pepe.addDispositivo(disp1);
 		
-//		model.agregar(pepe);
+		model.agregar(pepe);
 		
 		
 		//RECUPERAR DISPOSITIVO
 		DispositivoInteligente disp1Copy = (DispositivoInteligente)dispo_model.buscarDispositivo(1);
 				
 		//MOSTRAR INTERVALOS Y MODIFICAR CONSUMO
-//		disp1Copy.intervalosEncendidosEnElUltimoMes();
+		disp1Copy.intervalosEncendidosEnElUltimoMes();
 		disp1Copy.cambiarConsumo(5.0);
 		model.modificar(disp1Copy);
 		
 		//RECUPERAR
-		DispositivoInteligente disp1CopyCopy =(DispositivoInteligente)dispo_model.buscarDispositivo(1);
+		DispositivoInteligente disp1CopyCopy =(DispositivoInteligente)dispo_model.buscarDispositivo(1);		
+		
 		assertEquals(5.0, disp1CopyCopy.kwhConsumeXHora(), 0);
 		//ROLLBACK DE LA DB
 	}
-/*	@Test //Crear una nueva regla. Asociarla a un dispositivo. Agregar condiciones y
+
+	@Test //Crear una nueva regla. Asociarla a un dispositivo. Agregar condiciones y
 		  //acciones. Persistirla. Recuperarla y ejecutarla. Modificar alguna condici�n y
 		  //persistirla. Recuperarla y evaluar que la condici�n modificada posea la �ltima
 		  //modificaci�n.
+
 	public void casoDePrueba3() {
 		ReglaModel modelRegla = new ReglaModel();
 		//CREAR REGLA
 		Regla regla = new Regla (30.0);
+		//ASOCIAR REGLA A DISPOSITIVO
 		
-		//ASOCIAR REGLA
+		//Primero asocio la regla al sensor
+		Sensor s1=new Sensor();
+		s1.setMedicion(10.5);
+		s1.agregarRegla(regla);
+		//Luego asocio el sensor al dispositivo
+		disp1.enlazarSensor(s1);
+		
+		//Finalmente asocio el dispositivo al cliente para persistirlos
+		pepe.addDispositivo(disp1);
 		
 		//AGREGAR CONDICIONES Y ACCIONES
 		
+		regla.agregarActuador(new Actuador(disp1,"Apagar"));
+		
+		
+		
 		//PERSISTIR
-		model.agregar(regla);
+		model.agregar(pepe);
 		
 		//RECUPERAR Y EJECUTAR
 		Regla reglaCopy = modelRegla.buscarRegla(1);
 		
 		
-		//MODIFICAR Y PERSISTIR
-		reglaCopy.modificarCondicion(20.0);
-		model.modificar(reglaCopy);
 		
-		//RECUPERAR
-		Regla reglaCopyCopy = modelRegla.buscarRegla(1);
+		//Elimina todo lo persistido
+		ClienteModel c_model = new ClienteModel();
 		
-		assertEquals(20.0, regla.condicionDeAccion(), 0);
-		//ROLLBACK DE LA DB
+		Cliente c1=c_model.buscarCliente(1);
+		
+		c_model.eliminar(c1);
+  
+		
+//		//MODIFICAR Y PERSISTIR
+//		reglaCopy.modificarCondicion(20.0);
+//		model.modificar(reglaCopy);
+//		
+//		//RECUPERAR
+//		Regla reglaCopyCopy = modelRegla.buscarRegla(1);
+//		
+//		assertEquals(20.0, regla.condicionDeAccion(), 0);
+//		//ROLLBACK DE LA DB
 	}
 	@Test //Recuperar todos los transformadores persistidos. Registrar la cantidad.
 		  //Agregar una instancia de Transformador al JSON de entradas. Ejecutar el
 		  //m�todo de lectura y persistencia. Evaluar que la cantidad actual sea la anterior
 		  //+ 1.
+	
 	public void casoDePrueba4() {
 		//RECUPERAR TRANSFORMADORES
+		
+		ZonaGeograficaModel zona_model = new ZonaGeograficaModel();
+		
+		TransformadorModel trafo_model = new TransformadorModel();
+		
+		List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
+		
+		List<Transformador> trafos = new ArrayList<Transformador>();
+		
+		zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
+		
+		trafo1.asignarZona(zonas);
+		trafo2.asignarZona(zonas);
+		trafo3.asignarZona(zonas);
+		trafo4.asignarZona(zonas);
+		
+		zonas.stream().forEach(zona -> zona_model.agregar(zona));
+		
+		trafos=trafo_model.buscarTodasLasTransformador();
+		
+		System.out.println("Cantidad de trafos actuales: "+trafos.size());
+		
+		//Recupero la zona con los trafos
+		ZonaGeografica zona1 = zona_model.buscarZonaGeografica(1);
+		
+		
+		//Ahora le asigno a la zona el trafo nuevo
+		
+		zonas.clear();
+		
+		zonas.add(zona1);
+		
+		Transformador trafonuevo = new Transformador(11,1.23,4.123,1);
+		
+		trafonuevo.asignarZona(zonas);
+		
+		//Persisto la zona con el trafo nuevo
+		
+		zonas.stream().forEach(zona -> zona_model.modificar(zona));
+
+		trafos.clear();
+		
+		//Recupero la nueva lista de trafos
+		
+		trafos=trafo_model.buscarTodasLasTransformador();
+		
+		System.out.println("Cantidad de trafos actualizada: "+trafos.size());
 		
 		
 		// int i = transformadores.size();
@@ -597,35 +652,63 @@ public class Tests {
 		  //Nuevamente mostrar el consumo para ese transformador.
 	public void casoDePrueba5() {
 	
-		//HACER UN PAR DE CONSUMOS
-		LocalDateTime fechaLimiteMinima = LocalDateTime.now();
-		LocalDateTime fechaLimiteMaxima = fechaLimiteMinima.plusDays(10);
-		dispositivo1.cambiarEstado(new Encendido(fechaLimiteMinima, fechaLimiteMaxima));
-		dispositivo2.cambiarEstado(new Encendido(fechaLimiteMinima, fechaLimiteMaxima));
-		dispositivo3.cambiarEstado(new Encendido(fechaLimiteMinima, fechaLimiteMaxima));
-		pedro.addDispositivo(dispositivo1);
-		pedro.addDispositivo(dispositivo2);
-		pedro.addDispositivo(dispositivo3);
-		trafo1.addCliente(pedro);
+		ModelHelperPersistencia m = new ModelHelperPersistencia();
 		
-		System.out.format("El consumo del hogar en el periodo fue de %f \n", (float) pedro.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
-		System.out.format("El consumo del dispositivo fue de %f \n", (float) dispositivo1.consumoPromedioEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
-		System.out.format("El consumo del transformador fue de %f \n", (float) trafo1.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		TransformadorModel model_trafo = new TransformadorModel();
+		
+		//HACER UN PAR DE CONSUMOS
+		LocalDateTime fechaLimiteMinima = LocalDateTime.now().minusDays(1);
+		LocalDateTime fechaLimiteMaxima = fechaLimiteMinima.plusDays(11);
+		//dispositivo1.cambiarEstado(new Encendido(fechaLimiteMinima.plusDays(1), fechaLimiteMaxima.minusDays(1)));
+		//dispositivo2.cambiarEstado(new Encendido(fechaLimiteMinima.plusDays(1), fechaLimiteMaxima.minusDays(1)));
+		//dispositivo3.cambiarEstado(new Encendido(fechaLimiteMinima.plusDays(1), fechaLimiteMaxima.minusDays(1)));
+		pedro.addDispositivo(dispositivo5);
+		pedro.addDispositivo(dispositivo6);
+		pedro.addDispositivo(dispositivo7);
+		trafo5.addCliente(pedro);
+		
+		System.out.println("El consumo del hogar en el periodo fue de "+pedro.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		System.out.println("El consumo del dispositivo fue de "+dispositivo1.consumoPromedioEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		System.out.println("El consumo del transformador fue de "+trafo5.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		
+		//ASIGNO EL TRAFO A UNA ZONA PARA PERSISTIRLO
+		List<ZonaGeografica> zonas = new ArrayList<>();
+		
+		ZonaGeografica zona2=new ZonaGeografica(2, "zona2", 1.31, 2.13);
+		
+		zonas.add(zona2);
+		
+		trafo5.asignarZona(zonas);
+		
+		//PERSISTO LA ZONA
+		m.agregar(zona2);
+		
+		Transformador trafoCopy = model_trafo.buscarTransformador(10);
+		
+		System.out.println("Obteniendo clientes del trafo 10");
+		
+		Cliente clienteTrafo = trafoCopy.getClientes().get(0);
+		
+		Dispositivo dispoCliente = clienteTrafo.dispositivos().get(0);
+		
 		
 		
 		//RECUPERAR UN DISPO QUE ESTE EN ESTE TRANSFORMADOR
 		
 		//CAMBIAR CONSUMO
-		disp1.cambiarConsumo( disp1.kwhConsumeXHora() * 1000);
+		dispoCliente.cambiarConsumo( dispoCliente.kwhConsumeXHora() * 1000);
 		
 		
 		//PERSISTIR DISPOSITIVO
 		
+		model.agregar(dispoCliente);
 		
-		System.out.format("El consumo del transformador fue de %f \n", (float) trafo1.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
+		Transformador trafoNuevo = model_trafo.buscarTransformador(10);
+		
+		System.out.println("El consumo del transformador fue de "+trafoNuevo.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima));
 		
 		
 		//ROLLBACK DE LA DB
-	}*/
+	}
 
 }
