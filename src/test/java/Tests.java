@@ -472,7 +472,7 @@ public class Tests {
 	
 	//-------------------------------------------TESTS--------DE--------ENTREGA PERSISTENCIA--------------------------------------------------------------------
 	
-	@Test //Crear 1 usuario nuevo. Persistirlo. Recuperarlo, modificar la geolocalización y
+	@Test //Crear 1 usuario nuevo. Persistirlo. Recuperarlo, modificar la geolocalizaciï¿½n y
 		  //grabarlo. Recuperarlo y evaluar que el cambio se haya realizado.
 	public void casoDePrueba1() {
 		//CREAR CLIENTE NUEVO
@@ -507,7 +507,7 @@ public class Tests {
 		
 	}
 	@Test //Recuperar un dispositivo. Mostrar por consola todos los intervalos que estuvo
-		  //encendido durante el último mes. Modificar su nombre (o cualquier otro atributo
+		  //encendido durante el ï¿½ltimo mes. Modificar su nombre (o cualquier otro atributo
 		  //editable) y grabarlo. Recuperarlo y evaluar que el nombre coincida con el
 		  //esperado.
 	public void casoDePrueba2() {
@@ -538,9 +538,9 @@ public class Tests {
 		//ROLLBACK DE LA DB
 	}
 /*	@Test //Crear una nueva regla. Asociarla a un dispositivo. Agregar condiciones y
-		  //acciones. Persistirla. Recuperarla y ejecutarla. Modificar alguna condición y
-		  //persistirla. Recuperarla y evaluar que la condición modificada posea la última
-		  //modificación.
+		  //acciones. Persistirla. Recuperarla y ejecutarla. Modificar alguna condiciï¿½n y
+		  //persistirla. Recuperarla y evaluar que la condiciï¿½n modificada posea la ï¿½ltima
+		  //modificaciï¿½n.
 	public void casoDePrueba3() {
 		ReglaModel modelRegla = new ReglaModel();
 		//CREAR REGLA
@@ -569,7 +569,7 @@ public class Tests {
 	}
 	@Test //Recuperar todos los transformadores persistidos. Registrar la cantidad.
 		  //Agregar una instancia de Transformador al JSON de entradas. Ejecutar el
-		  //método de lectura y persistencia. Evaluar que la cantidad actual sea la anterior
+		  //mï¿½todo de lectura y persistencia. Evaluar que la cantidad actual sea la anterior
 		  //+ 1.
 	public void casoDePrueba4() {
 		//RECUPERAR TRANSFORMADORES
@@ -589,11 +589,11 @@ public class Tests {
 		
 		//ROLLBACK DE LA DB
 	}
-	@Test //Dado un hogar y un período, mostrar por consola (interfaz de comandos) el
-		  //consumo total. Dado un dispositivo y un período, mostrar por consola su
-		  //consumo promedio. Dado un transformador y un período, mostrar su consumo
+	@Test //Dado un hogar y un perï¿½odo, mostrar por consola (interfaz de comandos) el
+		  //consumo total. Dado un dispositivo y un perï¿½odo, mostrar por consola su
+		  //consumo promedio. Dado un transformador y un perï¿½odo, mostrar su consumo
 		  //promedio. Recuperar un dispositivo asociado a un hogar de ese transformador e
-		  //incrementar un 1000 % el consumo para ese período. Persistir el dispositivo.
+		  //incrementar un 1000 % el consumo para ese perï¿½odo. Persistir el dispositivo.
 		  //Nuevamente mostrar el consumo para ese transformador.
 	public void casoDePrueba5() {
 	
