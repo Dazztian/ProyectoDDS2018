@@ -13,13 +13,35 @@ public class TestDB {
 		
 		EntityManager e = ModelHelperPersistencia.getEntityManager();
 		
-		ModelHelperPersistencia m = new ModelHelperPersistencia();
+		ZonaGeograficaModel m = new ZonaGeograficaModel();
 		
+		List<ZonaGeografica> zonas = new ArrayList<>();
 		
+		zonas.add(new ZonaGeografica(3,"zona1",-3.11,-2.21));
 		
+		Transformador trafo1 = new Transformador(1, 1.1, 2.2, 3);
 		
+		trafo1.asignarZona(zonas);
+//		
+//		//Persisto la zona junto con su trafo
+		m.agregar(zonas.get(0));
 		
+		ZonaGeografica zona1=m.buscarZonaGeografica(3);
 		
+		System.out.println(zona1.getNombre()+" id: "+zona1.getId()+" lat: "+zona1.getLatitud()+" longitud: "+zona1.getLongitud()+
+				" trafos: "+zona1.getTrafos().size());
+		
+//		zonas.add(zona1);
+//		
+//		trafo1.asignarZona(zonas);
+//		
+//		zonas.forEach(zona->m.agregar(zona));
+//		
+//		zona1 = m.buscarZonaGeografica(3);
+//		
+//		
+		
+		//System.out.println(zona1.getTrafos().size());
 		
 //		DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 0.0);
 //		
@@ -50,24 +72,24 @@ public class TestDB {
 //		m.agregar(cat1);
 //		m.agregar(estado1);
 //		
-		ZonaGeograficaModel modelZona = new ZonaGeograficaModel();
-		
-		List<Transformador> trafos = new ArrayList<>();
-		
-		List<ZonaGeografica> zonas;
-		
+//		ZonaGeograficaModel modelZona = new ZonaGeograficaModel();
+//		
+//		List<Transformador> trafos = new ArrayList<>();
+//		
+//		List<ZonaGeografica> zonas;
+//		
 //		ZonaGeografica zona = new ZonaGeografica(2, "zona2", 1.1321, 3.123);
 		
 //		zonas.add(zona);
 		
 //		zonas =  modelZona.buscarTodasLasZonaGeografica();
 		
-		trafos.add(new Transformador(5, -34.705797, -58.404736, 1)); //Lanus Oeste - mas cercano a jose
-		trafos.add(new Transformador(2, -34.721041, -58.396010, 2)); //Escalada
-		trafos.add(new Transformador(7, -34.707652, -58.438311, 2)); //Fiorito
-		trafos.add(new Transformador(11, -34.689638, -58.402254, 3)); //Alsina
-		trafos.add(new Transformador(9, -34.689638, -58.402254, 1)); //Alsina
-		trafos.add(new Transformador(10, -34.689638, -58.402254, 3)); //Alsina
+//		trafos.add(new Transformador(5, -34.705797, -58.404736, 1)); //Lanus Oeste - mas cercano a jose
+//		trafos.add(new Transformador(2, -34.721041, -58.396010, 2)); //Escalada
+//		trafos.add(new Transformador(7, -34.707652, -58.438311, 2)); //Fiorito
+//		trafos.add(new Transformador(11, -34.689638, -58.402254, 3)); //Alsina
+//		trafos.add(new Transformador(9, -34.689638, -58.402254, 1)); //Alsina
+//		trafos.add(new Transformador(10, -34.689638, -58.402254, 3)); //Alsina
 		
 //		System.out.println("Reseteando trafos...");
 //		
