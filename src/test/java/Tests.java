@@ -92,7 +92,10 @@ public class Tests {
 
 	@Test
 	public void consumoMensualDispo1() {
-		dispositivo1.cambiarEstado(new Encendido(LocalDateTime.now(), LocalDateTime.now().plusHours(4)));
+		dispositivo1.guardarConsumo();
+		dispositivo1.guardarConsumo();
+		dispositivo1.guardarConsumo();
+		dispositivo1.guardarConsumo();
 		
 		assertEquals(200, dispositivo1.consumoMensual(), 0);
 	}
@@ -105,7 +108,7 @@ public class Tests {
 		assertEquals(12000, rosa.consumoMensual(), 0);
 		rosa.adaptarDispositivo(dispositivo5);
 		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).prender());
-		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1)));
+		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).guardarConsumo());
 		assertEquals(50, rosa.consumoMensual(), 0);
 		
 	}
@@ -114,10 +117,10 @@ public class Tests {
 		public void consumoMensualDeRosa() {
 		//Le agrego los dispositivos y testeo el consumo mensual que tiene Rosa
 		//Por motivos de testeo se asume que Rosa solo utilizo sus dispositivos por 1 hora este mes
-			dispositivo1.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
-			dispositivo2.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
-			dispositivo3.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
-			dispositivo4.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
+			dispositivo1.guardarConsumo();
+			dispositivo2.guardarConsumo();
+			dispositivo3.guardarConsumo();
+			dispositivo4.guardarConsumo();
 			rosa.addDispositivo(dispositivo1);
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
@@ -130,9 +133,9 @@ public class Tests {
 		public void estimativoFacturacionDeRosa() {
 		//Le agrego los dispositivos y testeo el precio estimativo de la factura de Rosa
 		//Por motivos de testeo se asume que Rosa solo utilizo sus dispositivos por 1 hora este mes
-			dispositivo1.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
-			dispositivo2.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
-			dispositivo3.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
+			dispositivo1.guardarConsumo();
+			dispositivo2.guardarConsumo();
+			dispositivo3.guardarConsumo();
 			rosa.addDispositivo(dispositivo1);
 			rosa.addDispositivo(dispositivo2);
 			rosa.addDispositivo(dispositivo3);
@@ -339,9 +342,19 @@ public class Tests {
 		pedro.addDispositivo(disp7);
 		pedro.agregarDispositivo("conFreezer");
 		
-		disp6.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(9));
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
+		disp6.guardarConsumo();
 		
-		disp7.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(3));
+		disp7.guardarConsumo();
+		disp7.guardarConsumo();
+		disp7.guardarConsumo();
 		
 		System.out.format("TEST ACCIONAR SEGUN CONSUMOS \n");
 		
@@ -440,9 +453,9 @@ public class Tests {
 		jose.addDispositivo(dispositivo4);
 		jose.addDispositivo(dispositivo5);
 		
-		dispositivo1.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
-		dispositivo2.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
-		dispositivo4.getEstadoActual().finalizarEstado(LocalDateTime.now().plusHours(1));
+		dispositivo1.guardarConsumo();
+		dispositivo2.guardarConsumo();
+		dispositivo4.guardarConsumo();
 		
 		//Calculo del consumo total de una zona
 		
@@ -452,6 +465,8 @@ public class Tests {
 	}
 	
 	//-------------------------------------------TESTS--------DE--------ENTREGA PERSISTENCIA--------------------------------------------------------------------
+	
+	/*
 	
 	@Test //Crear 1 usuario nuevo. Persistirlo. Recuperarlo, modificar la geolocalizaci�n y
 		  //grabarlo. Recuperarlo y evaluar que el cambio se haya realizado.
@@ -710,5 +725,7 @@ public class Tests {
 		
 		//ROLLBACK DE LA DB
 	}
+
+*/
 
 }

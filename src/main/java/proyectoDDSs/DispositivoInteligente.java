@@ -23,7 +23,7 @@ import java.time.*;
 @Entity(name="dispositivos_inteligentes")
 public class DispositivoInteligente extends Dispositivo {
 	
-	//private Estado estado;
+	private Estado estado;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="sensor_asignado")
 	private Sensor sensor;
@@ -31,9 +31,11 @@ public class DispositivoInteligente extends Dispositivo {
 	private Timer temporizador;
 	@Column(name="magnitud")
 	private Double magnitud;
+	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
 	@JoinColumn(name="id_Dispositivo",nullable=false)
-	public List<Estado> estados = new LinkedList<Estado>();
+	public List<Log> logDeConsumo = new LinkedList<Log>();
+	
 	@Transient
 	int intervalo=100;
 	
@@ -44,7 +46,7 @@ public class DispositivoInteligente extends Dispositivo {
 	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado, double unConsumoMinimo, double unConsumoMaximo) {
 		
 		super(unNombre, electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
-		estados.add(unEstado);	
+		estado = unEstado;	
 		temporizador=new Timer();
 		
 		temporizador.scheduleAtFixedRate(new TimerTask() {
@@ -63,18 +65,15 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	public boolean estaEncendido(){
-		return estados.get(0).estadoEncendido();
+		return estado.estadoEncendido();
 	}
 	
 	public Estado getEstadoActual () {
-		return this.estados.get(0);
+		return this.estado;
 	}
 	
 	public void cambiarEstado(Estado unEstado) {
-		Estado aux = estados.remove(0);
-		aux.finalizarEstado();
-		estados.add(0, aux);
-		estados.add(0, unEstado);
+		estado = unEstado;
 	}
 	
 	public void apagar() {
@@ -89,24 +88,24 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	public double consumoPorHora() {
-		return kwhConsumeXHora * estados.get(0).coeficienteDeConsumo();
+		return kwhConsumeXHora * estado.coeficienteDeConsumo();
 	}
 	
-/*	public void guardarConsumo() {
-		Log nuevoLog = new Log(this.consumoPorHora());
-		logDeConsumo.addFirst(nuevoLog);
-	}*/
+	public void guardarConsumo() {
+		Log nuevoLog = new Log(this.consumoPorHora(), this.getEstadoActual());
+		((LinkedList<Log>) logDeConsumo).addFirst(nuevoLog);
+	}
 	
 	public double consumoEnLasUltimasNHoras(int n) {
-		return estados.stream().filter(estado -> estado.fechaDeInicio.isAfter(LocalDateTime.now().minusHours(n)))
-				.mapToDouble(estado -> estado.coeficienteConHorasActivas())
-				.sum() * this.kwhConsumeXHora();
+		return logDeConsumo.stream().filter(log -> log.horaDeLaOperacion.isAfter(LocalDateTime.now().minusHours(n)))
+				.mapToDouble(log -> log.consumo())
+				.sum();
 	}
 	
 	public double consumoEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
-		return estados.stream().filter(estado -> estado.ocurreEntre(fechaLimiteMaxima, fechaLimiteMinima))
-				.mapToDouble(estado -> estado.coeficienteConHorasActivas())
-				.sum() * this.kwhConsumeXHora();
+		return logDeConsumo.stream().filter(log -> log.ocurreEntre(fechaLimiteMaxima, fechaLimiteMinima))
+				.mapToDouble(log -> log.consumo())
+				.sum();
 	}
 	
 	public double consumoPromedioEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
@@ -135,8 +134,8 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	public void intervalosEncendidoEnPeriodo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
 		System.out.format("El Dispositivo estuvo encendido en los siguientes Intervalos: \n");
-		estados.stream().filter(estado -> estado.ocurreEntre(fechaLimiteMaxima, fechaLimiteMinima))
-		.filter(estado -> estado.estadoEncendido()).forEach(estado -> estado.mostrarPeriodoPorConsola());		
+		logDeConsumo.stream().filter(log -> log.ocurreEntre(fechaLimiteMaxima, fechaLimiteMinima))
+		.filter(log -> log.estabaEncendido()).forEach(log -> log.mostrarLogPorConsola());		
 	}
 	
 	public void intervalosEncendidosEnElUltimoMes() {
@@ -144,10 +143,6 @@ public class DispositivoInteligente extends Dispositivo {
 		LocalDateTime fechaLimiteMaxima = LocalDateTime.of(aux.getYear(), aux.getMonthValue(), 1, 0, 0);
 		LocalDateTime fechaLimiteMinima = LocalDateTime.of(aux.getYear(), aux.getMonthValue(), 30, 0, 0);
 		this.intervalosEncendidoEnPeriodo(fechaLimiteMaxima, fechaLimiteMinima);
-	}
-	
-	public int cantidadEstados() {
-		return this.estados.size();
 	}
 	
 }

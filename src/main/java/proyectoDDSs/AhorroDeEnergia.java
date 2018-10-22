@@ -10,15 +10,12 @@ import javax.persistence.Entity;
 
 public class AhorroDeEnergia extends Estado {
 	
-	public AhorroDeEnergia() {
-		super();
-	}
-	public AhorroDeEnergia (LocalDateTime inicio, LocalDateTime fin) {
-		super(inicio, fin);
-	}
-	
 	public boolean estadoEncendido() {
 		return true;
+	}
+	
+	public String nombreEstado() {
+		return "AHORRO DE ENERGIA";
 	}
 
 	public double coeficienteDeConsumo() {

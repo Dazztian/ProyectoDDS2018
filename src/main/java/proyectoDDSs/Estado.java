@@ -3,11 +3,17 @@ package proyectoDDSs;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
+
+/*
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Estado")
 @Table(name = "Estado")
+*/
+
 public abstract class Estado {
+	
+	/*
 	
 	@Id
 	@GeneratedValue
@@ -27,15 +33,24 @@ public abstract class Estado {
 		fechaDeFin = fin;
 	}
 	
+	*/
+	
 	public abstract boolean estadoEncendido();
 	public abstract double coeficienteDeConsumo();
+	
+	/*
 	public void finalizarEstado() {
 		fechaDeFin = LocalDateTime.now();
 	}
 	public void finalizarEstado(LocalDateTime fin) {
 		fechaDeFin = fin;
 	}
+	*/
+	public abstract String nombreEstado();
+	
 	//Hace un recuento de cuantas horas estuvo el Estado activo.
+	
+	/*
 	public int horasActivas() {
 		if(fechaDeFin == null) {
 			return horasActivasHastaElMomento(LocalDateTime.now());
@@ -43,11 +58,17 @@ public abstract class Estado {
 		return horasDeDiferencia(fechaDeFin, fechaDeInicio);
 		}
 	}
+	
+	*/
 	//Hace un recuento de cuantas horas estuvo activo el Estado al momento de hacer la consulta,
 	//Se usa cuando todavia no se tiene un a fecha de fin del estado, o sea, cuando es el estado actual.
+	
+	/*
 	public int horasActivasHastaElMomento(LocalDateTime fechaDeConsulta) {
 		return horasDeDiferencia(fechaDeConsulta, fechaDeInicio);
 	}
+	*/
+	
 	
 	public int horasDeDiferencia(LocalDateTime fechaMayor, LocalDateTime fechaMenor) {
 		return  ((fechaMayor.getYear() - fechaMenor.getYear()) * 365 * 24) +
@@ -56,6 +77,7 @@ public abstract class Estado {
 				((fechaMayor.getHour() - fechaMenor.getHour()));
 	}
 	
+	/*
 	public boolean ocurreEntre (LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
 		LocalDateTime aux = fechaDeFin;
 		if(fechaDeFin == null){
@@ -70,5 +92,6 @@ public abstract class Estado {
 	public double coeficienteConHorasActivas() {
 		return (this.coeficienteDeConsumo() * this.horasActivas());
 	}
+	*/
 	
 }

@@ -7,10 +7,12 @@ import javax.swing.Spring;
 public class Log {
 	public double consumo;
 	public LocalDateTime horaDeLaOperacion;
+	public Estado estado;
 	
-	public Log (double unConsumo) {
+	public Log (double unConsumo, Estado unEstado) {
 		consumo = unConsumo;
 		horaDeLaOperacion = LocalDateTime.now();
+		estado = unEstado;
 	}
 	
 	public double consumo() {
@@ -25,24 +27,16 @@ public class Log {
 		return horaDeLaOperacion.isBefore(fechaLimiteMaxima) && horaDeLaOperacion.isAfter(fechaLimiteMinima);
 	}
 	
-	public void mostrarLogPorConsola(double consumoDisp) {
-		System.out.format("En el momento %s el dispositivo estuvo %s", horaDeLaOperacion.toString(), this.conseguirEstado(consumoDisp));
+	public void mostrarLogPorConsola() {
+		System.out.format("En el momento %s el dispositivo estuvo %s \n", horaDeLaOperacion.toString(), this.conseguirEstado());
 	}
 	
-	public String conseguirEstado(double consumoDisp) {
-		if(consumoDisp == consumo) {
-			return "ENCENDIDO";
-		}else {
-			if(consumoDisp / 2 == consumo) {
-				return "AHORRO DE ENERGIA";
-			}else {
-				if(consumoDisp / 100 == consumo) {
-					return "APAGADO";
-				}else {
-					return "OTRO";
-				}
-			}
-		}
+	public boolean estabaEncendido() {
+		return estado.estadoEncendido();
+	}
+	
+	public String conseguirEstado() {
+		return estado.nombreEstado();
 		
 	}
 }
