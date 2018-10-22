@@ -7,12 +7,12 @@ import javax.swing.Spring;
 public class Log {
 	public double consumo;
 	public LocalDateTime horaDeLaOperacion;
-	public Estado estado;
+	public String nombreEstado;
 	
 	public Log (double unConsumo, Estado unEstado) {
 		consumo = unConsumo;
 		horaDeLaOperacion = LocalDateTime.now();
-		estado = unEstado;
+		nombreEstado = unEstado.nombreEstado();
 	}
 	
 	public double consumo() {
@@ -32,11 +32,15 @@ public class Log {
 	}
 	
 	public boolean estabaEncendido() {
-		return estado.estadoEncendido();
+		if(nombreEstado == "ENCENDIDO" || nombreEstado == "AHORRO DE ENERGIA") {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	public String conseguirEstado() {
-		return estado.nombreEstado();
+		return nombreEstado;
 		
 	}
 }
