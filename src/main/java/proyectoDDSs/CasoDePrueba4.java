@@ -35,24 +35,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 /*
 ESTO ES DE HIBERNATE
-Recuperar todos los transformadores persistidos
-Registrar la cantidad.
+1-Recuperar todos los transformadores persistidos
+2-Registrar la cantidad.
  
+3-Agregar una instancia de Transformador al JSON de entradas.
+4-Ejecutar el método de lectura y persistencia. 
+5-Evaluar que la cantidad actual sea la anterior + 1.
+
  */
-//Agregar una instancia de Transformador al JSON de entradas.
-//Ejecutar el método de lectura y persistencia. 
-//Evaluar que la cantidad actual sea la anterior + 1.
-
-//CONCLUSION: El metodo de persistencia implica persistir a partir del JSON de entrada y checkeand si hay o no algun dispo nuevo!!!
-
-//Codigo para toda la logica del test3
-
-		//Leo uno x uno los elementos del JSON 
-		//Checkeo si no existen en la BD
-		//Si existen no los persisto y paso al siguiente
-		//Si no existen los persisto
-/**/
-
 public class CasoDePrueba4 {
 		public static void main(String[] args)
 		{			
@@ -61,7 +51,6 @@ public class CasoDePrueba4 {
 			Transformador trafoAPersistir;
 			
 			String json;
-			ArrayList<Transformador> transformadores = new ArrayList<Transformador>(); 
 			JSONParser parser = new JSONParser();
 			int cantTrafos = 0;
 			
@@ -75,10 +64,8 @@ public class CasoDePrueba4 {
 			List<Transformador> trafos = new ArrayList<Transformador>();
 			
 			zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
-
 			
-			
-			// trafos=trafo_model.buscarTodasLasTransformador();
+			 //trafos=trafo_model.buscarTodasLasTransformador();
 			
 			System.out.println("Cantidad de trafos actuales: "+trafos.size());
 			
@@ -86,13 +73,11 @@ public class CasoDePrueba4 {
 			//ZonaGeografica zona1 = zona_model.buscarZonaGeografica(1);
 			
 			
-			//Logica para agregar un Trafo al JSON de entradas
 			
+			//Logica para agregar un Trafo al JSON de entradas
 		     try {
 
-		      	JSONArray a = (JSONArray) parser.parse(new FileReader("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\transformadores.json"));
-		      	
-		      	
+		      	JSONArray a = (JSONArray) parser.parse(new FileReader("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\transformadores.json"));		      	
 		      	
 		      	 for (Object o : a)
 		 	  {
@@ -112,36 +97,31 @@ public class CasoDePrueba4 {
 			    //A cada uno los persisto en la BD, uno por uno 
 			    
 			    trafoAPersistir = new Transformador(id.intValue(), latitud, longitud,  zona.intValue());
-			    	
 			    trafos.add(trafoAPersistir);
-			    //LABURANDING
 			    trafoAPersistir.asignarZona(zonas);//Esto es lo que persiste al trafo
-
-				//transformadores.add( trafoAPersistir);
-				//trafo4.asignarZona(zonas);
-				//zona_model.agregar(zona);
-				//model.agregar(new Transformador(cantTrafos+1, latitud, longitud,  zona.intValue()));
-				
 							
 				cantTrafos++;
 				
 		 	  }
-		      	 	//LABURANDING
-					zonas.stream().forEach(zona -> zona_model.agregar(zona));
-
-		      	//Aca agrego al nuevo trafo que dice el enunciado 
-		      	//transformadores.add( new Transformador(cantTrafos+1, latitud, longitud,  zona.intValue())); 
+		      	//Aca agrego un TRAFO a la BD
+		      	trafoAPersistir = new Transformador(100, 34.5, 65.4, 1);
+			    trafos.add(trafoAPersistir);
+			    trafoAPersistir.asignarZona(zonas);
+				cantTrafos++;
 		      	 
+		      	 
+		      	zonas.stream().forEach(zona -> zona_model.agregar(zona));
+
 		     	Gson gson = new Gson();
-				json = gson.toJson(trafos);  
-				//Esto lo hago si quiero ver el resultado de los trafos actualizados
+				json = gson.toJson(trafos);
+				//Con esto Previsualizo el resultado del JSON de Entradas
 				System.out.println(json);
 
 //////////////////////////////////////////   LOGICA PARA ESCRIBIR (APPEND) UN ARCHIVO BIEN ATR  ////////////////////////////////////////////////////////////////
-		    /* Saco esto SOLO UN TOQUE para probar el resto del codigo
+		    // Saco esto SOLO UN TOQUE para probar el resto del codigo
 				try {
  	        	File file = new File("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\transformadores.json");
- 	        	FileWriter fr = new FileWriter(file, true);
+ 	        	FileWriter fr = new FileWriter(file, false);
  	        	fr.write(json);
  	        	fr.close();
  	        	}catch (IOException e) {
@@ -150,7 +130,7 @@ public class CasoDePrueba4 {
 	        
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 	        	 
 		      	System.out.println("La cant de trafos es:" + cantTrafos); 
-		      	*/
+		      	
 		     }//Aca termina el try
 		     catch (Exception e) { e.printStackTrace(); } 
 		
