@@ -1,5 +1,4 @@
 import java.text.ParseException;
-import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 
@@ -13,7 +12,31 @@ public class TestDB {
 		
 		EntityManager e = ModelHelperPersistencia.getEntityManager();
 		
-		ClienteModel m = new ClienteModel();
+		ZonaGeograficaModel zona_model = new ZonaGeograficaModel();
+		
+		TransformadorModel trafo_model = new TransformadorModel();
+		
+		List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
+		
+		List<Transformador> trafos = new ArrayList<Transformador>();
+		
+		zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
+	
+
+		Transformador trafo1 = new Transformador(2, -1.3414, -2.657, 1);
+		Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 1);
+		Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
+		Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 1);
+		Transformador trafo5= new Transformador(10,-1.123,4.132,2);
+		trafo1.asignarZona(zonas);
+		trafo2.asignarZona(zonas);
+		trafo3.asignarZona(zonas);
+		trafo4.asignarZona(zonas);
+		
+		zonas.stream().forEach(zona -> zona_model.agregar(zona));
+		
+		
+		/*ClienteModel m = new ClienteModel();
 		
 		DispositivoModel d = new DispositivoModel();
 		
@@ -122,7 +145,7 @@ public class TestDB {
 //		
 //		m.agregar(a);
 		
-		
+		*/
 	}
 
 }
