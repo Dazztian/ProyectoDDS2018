@@ -13,6 +13,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -29,6 +30,8 @@ import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import modelsPersistencia.CategoriaModel;
 import simplex.facade.*;
 
 @Entity
@@ -71,10 +74,9 @@ public class Cliente extends Usuario {
 	
 	
 	//Los clientes tienen una categoria
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="categoria")
 	protected Categoria categoria; 
-		
 	
 	public Cliente() {
 		
@@ -82,7 +84,7 @@ public class Cliente extends Usuario {
 	
 		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)	
 	public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
-			domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria, 
+			domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,int numeroCategoria, 
 			double latitud, double longitud, String usuario, String contrasenia) {
 		super(usuario, contrasenia);
 		this.nombre=nombre;
@@ -93,7 +95,7 @@ public class Cliente extends Usuario {
 		this.domicilio=domicilio;
 		this.fechaAlta = unaFecha;
 		this.dispositivos=unosDispositivos;
-		this.categoria = unaCategoria;
+		this.categoria = new CategoriaModel().buscarCategoria(numeroCategoria);
 		this.latitud=latitud;
 		this.longitud=longitud;
 		
@@ -101,6 +103,9 @@ public class Cliente extends Usuario {
 		
 		
 	}	
+	public Categoria getCategoria() {
+		return this.categoria;
+	}
 	
 	
 	public void asignarTrafoMasCercano(List<Transformador> trafos) {

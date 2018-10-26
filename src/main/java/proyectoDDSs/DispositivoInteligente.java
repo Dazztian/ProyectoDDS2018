@@ -34,9 +34,8 @@ public class DispositivoInteligente extends Dispositivo {
 	@Column(name="magnitud")
 	private Double magnitud;
 	
-//	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
-//	@JoinColumn(name="id_Dispositivo",nullable=false)
-	@Transient
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
+	@JoinColumn(name="id_Dispositivo",nullable=false)
 	public List<Log> logDeConsumo = new LinkedList<Log>();
 	
 	@Transient
