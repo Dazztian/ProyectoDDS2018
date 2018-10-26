@@ -32,6 +32,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import modelsPersistencia.CategoriaModel;
+import modelsPersistencia.DispositivoModel;
 import simplex.facade.*;
 
 @Entity
@@ -59,13 +60,11 @@ public class Cliente extends Usuario {
 	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-		name="Dispositivo_Cliente",
-		joinColumns=@JoinColumn(name="id_Cliente"),
-		inverseJoinColumns=@JoinColumn(name="id_Dispositivo")
-	)
-	public List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="pk.cliente",cascade=CascadeType.ALL)
+	private List<DispositivoXCliente> dipositivos_propios= new ArrayList<DispositivoXCliente>();
+	
+	@Transient
+	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	@Column(name="puntos")
 	public int puntos;
@@ -137,13 +136,16 @@ public class Cliente extends Usuario {
 		
 	// --------------------------------------------------------------------------------VERSION ENTREGA1 DE AGREGAR DISPOSITIVO--------------------------------------------------------------------------------
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
-	public void addDispositivo(Dispositivo dispo) 
+	public void addDispositivo(DispositivoXCliente d) 
 	{
-		dispositivos.add(dispo);
-		if(dispo.esInteligente()) 
-		{
-			puntos +=15;
-		}
+		
+		this.dipositivos_propios.add(d);
+		
+//		dispositivos.add(dispo);
+//		if(dispo.esInteligente()) 
+//		{
+//			puntos +=15;
+//		}
 	}
 	// --------------------------------------------------------------------------------VERSION ENTREGA1 DE AGREGAR DISPOSITIVO--------------------------------------------------------------------------------
 	

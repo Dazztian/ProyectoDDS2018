@@ -16,13 +16,14 @@ public class DispositivoEstandar extends Dispositivo {
 
 	public DispositivoEstandar() {}
 	
-	public DispositivoEstandar(String unNombre, double electricidadQConsume, int unaCantidadDeHoras, double unConsumoMinimo, double unConsumoMaximo) {
-		super(unNombre ,electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
+	public DispositivoEstandar(String unNombre,String equipo, double electricidadQConsume, int unaCantidadDeHoras, double unConsumoMinimo, double unConsumoMaximo) {
+		super(unNombre,equipo ,electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
 		usoDiarioEnHoras = unaCantidadDeHoras;
+		this.inteligente=false;
 	}
 
 	public boolean esInteligente() {
-		return false;
+		return this.inteligente;
 	}
 	
 	public ModuloAdaptador adaptar() {
