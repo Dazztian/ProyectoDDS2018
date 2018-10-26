@@ -53,21 +53,17 @@ public class CasoDePrueba4 {
 			String json;
 			JSONParser parser = new JSONParser();
 			int cantTrafos = 0;
-			
-			//Logica para levantar los trafos de la BD
 			ZonaGeograficaModel zona_model = new ZonaGeograficaModel();
-			
 			TransformadorModel trafo_model = new TransformadorModel();
-			
-			List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
-			
+			List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();			
 			List<Transformador> trafos = new ArrayList<Transformador>();
 			
-			zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
-			
-			 //trafos=trafo_model.buscarTodasLasTransformador();
-			
+			//Logica para levantar los trafos de la BD
+			trafos=trafo_model.buscarTodasLasTransformador();
 			System.out.println("Cantidad de trafos actuales: "+trafos.size());
+			
+			
+			zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
 			
 			//Recupero la zona con los trafos
 			//ZonaGeografica zona1 = zona_model.buscarZonaGeografica(1);
@@ -103,11 +99,16 @@ public class CasoDePrueba4 {
 				cantTrafos++;
 				
 		 	  }
+		      	 
+			      	System.out.println("La cant de trafos es:" + cantTrafos); 
+
 		      	//Aca agrego un TRAFO a la BD
+		      	 
 		      	trafoAPersistir = new Transformador(100, 34.5, 65.4, 1);
 			    trafos.add(trafoAPersistir);
 			    trafoAPersistir.asignarZona(zonas);
 				cantTrafos++;
+				
 		      	 
 		      	 
 		      	zonas.stream().forEach(zona -> zona_model.agregar(zona));
@@ -133,6 +134,7 @@ public class CasoDePrueba4 {
 		      	
 		     }//Aca termina el try
 		     catch (Exception e) { e.printStackTrace(); } 
+		     
 		
 		}
 }
