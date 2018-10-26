@@ -8,11 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
-@Entity(name="Dispositivos_estandar")
+@Entity
+@DiscriminatorValue("Estandar")
 public class DispositivoEstandar extends Dispositivo {
-	@Column(table="Dispositivos_estandar",name="uso_diario")
+	@Column(name="uso_diario")
 	int usoDiarioEnHoras;
 
+	public DispositivoEstandar() {}
+	
 	public DispositivoEstandar(String unNombre, double electricidadQConsume, int unaCantidadDeHoras, double unConsumoMinimo, double unConsumoMaximo) {
 		super(unNombre ,electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
 		usoDiarioEnHoras = unaCantidadDeHoras;

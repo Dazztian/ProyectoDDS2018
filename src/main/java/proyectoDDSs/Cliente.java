@@ -11,10 +11,13 @@ import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,7 +32,7 @@ import org.json.simple.parser.JSONParser;
 import simplex.facade.*;
 
 @Entity
-@Table(name="Clientes")
+@DiscriminatorValue("C")
 public class Cliente extends Usuario {
 		
 	@Column(name="nombre")
@@ -53,8 +56,12 @@ public class Cliente extends Usuario {
 	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_Cliente",nullable=false)
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+		name="Dispositivo_Cliente",
+		joinColumns=@JoinColumn(name="id_Cliente"),
+		inverseJoinColumns=@JoinColumn(name="id_Dispositivo")
+	)
 	public List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	@Column(name="puntos")

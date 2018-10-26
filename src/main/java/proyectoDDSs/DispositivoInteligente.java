@@ -20,9 +20,11 @@ import javax.persistence.Transient;
 
 import java.time.*;
 
-@Entity(name="dispositivos_inteligentes")
+@Entity
+@DiscriminatorValue("Inteligente")
 public class DispositivoInteligente extends Dispositivo {
 	
+	@Transient
 	private Estado estado;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="sensor_asignado")
@@ -32,8 +34,9 @@ public class DispositivoInteligente extends Dispositivo {
 	@Column(name="magnitud")
 	private Double magnitud;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
-	@JoinColumn(name="id_Dispositivo",nullable=false)
+//	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
+//	@JoinColumn(name="id_Dispositivo",nullable=false)
+	@Transient
 	public List<Log> logDeConsumo = new LinkedList<Log>();
 	
 	@Transient

@@ -13,23 +13,45 @@ public class TestDB {
 		
 		EntityManager e = ModelHelperPersistencia.getEntityManager();
 		
-		ZonaGeograficaModel m = new ZonaGeograficaModel();
+		ClienteModel m = new ClienteModel();
 		
-		List<ZonaGeografica> zonas = new ArrayList<>();
+		DispositivoModel d = new DispositivoModel();
 		
-		zonas.add(new ZonaGeografica(3,"zona1",-3.11,-2.21));
+//		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
+//				new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
+//				new Categoria("R1",18.56,0.86), -1.542, 7.1245, "pepe10", "pepe");
+//
+//		lucas.addDispositivo(new DispositivoInteligente("Heladera",2,new Apagado(),1,3));
+//		lucas.addDispositivo(new DispositivoInteligente("Smart TV",1,new Apagado(),1,3));
+//		lucas.addDispositivo(new DispositivoEstandar("Plancha",5,1,2,8));
+//
+//		m.agregar(lucas);
+//		
+//		
 		
-		Transformador trafo1 = new Transformador(1, 1.1, 2.2, 3);
+		DispositivoEstandar copiaDispo = (DispositivoEstandar) d.buscarDispositivo(3);
 		
-		trafo1.asignarZona(zonas);
+		Cliente lucasCopy = m.buscarCliente(1);
+		
+		lucasCopy.adaptarDispositivo(copiaDispo);
+		
+		m.modificar(lucasCopy);
+		
+//		List<ZonaGeografica> zonas = new ArrayList<>();
+//		
+//		zonas.add(new ZonaGeografica(3,"zona1",-3.11,-2.21));
+//		
+//		Transformador trafo1 = new Transformador(1, 1.1, 2.2, 3);
+//		
+//		trafo1.asignarZona(zonas);
 //		
 //		//Persisto la zona junto con su trafo
-		m.agregar(zonas.get(0));
-		
-		ZonaGeografica zona1=m.buscarZonaGeografica(3);
-		
-		System.out.println(zona1.getNombre()+" id: "+zona1.getId()+" lat: "+zona1.getLatitud()+" longitud: "+zona1.getLongitud()+
-				" trafos: "+zona1.getTrafos().size());
+//		m.agregar(zonas.get(0));
+//		
+//		ZonaGeografica zona1=m.buscarZonaGeografica(3);
+//		
+//		System.out.println(zona1.getNombre()+" id: "+zona1.getId()+" lat: "+zona1.getLatitud()+" longitud: "+zona1.getLongitud()+
+//				" trafos: "+zona1.getTrafos().size());
 		
 //		zonas.add(zona1);
 //		
