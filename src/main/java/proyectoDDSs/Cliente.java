@@ -13,6 +13,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -29,6 +30,9 @@ import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import modelsPersistencia.CategoriaModel;
+import modelsPersistencia.DispositivoModel;
 import simplex.facade.*;
 
 @Entity
@@ -56,13 +60,11 @@ public class Cliente extends Usuario {
 	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-		name="Dispositivo_Cliente",
-		joinColumns=@JoinColumn(name="id_Cliente"),
-		inverseJoinColumns=@JoinColumn(name="id_Dispositivo")
-	)
-	public List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="pk.cliente",cascade=CascadeType.ALL)
+	private List<DispositivoXCliente> dipositivos_propios= new ArrayList<DispositivoXCliente>();
+	
+	@Transient
+	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	@Column(name="puntos")
 	public int puntos;
@@ -71,10 +73,9 @@ public class Cliente extends Usuario {
 	
 	
 	//Los clientes tienen una categoria
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="categoria")
 	protected Categoria categoria; 
-		
 	
 	public Cliente() {
 		
@@ -82,7 +83,7 @@ public class Cliente extends Usuario {
 	
 		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)	
 	public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
-			domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria, 
+			domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,int numeroCategoria, 
 			double latitud, double longitud, String usuario, String contrasenia) {
 		super(usuario, contrasenia);
 		this.nombre=nombre;
@@ -93,7 +94,7 @@ public class Cliente extends Usuario {
 		this.domicilio=domicilio;
 		this.fechaAlta = unaFecha;
 		this.dispositivos=unosDispositivos;
-		this.categoria = unaCategoria;
+		this.categoria = new CategoriaModel().buscarCategoria(numeroCategoria);
 		this.latitud=latitud;
 		this.longitud=longitud;
 		
@@ -101,6 +102,9 @@ public class Cliente extends Usuario {
 		
 		
 	}	
+	public Categoria getCategoria() {
+		return this.categoria;
+	}
 	
 	
 	public void asignarTrafoMasCercano(List<Transformador> trafos) {
@@ -132,13 +136,16 @@ public class Cliente extends Usuario {
 		
 	// --------------------------------------------------------------------------------VERSION ENTREGA1 DE AGREGAR DISPOSITIVO--------------------------------------------------------------------------------
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
-	public void addDispositivo(Dispositivo dispo) 
+	public void addDispositivo(DispositivoXCliente d) 
 	{
-		dispositivos.add(dispo);
-		if(dispo.esInteligente()) 
-		{
-			puntos +=15;
-		}
+		
+		this.dipositivos_propios.add(d);
+		
+//		dispositivos.add(dispo);
+//		if(dispo.esInteligente()) 
+//		{
+//			puntos +=15;
+//		}
 	}
 	// --------------------------------------------------------------------------------VERSION ENTREGA1 DE AGREGAR DISPOSITIVO--------------------------------------------------------------------------------
 	

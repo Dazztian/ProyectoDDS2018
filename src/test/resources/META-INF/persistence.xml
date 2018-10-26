@@ -17,6 +17,8 @@
    		<class>proyectoDDSs.Dispositivo</class>
    		<class>proyectoDDSs.DispositivoInteligente</class>
    		<class>proyectoDDSs.DispositivoEstandar</class>
+   		<class>proyectoDDSs.DispositivoXCliente</class>
+   		<class>proyectoDDSs.Log</class>
    		<class>proyectoDDSs.ModuloAdaptador</class>			
    		<class>proyectoDDSs.Regla</class>   		
    		<class>proyectoDDSs.Sensor</class>

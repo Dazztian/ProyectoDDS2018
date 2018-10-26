@@ -27,6 +27,10 @@ public class Categoria extends BeanToJson<Categoria>{
 	@Expose protected double cargoAdicional;
 		
 	//getters
+	public String getTipo() {
+		return this.tipo;
+	}
+	
 	public double getCargoFijo() {
 		return cargoFijo;
 	}

@@ -14,35 +14,55 @@ public class TestDB {
 		
 		ZonaGeograficaModel zona_model = new ZonaGeograficaModel();
 		
+		DispositivoXCliente dc = new DispositivoXCliente();
+		
+//		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
+//				new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
+//				1, -1.542, 7.1245, "pepe10", "pepe");
+//		
+//		zona_model.agregar(lucas);
+		
+		DispositivoModel dispo_model = new DispositivoModel();
+		
+		Dispositivo d = dispo_model.buscarDispositivo(1);
+		
+		Cliente pepeCopy = new ClienteModel().buscarCliente(3);
+		
+		dc.setCliente(pepeCopy);
+		dc.setDispositivo(d);
+		dc.setSensor(new Sensor());
+		
+		dispo_model.agregar(dc);
+		
 		TransformadorModel trafo_model = new TransformadorModel();
-		
-		List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
-		
-		List<Transformador> trafos = new ArrayList<Transformador>();
-		
-		zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
-	
-
-		Transformador trafo1 = new Transformador(2, -1.3414, -2.657, 1);
-		Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 1);
-		Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
-		Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 1);
-		Transformador trafo5= new Transformador(10,-1.123,4.132,2);
-		trafo1.asignarZona(zonas);
-		trafo2.asignarZona(zonas);
-		trafo3.asignarZona(zonas);
-		trafo4.asignarZona(zonas);
-		
-		zonas.stream().forEach(zona -> zona_model.agregar(zona));
+//		
+//		List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
+//		
+//		List<Transformador> trafos = new ArrayList<Transformador>();
+//		
+//		zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
+//	
+//
+//		Transformador trafo1 = new Transformador(2, -1.3414, -2.657, 1);
+//		Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 1);
+//		Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
+//		Transformador trafo4 = new Transformador(8, -1.3414, -2.657, 1);
+//		Transformador trafo5= new Transformador(10,-1.123,4.132,2);
+//		trafo1.asignarZona(zonas);
+//		trafo2.asignarZona(zonas);
+//		trafo3.asignarZona(zonas);
+//		trafo4.asignarZona(zonas);
+//		
+//		zonas.stream().forEach(zona -> zona_model.agregar(zona));
 		
 		
 		/*ClienteModel m = new ClienteModel();
 		
 		DispositivoModel d = new DispositivoModel();
 		
-//		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
-//				new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
-//				new Categoria("R1",18.56,0.86), -1.542, 7.1245, "pepe10", "pepe");
+		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
+				new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
+				new Categoria("R1",18.56,0.86), -1.542, 7.1245, "pepe10", "pepe");
 //
 //		lucas.addDispositivo(new DispositivoInteligente("Heladera",2,new Apagado(),1,3));
 //		lucas.addDispositivo(new DispositivoInteligente("Smart TV",1,new Apagado(),1,3));

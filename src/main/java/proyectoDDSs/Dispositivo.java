@@ -20,16 +20,16 @@ public abstract class Dispositivo {
 	@GeneratedValue
 	@Column(name="id",nullable=false)
 	private int id;
-	@Column(name="nombre")
+	@Column(name="Dispositivo")
 	public String nombre;
-	@Column(name="kw_hora")
-	protected double kwhConsumeXHora;
+	@Column(name="equipo_concreto")
+	public String equipo;
 	@Column(name="es_inteligente")
 	public Boolean inteligente;
 	@Column(name="es_bajoConsumo")
 	public Boolean bajoConsumo;
-	@Column(name="equipo")
-	public String equipo;
+	@Column(name="kw_hora")
+	protected double kwhConsumeXHora;
 	@Column(name="consumo_minimo")
 	public double consumoMinimo;
 	@Column(name="consumo_maximo")
@@ -39,8 +39,9 @@ public abstract class Dispositivo {
 	}
 	
 	
-	public Dispositivo(String unNombre, double electricidadQConsume, double unConsumoMinimo, double unConsumoMaximo)
+	public Dispositivo(String unNombre,String equipo ,double electricidadQConsume, double unConsumoMinimo, double unConsumoMaximo)
 	{
+		this.equipo=equipo;
 		nombre= unNombre;
 		kwhConsumeXHora = electricidadQConsume;
 		consumoMinimo = unConsumoMinimo;
@@ -63,5 +64,9 @@ public abstract class Dispositivo {
 	
 	public void cambiarConsumo(double unConsumo) {
 		kwhConsumeXHora = unConsumo;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 }

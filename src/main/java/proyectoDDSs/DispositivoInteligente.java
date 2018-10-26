@@ -26,17 +26,17 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	@Transient
 	private Estado estado;
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="sensor_asignado")
+//	@OneToOne(cascade=CascadeType.ALL)
+//	@JoinColumn(name="sensor_asignado")
+	@Transient
 	private Sensor sensor;
 	@Transient
 	private Timer temporizador;
 	@Column(name="magnitud")
 	private Double magnitud;
 	
-//	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
-//	@JoinColumn(name="id_Dispositivo",nullable=false)
-	@Transient
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
+	@JoinColumn(name="id_Dispositivo",nullable=false)
 	public List<Log> logDeConsumo = new LinkedList<Log>();
 	
 	@Transient
@@ -46,11 +46,12 @@ public class DispositivoInteligente extends Dispositivo {
 		
 	}
 	
-	public DispositivoInteligente(String unNombre, double electricidadQConsume, Estado unEstado, double unConsumoMinimo, double unConsumoMaximo) {
+	public DispositivoInteligente(String unNombre,String equipo, double electricidadQConsume, Estado unEstado, double unConsumoMinimo, double unConsumoMaximo) {
 		
-		super(unNombre, electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
+		super(unNombre,equipo ,electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
 		estado = unEstado;	
 		temporizador=new Timer();
+		this.inteligente=true;
 		
 		temporizador.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
@@ -64,7 +65,7 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 
 	public boolean esInteligente() {
-		return true;
+		return this.inteligente;
 	}
 	
 	public boolean estaEncendido(){
