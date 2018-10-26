@@ -48,7 +48,7 @@ public class CasoDePrueba4 {
 		{			
 			
 			ModelHelperPersistencia model = new ModelHelperPersistencia();
-			Transformador trafoAPersistir;
+			Transformador trafoJSONEntrada;
 			
 			String json;
 			JSONParser parser = new JSONParser();
@@ -56,19 +56,15 @@ public class CasoDePrueba4 {
 			ZonaGeograficaModel zona_model = new ZonaGeograficaModel();
 			TransformadorModel trafo_model = new TransformadorModel();
 			List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();			
-			List<Transformador> trafos = new ArrayList<Transformador>();
+			List<Transformador> trafos = new ArrayList<Transformador>();//Va a tener los trafos que levante de la BD
+			List<Transformador> trafosJSON = new ArrayList<Transformador>();//Va a tener los trafos que levante del JSON de entrada
 			
 			//Logica para levantar los trafos de la BD
 			trafos=trafo_model.buscarTodasLasTransformador();
 			System.out.println("Cantidad de trafos actuales: "+trafos.size());
 			
-			
-			zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
-			
-			//Recupero la zona con los trafos
-			//ZonaGeografica zona1 = zona_model.buscarZonaGeografica(1);
-			
-			
+			//Si la zona ya Existe en la bd, comentar esto xq va a tirar error. AUN ASI el codigo seguiria funcionando
+			zonas.add(new ZonaGeografica(2, "zona1", 1.1, 2.2));
 			
 			//Logica para agregar un Trafo al JSON de entradas
 		     try {
@@ -90,39 +86,33 @@ public class CasoDePrueba4 {
 			    System.out.println("longitud:" +longitud);			    
 			    System.out.println("Zona " +zona + "\n");
 			    
-			    //A cada uno los persisto en la BD, uno por uno 
-			    
-			    trafoAPersistir = new Transformador(id.intValue(), latitud, longitud,  zona.intValue());
-			    trafos.add(trafoAPersistir);
-			    trafoAPersistir.asignarZona(zonas);//Esto es lo que persiste al trafo
-							
-				cantTrafos++;
-				
+
+			    /* ESTO ES UNA FORMA DE CARGAR LOS TRAFOS DEL JSON A LA BD, RECOMENDABLE USAR UNICAMENTE LA  1ERA VEZ QUE SE CARGA LA BD
+			    trafoJSONEntrada = new Transformador(id.intValue(), latitud, longitud,  zona.intValue());
+			    trafosJSON.add(trafoJSONEntrada);
+			    trafoJSONEntrada.asignarZona(zonas);//Esto es lo que persiste al trafo
+				*/							
 		 	  }
-		      	 
-			      	System.out.println("La cant de trafos es:" + cantTrafos); 
-
-		      	//Aca agrego un TRAFO a la BD
-		      	 
-		      	trafoAPersistir = new Transformador(100, 34.5, 65.4, 1);
-			    trafos.add(trafoAPersistir);
-			    trafoAPersistir.asignarZona(zonas);
-				cantTrafos++;
+		      	//Aca agrego un TRAFO al json de entrada y el mismo se persistira en la BD 		      	
+		      	trafoJSONEntrada = new Transformador(300, 34.5, 65.4, 2);
+			    trafos.add(trafoJSONEntrada);
+			    trafoJSONEntrada.asignarZona(zonas);//Esto es lo que persiste al trafo
 				
-		      	 
-		      	 
 		      	zonas.stream().forEach(zona -> zona_model.agregar(zona));
-
+		      	
+		      	//Esta es otra forma de checkear que correctamente haya cant+1 de trafos, haciéndolo desde la BD
+				//trafos=trafo_model.buscarTodasLasTransformador();
+				
 		     	Gson gson = new Gson();
 				json = gson.toJson(trafos);
 				//Con esto Previsualizo el resultado del JSON de Entradas
 				System.out.println(json);
 
-//////////////////////////////////////////   LOGICA PARA ESCRIBIR (APPEND) UN ARCHIVO BIEN ATR  ////////////////////////////////////////////////////////////////
+//////////////////////////////////////////   LOGICA PARA ESCRIBIR  UN ARCHIVO BIEN ATR  ////////////////////////////////////////////////////////////////
 		    // Saco esto SOLO UN TOQUE para probar el resto del codigo
 				try {
  	        	File file = new File("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\transformadores.json");
- 	        	FileWriter fr = new FileWriter(file, false);
+ 	        	FileWriter fr = new FileWriter(file, false);//False es sobreescritura, true es append
  	        	fr.write(json);
  	        	fr.close();
  	        	}catch (IOException e) {
@@ -130,8 +120,9 @@ public class CasoDePrueba4 {
 	        	}
 	        
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 	        	 
-		      	System.out.println("La cant de trafos es:" + cantTrafos); 
-		      	
+				System.out.println("Cantidad de trafos actuales: "+trafos.size());	
+				
+				
 		     }//Aca termina el try
 		     catch (Exception e) { e.printStackTrace(); } 
 		     

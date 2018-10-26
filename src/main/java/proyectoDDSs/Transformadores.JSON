@@ -1,1 +1,5 @@
-[{"id":11,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},{"id":12,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},{"id":13,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},{"id":100,"latitud":34.5,"longitud":65.4,"zona":1,"clientes":[]}]
+[{"id":11,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},
+{"id":12,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},
+{"id":13,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},
+{"id":100,"latitud":34.5,"longitud":65.4,"zona":1,"clientes":[]},
+{"id":300,"latitud":34.5,"longitud":65.4,"zona":2,"clientes":[]}]
