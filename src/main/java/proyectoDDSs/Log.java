@@ -24,6 +24,8 @@ public class Log {
 	@Column(name="Estado_Dispositivo")
 	public String nombreEstado;
 	
+	public Log() {}
+	
 	public Log (double unConsumo, Estado unEstado) {
 		consumo = unConsumo;
 		horaDeLaOperacion = LocalDateTime.now();

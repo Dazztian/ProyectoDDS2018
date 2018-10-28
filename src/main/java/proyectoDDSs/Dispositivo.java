@@ -10,16 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
-@Entity
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
+
+@Entity(name = "Dispositivo")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Tipo_Dispositivo")
+@DiscriminatorColumn(name="Tipo")
+@Table(name = "Dispositivos")
 public abstract class Dispositivo {
 	
 	@Id
 	@GeneratedValue
 	@Column(name="id",nullable=false)
-	private int id;
+	private Long id;
+	@NaturalId
 	@Column(name="Dispositivo")
 	public String nombre;
 	@Column(name="equipo_concreto")
@@ -66,7 +74,7 @@ public abstract class Dispositivo {
 		kwhConsumeXHora = unConsumo;
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 }

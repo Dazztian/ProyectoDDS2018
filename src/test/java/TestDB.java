@@ -13,27 +13,79 @@ public class TestDB {
 		EntityManager e = ModelHelperPersistencia.getEntityManager();
 		
 		ZonaGeograficaModel zona_model = new ZonaGeograficaModel();
+		DispositivoModel dispo_model1 = new DispositivoModel();
+		DispoXClienteModel dispo_model = new DispoXClienteModel();
+
+		DispositivoEstandar dispo1 = new DispositivoEstandar("Heladera","150 litros",300,24,200,400);
+					
+		DispositivoEstandar dispo2 = new DispositivoEstandar("TV","32'",50,5,30,60);
 		
-		DispositivoXCliente dc = new DispositivoXCliente();
+		Cliente lucasCopy = new ClienteModel().buscarCliente(new Long(1));
 		
+		System.out.println("Numero dispositivos: "+lucasCopy.dispositivos().size());
+		
+//		DispositivoEstandar dispoCopy3 = (DispositivoEstandar)dispo_model1.buscarDispositivo(new Long(1));
+//		
+//		dispoCopy3.setUsoDiario(10);
+//		
+//		lucasCopy.addDispositivo(dispoCopy3);
+//		
+		
+//		dispo_model.modificar(clienteCopy);
+		
+//		AdaptadoXCliente adaptadoCopy = (AdaptadoXCliente)dispo_model.buscarDispositivo(new Long(5));
+//		
+//		ModuloAdaptador modulo = adaptadoCopy.getDispositivo();
+//		
+//		EstandarXCliente estandar = adaptadoCopy.getDispoAdaptado();
+//		
+//		ArrayList<EstandarXCliente> lista = new ArrayList<>();
+//		
+//		lista.add(estandar);
+//		
+//		System.out.println("Id Modulo: "+modulo.getId());
+//		System.out.println("Id Estandar: "+estandar.getId());
+//		EstandarXCliente dispoCopy = (EstandarXCliente)dispo_model.buscarDispositivo(new Long(1));
+//				
+//		Cliente pepeCopy = new ClienteModel().buscarCliente(new Long(1));
+//		
+//		pepeCopy.adaptarDispositivo(dispoCopy);
+//		
+//		dispo_model.modificar(pepeCopy);
+		
+//		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
+//				new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
+//				1, -1.542, 7.1245, "pepe10", "pepe");
+//		
+//		DispositivoEstandar dispo_estandar=new DispositivoEstandar("lalaland", "peli", 5, 10, 3, 15);
+//		
+//		EstandarXCliente estandar_cliente = new EstandarXCliente(lucas, dispo_estandar);
+//		
+//		DispositivoEstandar dispo_estandar_copy = estandar_cliente.getDispositivo();
+//		
+//		System.out.println(dispo_estandar_copy.getId()+" "+dispo_estandar_copy.getUsoDiario());
+		
+//		Dispositivo d1 = new DispositivoEstandar("Heladera","150 litros",25,6,20,50);
+//		
+//		zona_model.agregar(d1);
+	
 //		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
 //				new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
 //				1, -1.542, 7.1245, "pepe10", "pepe");
 //		
 //		zona_model.agregar(lucas);
 		
-		DispositivoModel dispo_model = new DispositivoModel();
+//		DispositivoModel dispo_model = new DispositivoModel();
+//		
+//		Dispositivo dispo = dispo_model.buscarDispositivo(new Long(1));
+//		
+//		Cliente pepeCopy = new ClienteModel().buscarCliente(new Long(1));
+//		
+//		pepeCopy.addDispositivo(dispo);
+//		
+//		dispo_model.agregar(pepeCopy);
 		
-		Dispositivo d = dispo_model.buscarDispositivo(1);
-		
-		Cliente pepeCopy = new ClienteModel().buscarCliente(3);
-		
-		dc.setCliente(pepeCopy);
-		dc.setDispositivo(d);
-		dc.setSensor(new Sensor());
-		
-		dispo_model.agregar(dc);
-		
+//		
 		TransformadorModel trafo_model = new TransformadorModel();
 //		
 //		List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();

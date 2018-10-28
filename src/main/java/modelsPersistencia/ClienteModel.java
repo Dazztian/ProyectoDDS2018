@@ -12,7 +12,7 @@ public class ClienteModel extends ModelHelperPersistencia{
 		super();
 	}
 	
-	public Cliente buscarCliente(int id) {
+	public Cliente buscarCliente(Long id) {
 		return super.buscar(Cliente.class, new ImmutablePair<>("id", id));
 	}
 	

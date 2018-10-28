@@ -7,12 +7,13 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorValue("Estandar")
 public class DispositivoEstandar extends Dispositivo {
-	@Column(name="uso_diario")
-	int usoDiarioEnHoras;
+	@Transient
+	private int usoDiarioEnHoras;
 
 	public DispositivoEstandar() {}
 	
@@ -27,7 +28,7 @@ public class DispositivoEstandar extends Dispositivo {
 	}
 	
 	public ModuloAdaptador adaptar() {
-		return new ModuloAdaptador(nombre, kwhConsumeXHora, new Apagado(), this, this.consumoMinimo, this.consumoMaximo);
+		return new ModuloAdaptador("Adaptador "+nombre, this.equipo, kwhConsumeXHora, new Apagado(), this, this.consumoMinimo, this.consumoMaximo);
 	}
 	
 	public double consumoDiario() {
@@ -61,6 +62,14 @@ public class DispositivoEstandar extends Dispositivo {
 	
 	public double consumoPromedioEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
 		return kwhConsumeXHora;
+	}
+
+	public void setUsoDiario(int usoDiario) {
+		this.usoDiarioEnHoras=usoDiario;
+	}
+	
+	public int getUsoDiario() {
+		return this.usoDiarioEnHoras;
 	}
 	
 }

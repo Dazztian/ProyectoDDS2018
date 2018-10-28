@@ -20,7 +20,7 @@ public abstract class Usuario {
 	@Id
 	@GeneratedValue
 	@Column(name="id")
-	private int id;
+	private Long id;
 	
 	@Column(name="nombre_usuario")
 	private String usuario;
@@ -34,6 +34,10 @@ public abstract class Usuario {
 	public Usuario (String unUsuario, String unaContrasenia) {
 		usuario = unUsuario;
 		contrasenia = unaContrasenia;
+	}
+	
+	public Long getId() {
+		return this.id;
 	}
 	
 }

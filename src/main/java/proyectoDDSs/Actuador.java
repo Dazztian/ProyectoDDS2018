@@ -16,7 +16,7 @@ public class Actuador{
 	//@Column(name = "dispositivoSobreElQueActuo")
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="dispositivo_asignado")
-	protected DispositivoInteligente dispositivoSobreElQActuo;
+	protected InteligenteXCliente dispositivoSobreElQActuo;
 	
 	@Column(name ="accion")
 	protected String accion;
@@ -36,14 +36,14 @@ public class Actuador{
 	
 	public Actuador( String unaAccion) {accion = unaAccion;	}
 	
-	public Actuador(DispositivoInteligente unDispo, String unaAccion) 
+	public Actuador(InteligenteXCliente unDispo, String unaAccion) 
 	{
 		dispositivoSobreElQActuo = unDispo;
 		accion = unaAccion;		
 		//adaptadorDeMsjsSegunFabricante = null;
 	}
 	
-	public Actuador(DispositivoInteligente unDispo, String unaAccion, Traductor unTraductor) 
+	public Actuador(InteligenteXCliente unDispo, String unaAccion, Traductor unTraductor) 
 	{
 		dispositivoSobreElQActuo = unDispo;
 		accion = unaAccion;		

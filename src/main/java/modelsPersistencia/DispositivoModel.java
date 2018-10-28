@@ -11,7 +11,7 @@ import proyectoDDSs.Dispositivo;
 			super();
 		}
 		
-		public Dispositivo buscarDispositivo(int id) {
+		public Dispositivo buscarDispositivo(Long id) {
 			return super.buscar(Dispositivo.class, new ImmutablePair<>("id", id));
 		}
 		

@@ -8,20 +8,22 @@ import javax.persistence.Transient;
 
 import proyectoDDSs.DispositivoInteligente;
 
-
 @Entity
 @DiscriminatorValue("Adaptado")
 public class ModuloAdaptador extends DispositivoInteligente {
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="dispositivo_adaptado")
+	@Transient
 	public DispositivoEstandar dispositivoQueAdapta;
 
 	public ModuloAdaptador() {}
 	
-	public ModuloAdaptador(String unNombre, double electricidadQConsume, Estado unEstado, DispositivoEstandar unDispositivo, double unConsumoMinimo, double unConsumoMaximo) {
-		super(unNombre, electricidadQConsume, unEstado, unConsumoMinimo, unConsumoMaximo);
+	public ModuloAdaptador(String unNombre,String equipo, double electricidadQConsume, Estado unEstado,
+				DispositivoEstandar unDispositivo, double unConsumoMinimo, double unConsumoMaximo) {
+		super(unNombre, equipo, electricidadQConsume, unEstado, unConsumoMinimo, unConsumoMaximo);
 		dispositivoQueAdapta = unDispositivo;
+	}
+
+	public DispositivoEstandar getDispoQueAdapta() {
+		return this.dispositivoQueAdapta;
 	}
 
 }

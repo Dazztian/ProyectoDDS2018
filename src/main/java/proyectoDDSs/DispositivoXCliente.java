@@ -1,56 +1,67 @@
 package proyectoDDSs;
 
+import java.util.Objects;
+
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "Dispositivo_Cliente")
-@AssociationOverrides({
-		@AssociationOverride(name = "pk.cliente", 
-			joinColumns = @JoinColumn(name = "CLIENTE_ID")),
-		@AssociationOverride(name = "pk.dispositivo", 
-			joinColumns = @JoinColumn(name = "DISPOSITIVO_ID")) })
-public class DispositivoXCliente implements java.io.Serializable{
+@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="Dispositivo_Cliente")
+public abstract class DispositivoXCliente implements java.io.Serializable{
 	
-	private DispositivoXClienteId pk=new DispositivoXClienteId();
-	private Sensor sensor;
+	@Id
+	@GeneratedValue
+	private Long Id_DispoCliente;
 	
-	@EmbeddedId
-	public DispositivoXClienteId getPk() {
-		return this.pk;
-	}
-	
-	public void setPk(DispositivoXClienteId pk) {
-		this.pk=pk;
-	}
-	
-	@Transient
-	public Dispositivo getDispositivo() {
-		return getPk().getDispositivo();
-	}
-
-	public void setDispositivo(Dispositivo dispo) {
-		getPk().setDispositivo(dispo);
-	}
-
-	@Transient
-	public Cliente getCliente() {
-		return getPk().getCliente();
-	}
-
-	public void setCliente(Cliente cliente) {
-		getPk().setCliente(cliente);
-	}
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_cliente")
+    private Cliente cliente;
+ 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_dispositivo")
+    protected Dispositivo dispositivo;
+    
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="sensor_asignado")
+	private Sensor sensor;
+	
+    public DispositivoXCliente() {}
+    
+    public DispositivoXCliente(Cliente cliente) {
+        this.cliente=cliente;
+    }
+	
+    public void setDispositivo(Dispositivo dispo) {
+    	this.dispositivo=dispo;
+    }
+    
+    public abstract Dispositivo getDispositivo();
+    
+    public void setCliente(Cliente cliente) {
+    	this.cliente=cliente;
+    }
+    
+    public Cliente getCliente() {
+    	return this.cliente;
+    }
+    
 	public Sensor getSensor() {
 		return this.sensor;
 	}
@@ -59,8 +70,12 @@ public class DispositivoXCliente implements java.io.Serializable{
 		this.sensor=sensor;
 	}
 	
+	public Long getId() {
+		return this.Id_DispoCliente;
+	}
+	
 	public int hashCode() {
-		return (getPk() != null ? getPk().hashCode() : 0);
+		return Objects.hash(cliente,dispositivo);
 	}
 	
 }
