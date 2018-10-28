@@ -1,9 +1,11 @@
 package proyectoDDSs;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity(name="DispoEstandar_Cliente")
+@Entity
+@DiscriminatorValue("Dispositivo_Estandar")
 public class EstandarXCliente extends DispositivoXCliente{
 
 	@Column(name="Uso_Diario")

@@ -1,6 +1,7 @@
 package proyectoDDSs;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -8,7 +9,8 @@ import javax.persistence.OneToOne;
 
 import org.apache.commons.math3.distribution.GeometricDistribution;
 
-@Entity(name="DispoAdaptado_Cliente")
+@Entity
+@DiscriminatorValue("Modulo_Adaptador")
 public class AdaptadoXCliente extends InteligenteXCliente{
 	
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)

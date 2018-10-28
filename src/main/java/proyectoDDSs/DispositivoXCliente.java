@@ -22,7 +22,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="Tipo_Dispositivo")
 @Table(name="Dispositivo_Cliente")
 public abstract class DispositivoXCliente implements java.io.Serializable{
 	

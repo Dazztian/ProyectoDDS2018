@@ -20,10 +20,7 @@ public class TestDB {
 					
 		DispositivoEstandar dispo2 = new DispositivoEstandar("TV","32'",50,5,30,60);
 		
-		Cliente lucasCopy = new ClienteModel().buscarCliente(new Long(1));
-		
-		System.out.println("Numero dispositivos: "+lucasCopy.dispositivos().size());
-		
+			
 //		DispositivoEstandar dispoCopy3 = (DispositivoEstandar)dispo_model1.buscarDispositivo(new Long(1));
 //		
 //		dispoCopy3.setUsoDiario(10);
