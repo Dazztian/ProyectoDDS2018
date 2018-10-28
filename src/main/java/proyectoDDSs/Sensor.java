@@ -12,8 +12,8 @@ public class Sensor {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name= "valor")
-	private double valor; //aca se almacena lo que mide el sensor
+	@ElementCollection(fetch=FetchType.LAZY)
+	private List<Double> valor; //aca se almacena lo que mide el sensor
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="id_Sensor",nullable=false)
@@ -22,20 +22,20 @@ public class Sensor {
 	public Sensor() {
 		this.reglas=new ArrayList<>();
 	}
-	
-	public void setMedicion(double m) {
-		this.valor=m;
-	}
-	
-	public void medirMagnitud(double magnitud) {
-		valor=magnitud;
+
+	public void medirMagnitud(Double magnitud) {
+		valor.add(magnitud);
 	}
 	
 	public void notificarMedicion() {
 		for(Regla r:reglas) {
 	//Metodo en la regla para modificar valores
-			r.actualizarMedicion(valor);
+			r.actualizarMedicion(valor.get(valor.size()-1));
 		}
+	}
+	
+	public List<Double> getMediciones(){
+		return this.valor;
 	}
 	
 	public void agregarRegla(Regla r) {
