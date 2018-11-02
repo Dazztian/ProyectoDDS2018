@@ -41,3 +41,6 @@ https://stackoverflow.com/questions/31728446/write-a-json-file-in-java (Como esc
 https://www.thoughts-on-java.org/complete-guide-inheritance-strategies-jpa-hibernate/
 
 *Patrones de diseño, https://www.journaldev.com/1751/state-design-pattern-java
+*Ui Web
+http://sparkjava.com/
+http://ui-patterns.com/patterns
