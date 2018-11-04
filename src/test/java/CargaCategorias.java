@@ -22,9 +22,6 @@ public class CargaCategorias {
 		
 		}catch(IOException e) {
 			e.printStackTrace();
-		}
-		
-		
+		}				
 	}
-
 }

@@ -39,7 +39,7 @@ ESTO ES DE HIBERNATE
 2-Registrar la cantidad.
  
 3-Agregar una instancia de Transformador al JSON de entradas.
-4-Ejecutar el método de lectura y persistencia. 
+4-Ejecutar el mï¿½todo de lectura y persistencia. 
 5-Evaluar que la cantidad actual sea la anterior + 1.
 
  */
@@ -64,7 +64,8 @@ public class CasoDePrueba4 {
 			System.out.println("Cantidad de trafos actuales: "+trafos.size());
 			
 			//Si la zona ya Existe en la bd, comentar esto xq va a tirar error. AUN ASI el codigo seguiria funcionando
-			zonas.add(new ZonaGeografica(2, "zona1", 1.1, 2.2));
+			zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
+			zonas.add(new ZonaGeografica(2, "zona2", 45.3, 2.56));
 			
 			//Logica para agregar un Trafo al JSON de entradas
 		     try {
@@ -80,7 +81,7 @@ public class CasoDePrueba4 {
 			    Double longitud = (Double) transformador.get("longitud");
 			    Long zona = (Long) transformador.get("zona");
 			    
-			    //Muestro lo que leo solo para ver el contenido que será escrito
+			    //Muestro lo que leo solo para ver el contenido que serï¿½ escrito
 			    System.out.println("Trafo" +id);
 			    System.out.println("latitud: " +latitud);
 			    System.out.println("longitud:" +longitud);			    
@@ -91,7 +92,8 @@ public class CasoDePrueba4 {
 			    trafoJSONEntrada = new Transformador(id.intValue(), latitud, longitud,  zona.intValue());
 			    trafosJSON.add(trafoJSONEntrada);
 			    trafoJSONEntrada.asignarZona(zonas);//Esto es lo que persiste al trafo
-				*/							
+			    */
+											
 		 	  }
 		      	//Aca agrego un TRAFO al json de entrada y el mismo se persistira en la BD 		      	
 		      	trafoJSONEntrada = new Transformador(300, 34.5, 65.4, 2);
@@ -100,7 +102,7 @@ public class CasoDePrueba4 {
 				
 		      	zonas.stream().forEach(zona -> zona_model.agregar(zona));
 		      	
-		      	//Esta es otra forma de checkear que correctamente haya cant+1 de trafos, haciéndolo desde la BD
+		      	//Esta es otra forma de checkear que correctamente haya cant+1 de trafos, haciï¿½ndolo desde la BD
 				//trafos=trafo_model.buscarTodasLasTransformador();
 				
 		     	Gson gson = new Gson();
@@ -111,7 +113,7 @@ public class CasoDePrueba4 {
 //////////////////////////////////////////   LOGICA PARA ESCRIBIR  UN ARCHIVO BIEN ATR  ////////////////////////////////////////////////////////////////
 		    // Saco esto SOLO UN TOQUE para probar el resto del codigo
 				try {
- 	        	File file = new File("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\transformadores.json");
+ 	        	File file = new File("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\Transformadores.json");
  	        	FileWriter fr = new FileWriter(file, false);//False es sobreescritura, true es append
  	        	fr.write(json);
  	        	fr.close();

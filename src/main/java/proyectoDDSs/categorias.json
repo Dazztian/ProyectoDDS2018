@@ -2,46 +2,46 @@
 	{
 		"categoria" : "R1",
 		"cargoFijo" : 18.76,
-		"cargoVariable" : 0.644 
+		"cargoAdicional" : 0.644 
 	},
 	{
 		"categoria" : "R2",
 		"cargoFijo" : 35.32,
-		"cargoVariable" : 0.644 
+		"cargoAdicional" : 0.644 
 	},
 	{
 		"categoria" : "R3",
 		"cargoFijo" : 60.71,
-		"cargoVariable" : 0.681 
+		"cargoAdicional" : 0.681 
 	},	
 	{
 		"categoria" : "R4",
 		"cargoFijo" : 71.74,
-		"cargoVariable" : 0.738 
+		"cargoAdicional" : 0.738 
 	},	
 	{
 		"categoria" : "R5",
 		"cargoFijo" : 110.38,
-		"cargoVariable" : 0.794 
+		"cargoAdicional" : 0.794 
 	},	
 	{
 		"categoria" : "R6",
 		"cargoFijo" : 220.75,
-		"cargoVariable" : 0.832 
+		"cargoAdicional" : 0.832 
 	},	
 	{
 		"categoria" : "R7",
 		"cargoFijo" : 443.59,
-		"cargoVariable" : 0.851 
+		"cargoAdicional" : 0.851 
 	},	
 	{
 		"categoria" : "R8",
 		"cargoFijo" : 545.96,
-		"cargoVariable" : 0.851 
+		"cargoAdicional" : 0.851 
 	},	
 	{
 		"categoria" : "R9",
 		"cargoFijo" : 887.19,
-		"cargoVariable" : 0.851 
+		"cargoAdicional" : 0.851 
 	}
 ]
