@@ -1,4 +1,4 @@
-package proyectoDDSs;
+
 
 import java.util.*;
 
@@ -12,7 +12,8 @@ import modelsPersistencia.TransformadorModel;
 import modelsPersistencia.ZonaGeograficaModel;
 import proyectoDDSs.Actuador;
 import proyectoDDSs.Apagar;
-
+import proyectoDDSs.Transformador;
+import proyectoDDSs.ZonaGeografica;
 
 import static org.junit.Assert.assertEquals;
 
