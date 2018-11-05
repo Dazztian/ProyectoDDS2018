@@ -10,15 +10,15 @@ import com.google.gson.annotations.Expose;
 import json.*;
 
 @Entity
-@Table(name = "Categoria")
+@Table(name = "categoria")
 public class Categoria extends BeanToJson<Categoria>{
 	
 	@Id
 	@GeneratedValue
 	private int id;
 
-	@Column(name = "tipo")
-	@Expose protected String tipo;
+	@Column(name = "categoria")
+	@Expose protected String categoria;
 	
 	@Column(name = "cargoFijo")
 	@Expose protected double cargoFijo;
@@ -27,6 +27,10 @@ public class Categoria extends BeanToJson<Categoria>{
 	@Expose protected double cargoAdicional;
 		
 	//getters
+	public String getcategoria() {
+		return this.categoria;
+	}
+	
 	public double getCargoFijo() {
 		return cargoFijo;
 	}
@@ -40,11 +44,12 @@ public class Categoria extends BeanToJson<Categoria>{
 		
 	}
 	
-	public Categoria(String unTipo,double cargoFijo,double cargoAdicional) {
-		this.tipo=unTipo;
+	public Categoria(String uncategoria,double cargoFijo,double cargoAdicional) {
+		this.categoria=uncategoria;
 		this.cargoFijo=cargoFijo;
 		this.cargoAdicional=cargoAdicional;
 	}
+
 	@Override
 	public Categoria getObj() {
 		return this;

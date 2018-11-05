@@ -1,21 +1,3 @@
-[
-	{
-		"id" : 1,
-		"latitud": -34.618680,
-		"longitud": -58.415423,
-		"zona": 1
-	},
-	{
-		"id" : 2,
-		"latitud": -34.618680,
-		"longitud": -58.415423,
-		"zona": 1
-	},
-	{
-		"id" : 3,
-		"latitud": -34.618680,
-		"longitud": -58.415423,
-		"zona": 2
-	}
-
-]
+[{"id":11,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},
+{"id":12,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},
+{"id":13,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]}]

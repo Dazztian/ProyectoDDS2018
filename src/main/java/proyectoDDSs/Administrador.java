@@ -4,11 +4,12 @@ import java.time.*;
 import java.util.*;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Administradores")
+@DiscriminatorValue("A")
 public class Administrador extends Usuario {
 	
 	@Column(name="nombre")

@@ -7,23 +7,28 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-@Entity(name="Dispositivos_estandar")
+@Entity
+@DiscriminatorValue("Estandar")
 public class DispositivoEstandar extends Dispositivo {
-	@Column(table="Dispositivos_estandar",name="uso_diario")
-	int usoDiarioEnHoras;
+	@Transient
+	private int usoDiarioEnHoras;
 
-	public DispositivoEstandar(String unNombre, double electricidadQConsume, int unaCantidadDeHoras, double unConsumoMinimo, double unConsumoMaximo) {
-		super(unNombre ,electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
+	public DispositivoEstandar() {}
+	
+	public DispositivoEstandar(String unNombre,String equipo, double electricidadQConsume, int unaCantidadDeHoras, double unConsumoMinimo, double unConsumoMaximo) {
+		super(unNombre,equipo ,electricidadQConsume, unConsumoMinimo, unConsumoMaximo);
 		usoDiarioEnHoras = unaCantidadDeHoras;
+		this.inteligente=false;
 	}
 
 	public boolean esInteligente() {
-		return false;
+		return this.inteligente;
 	}
 	
 	public ModuloAdaptador adaptar() {
-		return new ModuloAdaptador(nombre, kwhConsumeXHora, new Apagado(), this, this.consumoMinimo, this.consumoMaximo);
+		return new ModuloAdaptador("Adaptador "+nombre, this.equipo, kwhConsumeXHora, new Apagado(), this, this.consumoMinimo, this.consumoMaximo);
 	}
 	
 	public double consumoDiario() {
@@ -57,6 +62,14 @@ public class DispositivoEstandar extends Dispositivo {
 	
 	public double consumoPromedioEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
 		return kwhConsumeXHora;
+	}
+
+	public void setUsoDiario(int usoDiario) {
+		this.usoDiarioEnHoras=usoDiario;
+	}
+	
+	public int getUsoDiario() {
+		return this.usoDiarioEnHoras;
 	}
 	
 }

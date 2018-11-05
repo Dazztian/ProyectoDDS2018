@@ -14,6 +14,7 @@ Gonzalo Delaguardia gonzalodelaguardia@hotmail.com 159672-0 (Profe Daniel)
 Herramientas colaborativas:
 
 https://drive.google.com/open?id=10PPqcSJqN0CJicFjxxpY76vfKmDPEJCC
+https://www.draw.io/#G1i0ewiJxFkl7xgROWA_q0xn-I2bZgThHb Diagrama entidad relacion
 https://www.lucidchart.com/documents/edit/3d57b928-3bb8-449d-a7df-e92a96564552/0
 https://trello.com/b/X8bjZaPh/tablero-scrum
 Diagrama De Clases: https://drive.google.com/file/d/1tXRYsvzXw7a3QvTcvjTNnpQAxuj-t3Nf/view?usp=sharing
@@ -28,11 +29,15 @@ https://ingenieriadesoftwareutmachala.wordpress.com/2017/01/20/requerimientos-fu
 https://stackoverflow.com/questions/8751553/how-to-write-a-unit-test HOW TO TEST IN JAVA
 https://stackoverflow.com/questions/8751553/how-to-write-a-unit-test HOW TO WRITE UNI TEST
 
+https://www.tutorialspoint.com/hibernate/hibernate_mapping_files.htm TEORÍA DE HIBERNATE
+
 *JSON, 
 https://www.w3schools.com (Tiene info de como laburar con js y json)
 http://jason.sourceforge.net/mini-tutorial/eclipse-plugin/ (Como instalarlo)
 https://crunchify.com/how-to-read-json-object-from-file-in-java/ (Como leer Json)
 https://stackoverflow.com/questions/31728446/write-a-json-file-in-java (Como escribir JSON)
 
+*Hibernate
+https://www.thoughts-on-java.org/complete-guide-inheritance-strategies-jpa-hibernate/
 
 *Patrones de diseño, https://www.journaldev.com/1751/state-design-pattern-java

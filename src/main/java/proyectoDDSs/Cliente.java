@@ -11,10 +11,14 @@ import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,10 +30,14 @@ import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import modelsPersistencia.CategoriaModel;
+import modelsPersistencia.ClienteModel;
+import modelsPersistencia.DispositivoModel;
 import simplex.facade.*;
 
 @Entity
-@Table(name="Clientes")
+@DiscriminatorValue("C")
 public class Cliente extends Usuario {
 		
 	@Column(name="nombre")
@@ -53,9 +61,11 @@ public class Cliente extends Usuario {
 	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_Cliente",nullable=false)
-	public List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="cliente",cascade=CascadeType.ALL,orphanRemoval=true)
+	private List<DispositivoXCliente> dispositivos_propios= new ArrayList<DispositivoXCliente>();
+	
+	@Transient
+	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	@Column(name="puntos")
 	public int puntos;
@@ -64,10 +74,9 @@ public class Cliente extends Usuario {
 	
 	
 	//Los clientes tienen una categoria
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="categoria")
 	protected Categoria categoria; 
-		
 	
 	public Cliente() {
 		
@@ -75,7 +84,7 @@ public class Cliente extends Usuario {
 	
 		//La clase GregorianCalendar permite instanciar una fecha pasandole como parametros (anio,mes,dia)	
 	public Cliente(String nombre,String apellido,String tipoDocumento,long documento,long telefono,String 
-			domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,Categoria unaCategoria, 
+			domicilio,ArrayList<Dispositivo> unosDispositivos,Calendar unaFecha,int numeroCategoria, 
 			double latitud, double longitud, String usuario, String contrasenia) {
 		super(usuario, contrasenia);
 		this.nombre=nombre;
@@ -86,7 +95,7 @@ public class Cliente extends Usuario {
 		this.domicilio=domicilio;
 		this.fechaAlta = unaFecha;
 		this.dispositivos=unosDispositivos;
-		this.categoria = unaCategoria;
+		this.categoria = new CategoriaModel().buscarCategoria(numeroCategoria);
 		this.latitud=latitud;
 		this.longitud=longitud;
 		
@@ -94,6 +103,9 @@ public class Cliente extends Usuario {
 		
 		
 	}	
+	public Categoria getCategoria() {
+		return this.categoria;
+	}
 	
 	
 	public void asignarTrafoMasCercano(List<Transformador> trafos) {
@@ -117,7 +129,7 @@ public class Cliente extends Usuario {
 			trafoMasCercano.addCliente(this);
 		
 		}
-	public List<Dispositivo> dispositivos() {return dispositivos;}
+	public List<DispositivoXCliente> dispositivos() {return this.dispositivos_propios;}
 	
 	public double estimativoFacturacion()
 	{ return
@@ -127,11 +139,23 @@ public class Cliente extends Usuario {
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
 	public void addDispositivo(Dispositivo dispo) 
 	{
-		dispositivos.add(dispo);
-		if(dispo.esInteligente()) 
-		{
-			puntos +=15;
-		}
+		DispositivoXCliente dispo_cliente; 
+		if(dispo.esInteligente()) {
+			dispo_cliente = new InteligenteXCliente(this,(DispositivoInteligente)dispo);
+			this.puntos +=15;
+		}else
+			dispo_cliente = new EstandarXCliente(this,(DispositivoEstandar)dispo);
+		
+		new ClienteModel().agregar(dispo_cliente);
+//		this.dispositivos_propios.add(dispo_cliente);
+		
+	}
+	
+	//Funcion para persistir todos los dispos del cliente a la DB
+	
+	public void persistirDispositivos() {
+		DispositivoModel dispo_model = new DispositivoModel();
+		this.dispositivos_propios.forEach(dispo -> dispo_model.agregar(dispo));
 	}
 	// --------------------------------------------------------------------------------VERSION ENTREGA1 DE AGREGAR DISPOSITIVO--------------------------------------------------------------------------------
 	
@@ -231,10 +255,14 @@ public class Cliente extends Usuario {
 				mapToDouble(dispositivo -> dispositivo.consumoMensual()).sum();
 	}
 	
-	public void adaptarDispositivo(DispositivoEstandar unDispositivo) {
-		ModuloAdaptador dispositivoAdaptado = unDispositivo.adaptar();
-		dispositivos.remove(unDispositivo);
-		dispositivos.add(dispositivoAdaptado);
+	public void adaptarDispositivo(EstandarXCliente dispo) {
+		DispositivoEstandar dispo_a_adaptar = dispo.getDispositivo();
+		
+		//Aca deberia hacerse una query que busque el adaptador para ese dispo_a_adaptar
+		ModuloAdaptador dispositivoAdaptado = (ModuloAdaptador)new DispositivoModel().buscarDispositivo(new Long(2));
+		
+		dispositivos_propios.remove(dispo);
+		dispositivos_propios.add(new AdaptadoXCliente(this, dispositivoAdaptado, dispo_a_adaptar));
 		puntos += 10;
 	}
 

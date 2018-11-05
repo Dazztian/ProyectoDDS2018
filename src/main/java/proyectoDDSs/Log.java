@@ -2,15 +2,34 @@ package proyectoDDSs;
 
 import java.time.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.swing.Spring;
 
+@Entity
+@Table(name="Consumos")
 public class Log {
-	public double consumo;
-	public LocalDateTime horaDeLaOperacion;
 	
-	public Log (double unConsumo) {
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column(name="Consumo")
+	public double consumo;
+	@Column(name="Fecha")
+	public LocalDateTime horaDeLaOperacion;
+	@Column(name="Estado_Dispositivo")
+	public String nombreEstado;
+	
+	public Log() {}
+	
+	public Log (double unConsumo, Estado unEstado) {
 		consumo = unConsumo;
 		horaDeLaOperacion = LocalDateTime.now();
+		nombreEstado = unEstado.nombreEstado();
 	}
 	
 	public double consumo() {
@@ -25,24 +44,20 @@ public class Log {
 		return horaDeLaOperacion.isBefore(fechaLimiteMaxima) && horaDeLaOperacion.isAfter(fechaLimiteMinima);
 	}
 	
-	public void mostrarLogPorConsola(double consumoDisp) {
-		System.out.format("En el momento %s el dispositivo estuvo %s", horaDeLaOperacion.toString(), this.conseguirEstado(consumoDisp));
+	public void mostrarLogPorConsola() {
+		System.out.format("En el momento %s el dispositivo estuvo %s \n", horaDeLaOperacion.toString(), this.conseguirEstado());
 	}
 	
-	public String conseguirEstado(double consumoDisp) {
-		if(consumoDisp == consumo) {
-			return "ENCENDIDO";
+	public boolean estabaEncendido() {
+		if(nombreEstado == "ENCENDIDO" || nombreEstado == "AHORRO DE ENERGIA") {
+			return true;
 		}else {
-			if(consumoDisp / 2 == consumo) {
-				return "AHORRO DE ENERGIA";
-			}else {
-				if(consumoDisp / 100 == consumo) {
-					return "APAGADO";
-				}else {
-					return "OTRO";
-				}
-			}
+			return false;
 		}
+	}
+	
+	public String conseguirEstado() {
+		return nombreEstado;
 		
 	}
 }

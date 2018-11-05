@@ -3,31 +3,41 @@ package proyectoDDSs;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
-@Entity(name="Dispositivos")
-@Inheritance(strategy=InheritanceType.JOINED)
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
+
+@Entity(name = "Dispositivo")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="Tipo")
+@Table(name = "Dispositivos")
 public abstract class Dispositivo {
 	
 	@Id
 	@GeneratedValue
 	@Column(name="id",nullable=false)
-	private int id;
-	@Column(name="nombre")
+	private Long id;
+	@NaturalId
+	@Column(name="Dispositivo")
 	public String nombre;
-	@Column(name="kw_hora")
-	protected double kwhConsumeXHora;
+	@Column(name="equipo_concreto")
+	public String equipo;
 	@Column(name="es_inteligente")
 	public Boolean inteligente;
 	@Column(name="es_bajoConsumo")
 	public Boolean bajoConsumo;
-	@Column(name="equipo")
-	public String equipo;
+	@Column(name="kw_hora")
+	protected double kwhConsumeXHora;
 	@Column(name="consumo_minimo")
 	public double consumoMinimo;
 	@Column(name="consumo_maximo")
@@ -37,8 +47,9 @@ public abstract class Dispositivo {
 	}
 	
 	
-	public Dispositivo(String unNombre, double electricidadQConsume, double unConsumoMinimo, double unConsumoMaximo)
+	public Dispositivo(String unNombre,String equipo ,double electricidadQConsume, double unConsumoMinimo, double unConsumoMaximo)
 	{
+		this.equipo=equipo;
 		nombre= unNombre;
 		kwhConsumeXHora = electricidadQConsume;
 		consumoMinimo = unConsumoMinimo;
@@ -61,5 +72,9 @@ public abstract class Dispositivo {
 	
 	public void cambiarConsumo(double unConsumo) {
 		kwhConsumeXHora = unConsumo;
+	}
+	
+	public Long getId() {
+		return this.id;
 	}
 }
