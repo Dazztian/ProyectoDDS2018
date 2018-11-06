@@ -16,6 +16,8 @@ public class Server {
 		
 		Spark.get("/login", Controller::showLogin, engine);
 		
+		Spark.get("/mapa", ControllerMapa::showMap,engine);
+		
 		Spark.init(); 
 		
 		DebugScreen.enableDebugScreen();
