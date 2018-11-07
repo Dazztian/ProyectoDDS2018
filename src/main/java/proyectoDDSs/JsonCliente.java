@@ -63,7 +63,7 @@ public class JsonCliente {
 	        	    for (Object d :dispositivos)
 	        	    {
 	        	    	 JSONObject dispo = (JSONObject) d;
-	        	    	 
+	        	    	 String dispoTipo = (String) dispo.get("tipo");
 	        	    	String nombreDispo = (String) dispo.get("nombreDispo");
 		        	    boolean estado = (boolean) dispo.get("estado");
 		        	    long kwhConsumeXHora = (long) dispo.get("kwhConsumeXHora");
@@ -72,7 +72,7 @@ public class JsonCliente {
 		        	    System.out.println(estado);
 		        	    System.out.println(kwhConsumeXHora);        	    
 		        	            	    
-		        	    listaDispositivos.add( new DispositivoEstandar(nombreDispo/*,estado*/,kwhConsumeXHora,1,1,1) );
+		        	    listaDispositivos.add( new DispositivoEstandar(nombreDispo, dispoTipo/*,estado*/,kwhConsumeXHora,1,1,1) );
 		        	    	        	    
 		        	}
 	        	    //Resuelvo la categoria asociada al cliente
