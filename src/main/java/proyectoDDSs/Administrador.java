@@ -1,5 +1,6 @@
 package proyectoDDSs;
 
+import java.io.Console;
 import java.time.*;
 import java.util.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Table;
 
+import modelsPersistencia.DispositivoModel;
 import modelsPersistencia.ModelHelperPersistencia;
 
 @Entity
@@ -49,30 +51,50 @@ public class Administrador extends Usuario {
 			return (long)Math.abs(duracion.toDays()/30);
 		}
 		
-		public double generarReportHogarXPeriodo(Cliente cliente, LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		//Abm dispositivos
+		public void altaDispositivo(Dispositivo unDispo) { 
+			DispositivoModel dispoMod = new DispositivoModel();
+			dispoMod.agregar(unDispo);
+			dispoMod.cerrarEntityManager();
+		}
+		
+		public void bajaDispositivo(Dispositivo unDispo) { 
+			DispositivoModel dispoMod = new DispositivoModel();
+			dispoMod.eliminar(unDispo);
+			dispoMod.cerrarEntityManager();
+		}
+		public void modificacionDispositivo(Dispositivo unDispo) { 
+			DispositivoModel dispoMod = new DispositivoModel();
+			dispoMod.modificar(unDispo);
+			dispoMod.cerrarEntityManager();
+		}
+		
+		//Reportes
+		public Object generarReportHogarXPeriodo(Cliente cliente, String fechaInicio, String fechaFinal) {
 
 			double resultado=0;
 			ModelHelperPersistencia mh = new ModelHelperPersistencia();
 			EntityManager em = mh.entityManager();
 			
-			List<Object[]> resultadoQuery = 
+			Object resultadoQuery = 			
 					em.createNativeQuery("select sum(consumo) suma " +
 									"from usuarios u " +
 										"join dispositivo_cliente dc on (u.id = dc.id_cliente) " +
 										"join consumos c on (c.id_dispositivo = dc.Id_DispoCliente) " +	
-									"where u.id = " + cliente.getId() + "And c.fecha between " + fechaInicial + " and " + fechaFinal + 
+									"where u.id = " + cliente.getId() + " and c.fecha between " + fechaInicio + " and " + fechaFinal + 
 									" group by u.id"
-									).getResultList();
+									).getSingleResult();
 			
-			for(Object[] resultadoSingular : resultadoQuery) {
-				resultado = (double) resultadoSingular[0];
-			}
-			return resultado;
+			System.out.println("Consumo total del hogar dado el periodo "+ resultadoQuery + " kw");
+			
+			return resultadoQuery;
+	
 		}
 		
-		public double generarReportePromedioXPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		public void generarReportePromedioXPeriodo(String fechaInicial, String fechaFinal) {
 			
 			double resultado=0;
+			String tipo;
 			ModelHelperPersistencia mh = new ModelHelperPersistencia();
 			EntityManager em = mh.entityManager();
 			
@@ -85,9 +107,11 @@ public class Administrador extends Usuario {
 							"    group by dc.Tipo_Dispositivo").getResultList();
 			
 			for(Object[] resultadoSingular : resultadoQuery) {
-				resultado = (double) resultadoSingular[0];
+				tipo = (String) resultadoSingular[0];
+				resultado = (double) resultadoSingular[1];
+				System.out.println("Promedio para " +tipo +" "+ resultado + " kw");
 			}
-			return resultado;
+			
 		}
 }
 				

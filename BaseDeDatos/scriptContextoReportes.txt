@@ -1,6 +1,9 @@
---script que genera pequeño contexto para probar los select de los reportes que requiere admin 
-insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido)  values ('C', 1, 'roberto','roberts');
-insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido)  values ('C', 2, 'roberto','robinson');
+﻿--script que genera pequeño contexto para probar los select de los reportes que requiere admin 
+insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido,latitud,longitud,numero_dni, puntos,telefono, tipo_dni)  
+values ('C', '1','roberto', 'roberts','unDomicilio', '40', '45', '451000', '0', '1221212121', 'unTipo');
+insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido,latitud,longitud,numero_dni, puntos,telefono, tipo_dni)  
+values ('C', '2','roberto', 'robinson', 'unDomicilio', '44', '45', '4510010', '0', '1221212121', 'unTipo');
+
 
 insert into dispositivos (Tipo, id) values ('Inteligente', 1);
 insert into dispositivos (Tipo, id) values ('Inteligente', 2);
@@ -33,7 +36,7 @@ insert into consumos(id,Consumo,Fecha, id_Dispositivo) values (4, 20, 2/1/2018 ,
 insert into consumos(id,Consumo,Fecha, id_Dispositivo) values (8, 20, 2/1/2018 ,3);
 insert into consumos(id,Consumo,Fecha, id_Dispositivo) values (9, 10, 2/1/2018 ,3);
 
---este select devuelve 75
+--este select devuelve 105
 select sum(consumo) TotalConsumido
 	from usuarios u  
 		join dispositivo_cliente dc on (u.id = dc.id_cliente) 
