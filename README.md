@@ -44,3 +44,8 @@ https://www.thoughts-on-java.org/complete-guide-inheritance-strategies-jpa-hiber
 *Ui Web
 http://sparkjava.com/
 http://ui-patterns.com/patterns
+
+*Para reiniciar de manera local tu repo
+git clean -fdx
+git fetch
+git reset --hard origin/master
