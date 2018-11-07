@@ -85,7 +85,7 @@ public class Administrador extends Usuario {
 									" group by u.id"
 									).getSingleResult();
 			
-			System.out.println("Consumo total del hogar dado el periodo "+ resultadoQuery + " kw");
+			System.out.println("Consumo total del hogar dado el periodo es de "+ resultadoQuery + " kw");
 			
 			return resultadoQuery;
 	
