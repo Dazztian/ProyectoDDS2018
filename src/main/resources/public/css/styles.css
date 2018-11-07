@@ -1,43 +1,18 @@
-h2 {
-    color: #0080FF;
-    text-align: center;
+html, body, #map {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
 }
-
-body {
-    font-family: sans-serif;
-    font-size: 1.2em;
-}
-
-input {
-  font-family: sans-serif;
-  font-size: 1em;
-}
-
-div {
-    width: 95%;
-    padding: 0.5em;
-}
-
-table {
-    width: 100%;
-}
-
-tr:nth-child(even) {background-color: #f2f2f2}
-
-th, td {
-    padding: 15px;
-    text-align: left;
-}
-
-th {
-    background-color: #2E9AFE;
-    color: white;
-}
-
-.centrada {
-    text-align: center;
-}
-
-#enRojo {
-   color:red;
+div#footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 18px;
+	margin: 0;
+	padding: 6px;
+	z-index: 2;
+	background: WHITE;
 }
