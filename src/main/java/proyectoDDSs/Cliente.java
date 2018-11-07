@@ -65,7 +65,7 @@ public class Cliente extends Usuario {
 	private List<DispositivoXCliente> dispositivos_propios= new ArrayList<DispositivoXCliente>();
 	
 	@Transient
-	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	public List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	@Column(name="puntos")
 	public int puntos;
@@ -130,6 +130,7 @@ public class Cliente extends Usuario {
 		
 		}
 	public List<DispositivoXCliente> dispositivos() {return this.dispositivos_propios;}
+	public List<Dispositivo> dispositivosTEST() {return dispositivos;}
 	
 	public double estimativoFacturacion()
 	{ return
@@ -149,6 +150,13 @@ public class Cliente extends Usuario {
 		new ClienteModel().agregar(dispo_cliente);
 //		this.dispositivos_propios.add(dispo_cliente);
 		
+	}
+	
+	public void addDispositivoTEST(Dispositivo dispo) {
+		if (dispo.esInteligente()) {
+			puntos +=15;
+		}
+		dispositivos.add(dispo);
 	}
 	
 	//Funcion para persistir todos los dispos del cliente a la DB
@@ -189,13 +197,13 @@ public class Cliente extends Usuario {
 			       	    	
 			       	    	if(dispoInteligente)
 			       	    	{			       	    		
-						       	DispositivoInteligente dispositivoEncontrado = new DispositivoInteligente(dispoNombreCompleto, dispoConsumo, new Encendido(), consumoMin, consumoMax);
+						       	DispositivoInteligente dispositivoEncontrado = new DispositivoInteligente(dispoNombre, dispoTipo, dispoConsumo, new Encendido(), consumoMin, consumoMax);
 						       	dispositivos.add(dispositivoEncontrado);
 						       	puntos +=15;
 			       	    	}
 			       	    	else
 			       	    	{
-			       	    		DispositivoEstandar dispositivoEncontrado = new DispositivoEstandar(dispoNombreCompleto, dispoConsumo , 10, consumoMin, consumoMax);
+			       	    		DispositivoEstandar dispositivoEncontrado = new DispositivoEstandar(dispoNombre, dispoTipo, dispoConsumo , 10, consumoMin, consumoMax);
 						       	dispositivos.add(dispositivoEncontrado);
 			       	    	}
 			       	    }
@@ -263,6 +271,13 @@ public class Cliente extends Usuario {
 		
 		dispositivos_propios.remove(dispo);
 		dispositivos_propios.add(new AdaptadoXCliente(this, dispositivoAdaptado, dispo_a_adaptar));
+		puntos += 10;
+	}
+	
+	public void adaptarDispositivoTEST (DispositivoEstandar dispo) {
+		ModuloAdaptador modulo = dispo.adaptar();
+		dispositivos.remove(dispo);
+		dispositivos.add(modulo);
 		puntos += 10;
 	}
 

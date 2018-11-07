@@ -21,6 +21,9 @@ public class Actuador{
 	@Column(name ="accion")
 	protected String accion;
 	
+	@Transient
+	public DispositivoInteligente dispoActuaTest;
+	
 	//@Column(name = "traductor")
 	@Transient
 	protected Traductor adaptadorDeMsjsSegunFabricante;
@@ -41,6 +44,12 @@ public class Actuador{
 		dispositivoSobreElQActuo = unDispo;
 		accion = unaAccion;		
 		//adaptadorDeMsjsSegunFabricante = null;
+	}
+	
+	public Actuador(DispositivoInteligente unDispo, String unaAccion, Traductor unTraductor) {
+		dispoActuaTest = unDispo;
+		accion = unaAccion;
+		adaptadorDeMsjsSegunFabricante = unTraductor;
 	}
 	
 	public Actuador(InteligenteXCliente unDispo, String unaAccion, Traductor unTraductor) 

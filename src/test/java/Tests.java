@@ -32,7 +32,7 @@ public class Tests {
 		try {
 			pepe=new Cliente("pepe","gonzales","dni",4012939,40239401,"Yrigoyen",
 					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
-							new Categoria("R1",18.56,0.86), -1.542, 7.1245, "pepe10", "pepe");
+							1, -1.542, 7.1245, "pepe10", "pepe");
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -40,7 +40,7 @@ public class Tests {
 		try {
 			rosa=new Cliente("rosa","Perez","dni",4012339,40239401,"Yrigoyen",
 					new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-02-01T12:00:00+01:00"),
-							new Categoria("R2",21.36,1.2),-5.653, 10.5020, "rosa20", "rosa");
+							1,-5.653, 10.5020, "rosa20", "rosa");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,13 +49,13 @@ public class Tests {
 		try {
 			pedro = new Cliente("Pedro", "Perez","DNI", 40740740, 011450450,
 				"casa",new ArrayList<Dispositivo>(),
-				ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), new Categoria("R1",18.56,0.86), 7.1235, -5.4820, "rosa20", "rosa");
+				ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), 1, 7.1235, -5.4820, "rosa20", "rosa");
 		} catch(ParseException e1) {
 			e1.printStackTrace();
 		}
 		try {
 			jose = new Cliente("Jose","Lopez","dni",10598212,1134913412,"25 de mayo",new ArrayList<Dispositivo>(),
-								ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),new Categoria("R1",18.56,0.86),
+								ISO8601.toCalendar("2010-01-01T12:00:00+01:00"), 1,
 								-34.704966, -58.412315, "rosa20", "rosa");
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -66,21 +66,21 @@ public class Tests {
 	ModelHelperPersistencia model = new ModelHelperPersistencia();
 	
 	//Dispositivos para el Simplex
-	DispositivoInteligente disp1 = new DispositivoInteligente("Dispo1", 0.06, new Encendido(), 120.0, 360.0);
-	DispositivoInteligente disp2 = new DispositivoInteligente("Dispo2", 0.875, new Encendido(), 6.0, 30.0);
-	DispositivoInteligente disp3 = new DispositivoInteligente("Dispo3", 0.18, new Encendido(), 90.0, 370.0);
-	DispositivoInteligente disp4 = new DispositivoInteligente("Dispo1", 4.5, new Encendido(), 120.0, 360.0);
-	DispositivoInteligente disp5 = new DispositivoInteligente("Dispo1", 400.0, new Encendido(), 120.0, 360.0);
-	DispositivoInteligente disp6 = new DispositivoInteligente("Dispo6", 50.0, new Encendido(), 6.0, 30.0);
-	DispositivoInteligente disp7 = new DispositivoInteligente("Dispo7", 50.0, new Encendido(), 6.0, 30.0);
+	DispositivoInteligente disp1 = new DispositivoInteligente("Dispo1", "Test", 0.06, new Encendido(), 120.0, 360.0);
+	DispositivoInteligente disp2 = new DispositivoInteligente("Dispo2", "Test", 0.875, new Encendido(), 6.0, 30.0);
+	DispositivoInteligente disp3 = new DispositivoInteligente("Dispo3", "Test", 0.18, new Encendido(), 90.0, 370.0);
+	DispositivoInteligente disp4 = new DispositivoInteligente("Dispo1", "Test", 4.5, new Encendido(), 120.0, 360.0);
+	DispositivoInteligente disp5 = new DispositivoInteligente("Dispo1", "Test", 400.0, new Encendido(), 120.0, 360.0);
+	DispositivoInteligente disp6 = new DispositivoInteligente("Dispo6", "Test", 50.0, new Encendido(), 6.0, 30.0);
+	DispositivoInteligente disp7 = new DispositivoInteligente("Dispo7", "Test", 50.0, new Encendido(), 6.0, 30.0);
 	
-	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera",50, new Encendido(), 0.0, 0.0);
-	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV",50, new Encendido(), 30.0, 360.0);
-	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire",100, new Encendido(), 30.0, 360.0);
-	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas",100, new Encendido(), 30.0, 360.0);
-	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", 50, 8, 30.0, 360.0);
-	private DispositivoEstandar dispositivo6 = new DispositivoEstandar("Heladera", 20, 8, 30.0, 360.0);
-	private DispositivoEstandar dispositivo7 = new DispositivoEstandar("TV", 10, 8, 30.0, 360.0);
+	private DispositivoInteligente dispositivo1 = new DispositivoInteligente("Heladera", "Test",50, new Encendido(), 0.0, 0.0);
+	private DispositivoInteligente dispositivo2 = new DispositivoInteligente("TV", "Test",50, new Encendido(), 30.0, 360.0);
+	private DispositivoInteligente dispositivo3 = new DispositivoInteligente("Aire", "Test",100, new Encendido(), 30.0, 360.0);
+	private DispositivoInteligente dispositivo4 = new DispositivoInteligente("Microondas", "Test",100, new Encendido(), 30.0, 360.0);
+	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", "Test", 50, 8, 30.0, 360.0);
+	private DispositivoEstandar dispositivo6 = new DispositivoEstandar("Heladera", "Test", 20, 8, 30.0, 360.0);
+	private DispositivoEstandar dispositivo7 = new DispositivoEstandar("TV", "Test", 10, 8, 30.0, 360.0);
 	private	Administrador juan = new Administrador("Juan","Lopez",123231,"Juancito","asd123");
 	Transformador trafo1 = new Transformador(2, -1.3414, -2.657, 1);
 	Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 1);
@@ -104,11 +104,11 @@ public class Tests {
 	public void adaptarUnDispositivo() {
 		//Cuando Rosa adapta su ventilador, este deberia salir de su lista de dispositivos y en su lugar estar el moduloAdaptador
 		//Tambien se deberian poder entender todos los metodos de un DI
-		rosa.addDispositivo(dispositivo5);
+		rosa.addDispositivoTEST(dispositivo5);
 		assertEquals(12000, rosa.consumoMensual(), 0);
-		rosa.adaptarDispositivo(dispositivo5);
-		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).prender());
-		rosa.dispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).guardarConsumo());
+		rosa.adaptarDispositivoTEST(dispositivo5);
+		rosa.dispositivosTEST().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).prender());
+		rosa.dispositivosTEST().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).guardarConsumo());
 		assertEquals(50, rosa.consumoMensual(), 0);
 		
 	}
@@ -121,10 +121,10 @@ public class Tests {
 			dispositivo2.guardarConsumo();
 			dispositivo3.guardarConsumo();
 			dispositivo4.guardarConsumo();
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
+			rosa.addDispositivoTEST(dispositivo1);
+			rosa.addDispositivoTEST(dispositivo2);
+			rosa.addDispositivoTEST(dispositivo3);
+			rosa.addDispositivoTEST(dispositivo4);
 			assertEquals(300, rosa.consumoMensual(), 0);		
 	}
 	
@@ -136,17 +136,17 @@ public class Tests {
 			dispositivo1.guardarConsumo();
 			dispositivo2.guardarConsumo();
 			dispositivo3.guardarConsumo();
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			assertEquals(261.36, rosa.estimativoFacturacion(), 0);	
+			rosa.addDispositivoTEST(dispositivo1);
+			rosa.addDispositivoTEST(dispositivo2);
+			rosa.addDispositivoTEST(dispositivo3);
+			assertEquals(190.56, rosa.estimativoFacturacion(), 0);	
 }
 		@Test
 	 	public void testCantDispositivos()	{
 		 //Le agrego los dispositivos y testeo la cantidad de dispositivos que tiene Rosa
-		 	rosa.addDispositivo(dispositivo1);
-		 	rosa.addDispositivo(dispositivo2);
-		 	rosa.addDispositivo(dispositivo3);
+		 	rosa.addDispositivoTEST(dispositivo1);
+		 	rosa.addDispositivoTEST(dispositivo2);
+		 	rosa.addDispositivoTEST(dispositivo3);
 		 	assertEquals(3,rosa.cantDispositivos());		 
 	 }
 	
@@ -155,10 +155,10 @@ public class Tests {
 		public void testCantDispositivosEncendidos(){
 		//Se agregan dispositivos a Rosa y se comprueba cuantos de ellos estan encendidos
 			dispositivo4.apagar();
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
+			rosa.addDispositivoTEST(dispositivo1);
+			rosa.addDispositivoTEST(dispositivo2);
+			rosa.addDispositivoTEST(dispositivo3);
+			rosa.addDispositivoTEST(dispositivo4);
 			assertEquals(3, rosa.cantDispositivosEncendidos());
 	}
 	
@@ -166,20 +166,20 @@ public class Tests {
 		public void testCantDispositivosApagados() {
 		//Se agregan dispositivos a Rosa y se comprueba cuantos de ellos estan apagados
 			dispositivo4.apagar();
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
+			rosa.addDispositivoTEST(dispositivo1);
+			rosa.addDispositivoTEST(dispositivo2);
+			rosa.addDispositivoTEST(dispositivo3);
+			rosa.addDispositivoTEST(dispositivo4);
 			assertEquals(1, rosa.cantDispositivosApagados());
 	}
 	
 	@Test
 		public void tieneRosaAlgunDispositivoEncendido() {
 		//Se agregan dispositivos a Rosa y se comprueba si alguno de ellos esta encendido
-			rosa.addDispositivo(dispositivo1);
-			rosa.addDispositivo(dispositivo2);
-			rosa.addDispositivo(dispositivo3);
-			rosa.addDispositivo(dispositivo4);
+			rosa.addDispositivoTEST(dispositivo1);
+			rosa.addDispositivoTEST(dispositivo2);
+			rosa.addDispositivoTEST(dispositivo3);
+			rosa.addDispositivoTEST(dispositivo4);
 			assert(rosa.algunDispositivoEncendido());
 		
 	}
@@ -291,9 +291,9 @@ public class Tests {
 	@Test //Test de Simplex, es posible obtener los usos maximos de los dispositivos
 	public void seTienenLosUsosMaximos()
 	{
-		pedro.addDispositivo(disp1);
-		pedro.addDispositivo(disp2);
-		pedro.addDispositivo(disp3);
+		pedro.addDispositivoTEST(disp1);
+		pedro.addDispositivoTEST(disp2);
+		pedro.addDispositivoTEST(disp3);
 		
 		PointValuePair consumosOptimos = pedro.consumoOptimo();
 		
@@ -305,9 +305,9 @@ public class Tests {
 	@Test //Test de Simplex, al aumentar el consumo, cambia las horas maximas recomendadas
 	public void seAlteraronLasHorasMaximas()
 	{
-		pedro.addDispositivo(disp4);
-		pedro.addDispositivo(disp2);
-		pedro.addDispositivo(disp3);
+		pedro.addDispositivoTEST(disp4);
+		pedro.addDispositivoTEST(disp2);
+		pedro.addDispositivoTEST(disp3);
 		
 		PointValuePair consumosOptimos = pedro.consumoOptimo();
 		
@@ -338,8 +338,8 @@ public class Tests {
 	@Test //Test de Simplex, al excederse de los consumos recomendados, el disp6 se apaga. Tambien se ignora al dispositivo que es una heladera.
 	public void seCambiaElEstadoSegunElConsumo()
 	{
-		pedro.addDispositivo(disp6);
-		pedro.addDispositivo(disp7);
+		pedro.addDispositivoTEST(disp6);
+		pedro.addDispositivoTEST(disp7);
 		pedro.agregarDispositivo("conFreezer");
 		
 		disp6.guardarConsumo();
@@ -444,14 +444,14 @@ public class Tests {
 		pedro.asignarTrafoMasCercano(trafos);
 		jose.asignarTrafoMasCercano(trafos);
 		
-		rosa.addDispositivo(new DispositivoEstandar("heladera", 30, 12, 100, 220));
-		rosa.addDispositivo(dispositivo1);
-		pepe.addDispositivo(new DispositivoEstandar("lavarropa", 100, 2, 100, 300));
-		pepe.addDispositivo(dispositivo2);
-		pedro.addDispositivo(new DispositivoEstandar("notebook", 20, 5, 50, 180));
-		jose.addDispositivo(new DispositivoEstandar("TV", 60.5, 10, 80, 240));
-		jose.addDispositivo(dispositivo4);
-		jose.addDispositivo(dispositivo5);
+		rosa.addDispositivoTEST(new DispositivoEstandar("heladera", "TEST", 30, 12, 100, 220));
+		rosa.addDispositivoTEST(dispositivo1);
+		pepe.addDispositivoTEST(new DispositivoEstandar("lavarropa", "TEST", 100, 2, 100, 300));
+		pepe.addDispositivoTEST(dispositivo2);
+		pedro.addDispositivoTEST(new DispositivoEstandar("notebook", "TEST", 20, 5, 50, 180));
+		jose.addDispositivoTEST(new DispositivoEstandar("TV", "TEST", 60.5, 10, 80, 240));
+		jose.addDispositivoTEST(dispositivo4);
+		jose.addDispositivoTEST(dispositivo5);
 		
 		dispositivo1.guardarConsumo();
 		dispositivo2.guardarConsumo();
