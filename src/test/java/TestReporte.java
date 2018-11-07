@@ -4,9 +4,9 @@ import proyectoDDSs.Administrador;
 import proyectoDDSs.Cliente;
 
 public class TestReporte {
-
+	// para poder correr esto primero hay que correr el scriptContextoReportes.txt desde mySql
 	public static void main(String[] args) {
-
+		
 		ClienteModel clienteHelper = new ClienteModel();
 		
 		Administrador admin = new Administrador("Alfredo","Alfredez",1,"usuario","ycontrasenia");
