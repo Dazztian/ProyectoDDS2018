@@ -14,6 +14,9 @@ public class Server {
 		
 		Spark.staticFileLocation("/public");
 		
+		Spark.get("/", ControllerHome::showHome, engine);
+		Spark.get("/home", ControllerHome::showHome, engine);
+		
 		Spark.get("/login", Controller::showLogin, engine);
 		
 		Spark.get("/mapa", ControllerMapa::showMap,engine);
