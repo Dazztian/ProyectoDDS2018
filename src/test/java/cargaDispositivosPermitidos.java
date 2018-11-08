@@ -31,7 +31,7 @@ public class cargaDispositivosPermitidos {
           	  {
 		       	    JSONObject unDispo = (JSONObject) o;
 		       	    
-		       	    	String dispoTipo = (String) unDispo.get("tipo");       	   
+		       	    	String dispoTipo = (String) unDispo.get("nombre");       	   
 		       	    	String dispoNombre = (String) unDispo.get("equipo");
 		       	    	Boolean dispoInteligente = (Boolean) unDispo.get("inteligente");
 				       	Boolean dispoBajo_Consumo = (Boolean) unDispo.get("bajo_consumo");
