@@ -1,0 +1,218 @@
+[
+{
+"equipo": "aire_acondicionado",
+"nombre" : "3500",
+"inteligente" : true,
+"bajo_consumo" : false,
+"kwhConsumeXHora" : 1.613,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "aire_acondicionado",
+"nombre" : "2200",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 1.013,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "televisor",
+"nombre" : "tubo_21",
+"inteligente" : false,
+"bajo_consumo" : false,
+"kwhConsumeXHora" : 0.075,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "televisor",
+"nombre" : "tubo_29a34",
+"inteligente" : false,
+"bajo_consumo" : false,
+"kwhConsumeXHora" : 0.175,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "televisor",
+"nombre" : "lcd_40",
+"inteligente" : false,
+"bajo_consumo" : false,
+"kwhConsumeXHora" : 0.18,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "televisor",
+"nombre" : "led_24",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.04,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "televisor",
+"nombre" : "led_32",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.055,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "televisor",
+"nombre" : "led_40",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.08,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "heladera",
+"nombre" : "conFreezer",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.09,
+"consumoMinimo" : 0.0,
+"consumoMaximo" : 0.0
+},
+{
+"equipo": "heladera",
+"nombre" : "sinFreezer",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.075,
+"consumoMinimo" : 0.0,
+"consumoMaximo" : 0.0
+},
+{
+"equipo": "lavarropas",
+"nombre" : "automatico_con_calentamiento_agua",
+"inteligente" : false,
+"bajo_consumo" : false,
+"kwhConsumeXHora" : 0.875,
+"consumoMinimo" : 6.0,
+"consumoMaximo" : 30.0
+},
+{
+"equipo": "lavarropas",
+"nombre" : "automatico",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.175,
+"consumoMinimo" : 6.0,
+"consumoMaximo" : 30.0
+},
+{
+"equipo": "lavarropas",
+"nombre" : "semi_automatico",
+"inteligente" : false,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.1275,
+"consumoMinimo" : 6.0,
+"consumoMaximo" : 30.0
+},
+{
+"equipo": "ventilador",
+"nombre" : "pie",
+"inteligente" : false,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.09,
+"consumoMinimo" : 120.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "ventilador",
+"nombre" : "techo",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.06,
+"consumoMinimo" : 120.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "lampara",
+"nombre" : "40w",
+"inteligente" : true,
+"bajo_consumo" : false,
+"kwhConsumeXHora" : 0.04,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "lampara",
+"nombre" : "60w",
+"inteligente" : true,
+"bajo_consumo" : false,
+"kwhConsumeXHora" : 0.06,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "lampara",
+"nombre" : "100w",
+"inteligente" : true,
+"bajo_consumo" : false,
+"kwhConsumeXHora" : 0.015,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "lampara",
+"nombre" : "11w",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.011,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "lampara",
+"nombre" : "15w",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.015,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "lampara",
+"nombre" : "20w",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.02,
+"consumoMinimo" : 90.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "pc",
+"nombre" : "escritorio",
+"inteligente" : true,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.4,
+"consumoMinimo" : 60.0,
+"consumoMaximo" : 360.0
+},
+{
+"equipo": "microondas",
+"nombre" : "convencional",
+"inteligente" : false,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.64,
+"consumoMinimo" : 3.0,
+"consumoMaximo" : 15.0
+},
+{
+"equipo": "plancha",
+"nombre" : "vapor",
+"inteligente" : false,
+"bajo_consumo" : true,
+"kwhConsumeXHora" : 0.75,
+"consumoMinimo" : 3.0,
+"consumoMaximo" : 30.0
+}
+]
