@@ -17,30 +17,31 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
+import json.BeanToJson;
+
 @Entity(name = "Dispositivo")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="Tipo")
 @Table(name = "Dispositivos")
-public abstract class Dispositivo {
+public abstract class Dispositivo extends BeanToJson<Dispositivo>{
 	
 	@Id
 	@GeneratedValue
 	@Column(name="id",nullable=false)
 	private Long id;
-	@NaturalId
-	@Column(name="Dispositivo")
+	@Column(name="nombre")
 	public String nombre;
-	@Column(name="equipo_concreto")
+	@Column(name="equipo")
 	public String equipo;
-	@Column(name="es_inteligente")
+	@Column(name="inteligente")
 	public Boolean inteligente;
-	@Column(name="es_bajoConsumo")
+	@Column(name="bajoConsumo")
 	public Boolean bajoConsumo;
-	@Column(name="kw_hora")
+	@Column(name="kwhConsumeXHora")
 	protected double kwhConsumeXHora;
-	@Column(name="consumo_minimo")
+	@Column(name="consumoMinimo")
 	public double consumoMinimo;
-	@Column(name="consumo_maximo")
+	@Column(name="consumoMaximo")
 	public double consumoMaximo;
 	
 	public Dispositivo() {
@@ -76,5 +77,84 @@ public abstract class Dispositivo {
 	
 	public Long getId() {
 		return this.id;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getEquipo() {
+		return equipo;
+	}
+
+
+	public void setEquipo(String equipo) {
+		this.equipo = equipo;
+	}
+
+
+	public Boolean getInteligente() {
+		return inteligente;
+	}
+
+
+	public void setInteligente(Boolean inteligente) {
+		this.inteligente = inteligente;
+	}
+
+
+	public Boolean getBajoConsumo() {
+		return bajoConsumo;
+	}
+
+
+	public void setBajoConsumo(Boolean bajoConsumo) {
+		this.bajoConsumo = bajoConsumo;
+	}
+
+
+	public double getKwhConsumeXHora() {
+		return kwhConsumeXHora;
+	}
+
+
+	public void setKwhConsumeXHora(double kwhConsumeXHora) {
+		this.kwhConsumeXHora = kwhConsumeXHora;
+	}
+
+
+	public double getConsumoMinimo() {
+		return consumoMinimo;
+	}
+
+
+	public void setConsumoMinimo(double consumoMinimo) {
+		this.consumoMinimo = consumoMinimo;
+	}
+
+
+	public double getConsumoMaximo() {
+		return consumoMaximo;
+	}
+
+
+	public void setConsumoMaximo(double consumoMaximo) {
+		this.consumoMaximo = consumoMaximo;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	@Override
+	public Dispositivo getObj() {
+		return this;
 	}
 }
