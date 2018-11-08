@@ -19,8 +19,24 @@ public class TestDB {
 		DispositivoEstandar dispo1 = new DispositivoEstandar("Heladera","150 litros",300,24,200,400);
 					
 		DispositivoEstandar dispo2 = new DispositivoEstandar("TV","32'",50,5,30,60);
+
+//		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
+//		new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
+//		1, -1.542, 7.1245, "pepe10", "pepe");
+//
+//		Administrador roberto= new Administrador("roberto","Lopez",2,"robertito","asd123");
+//		
+//		dispo_model.agregar(lucas);
+//		dispo_model.agregar(roberto);
+//		
+//		
 		
-			
+		Cliente admin=new ClienteModel().buscarCliente("robertito");
+		
+		if(admin==null) {
+			System.out.println("no se encontro al cliente robertito");
+		}
+		
 //		DispositivoEstandar dispoCopy3 = (DispositivoEstandar)dispo_model1.buscarDispositivo(new Long(1));
 //		
 //		dispoCopy3.setUsoDiario(10);

@@ -26,6 +26,9 @@ public class Administrador extends Usuario {
 	@Column(name="fecha_alta")
 	private LocalDateTime fechaCreacion;
 	
+	public Administrador() {
+		
+	}
 	
 	public Administrador(String unNombre, String unApellido, int unId, String usuario, String contrasenia) 
 	{

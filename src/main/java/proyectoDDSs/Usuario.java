@@ -23,9 +23,9 @@ public abstract class Usuario {
 	private Long id;
 	
 	@Column(name="nombre_usuario")
-	private String usuario;
+	protected String usuario;
 	@Column(name="contrasenia")
-	private String contrasenia;
+	protected String contrasenia;
 	
 	public Usuario() {
 		
@@ -38,6 +38,10 @@ public abstract class Usuario {
 	
 	public Long getId() {
 		return this.id;
+	}
+	
+	public String getPassword() {
+		return this.contrasenia;
 	}
 	
 }
