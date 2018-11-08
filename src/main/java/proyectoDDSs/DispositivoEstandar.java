@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 @Entity
 @DiscriminatorValue("Estandar")
 public class DispositivoEstandar extends Dispositivo {
-	@Transient
+	@Column(name="UsoDiarioEnHoras")
 	private int usoDiarioEnHoras;
 
 	public DispositivoEstandar() {}

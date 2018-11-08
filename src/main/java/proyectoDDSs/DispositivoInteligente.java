@@ -26,14 +26,18 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	@Transient
 	private Estado estado;
-	@Transient
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="sensor_asignado")
 	private Sensor sensor;
+	
 	@Transient
 	private Timer temporizador;
 	@Transient
 	private Double magnitud;
 	
-	@Transient
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
+	@JoinColumn(name="id_Dispositivo",nullable=false)
 	public List<Log> logDeConsumo = new LinkedList<Log>();
 	
 	@Transient

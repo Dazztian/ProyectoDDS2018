@@ -2,6 +2,7 @@ package proyectoDDSs;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -11,7 +12,8 @@ import proyectoDDSs.DispositivoInteligente;
 @Entity
 @DiscriminatorValue("Adaptado")
 public class ModuloAdaptador extends DispositivoInteligente {
-	@Transient
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="id_adaptado")
 	public DispositivoEstandar dispositivoQueAdapta;
 
 	public ModuloAdaptador() {}

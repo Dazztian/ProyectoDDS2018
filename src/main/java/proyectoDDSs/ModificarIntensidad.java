@@ -4,7 +4,7 @@ public class ModificarIntensidad extends Actuador {
 	
 	public ModificarIntensidad( String unaAccion){ super( unaAccion);}
 	
-	public ModificarIntensidad(InteligenteXCliente dispositivo1, String accion, Traductor probandoTraductor) {
+	public ModificarIntensidad(DispositivoInteligente dispositivo1, String accion, Traductor probandoTraductor) {
 		super(dispositivo1,accion,probandoTraductor);
 		}
 

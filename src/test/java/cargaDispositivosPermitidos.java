@@ -10,6 +10,7 @@ import modelsPersistencia.DispositivoModel;
 import proyectoDDSs.Dispositivo;
 import proyectoDDSs.DispositivoEstandar;
 import proyectoDDSs.DispositivoInteligente;
+import proyectoDDSs.DispositivoPermitido;
 import proyectoDDSs.Encendido;
 
 //Esto deberia ser la carga de dispositivos Permitidos
@@ -18,7 +19,7 @@ public class cargaDispositivosPermitidos {
 
 	public static void main(String[] args) {
 		
-		final List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+		final List<DispositivoPermitido> dispositivos = new ArrayList<DispositivoPermitido>();
 		DispositivoModel modelDispo = new DispositivoModel();
 		
 		JSONParser parser = new JSONParser();
@@ -38,21 +39,33 @@ public class cargaDispositivosPermitidos {
 				       	double dispoConsumo = (double) unDispo.get("kwhConsumeXHora");
 				       	double consumoMin = (double) unDispo.get("consumoMinimo");
 				       	double consumoMax = (double) unDispo.get("consumoMaximo");
-				       			       	    	
-		       	    	if(dispoInteligente)
-		       	    	{			       	    		
-					       	DispositivoInteligente dispositivoEncontrado = new DispositivoInteligente(dispoNombre, dispoTipo, dispoConsumo, new Encendido(), consumoMin, consumoMax);
-					       	dispositivos.add(dispositivoEncontrado);
-					       	modelDispo.agregar(dispositivoEncontrado);
-					       	//Aca estaba la logica que le agregaba ptos al cliente
-		       	    	}
-		       	    	else
-		       	    	{
-		       	    		DispositivoEstandar dispositivoEncontrado = new DispositivoEstandar(dispoNombre, dispoTipo, dispoConsumo , 10, consumoMin, consumoMax);
-					       	dispositivos.add(dispositivoEncontrado);
-					       	modelDispo.agregar(dispositivoEncontrado);
 
-		       	    	}
+				       	
+				       	DispositivoPermitido dispoEncontrado = new DispositivoPermitido();
+				       	dispoEncontrado.setNombre(dispoNombre);
+				       	dispoEncontrado.setEquipo(dispoTipo);
+				       	dispoEncontrado.setInteligente(dispoInteligente);
+				       	dispoEncontrado.setKwhConsumeXHora(dispoConsumo);
+				       	dispoEncontrado.setConsumoMinimo(consumoMin);
+				       	dispoEncontrado.setConsumoMaximo(consumoMax);
+				       	dispoEncontrado.setBajoConsumo(dispoBajo_Consumo);
+				       	
+				       	modelDispo.agregar(dispoEncontrado);
+				       	
+//		       	    	if(dispoInteligente)
+//		       	    	{			       	    		
+//					       	DispositivoInteligente dispositivoEncontrado = new DispositivoInteligente(dispoNombre, dispoTipo, dispoConsumo, new Encendido(), consumoMin, consumoMax);
+//					       	dispositivos.add(dispositivoEncontrado);
+//					       	modelDispo.agregar(dispositivoEncontrado);
+//					       	//Aca estaba la logica que le agregaba ptos al cliente
+//		       	    	}
+//		       	    	else
+//		       	    	{
+//		       	    		DispositivoEstandar dispositivoEncontrado = new DispositivoEstandar(dispoNombre, dispoTipo, dispoConsumo , 10, consumoMin, consumoMax);
+//					       	dispositivos.add(dispositivoEncontrado);
+//					       	modelDispo.agregar(dispositivoEncontrado);
+//
+//		       	    	}
 		       	    
 		      }
    	    }

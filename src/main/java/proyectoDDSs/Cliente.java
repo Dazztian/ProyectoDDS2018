@@ -62,10 +62,7 @@ public class Cliente extends Usuario {
 	private Calendar fechaAlta;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="cliente",cascade=CascadeType.ALL,orphanRemoval=true)
-	private List<DispositivoXCliente> dispositivos_propios= new ArrayList<DispositivoXCliente>();
-	
-	@Transient
-	public List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	@Column(name="puntos")
 	public int puntos;
@@ -129,7 +126,7 @@ public class Cliente extends Usuario {
 			trafoMasCercano.addCliente(this);
 		
 		}
-	public List<DispositivoXCliente> dispositivos() {return this.dispositivos_propios;}
+	
 	public List<Dispositivo> dispositivosTEST() {return dispositivos;}
 	
 	public double estimativoFacturacion()
@@ -140,15 +137,11 @@ public class Cliente extends Usuario {
 	//Agrego esta funcion para que el cliente pueda dar de alta algun dispositivo
 	public void addDispositivo(Dispositivo dispo) 
 	{
-		DispositivoXCliente dispo_cliente; 
-		if(dispo.esInteligente()) {
-			dispo_cliente = new InteligenteXCliente(this,(DispositivoInteligente)dispo);
-			this.puntos +=15;
-		}else
-			dispo_cliente = new EstandarXCliente(this,(DispositivoEstandar)dispo);
 		
-		new ClienteModel().agregar(dispo_cliente);
-//		this.dispositivos_propios.add(dispo_cliente);
+		if(dispo.esInteligente()) {
+			this.puntos +=15;
+		}
+		this.dispositivos.add(dispo);
 		
 	}
 	
@@ -159,12 +152,7 @@ public class Cliente extends Usuario {
 		dispositivos.add(dispo);
 	}
 	
-	//Funcion para persistir todos los dispos del cliente a la DB
 	
-	public void persistirDispositivos() {
-		DispositivoModel dispo_model = new DispositivoModel();
-		this.dispositivos_propios.forEach(dispo -> dispo_model.agregar(dispo));
-	}
 	// --------------------------------------------------------------------------------VERSION ENTREGA1 DE AGREGAR DISPOSITIVO--------------------------------------------------------------------------------
 	
 	//---------------------------------------------------------------------------------VERSION ENTREGA2 DE AGREGAR DISPOSITIVO----------------------------------------------------------------------------------
@@ -263,14 +251,12 @@ public class Cliente extends Usuario {
 				mapToDouble(dispositivo -> dispositivo.consumoMensual()).sum();
 	}
 	
-	public void adaptarDispositivo(EstandarXCliente dispo) {
-		DispositivoEstandar dispo_a_adaptar = dispo.getDispositivo();
-		
+	public void adaptarDispositivo(DispositivoEstandar dispo) {
 		//Aca deberia hacerse una query que busque el adaptador para ese dispo_a_adaptar
-		ModuloAdaptador dispositivoAdaptado = (ModuloAdaptador)new DispositivoModel().buscarDispositivo(new Long(2));
+		ModuloAdaptador dispositivoAdaptado = dispo.adaptar();
 		
-		dispositivos_propios.remove(dispo);
-		dispositivos_propios.add(new AdaptadoXCliente(this, dispositivoAdaptado, dispo_a_adaptar));
+		dispositivos.remove(dispo);
+		dispositivos.add(dispositivoAdaptado);
 		puntos += 10;
 	}
 	

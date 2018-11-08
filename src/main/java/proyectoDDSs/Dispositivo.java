@@ -1,14 +1,20 @@
+
 package proyectoDDSs;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
@@ -19,11 +25,11 @@ import org.hibernate.annotations.NaturalIdCache;
 
 import json.BeanToJson;
 
-@Entity(name = "Dispositivo")
+@Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="Tipo")
 @Table(name = "Dispositivos")
-public abstract class Dispositivo extends BeanToJson<Dispositivo>{
+public abstract class Dispositivo extends BeanToJson<Dispositivo> implements Serializable{
 	
 	@Id
 	@GeneratedValue
@@ -43,6 +49,14 @@ public abstract class Dispositivo extends BeanToJson<Dispositivo>{
 	public double consumoMinimo;
 	@Column(name="consumoMaximo")
 	public double consumoMaximo;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_cliente")
+    protected Cliente cliente;
+ 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_dispositivo")
+    protected DispositivoPermitido dispositivo_permitido;
 	
 	public Dispositivo() {
 	}
@@ -156,5 +170,17 @@ public abstract class Dispositivo extends BeanToJson<Dispositivo>{
 	@Override
 	public Dispositivo getObj() {
 		return this;
+	}
+	
+	public void setCliente(Cliente c) {
+		this.cliente=c;
+	}
+	
+	public void setDispositivo(DispositivoPermitido d) {
+		this.dispositivo_permitido=d;
+	}
+	
+	public int hashCode() {
+		return Objects.hash(cliente,dispositivo_permitido);
 	}
 }

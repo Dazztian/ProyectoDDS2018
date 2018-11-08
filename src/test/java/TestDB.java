@@ -9,13 +9,9 @@ import java.util.*;
 public class TestDB {
 
 	public static void main(String[] args) throws ParseException {
+				
+		EntityManager em = ModelHelperPersistencia.getEntityManager();
 		
-		EntityManager e = ModelHelperPersistencia.getEntityManager();
-		
-		ZonaGeograficaModel zona_model = new ZonaGeograficaModel();
-		DispositivoModel dispo_model1 = new DispositivoModel();
-		DispoXClienteModel dispo_model = new DispoXClienteModel();
-
 		DispositivoEstandar dispo1 = new DispositivoEstandar("Heladera","150 litros",300,24,200,400);
 					
 		DispositivoEstandar dispo2 = new DispositivoEstandar("TV","32'",50,5,30,60);
@@ -31,12 +27,12 @@ public class TestDB {
 //		
 //		
 		
-		Cliente admin=new ClienteModel().buscarCliente("robertito");
-		
-		if(admin==null) {
-			System.out.println("no se encontro al cliente robertito");
-		}
-		
+//		Cliente admin=new ClienteModel().buscarCliente("robertito");
+//		
+//		if(admin==null) {
+//			System.out.println("no se encontro al cliente robertito");
+//		}
+//		
 //		DispositivoEstandar dispoCopy3 = (DispositivoEstandar)dispo_model1.buscarDispositivo(new Long(1));
 //		
 //		dispoCopy3.setUsoDiario(10);
