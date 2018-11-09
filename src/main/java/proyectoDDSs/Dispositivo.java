@@ -51,11 +51,11 @@ public abstract class Dispositivo extends BeanToJson<Dispositivo> implements Ser
 	@Column(name="consumoMaximo")
 	public double consumoMaximo;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name="id_cliente")
     protected Cliente cliente;
  
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="id_dispositivo")
     protected DispositivoPermitido dispositivo_permitido;
 	

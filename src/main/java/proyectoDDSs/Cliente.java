@@ -61,7 +61,7 @@ public class Cliente extends Usuario {
 	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
 	
-	@OneToMany(mappedBy="cliente",orphanRemoval=true)
+	@OneToMany(mappedBy="cliente",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	@Column(name="puntos")

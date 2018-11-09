@@ -16,30 +16,39 @@ public class TestDB {
 		DispositivoModel dispo_model = new DispositivoModel();
 
 		
-		//Agregar Dispositivo nuevo a un cliente
-//		Cliente copy = cliente_model.buscarCliente(new Long(1));
-//		DispositivoPermitido dispo = permitido_model.buscarDispositivo(new Long(1));
+//		DispositivoInteligente dispo = (DispositivoInteligente) dispo_model.buscarDispositivo(new Long(3));
 //		
+//		dispo_model.eliminar(dispo);
+		
+		//Agregar Dispositivo nuevo a un cliente
+//		Cliente copy = cliente_model.buscarCliente(new Long(3));		
+//		DispositivoPermitido dispo = permitido_model.buscarDispositivo(new Long(2));
+//		
+//		dispo_model.eliminar(dispo);
+		
 //		DispositivoInteligente dispo_cliente = new DispositivoInteligente(dispo.getNombre(),dispo.getEquipo(),
 //				dispo.getKwhConsumeXHora(),new Apagado(),dispo.getConsumoMinimo(),dispo.getConsumoMaximo());
-//		
+
 //		dispo_cliente.setCliente(copy);
 //		dispo_cliente.setDispositivo(dispo);
+		
+//		DispositivoInteligente dispo_cliente = (DispositivoInteligente) dispo_model.buscarDispositivo(new Long(5));
 //		
-//		dispo_model.agregar(dispo_cliente);
-		
-		DispositivoInteligente dispoCopy = (DispositivoInteligente) dispo_model.buscarDispositivo(new Long(2));
-		
-		dispoCopy.cambiarEstado(new Encendido());
-		dispoCopy.guardarConsumo();
-		dispoCopy.cambiarEstado(new AhorroDeEnergia());
-		dispoCopy.guardarConsumo();
-		
-		dispo_model.agregar(dispoCopy);
+//		dispo_model.eliminar(dispo_cliente);
+//		
+//		DispositivoInteligente dispoCopy = (DispositivoInteligente) dispo_model.buscarDispositivo(new Long(8));
+//		
+//		dispoCopy.cambiarEstado(new Encendido());
+//		dispoCopy.guardarConsumo();
+//		dispoCopy.cambiarEstado(new AhorroDeEnergia());
+//		dispoCopy.guardarConsumo();
+//
+//		dispo_model.modificar(dispoCopy);
+//		dispo_model.agregar(dispoCopy);
 //		
 //		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
 //		new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
-//		1, -1.542, 7.1245, "Luquitas", "asd123");
+//		2, -1.542, 7.1245, "Luquitas", "asd123");
 //
 //		Cliente roberto=new Cliente("Roberto","Perez","dni",40190643,1139201381,"25 de Mayo",
 //		new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
