@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -50,11 +51,11 @@ public abstract class Dispositivo extends BeanToJson<Dispositivo> implements Ser
 	@Column(name="consumoMaximo")
 	public double consumoMaximo;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="id_cliente")
     protected Cliente cliente;
  
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="id_dispositivo")
     protected DispositivoPermitido dispositivo_permitido;
 	

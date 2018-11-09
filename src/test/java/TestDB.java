@@ -11,19 +11,46 @@ public class TestDB {
 	public static void main(String[] args) throws ParseException {
 				
 		EntityManager em = ModelHelperPersistencia.getEntityManager();
-		
-		DispositivoEstandar dispo1 = new DispositivoEstandar("Heladera","150 litros",300,24,200,400);
-					
-		DispositivoEstandar dispo2 = new DispositivoEstandar("TV","32'",50,5,30,60);
+		ClienteModel cliente_model = new ClienteModel();
+		DispoPermitidoModel permitido_model = new DispoPermitidoModel();
+		DispositivoModel dispo_model = new DispositivoModel();
 
+		
+		//Agregar Dispositivo nuevo a un cliente
+//		Cliente copy = cliente_model.buscarCliente(new Long(1));
+//		DispositivoPermitido dispo = permitido_model.buscarDispositivo(new Long(1));
+//		
+//		DispositivoInteligente dispo_cliente = new DispositivoInteligente(dispo.getNombre(),dispo.getEquipo(),
+//				dispo.getKwhConsumeXHora(),new Apagado(),dispo.getConsumoMinimo(),dispo.getConsumoMaximo());
+//		
+//		dispo_cliente.setCliente(copy);
+//		dispo_cliente.setDispositivo(dispo);
+//		
+//		dispo_model.agregar(dispo_cliente);
+		
+		DispositivoInteligente dispoCopy = (DispositivoInteligente) dispo_model.buscarDispositivo(new Long(2));
+		
+		dispoCopy.cambiarEstado(new Encendido());
+		dispoCopy.guardarConsumo();
+		dispoCopy.cambiarEstado(new AhorroDeEnergia());
+		dispoCopy.guardarConsumo();
+		
+		dispo_model.agregar(dispoCopy);
+//		
 //		Cliente lucas=new Cliente("Lucas","Resa","dni",40190642,1140256921,"Yrigoyen",
 //		new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
-//		1, -1.542, 7.1245, "pepe10", "pepe");
+//		1, -1.542, 7.1245, "Luquitas", "asd123");
 //
+//		Cliente roberto=new Cliente("Roberto","Perez","dni",40190643,1139201381,"25 de Mayo",
+//		new ArrayList<Dispositivo>(),ISO8601.toCalendar("2010-01-01T12:00:00+01:00"),
+//		2, -1.542, 7.1245, "Robertito", "RPerez");
+
+		
+		
 //		Administrador roberto= new Administrador("roberto","Lopez",2,"robertito","asd123");
 //		
-//		dispo_model.agregar(lucas);
-//		dispo_model.agregar(roberto);
+//		cliente_model.agregar(lucas);
+//		cliente_model.agregar(roberto);
 //		
 //		
 		

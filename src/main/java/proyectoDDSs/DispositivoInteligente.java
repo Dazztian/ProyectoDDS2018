@@ -97,8 +97,11 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	public void guardarConsumo() {
+		LinkedList<Log> logCopy = new LinkedList<>(); 
+		this.logDeConsumo.addAll(logCopy);
 		Log nuevoLog = new Log(this.consumoPorHora(), this.getEstadoActual());
-		((LinkedList<Log>) logDeConsumo).addFirst(nuevoLog);
+		logCopy.addFirst(nuevoLog);
+		logDeConsumo.add(logCopy.getFirst());
 	}
 	
 	public double consumoEnLasUltimasNHoras(int n) {

@@ -61,7 +61,7 @@ public class Cliente extends Usuario {
 	@Column(name="fecha_alta")
 	private Calendar fechaAlta;
 	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="cliente",cascade=CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(mappedBy="cliente",orphanRemoval=true)
 	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	@Column(name="puntos")
@@ -127,7 +127,7 @@ public class Cliente extends Usuario {
 		
 		}
 	
-	public List<Dispositivo> dispositivosTEST() {return dispositivos;}
+	public List<Dispositivo> getDispositivos() {return this.dispositivos;}
 	
 	public double estimativoFacturacion()
 	{ return
