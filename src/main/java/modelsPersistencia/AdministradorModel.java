@@ -23,12 +23,8 @@ public class AdministradorModel extends ModelHelperPersistencia{
 	}
 	
 	public Administrador buscarAdmin(String username) {
-		try {
-		Administrador admin=entityManager().createQuery("from Administrador a where nombre_usuario='"+username+"'",Administrador.class).getSingleResult();
+		Administrador admin=super.buscar(Administrador.class, new ImmutablePair<>("nombre_usuario", username));
 		return admin;
-		}catch(NoResultException e) {
-			return null;
-		}
 	}
 	
 }

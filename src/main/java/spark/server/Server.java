@@ -15,7 +15,12 @@ public class Server {
 	
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
+		
 		Spark.staticFileLocation("/public");
+		
+//		Spark.before("/", filter);
+//		
+		
 		
 		Spark.get("/", ControllerHome::showHome, engine);
 		Spark.get("/home", ControllerHome::showHome, engine);

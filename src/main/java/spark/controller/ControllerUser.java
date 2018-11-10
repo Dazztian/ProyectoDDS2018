@@ -5,7 +5,7 @@ import modelsPersistencia.ClienteModel;
 import proyectoDDSs.Cliente;
 import proyectoDDSs.Administrador;
 
-public class UserController {
+public class ControllerUser {
 
 	public static boolean autenticarCliente(String username, String password) {
 		

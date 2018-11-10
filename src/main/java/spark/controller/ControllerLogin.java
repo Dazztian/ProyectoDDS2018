@@ -22,17 +22,23 @@ public class ControllerLogin {
 		
 		Map<String, Object> viewModel = new HashMap<>();
 		
-		if(UserController.autenticarCliente(req.queryParams("username"), req.queryParams("password"))) {
+		if(ControllerUser.autenticarCliente(req.queryParams("username"), req.queryParams("password"))) {
+			
 			req.session().attribute("user", req.queryParams("username"));
-			viewModel.put("AutenticacionCliente", true);
-			return new ModelAndView(viewModel,"home.hbs");
-		}else if(UserController.autenticarAdministrador(req.queryParams("username"), req.queryParams("password"))) {
+			viewModel.put("UserAutentication", true);
+			return new ModelAndView(viewModel,"login.hbs");
+			
+		}else if(ControllerUser.autenticarAdministrador(req.queryParams("username"), req.queryParams("password"))) {
+			
 			req.session().attribute("admin", req.queryParams("username"));
-			viewModel.put("AutenticacionAdmin", true);
-			return new ModelAndView(null,"home.hbs");
+			viewModel.put("UserAutentication", true);
+			return new ModelAndView(null,"login.hbs");
+		
 		}else {
+			
 			viewModel.put("AutenticacionFallida", true);
 			return new ModelAndView(viewModel,"login.hbs");
+		
 		}
 		
 	}

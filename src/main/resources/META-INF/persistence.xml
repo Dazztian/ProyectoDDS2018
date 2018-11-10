@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
+    version="2.0"> 
+  
+    <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	
+    	
+    	
+   		<class>proyectoDDSs.Actuador</class>
+  		<class>proyectoDDSs.Categoria</class>  		
+   		<class>proyectoDDSs.Cliente</class>
+   		<class>proyectoDDSs.Administrador</class>
+   		<class>proyectoDDSs.Dispositivo</class>
+   		<class>proyectoDDSs.DispositivoInteligente</class>
+   		<class>proyectoDDSs.DispositivoEstandar</class>
+		<class>proyectoDDSs.DispositivoPermitido</class>
+   		<class>proyectoDDSs.Log</class>
+   		<class>proyectoDDSs.ModuloAdaptador</class>			
+   		<class>proyectoDDSs.Regla</class>   		
+   		<class>proyectoDDSs.Sensor</class>
+   		<class>proyectoDDSs.Traductor</class>
+   		<class>proyectoDDSs.Transformador</class>
+   		<class>proyectoDDSs.ZonaGeografica</class>
+    	
+    	
+    	 
+        <properties> 
+	    <property name="hibernate.archive.autodetection" value="class"/>        
+        
+         
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/entrega_persistencia?serverTimezone=UTC" /> 
+            <property name="hibernate.connection.username" value="root" />
+            <property name="hibernate.connection.password" value="dds2018" /> 
+
+<!-- 
+            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
+            <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db" /> 
+            <property name="hibernate.connection.username" value="sa" /> 
+            <property name="hibernate.connection.password" value="" /> 
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+ -->
+                            
+            <property name="hibernate.show_sql" value="true" /> 
+            <property name="hibernate.format_sql" value="true" /> 
+            <property name="use_sql_comments" value="true" /> 
+            <property name="hibernate.hbm2ddl.auto" value="update" /> 
+        </properties>
+          
+    </persistence-unit> 
+  
+</persistence>

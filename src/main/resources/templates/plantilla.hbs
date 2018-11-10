@@ -37,15 +37,25 @@
     </li>
     </ul>
     <!-- Links -->
-      	{{#if usuarioActual}}
+      	{{#if user}}
     		
           		<form method="post" action="/logout">
           		<button id="logout">Logout</button>
            		</form>
         	
     	{{else}}
+    		{{#if admin}}
+    		
+    	        <form method="post" action="/logout">
+          		<button id="logout">Logout</button>
+           		</form>
+   			
+   			{{else}}
+    		
     		<img src="img/imagenes/usuario.png" width="20" height="20"/>
         	<a class="nav-link font-weight-bold white-text pl-2" href="/login">Login</a>
+			
+			{{/if}}
 		{{/if}}
 	</div>
   <!-- Collapsible content -->
