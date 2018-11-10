@@ -49,14 +49,18 @@ public class ControllerLogin {
 	}
 	
 	public static ModelAndView manageLogout(Request req, Response res) {
+		Map<String, Object> viewModel = new HashMap<>();
 		
 		if(ControllerLogin.userIsLoggedIn(req, res)||ControllerLogin.adminIsLoggedIn(req, res)) {
 			req.session().removeAttribute("user");
         	req.session().removeAttribute("admin");
+        	viewModel.put("LogOut", true);
+        	return new ModelAndView(viewModel,"home.hbs");
 		}
-    	res.redirect("/home");
-    	return null;
-
+		
+		viewModel.put("InvalidLogOut", true);
+		return new ModelAndView(viewModel,"home.hbs");
+		
 	}
 	
 	public static boolean userIsLoggedIn(Request req, Response res) {

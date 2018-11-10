@@ -3,7 +3,10 @@
   <div class="card mx-5">
    <h5 class="card-header primary-color white-text text-center py-4"><strong>Sign in</strong></h5>
    <form class="text-center" method="post" action="/login" style="color: #757575;">
-    <div class="card-body pt-0 px-5">	
+    <div class="card-body pt-0 px-5">
+    {{#if AutenticacionFallida}}
+    	<h4 class="deep-orange darken-2 white-text mt-2">Nombre de usuario y/o contraseña incorrectos</h4>
+    {{/if}}  	
      <div class="md-form">
     	<h3 class="text-left">User Name</h3>
      	<input type="text" class="form-control" id="User1" name="username" placeholder="Usuario">
