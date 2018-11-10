@@ -1,4 +1,4 @@
-package spark.server;
+package spark.controller;
 
 import spark.*;
 
@@ -23,11 +23,11 @@ public class ControllerLogin {
 		Map<String, Object> viewModel = new HashMap<>();
 		
 		if(UserController.autenticarCliente(req.queryParams("username"), req.queryParams("password"))) {
-			req.session().attribute("usuarioActual", req.queryParams("username"));
+			req.session().attribute("user", req.queryParams("username"));
 			viewModel.put("AutenticacionCliente", true);
 			return new ModelAndView(viewModel,"home.hbs");
 		}else if(UserController.autenticarAdministrador(req.queryParams("username"), req.queryParams("password"))) {
-			req.session().attribute("usuarioActual", req.queryParams("username"));
+			req.session().attribute("admin", req.queryParams("username"));
 			viewModel.put("AutenticacionAdmin", true);
 			return new ModelAndView(null,"home.hbs");
 		}else {

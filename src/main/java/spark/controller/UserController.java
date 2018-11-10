@@ -1,4 +1,4 @@
-package spark.server;
+package spark.controller;
 
 import modelsPersistencia.AdministradorModel;
 import modelsPersistencia.ClienteModel;
