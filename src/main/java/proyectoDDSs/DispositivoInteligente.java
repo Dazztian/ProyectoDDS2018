@@ -157,4 +157,8 @@ public class DispositivoInteligente extends Dispositivo {
 		return this.logDeConsumo;
 	}
 	
+	public Sensor getSensor() {
+		return this.sensor;
+	}
+	
 }

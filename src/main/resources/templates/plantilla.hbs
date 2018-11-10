@@ -8,9 +8,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{punto}}/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="{{punto}}/css/mdb.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -36,24 +36,24 @@
         <a class="nav-link" href="/mapa">Mapa</a>
     </li>
     <li class="nav-item">
-    	<a class="nav-link" href="#">{{actualUser}}</a>
+    	<a class="nav-link" href="/user/home">{{actualUser}}</a>
     </li>
     <li class="nav-item">
-    	<a class="nav-link" href="#">{{actualAdmin}}</a>
+    	<a class="nav-link" href="/admin">{{actualAdmin}}</a>
     </li>
     </ul>
     <!-- Links -->
     	<form class="p-0 m-0" method="post" action="/logout">	
 	    	<button class="btn btn-outline-white btn-md my-2 mr-5">Logout</button>
      	</form>
-    		<img src="img/imagenes/usuario.png" width="20" height="20"/>
+    		<img src="{{punto}}/img/imagenes/usuario.png" width="20" height="20"/>
         	<a class="nav-link font-weight-bold white-text pl-2" href="/login">Login</a>
 	</div>
   <!-- Collapsible content -->
 
 </nav>
 <!--/.Navbar-->
-	<section class="container">
+	<section>
 		{{#block "contenido"}}
 		{{/block}}
 	</section>

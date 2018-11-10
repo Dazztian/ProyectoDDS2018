@@ -31,14 +31,14 @@ public class ControllerLogin {
 		if(ControllerUser.autenticarCliente(req.queryParams("username"), req.queryParams("password"))) {
 			
 			req.session().attribute("user", req.queryParams("username"));
-			viewModel.put("actualUser", req.session().attribute("user"));
-			return new ModelAndView(viewModel,"home.hbs");
+			res.redirect("/user/home");
+			return null;
 			
-		}else if(ControllerUser.autenticarAdministrador(req.queryParams("username"), req.queryParams("password"))) {
+		}else if(ControllerAdmin.autenticarAdministrador(req.queryParams("username"), req.queryParams("password"))) {
 			
 			req.session().attribute("admin", req.queryParams("username"));
-			viewModel.put("actualAdmin", req.session().attribute("admin"));
-			return new ModelAndView(viewModel,"home.hbs");
+			res.redirect("/admin/home");
+			return null;
 		
 		}else {
 			viewModel.put("AutenticacionFallida", true);
