@@ -35,10 +35,17 @@
     <li class="nav-item">
         <a class="nav-link" href="/mapa">Mapa</a>
     </li>
+    <li class="nav-item">
+    	<a class="nav-link" href="#">{{actualUser}}</a>
+    </li>
+    <li class="nav-item">
+    	<a class="nav-link" href="#">{{actualAdmin}}</a>
+    </li>
     </ul>
     <!-- Links -->
-	    	<a class="nav-link font-weight-bold white-text pr-5" href="/login">Logout</a>
-     
+    	<form class="p-0 m-0" method="post" action="/logout">	
+	    	<button class="btn btn-outline-white btn-md my-2 mr-5">Logout</button>
+     	</form>
     		<img src="img/imagenes/usuario.png" width="20" height="20"/>
         	<a class="nav-link font-weight-bold white-text pl-2" href="/login">Login</a>
 	</div>

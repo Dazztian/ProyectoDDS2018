@@ -1,5 +1,8 @@
 package spark.server;
 
+import javax.persistence.EntityManager;
+
+import modelsPersistencia.ModelHelperPersistencia;
 import spark.*;
 import spark.controller.ControllerHome;
 import spark.controller.ControllerLogin;
@@ -15,6 +18,7 @@ public class Server {
 	
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		
+		EntityManager em = ModelHelperPersistencia.getEntityManager();
 		
 		Spark.staticFileLocation("/public");
 		
@@ -28,7 +32,7 @@ public class Server {
 		
 		Spark.get("/login", ControllerLogin::showLogin, engine);	
 		Spark.post("/login", ControllerLogin::manageLogin, engine);
-		Spark.post("logout", ControllerLogin::manageLogout, engine);
+		Spark.post("/logout", ControllerLogin::manageLogout, engine);
 		
 		Spark.init(); 
 		
