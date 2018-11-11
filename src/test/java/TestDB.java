@@ -37,11 +37,6 @@ public class TestDB {
 		dispoNuevo2.setCliente(copy2);
 		dispoNuevo2.setDispositivo(dispo);
 //		dispo_model.agregar(dispoNuevo2);
-
-		dispo_model.eliminar(dispo_model.buscarDispositivo(new Long(1)));
-		dispo_model.eliminar(dispo_model.buscarDispositivo(new Long(2)));
-		dispo_model.eliminar(dispo_model.buscarDispositivo(new Long(3)));
-		dispo_model.eliminar(dispo_model.buscarDispositivo(new Long(4)));
 		
 //		dispo_model.eliminar(dispo);
 		

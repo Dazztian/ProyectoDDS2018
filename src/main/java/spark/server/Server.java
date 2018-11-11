@@ -53,6 +53,8 @@ public class Server {
 		
 		Spark.get("/admin/home", ControllerAdmin::showAdminHome, engine);
 		Spark.get("/admin/hogares", ControllerAdmin::showHogares, engine);
+		Spark.get("/admin/tabladispositivos", ControllerAdmin::showTablaDispositivos, engine);
+		Spark.post("/admin/tabladispositivos", ControllerAdmin::cambioEnLaTabla, engine);
 		
 		
 		Spark.get("/login", ControllerLogin::showLogin, engine);	

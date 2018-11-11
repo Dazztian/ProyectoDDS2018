@@ -1,0 +1,73 @@
+<title>Dispositivos Permitidos</title>
+{{#partial "contenido"}}
+
+<!-- Editable table -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Tabla de Dispositivos</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 ml-auto"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x"
+            aria-hidden="true"></i></a></span>
+      <div>
+		<a href="/admin/home"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
+	  </div>
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <tr>
+          <th class="text-center">Id</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Equipo</th>
+          <th class="text-center">Inteligente</th>
+          <th class="text-center">Bajo Consumo</th>
+          <th class="text-center">Consumo por Hora (kw)</th>
+          <th class="text-center">Consumo Minimo</th>
+          <th class="text-center">Consumo Maximo</th>
+          <th class="text-center">Remover</th>
+          <th class="text-center">Modificar</th>
+        </tr>
+        {{#each dispositivos}}
+        <form method="post" action=/admin/tabladispositivos>
+        <tr>
+          <td class="pt-3-half" contenteditable="false">{{id}}</td>
+          <input type="hidden" id="productPrice" name="id" value={{id}}>
+          
+          <td class="pt-3-half" contenteditable="false">{{nombre}}</td>
+          <input type="hidden" id="productPrice" name="nombre" value={{nombre}}>
+          
+          <td class="pt-3-half" contenteditable="false">{{equipo}}</td>
+          <input type="hidden" id="productPrice" name="equipo" value={{equipo}}>
+          
+          <td class="pt-3-half" contenteditable="false">{{inteligente}}</td>
+          <input type="hidden" id="productPrice" name="inteligente" value={{inteligente}}>
+          
+          <td class="pt-3-half" contenteditable="false">{{bajoConsumo}}</td>
+          <input type="hidden" id="productPrice" name="bajoConsumo" value={{bajoConsumo}}>
+          
+          <td class="pt-3-half" contenteditable="true">
+          <input type="text" class="form-control text-center" id="productPrice" name="consumo" placeholder={{kwhConsumeXHora}}>
+		  </td>
+          
+          <td class="pt-3-half" contenteditable="true">
+		  <input type="text" class="form-control text-center" id="productPrice" name="consumoMinimo" placeholder={{consumoMinimo}}>
+          </td>
+     
+          <td class="pt-3-half" contenteditable="true">
+          <input type="text" class="form-control text-center" id="productPrice" name="consumoMaximo" placeholder={{consumoMaximo}}>
+          </td>
+         
+          <td>
+            <span class="table-remove"><button type="submit" class="btn btn-danger btn-rounded btn-sm my-0" name='accion' value='borrar'>Remove</button></span>
+          </td>
+          <td>
+            <span class="table-remove"><button type="submit" class="btn btn-danger btn-rounded btn-sm my-0" name='accion' value='modificar'>Modificar</button></span>
+          </td>
+         </form>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->
+
+{{/partial}}
+{{>plantilla.hbs}}
