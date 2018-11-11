@@ -21,8 +21,6 @@ public class Administrador extends Usuario {
 	private String nombre;
 	@Column(name="apellido")
 	private String apellido;
-	@Column(name="id_admin")
-	private int id_admin;
 	@Column(name="fecha_alta")
 	private LocalDateTime fechaCreacion;
 	
@@ -30,12 +28,12 @@ public class Administrador extends Usuario {
 		
 	}
 	
-	public Administrador(String unNombre, String unApellido, int unId, String usuario, String contrasenia) 
+	public Administrador(String unNombre, String unApellido, String usuario, String contrasenia) 
 	{
 		super(usuario, contrasenia);
 		nombre = unNombre;
 		apellido=unApellido;
-		id_admin=unId;
+
 		fechaCreacion=LocalDateTime.now();
 		
 	}
@@ -83,7 +81,7 @@ public class Administrador extends Usuario {
 					em.createNativeQuery("select sum(consumo) suma " +
 									"from usuarios u " +
 										"join dispositivo_cliente dc on (u.id = dc.id_cliente) " +
-										"join consumos c on (c.id_dispositivo = dc.Id_DispoCliente) " +	
+										"join consumos c on (c.id_dispositivo = dc.id_dispositivo) " +	
 									"where u.id = " + cliente.getId() + " and c.fecha between " + fechaInicio + " and " + fechaFinal + 
 									" group by u.id"
 									).getSingleResult();
@@ -102,12 +100,12 @@ public class Administrador extends Usuario {
 			EntityManager em = mh.entityManager();
 			
 			List<Object[]> resultadoQuery = 
-					em.createNativeQuery("select dc.Tipo_Dispositivo, avg(consumo) PromedioDeConsumo\r\n" + 
+					em.createNativeQuery("select dc.tipo, avg(consumo) PromedioDeConsumo\r\n" + 
 							"	from dispositivo_cliente dc \r\n" + 
-							"		join consumos c on (dc.Id_DispoCliente = c.id_dispositivo)\r\n" + 
+							"		join consumos c on (dc.id_dispositivo = c.id_dispositivo)\r\n" + 
 							"    where c.fecha between " + fechaInicial + 
 							" and " + fechaFinal + 
-							"    group by dc.Tipo_Dispositivo").getResultList();
+							"    group by dc.tipo").getResultList();
 			
 			for(Object[] resultadoSingular : resultadoQuery) {
 				tipo = (String) resultadoSingular[0];

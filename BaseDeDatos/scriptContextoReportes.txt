@@ -1,40 +1,45 @@
 ﻿--script que genera pequeño contexto para probar los select de los reportes que requiere admin 
-insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido,latitud,longitud,numero_dni, puntos,telefono, tipo_dni)  
-values ('C', '1','roberto', 'roberts','unDomicilio', '40', '45', '451000', '0', '1221212121', 'unTipo');
-insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido,latitud,longitud,numero_dni, puntos,telefono, tipo_dni)  
-values ('C', '2','roberto', 'robinson', 'unDomicilio', '44', '45', '4510010', '0', '1221212121', 'unTipo');
+insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido, domicilio, latitud,longitud,numero_dni, puntos,telefono, tipo_dni, nombre, contrasenia)  
+values ('C', '1','roberto', 'roberts','unDomicilio', '40', '45', '451000', '0', '1221212121', 'unTipo','robeer','unapass');
+insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido, domicilio, latitud,longitud,numero_dni, puntos,telefono, tipo_dni, nombre, contrasenia)  
+values ('C', '2','roberto', 'robinson', 'unDomicilio', '44', '45', '4510010', '0', '1221212121', 'unTipo','robertito','unapass');
+insert into usuarios(Tipo_Usuario, id, nombre_usuario, apellido, domicilio, latitud,longitud,numero_dni, puntos,telefono, tipo_dni,fecha_alta,nombre,contrasenia)  
+values ('A', '3','Carlos', 'Carleto', 'unDomicilio', '44', '45', '4510010', '0', '1221212121', 'unTipo', 1/1/2004,'carlooos','unapass');
 
 
-insert into dispositivos (Tipo, id) values ('Inteligente', 1);
-insert into dispositivos (Tipo, id) values ('Inteligente', 2);
-insert into dispositivos (Tipo, id) values ('Estandar', 3);
 
-insert into dispositivo_cliente(Tipo_Dispositivo,Id_DispoCliente,id_cliente, id_dispositivo) 
-	values ('Dispositivo_Inteligente', 1, 1,1); 
+insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+	values ('Inteligente', 1, 1,1); 
     
-insert into dispositivo_cliente(Tipo_Dispositivo,Id_DispoCliente,id_cliente, id_dispositivo) 
-	values ('Dispositivo_Inteligente', 2, 1,2); 
+insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+	values ('Inteligente', 2, 1,2); 
     
-insert into dispositivo_cliente(Tipo_Dispositivo,Id_DispoCliente,id_cliente, id_dispositivo) 
-	values ('Dispositivo_Estandar', 3, 1,3); 
-    
-insert into dispositivo_cliente(Tipo_Dispositivo,Id_DispoCliente,id_cliente, id_dispositivo) 
-	values ('Dispositivo_Inteligente', 4, 2,1); 
-    
-insert into dispositivo_cliente(Tipo_Dispositivo,Id_DispoCliente,id_cliente, id_dispositivo) 
-	values ('Dispositivo_Inteligente', 5, 2,2); 
+insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+	values ('Estandar', 3, 1,3); 
 	
-insert into consumos(id,Consumo,Fecha, id_Dispositivo) values (1, 20, 2/1/2018 , 1); 
-insert into consumos(id,Consumo,Fecha, id_Dispositivo) values (2, 20, 2/1/2018 ,1);
-insert into consumos(id,Consumo,Fecha, id_Dispositivo)values (3, 20, 3/1/2018 ,2);
-insert into consumos(id,Consumo,Fecha, id_Dispositivo)values (5, 20, 20/1/2018 ,2);
-insert into consumos(id,Consumo,Fecha, id_Dispositivo)values (6, 15, 3/1/2018 ,2);
-insert into consumos(id,Consumo,Fecha, id_Dispositivo)values (7, 30, 20/1/2018 ,2);
+insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+	values ('Estandar', 4, 1,4); 
+    
+insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+	values ('Inteligente', 5, 2,1); 
+    
+insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+	values ('Inteligente', 6, 2,2); 
+	
+insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+	values ('Estandar', 3, 2,3); 
+	
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo) values (1, 20, 2/1/2018 , 1,'ENCENDIDO'); 
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo) values (2, 20, 2/1/2018 ,1,'ENCENDIDO');
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo)values (3, 20, 3/1/2018 ,2,'ENCENDIDO');
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo)values (5, 20, 20/1/2018 ,2,'ENCENDIDO');
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo)values (6, 15, 3/1/2018 ,2,'ENCENDIDO');
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo)values (7, 30, 20/1/2018 ,2,'ENCENDIDO');
 
-insert into consumos(id,Consumo,Fecha, id_Dispositivo) values (4, 20, 2/1/2018 ,5);
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo) values (4, 20, 2/1/2018 ,5,'ENCENDIDO');
 
-insert into consumos(id,Consumo,Fecha, id_Dispositivo) values (8, 20, 2/1/2018 ,3);
-insert into consumos(id,Consumo,Fecha, id_Dispositivo) values (9, 10, 2/1/2018 ,3);
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo) values (8, 20, 2/1/2018 ,3,'ENCENDIDO');
+insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo) values (9, 10, 2/1/2018 ,3,'ENCENDIDO');
 
 --este select devuelve 105
 select sum(consumo) TotalConsumido
@@ -44,7 +49,7 @@ select sum(consumo) TotalConsumido
 	where u.id = 1 And c.fecha between 1/1/2018 and 4/1/2018
 	group by u.id
 	
---este devuelve 19 para los inteligentes y 15 para los estandar
+--este devuelve 15 para los inteligentes y 18,75  para los estandar
 select dc.Tipo_Dispositivo, avg(consumo) PromedioDeConsumo
 	from dispositivo_cliente dc 
 		join consumos c on (dc.Id_DispoCliente = c.id_dispositivo)

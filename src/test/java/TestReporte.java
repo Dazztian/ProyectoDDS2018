@@ -9,7 +9,7 @@ public class TestReporte {
 		
 		ClienteModel clienteHelper = new ClienteModel();
 		
-		Administrador admin = new Administrador("Alfredo","Alfredez",1,"usuario","ycontrasenia");
+		Administrador admin = new Administrador("Alfredo","Alfredez","usuario","ycontrasenia");
 		
 		Cliente roberto = clienteHelper.buscarCliente(new Long (1));
 	

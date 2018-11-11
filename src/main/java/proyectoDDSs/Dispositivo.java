@@ -29,7 +29,7 @@ import json.BeanToJson;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="Tipo")
-@Table(name = "Dispositivos")
+@Table(name = "dispositivo_cliente")
 public abstract class Dispositivo extends BeanToJson<Dispositivo> implements Serializable{
 	
 	@Id
