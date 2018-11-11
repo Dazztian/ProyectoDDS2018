@@ -101,9 +101,13 @@ public class ModelHelperPersistencia {
 	}
 	
 	public <T> T buscar(Class<T> clase, ImmutablePair<Object, Object> ... pair) {
+		try {
 		TypedQuery<T> query = this.generarQueryPara(clase, pair);
 		List<T> resultados = query.getResultList();
 		return resultados.get(query.getFirstResult());
+		}catch(IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 	
 	public <T> List<T> buscarTodos(Class<T> clase) {

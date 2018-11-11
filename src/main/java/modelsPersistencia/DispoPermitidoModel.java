@@ -7,6 +7,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class DispoPermitidoModel extends ModelHelperPersistencia{
 
+	private static DispoPermitidoModel instance = new DispoPermitidoModel();
+	
 	public DispoPermitidoModel() {
 		super();
 	}
@@ -19,5 +21,12 @@ public class DispoPermitidoModel extends ModelHelperPersistencia{
 		return super.buscarTodos(DispositivoPermitido.class);
 	}
 	
+	public DispositivoPermitido buscarDispositivo(String equipo) {
+		return super.buscar(DispositivoPermitido.class,	new ImmutablePair<>("equipo", equipo));
+	}
+	
+	public static DispoPermitidoModel getInstance() {
+		return instance;
+	}
 	
 }

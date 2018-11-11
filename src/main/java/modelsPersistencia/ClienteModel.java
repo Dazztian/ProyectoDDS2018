@@ -11,6 +11,8 @@ import proyectoDDSs.Cliente;
 
 public class ClienteModel extends ModelHelperPersistencia{
 
+	private static ClienteModel instance = new ClienteModel();
+	
 	public ClienteModel() {
 		super();
 	}
@@ -24,12 +26,12 @@ public class ClienteModel extends ModelHelperPersistencia{
 	}
 	
 	public Cliente buscarCliente(String username) {
-		try {
-		Cliente cliente=entityManager().createQuery("from Cliente c where nombre_usuario='"+username+"'",Cliente.class).getSingleResult();
+		Cliente cliente= super.buscar(Cliente.class, new ImmutablePair<>("nombre_usuario", username));
 		return cliente;
-		}catch(NoResultException e) {
-			return null;
-		}
+	}
+	
+	public static ClienteModel getInstance() {
+		return instance;
 	}
 	
 }

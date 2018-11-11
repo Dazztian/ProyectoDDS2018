@@ -21,9 +21,23 @@ public class TestDB {
 //		dispo_model.eliminar(dispo);
 		
 		//Agregar Dispositivo nuevo a un cliente
-//		Cliente copy = cliente_model.buscarCliente(new Long(3));		
-//		DispositivoPermitido dispo = permitido_model.buscarDispositivo(new Long(2));
+		Cliente copy = cliente_model.buscarCliente(new Long(3));		
+		Cliente copy2 = cliente_model.buscarCliente(new Long(1));
+		DispositivoPermitido dispo = permitido_model.buscarDispositivo(new Long(3));
 //		
+		DispositivoEstandar dispoNuevo = new DispositivoEstandar(dispo.getNombre(),dispo.getEquipo(),
+				dispo.getKwhConsumeXHora(),5,dispo.getConsumoMinimo(),dispo.getConsumoMaximo());
+		dispoNuevo.setCliente(copy);
+		dispoNuevo.setDispositivo(dispo);
+//		dispo_model.agregar(dispoNuevo);
+				
+		DispositivoEstandar dispoNuevo2 = new DispositivoEstandar(dispo.getNombre(),dispo.getEquipo(),
+				dispo.getKwhConsumeXHora(),6,dispo.getConsumoMinimo(),dispo.getConsumoMaximo());
+
+		dispoNuevo2.setCliente(copy2);
+		dispoNuevo2.setDispositivo(dispo);
+//		dispo_model.agregar(dispoNuevo2);
+		
 //		dispo_model.eliminar(dispo);
 		
 //		DispositivoInteligente dispo_cliente = new DispositivoInteligente(dispo.getNombre(),dispo.getEquipo(),

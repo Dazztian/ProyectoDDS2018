@@ -46,4 +46,8 @@ public class Sensor {
 		reglas.remove(r);
 	}
 	
+	public Regla getRegla() {
+		return this.reglas.get(0);
+	}
+	
 }
