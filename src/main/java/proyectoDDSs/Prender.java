@@ -4,7 +4,7 @@ public class Prender extends Actuador {
 	
 	public Prender( String unaAccion){ super( unaAccion);}
 	
-	public Prender(InteligenteXCliente dispositivo1, String accion, Traductor probandoTraductor) {
+	public Prender(DispositivoInteligente dispositivo1, String accion, Traductor probandoTraductor) {
 		super(dispositivo1,accion,probandoTraductor);
 		}
 
@@ -14,6 +14,6 @@ public class Prender extends Actuador {
 	}
 	
 	public void prender() {
-		dispositivoSobreElQActuo.getDispositivo().prender();
+		dispositivoSobreElQActuo.prender();
 	}
 }

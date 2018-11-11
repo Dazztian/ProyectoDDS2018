@@ -2,7 +2,7 @@
 {{#partial "contenido"}}
   <div class="card mx-5">
    <h5 class="card-header primary-color white-text text-center py-4"><strong>Sign in</strong></h5>
-   <form class="text-center" style="color: #757575;">
+   <form class="text-center" method="post" action="/login" style="color: #757575;">
     <div class="card-body pt-0 px-5">	
      <div class="md-form">
     	<h3 class="text-left">User Name</h3>
@@ -10,7 +10,7 @@
   	 </div>
      <div class="md-form">	
         <h3 class="text-left">Password</h3>
-  	 	<input type="password" class="form-control" id="Pass1" name="pass" placeholder="Contraseña">
+  	 	<input type="password" class="form-control" id="Pass1" name="password" placeholder="Contraseña">
      </div>
         <button class="btn btn-outline-info btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>    
     </div>

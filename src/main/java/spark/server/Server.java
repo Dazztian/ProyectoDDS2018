@@ -16,10 +16,11 @@ public class Server {
 		
 		Spark.get("/", ControllerHome::showHome, engine);
 		Spark.get("/home", ControllerHome::showHome, engine);
-		
-		Spark.get("/login", Controller::showLogin, engine);
-		
 		Spark.get("/mapa", ControllerMapa::showMap,engine);
+		
+		Spark.get("/login", ControllerLogin::showLogin, engine);	
+		Spark.post("/login", ControllerLogin::manageLogin, engine);
+		Spark.post("logout", ControllerLogin::manageLogout, engine);
 		
 		Spark.init(); 
 		
