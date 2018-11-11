@@ -33,6 +33,11 @@ public class Server {
 			}
 		});
 
+		Spark.before("/register",(req,res)->{
+			if(ControllerLogin.userIsLoggedIn(req, res)) {
+				Spark.halt(401, "You have to LogOut");
+			}
+		});
 		
 		Spark.get("/", ControllerHome::showHome, engine);
 		Spark.get("/home", ControllerHome::showHome, engine);
@@ -51,6 +56,9 @@ public class Server {
 		Spark.get("/login", ControllerLogin::showLogin, engine);	
 		Spark.post("/login", ControllerLogin::manageLogin, engine);
 		Spark.post("/logout", ControllerLogin::manageLogout, engine);
+		
+		Spark.get("/register", ControllerRegister::showRegisterPage, engine);
+		Spark.post("/register", ControllerRegister::manageRegister, engine);
 		
 		Spark.init(); 
 		

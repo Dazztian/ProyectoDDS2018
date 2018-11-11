@@ -1,0 +1,144 @@
+<title>Register</title>
+{{#partial "contenido"}}
+<div class="container">
+ <div class="card mx-5">
+  <h5 class="card-header primary-color white-text text-center py-4"><strong>Registro</strong></h5>
+  <form class="text-center" method="post" action="/register" style="color: #757575;">
+   <div class="card-body pt-0 px-5"> 	
+    {{#if RegistroFailed}}
+    	<h4 class="deep-orange darken-2 white-text mt-2">Algunos de los campos quedaron vacios</h4>
+    {{/if}}
+    <div class="row"> 
+     <div class="md-form col-md-6">
+     	<input type="text" class="form-control" id="name" name="nombre" placeholder="Nombre">
+  	 {{#if Notnombre}}		
+  	 	<div class="text-left red-text">
+        	Por favor escriba su nombre.
+      	</div>
+  	 {{/if}}
+  	 </div>
+     <div class="md-form col-md-6">	
+  	 	<input type="text" class="form-control" id="surname" name="apellido" placeholder="Apellido">
+  	 {{#if Notapellido}}	
+  	 	<div class="text-left red-text">
+        	Por favor escriba su apellido.
+      	</div>
+     {{/if}}
+     </div>
+    </div> 
+    
+    <div class="row">
+     <div class="md-form col-md-3">
+     	<input type="text" class="form-control" id="address" name="domicilio" placeholder="Domicilio">
+     {{#if Notdomicilio}}
+     	<div class="text-left red-text">
+        	Por favor escriba su domicilio.
+      	</div>
+     {{/if}}
+     </div>
+     <div class="col">
+      <div class="row">
+     	<div class="md-form col-md-3">
+     		<input type="number" class="form-control" id="DNI" name="dni" placeholder="Dni">
+     	{{#if Notdni}}	
+     		<div class="text-left red-text">
+        		Por favor escriba su Dni.
+      		</div>
+      	{{/if}}
+     	</div>
+    	<div class="md-form col-md-3">
+     		<input type="number" class="form-control" id="phone" name="telefono" placeholder="Telefono">
+     	{{#if Nottelefono}}
+     		<div class="text-left red-text">
+        		Por favor escriba su Telefono.
+      		</div>
+      	{{/if}}
+     	</div>
+     	<div class="md-form col-md-3">
+     		<input type="text" class="form-control" id="latitud" name="latitud" placeholder="Latitud">
+     	{{#if Notlatitud}}
+     		<div class="text-left red-text">
+        		Por favor escriba su Latitud.
+      		</div>
+      	{{/if}}
+     	</div>
+     	<div class="md-form col-md-3">
+    		<input type="text" class="form-control" id="longitud" name="longitud" placeholder="Longitud">
+    	{{#if Notlongitud}}	
+    		<div class="text-left red-text">
+        		Por favor escriba su Longitud.
+      		</div>
+     	{{/if}}
+     	</div>     	
+      </div>
+     </div>      
+    </div>
+	
+	<div class="row">     
+     <div class="md-form col-md-4">
+     	<input type="text" class="form-control" id="name" name="username" placeholder="Usuario">
+     {{#if Notusuario}}	
+     	<div class="text-left red-text">
+        	Por favor escriba un nombre de usuario.
+      	</div>
+     {{/if}}
+     {{#if ClienteExistente}}
+      	div class="text-left red-text">
+        	Este nombre de usuario ya existe.
+      	</div>
+     {{/if}} 	
+  	 </div>
+     <div class="md-form col-md-4">	
+  	 	<input type="password" class="form-control" id="pass" name="password1" placeholder="Contraseña">
+  	 {{#if Notpass1}}	
+  	 	<div class="text-left red-text">
+        	Por favor escriba su contraseña.
+      	</div>
+     {{/if}}
+     </div>
+     <div class="md-form col-md-4">	
+  	 	<input type="password" class="form-control" id="pass2" name="password2" placeholder="Repetir Contraseña">
+  	 {{#if Notpass2}}	
+  	 	<div class="text-left red-text">
+        	Por favor vuelva a escribir su contraseña.
+      	</div>
+     {{/if}}
+     {{#if ContraseniasDistintas}}
+     	<div class="text-left red-text">
+        	Las contraseñas son distintas.
+      	</div>
+     {{/if}}
+     </div>
+    </div>
+   
+    <div class="row">
+	 <div class="form-group col-md-4">
+    	<select class="custom-select browser-default" name="categoria">
+      		<option value="">Seleccione una Categoria</option>
+      		<option value="1">R1</option>
+      		<option value="2">R2</option>
+      		<option value="3">R3</option>
+      		<option value="4">R4</option>
+      		<option value="5">R5</option>
+      		<option value="6">R6</option>
+      		<option value="7">R7</option>
+      		<option value="8">R8</option>
+      		<option value="9">R9</option>
+		</select>
+		{{#if Notcategoria}}
+		<div class="text-left red-text">
+        	Por favor seleccione un categoria.
+      	</div>
+      	{{/if}}
+  	 </div>   
+	</div>
+  
+   
+   </div>
+
+  <button class="btn btn-primary" type="submit">Registrar</button>
+  </form>
+ </div>
+</div>
+{{/partial}}
+{{>plantilla.hbs}}

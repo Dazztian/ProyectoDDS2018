@@ -5,7 +5,11 @@
 	<h4 class="light-blue darken-1 text-center white-text my-2">Acabas de cerrar sesión</h4>
 {{else}}
 	{{#if InvalidLogOut}}
-    <h4 class="yellow darken-1 text-center white-text my-2">No tenes ninguna sesión iniciada</h4>
+    	<h4 class="yellow darken-1 text-center white-text my-2">No tenes ninguna sesión iniciada</h4>
+	{{else}}
+		{{#if RegistroOK}}
+			<h4 class="green darken-1 text-center white-text my-2">Usuario registrado correctamente</h4>		
+		{{/if}}
 	{{/if}}
 {{/if}}
 <main role="main">
