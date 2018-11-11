@@ -39,8 +39,12 @@ public abstract class Usuario {
 	public Long getId() {
 		return this.id;
 	}
+
+	public String getUsuario() {
+		return this.usuario;
+	}
 	
-	public String getPassword() {
+	public String getContrasenia() {
 		return this.contrasenia;
 	}
 	

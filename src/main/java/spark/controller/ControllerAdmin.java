@@ -1,10 +1,11 @@
 package spark.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.*;
 
 import modelsPersistencia.AdministradorModel;
-import proyectoDDSs.Administrador;
+import modelsPersistencia.ClienteModel;
+import proyectoDDSs.*;
 import spark.*;
 
 public class ControllerAdmin {
@@ -20,7 +21,7 @@ public class ControllerAdmin {
 			return false;
 		}
 		
-		return admin.getPassword().equals(password);
+		return admin.getContrasenia().equals(password);
 		
 	}
 
@@ -35,5 +36,17 @@ public class ControllerAdmin {
 		
 	}
 	
+	public static ModelAndView showHogares(Request req, Response res) {
+		Map<String, Object> viewModel = new HashMap<>();
+		List<Cliente> clientes = ClienteModel.getInstance().buscarTodosLosCliente();
+
+		clientes.stream().forEach(cliente -> cliente.consumoMensual());
+		
+		viewModel.put("clientes", clientes);
+		viewModel.put("punto", "..");
+		
+		return new ModelAndView(viewModel,"hogares.hbs");
+		
+	}
 	
 }

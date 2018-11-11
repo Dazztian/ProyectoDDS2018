@@ -1,0 +1,29 @@
+<title>Consumo Hogares</title>
+{{#partial "contenido"}}
+	<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Nombre de usuario</th>
+			<th>Consumo Mensual</th>
+		</thead>
+		<tbody>
+			{{#each clientes}}
+				<tr>
+					<td>{{nombre}}</td>
+					<td>{{apellido}}</td>
+					<td>{{usuario}}</td>
+					<td>{{consumoMensual}}</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+	<div>
+		<a href="/admin/home"><button type="button" class="btn btn-primary">Volver</button></a>
+	</div>
+	
+</div>
+	
+{{/partial}}
+{{>plantilla.hbs}}

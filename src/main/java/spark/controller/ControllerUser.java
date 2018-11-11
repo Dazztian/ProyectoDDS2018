@@ -21,7 +21,7 @@ public class ControllerUser {
 			return false;
 		}
 		
-		return cliente.getPassword().equals(password);
+		return cliente.getContrasenia().equals(password);
 		
 	}
 		

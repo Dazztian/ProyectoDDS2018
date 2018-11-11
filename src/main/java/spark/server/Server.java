@@ -45,13 +45,15 @@ public class Server {
 		
 		//Vistas del usuario, pueden cambiar
 		Spark.get("/user/home", ControllerUser::showUserHome, engine);
-		Spark.get("user/estado", ControllerUser::showEstado, engine);
+		Spark.get("/user/estado", ControllerUser::showEstado, engine);
 //		Spark.get("/user/uploadDispositivos", ControllerUser::);
 //		Spark.get("/user/simplex", route);
 //		Spark.get("/user/reglas-dispositivos", route);
 //		Spark.get("/user/consumos", route);
 		
 		Spark.get("/admin/home", ControllerAdmin::showAdminHome, engine);
+		Spark.get("/admin/hogares", ControllerAdmin::showHogares, engine);
+		
 		
 		Spark.get("/login", ControllerLogin::showLogin, engine);	
 		Spark.post("/login", ControllerLogin::manageLogin, engine);
