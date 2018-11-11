@@ -88,4 +88,8 @@ public class DispositivoPermitido {
 		this.consumoMaximo = consumoMaximo;
 	}
 	
+	public String toString() {
+		return this.nombre + " " + this.equipo + " " + this.inteligente + " " + this.bajoConsumo + 
+				" " + this.kwhConsumeXHora + " " + this.consumoMinimo + " " + this.consumoMaximo;
+	}
 }

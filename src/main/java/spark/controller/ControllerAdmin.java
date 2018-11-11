@@ -94,4 +94,76 @@ public class ControllerAdmin {
 		return null;
 	}
 	
+	public static ModelAndView showAddDispositivo(Request req, Response res) {		
+		Map<String, Object> viewModel = new HashMap<>();
+
+		viewModel.put("actualAdmin", req.session().attribute("admin"));
+
+		
+		return new ModelAndView(viewModel,"agregardispositivo.hbs");
+
+	}
+	
+	public static ModelAndView addNuevoDispositivo(Request req, Response res) {
+		Map<String, Object> viewModel = new HashMap<>();
+		DispositivoPermitido dispo = new DispositivoPermitido();
+		
+		viewModel.put("actualAdmin", req.session().attribute("admin"));
+		
+		if(!camposVacios(req)) {
+			dispo.setNombre(req.queryParams("nombre"));
+			dispo.setEquipo(req.queryParams("equipo"));
+		
+			if(req.queryParams("inteligente")!=null)
+				dispo.setInteligente(true);
+			else
+				dispo.setInteligente(false);
+			if(req.queryParams("bajoConsumo")!=null)
+				dispo.setBajoConsumo(true);
+			else
+				dispo.setBajoConsumo(false);
+		
+			dispo.setKwhConsumeXHora(Double.parseDouble(req.queryParams("consumo")));
+			dispo.setConsumoMinimo(Double.parseDouble(req.queryParams("consumoMinimo")));
+			dispo.setConsumoMaximo(Double.parseDouble(req.queryParams("consumoMaximo")));
+		
+			DispoPermitidoModel.getInstance().agregar(dispo);
+		
+			res.redirect("/admin/tabladispositivos");
+			
+			System.out.println(dispo.toString());
+			return null;
+		}else {
+			
+			viewModel.put("Notnombre", true);
+			viewModel.put("Notequipo", true);
+			viewModel.put("Notconsumo", true);
+			viewModel.put("Notminimo", true);
+			viewModel.put("Notmaximo", true);
+			
+			return new ModelAndView(viewModel,"agregardispositivo.hbs");
+		}
+	}
+	
+	public static boolean camposVacios(Request req) {
+		
+		if(req.queryParams("nombre").isEmpty()) {
+			return true;
+		}
+		if(req.queryParams("equipo").isEmpty()) {
+			return true;
+		}
+		if(req.queryParams("consumo").isEmpty()) {
+			return true;
+		}
+		if(req.queryParams("consumoMinimo").isEmpty()) {
+			return true;
+		}
+		if(req.queryParams("consumoMaximo").isEmpty()) {
+			return true;
+		}
+		return false;
+		
+	}
+	
 }

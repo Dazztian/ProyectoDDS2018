@@ -34,7 +34,7 @@ public class Server {
 		});
 
 		Spark.before("/register",(req,res)->{
-			if(ControllerLogin.userIsLoggedIn(req, res)) {
+			if(ControllerLogin.userIsLoggedIn(req, res)||ControllerLogin.adminIsLoggedIn(req, res)) {
 				Spark.halt(401, "You have to LogOut");
 			}
 		});
@@ -55,7 +55,9 @@ public class Server {
 		Spark.get("/admin/hogares", ControllerAdmin::showHogares, engine);
 		Spark.get("/admin/tabladispositivos", ControllerAdmin::showTablaDispositivos, engine);
 		Spark.post("/admin/tabladispositivos", ControllerAdmin::cambioEnLaTabla, engine);
-		
+		Spark.get("/admin/agregardispositivo", ControllerAdmin::showAddDispositivo, engine);
+		Spark.post("/admin/agregardispositivo", ControllerAdmin::addNuevoDispositivo, engine);
+
 		
 		Spark.get("/login", ControllerLogin::showLogin, engine);	
 		Spark.post("/login", ControllerLogin::manageLogin, engine);
