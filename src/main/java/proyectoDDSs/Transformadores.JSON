@@ -1,3 +1,8 @@
-[{"id":11,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},
-{"id":12,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]},
-{"id":13,"latitud":-34.61868,"longitud":-58.415423,"zona":1,"clientes":[]}]
+[{"id":1,"latitud":-34.6538,"longitud":-58.4810,"zona":1,"clientes":[]},
+{"id":2,"latitud":-34.6599,"longitud":-58.4681,"zona":1,"clientes":[]},
+{"id":3,"latitud":-34.6643,"longitud":-58.4703,"zona":1,"clientes":[]},
+{"id":4,"latitud":-34.6663,"longitud":-58.4778,"zona":1,"clientes":[]},
+{"id":5,"latitud":-34.6609,"longitud":-58.4584,"zona":1,"clientes":[]},
+{"id":6,"latitud":-34.6538,"longitud":-58.4533,"zona":1,"clientes":[]},
+{"id":7,"latitud":-34.6455,"longitud":-58.4676,"zona":1,"clientes":[]},
+{"id":8,"latitud":-34.6372,"longitud":-58.4788,"zona":1,"clientes":[]}]

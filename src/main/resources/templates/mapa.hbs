@@ -36,6 +36,16 @@
 					accessToken: 'pk.eyJ1IjoiZ29ub21heCIsImEiOiJjam82bm1kZjgwMGJjM2ttd2JjY3hhdm1uIn0.0i6MFZTGjRJnHboBgUenUg'
 					}).addTo(mymap);
 					
+					var trafosJson = "{{jsonTrafos}}".replace(/&quot;/g, "\"");
+					
+					
+					var trafos = JSON.parse(trafosJson);
+					
+					for (var i = 0; i < trafos.length; i++){
+						var trafo = trafos[i];
+						var marker = L.marker([trafo.latitud, trafo.longitud]).addTo(mymap);
+						}
+					
 					var marker = L.marker([-34.65976, -58.46835]).addTo(mymap);
 					var circle = L.circle([-34.65976, -58.46835], {
 						color: 'red',
@@ -44,6 +54,7 @@
 						radius: 500
 						}).addTo(mymap);
 					marker.bindPopup("<b>UTN Lugano</b><br>Entrada").openPopup();
+					
 		            </script>
 	</body>
 	
