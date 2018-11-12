@@ -81,7 +81,7 @@ public class Tests {
 	private DispositivoEstandar dispositivo5 = new DispositivoEstandar("Ventilador", "Test", 50, 8, 30.0, 360.0);
 	private DispositivoEstandar dispositivo6 = new DispositivoEstandar("Heladera", "Test", 20, 8, 30.0, 360.0);
 	private DispositivoEstandar dispositivo7 = new DispositivoEstandar("TV", "Test", 10, 8, 30.0, 360.0);
-	private	Administrador juan = new Administrador("Juan","Lopez",123231,"Juancito","asd123");
+	private	Administrador juan = new Administrador("Juan","Lopez","Juancito","asd123");
 	Transformador trafo1 = new Transformador(2, -1.3414, -2.657, 1);
 	Transformador trafo2 = new Transformador(6, -1.3414, -2.657, 1);
 	Transformador trafo3 = new Transformador(7, -1.3414, -2.657, 1);
@@ -107,8 +107,8 @@ public class Tests {
 		rosa.addDispositivoTEST(dispositivo5);
 		assertEquals(12000, rosa.consumoMensual(), 0);
 		rosa.adaptarDispositivoTEST(dispositivo5);
-		rosa.dispositivosTEST().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).prender());
-		rosa.dispositivosTEST().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).guardarConsumo());
+		rosa.getDispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).prender());
+		rosa.getDispositivos().forEach(dispositivo -> ((DispositivoInteligente) dispositivo).guardarConsumo());
 		assertEquals(50, rosa.consumoMensual(), 0);
 		
 	}
@@ -189,7 +189,7 @@ public class Tests {
 		//Se agrega un dispositivo a Rosa y se lo da de baja, luego se comprueba que ya no este mas en sus dispositivos
 			rosa.addDispositivo(dispositivo1);
 			rosa.bajaDispositivo(dispositivo1);
-			assert(!rosa.dispositivos().contains(dispositivo1));
+			assert(!rosa.getDispositivos().contains(dispositivo1));
 	}
 	
 	@Test
@@ -255,7 +255,7 @@ public class Tests {
 	public void agregarDispo()
 	{
 		rosa.agregarDispositivo("tubo_21");
-		assertEquals(0,rosa.dispositivos.size(),1);
+		assertEquals(0,rosa.getDispositivos().size(),1);
 		
 	}
 	

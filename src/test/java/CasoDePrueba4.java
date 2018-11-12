@@ -89,11 +89,12 @@ public class CasoDePrueba4 {
 			    System.out.println("Zona " +zona + "\n");
 			    
 
-			    /* ESTO ES UNA FORMA DE CARGAR LOS TRAFOS DEL JSON A LA BD, RECOMENDABLE USAR UNICAMENTE LA  1ERA VEZ QUE SE CARGA LA BD
+			    // ESTO ES UNA FORMA DE CARGAR LOS TRAFOS DEL JSON A LA BD, RECOMENDABLE USAR UNICAMENTE LA  1ERA VEZ QUE SE CARGA LA BD
+			    
 			    trafoJSONEntrada = new Transformador(id.intValue(), latitud, longitud,  zona.intValue());
 			    trafosJSON.add(trafoJSONEntrada);
 			    trafoJSONEntrada.asignarZona(zonas);//Esto es lo que persiste al trafo
-			    */
+			    
 											
 		 	  }
 		      	//Aca agrego un TRAFO al json de entrada y el mismo se persistira en la BD 		      	
