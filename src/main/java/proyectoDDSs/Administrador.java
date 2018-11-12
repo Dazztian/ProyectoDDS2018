@@ -71,7 +71,7 @@ public class Administrador extends Usuario {
 		}
 		
 		//Reportes
-		public Object generarReportHogarXPeriodo(Cliente cliente, String fechaInicio, String fechaFinal) {
+		public Double generarReportHogarXPeriodo(Cliente cliente, String fechaInicio, String fechaFinal) {
 
 			double resultado=0;
 			ModelHelperPersistencia mh = new ModelHelperPersistencia();
@@ -86,9 +86,9 @@ public class Administrador extends Usuario {
 									" group by u.id"
 									).getSingleResult();
 			
-			System.out.println("Consumo total del hogar dado el periodo es de "+ resultadoQuery + " kw");
+			//System.out.println("Consumo total del hogar dado el periodo es de "+ resultadoQuery + " kw");
 			
-			return resultadoQuery;
+			return (Double) resultadoQuery;
 	
 		}
 		

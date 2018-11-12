@@ -13,7 +13,9 @@ public class TestReporte {
 		
 		Cliente roberto = clienteHelper.buscarCliente(new Long (1));
 	
-		admin.generarReportHogarXPeriodo(roberto, "1/1/2018" , "4/1/2018");
+		System.out.println("Consumo de "+roberto.getNombre()+" es "+ 
+								admin.generarReportHogarXPeriodo(roberto, "1/1/2018" , "4/1/2018"));
+		
 		admin.generarReportePromedioXPeriodo("1/1/2018" , "4/1/2018");
 
 	}
