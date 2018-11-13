@@ -57,7 +57,10 @@ public class Server {
 		Spark.post("/admin/tabladispositivos", ControllerAdmin::cambioEnLaTabla, engine);
 		Spark.get("/admin/agregardispositivo", ControllerAdmin::showAddDispositivo, engine);
 		Spark.post("/admin/agregardispositivo", ControllerAdmin::addNuevoDispositivo, engine);
-
+		Spark.get("/admin/reportes", ControllerAdmin::showReportes, engine);
+		Spark.post("/admin/reportes/reportehogar", ControllerAdmin::getReporteHogar, engine);
+		Spark.post("/admin/reportes/reportepromedio", ControllerAdmin::getReporteDispositivo, engine);
+		Spark.post("/admin/reportes/reportetrafo", ControllerAdmin::getReporteTrafo, engine);
 		
 		Spark.get("/login", ControllerLogin::showLogin, engine);	
 		Spark.post("/login", ControllerLogin::manageLogin, engine);

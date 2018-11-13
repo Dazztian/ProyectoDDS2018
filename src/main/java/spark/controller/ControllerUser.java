@@ -32,7 +32,7 @@ public class ControllerUser {
 		viewModel.put("actualUser", req.session().attribute("user"));
 		viewModel.put("punto", "..");
 		
-		return new ModelAndView(viewModel,"userHome.hbs");
+		return new ModelAndView(viewModel,"cliente/userHome.hbs");
 		
 	}
 	
@@ -46,7 +46,7 @@ public class ControllerUser {
 		viewModel.put("dispositivos", cliente.getDispositivos());
 		viewModel.put("reglas", DispositivoModel.getInstance().buscarReglas(cliente.getDispositivos()));
 		
-		return new ModelAndView(viewModel,"estadoHagar.hbs");
+		return new ModelAndView(viewModel,"cliente/estadoHagar.hbs");
 	}
 	
 	

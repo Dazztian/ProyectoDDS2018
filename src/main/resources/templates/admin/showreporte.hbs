@@ -1,0 +1,78 @@
+<title>Reporte {{tipo}}</title>
+{{#partial "contenido"}}
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-2">{{header}}</h3>
+  <div class="card-body">
+	<div class="table-responsive">
+	<table class="table table-striped">
+	{{#if reportehogar}}
+		<thead>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Nombre de usuario</th>
+			<th>Consumo desde {{inicio}} a {{fin}}</th>
+		</thead>
+		<tbody>
+		{{#if todos}}
+			{{#each clientes}}
+				<tr>
+					<td>{{nombre}}</td>
+					<td>{{apellido}}</td>
+					<td>{{usuario}}</td>
+					<td>
+					{{#with (lookup ../consumos @index)}}
+						{{this}}
+					{{/with}}
+					</td>
+				</tr>
+			{{/each}}
+		{{else}}
+			    <tr>
+					<td>{{cliente.nombre}}</td>
+					<td>{{cliente.apellido}}</td>
+					<td>{{cliente.usuario}}</td>
+					<td>{{consumo}}</td>
+				</tr>
+		{{/if}}
+		</tbody>
+    {{/if}}
+  
+   	{{#if reportedispo}}
+	  	<thead>
+			<th>Tipo de Dispositivo</th>
+			<th>Periodo</th>
+			<th>Consumo Promedio</th>
+	  	</thead>
+	  	<tbody>
+	  	{{#each tipos}}
+			<tr>
+				<td>{{this}}</td>
+				<td>{{inicio}} - {{fin}}</td>
+				<td>
+				{{#with (lookup ../promedios @index)}}
+					{{this}}
+				{{/with}}
+				</td>
+			</tr>
+	  	{{/each}}
+	  	</tbody>
+  	{{/if}}
+	
+	{{#if reportetrafo}}
+	  	<thead>
+			<th>Transformador</th>
+			<th>Periodo</th>
+			<th>Consumo Total</th>
+	  	</thead>
+	  	<tbody>
+	  	</tbody>	
+	{{/if}}
+		<div class="ml-1">
+			<a href="/admin/reportes"><button type="button" class="btn btn-primary">Volver</button></a>
+  		</div>
+  	</table>
+  	</div>
+  </div>
+</div>
+{{/partial}}
+{{>plantilla.hbs}}

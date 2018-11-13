@@ -56,8 +56,6 @@ public class Cliente extends Usuario {
 	private double longitud;
 	@Column(name="latitud")
 	private double latitud;
-	@Transient
-	private double consumoMensual;
 	
 	//pattern "yyyy-MM-dd'T'HH:mm:ssZ" to be ISO8601
 	@Column(name="fecha_alta")
@@ -248,10 +246,8 @@ public class Cliente extends Usuario {
 	{
 		//Al cliente le calculo cuanto consume cada dispositivo sumo uno a uno su consumo y luego devuelvo el resultado,
 		//Se realiza el c�lculo suponiendo que est�n siempre funcionando.
-		this.consumoMensual=dispositivos.stream().
+		return dispositivos.stream().
 				mapToDouble(dispositivo -> dispositivo.consumoMensual()).sum();
-		
-		return 	this.consumoMensual;	
 	}
 	
 	public void adaptarDispositivo(DispositivoEstandar dispo) {
@@ -370,7 +366,4 @@ public class Cliente extends Usuario {
 		return this.numeroDocumento;
 	}
 
-	public double getConsumoMensual() {
-		return this.consumoMensual;
-	}
 }

@@ -61,9 +61,9 @@
 			<version>1.6.4</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sparkjava</groupId>
-			<artifactId>spark-template-handlebars</artifactId>
-			<version>2.3</version>
+    		<groupId>com.sparkjava</groupId>
+    		<artifactId>spark-template-handlebars</artifactId>
+   			<version>2.7.1</version>
 		</dependency>
 
 		<dependency>

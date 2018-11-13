@@ -14,7 +14,11 @@
 					<td>{{nombre}}</td>
 					<td>{{apellido}}</td>
 					<td>{{usuario}}</td>
-					<td>{{consumoMensual}}</td>
+					<td>
+					{{#with (lookup ../consumos @index)}}
+						{{this}}
+					{{/with}}
+					</td>
 				</tr>
 			{{/each}}
 		</tbody>

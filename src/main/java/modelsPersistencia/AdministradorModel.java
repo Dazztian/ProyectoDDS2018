@@ -10,11 +10,13 @@ import proyectoDDSs.Cliente;
 
 public class AdministradorModel extends ModelHelperPersistencia{
 	
+	private static AdministradorModel instance = new AdministradorModel();
+	
 	public AdministradorModel() {
 		super();
 	}
 	
-	public Administrador buscarUsuario(int id) {
+	public Administrador buscarUsuario(Long id) {
 		return super.buscar(Administrador.class, new ImmutablePair<>("id", id));
 	}
 	
@@ -25,6 +27,10 @@ public class AdministradorModel extends ModelHelperPersistencia{
 	public Administrador buscarAdmin(String username) {
 		Administrador admin=super.buscar(Administrador.class, new ImmutablePair<>("nombre_usuario", username));
 		return admin;
+	}
+	
+	public static AdministradorModel getInstance() {
+		return instance;
 	}
 	
 }

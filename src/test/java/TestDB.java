@@ -16,26 +16,31 @@ public class TestDB {
 		DispositivoModel dispo_model = new DispositivoModel();
 
 		
+		cliente_model.eliminar(AdministradorModel.getInstance().buscarUsuario(new Long(5)));
+		
+		
+		
+		
 //		DispositivoInteligente dispo = (DispositivoInteligente) dispo_model.buscarDispositivo(new Long(3));
 //		
 //		dispo_model.eliminar(dispo);
 		
 		//Agregar Dispositivo nuevo a un cliente
-		Cliente copy = cliente_model.buscarCliente(new Long(3));		
-		Cliente copy2 = cliente_model.buscarCliente(new Long(1));
-		DispositivoPermitido dispo = permitido_model.buscarDispositivo(new Long(3));
+//		Cliente copy = cliente_model.buscarCliente(new Long(3));		
+//		Cliente copy2 = cliente_model.buscarCliente(new Long(1));
+		//		DispositivoPermitido dispo = permitido_model.buscarDispositivo(new Long(3));
 //		
-		DispositivoEstandar dispoNuevo = new DispositivoEstandar(dispo.getNombre(),dispo.getEquipo(),
-				dispo.getKwhConsumeXHora(),5,dispo.getConsumoMinimo(),dispo.getConsumoMaximo());
-		dispoNuevo.setCliente(copy);
-		dispoNuevo.setDispositivo(dispo);
+//		DispositivoEstandar dispoNuevo = new DispositivoEstandar(dispo.getNombre(),dispo.getEquipo(),
+//				dispo.getKwhConsumeXHora(),5,dispo.getConsumoMinimo(),dispo.getConsumoMaximo());
+//		dispoNuevo.setCliente(copy);
+//		dispoNuevo.setDispositivo(dispo);
 //		dispo_model.agregar(dispoNuevo);
 				
-		DispositivoEstandar dispoNuevo2 = new DispositivoEstandar(dispo.getNombre(),dispo.getEquipo(),
-				dispo.getKwhConsumeXHora(),6,dispo.getConsumoMinimo(),dispo.getConsumoMaximo());
-
-		dispoNuevo2.setCliente(copy2);
-		dispoNuevo2.setDispositivo(dispo);
+//		DispositivoEstandar dispoNuevo2 = new DispositivoEstandar(dispo.getNombre(),dispo.getEquipo(),
+//				dispo.getKwhConsumeXHora(),6,dispo.getConsumoMinimo(),dispo.getConsumoMaximo());
+//
+//		dispoNuevo2.setCliente(copy2);
+//		dispoNuevo2.setDispositivo(dispo);
 //		dispo_model.agregar(dispoNuevo2);
 		
 //		dispo_model.eliminar(dispo);
@@ -145,7 +150,6 @@ public class TestDB {
 //		dispo_model.agregar(pepeCopy);
 		
 //		
-		TransformadorModel trafo_model = new TransformadorModel();
 //		
 //		List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
 //		

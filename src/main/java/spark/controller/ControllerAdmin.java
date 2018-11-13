@@ -1,12 +1,17 @@
 package spark.controller;
 
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.*;
+
+import javax.swing.text.DateFormatter;
 
 import modelsPersistencia.AdministradorModel;
 import modelsPersistencia.ClienteModel;
 import modelsPersistencia.DispoPermitidoModel;
 import modelsPersistencia.DispositivoModel;
+import modelsPersistencia.TransformadorModel;
 import proyectoDDSs.*;
 import spark.*;
 
@@ -34,7 +39,7 @@ public class ControllerAdmin {
 		viewModel.put("actualAdmin", req.session().attribute("admin"));
 		viewModel.put("punto", "..");
 		
-		return new ModelAndView(viewModel,"adminHome.hbs");
+		return new ModelAndView(viewModel,"admin/adminHome.hbs");
 		
 	}
 	
@@ -42,13 +47,14 @@ public class ControllerAdmin {
 		Map<String, Object> viewModel = new HashMap<>();
 		List<Cliente> clientes = ClienteModel.getInstance().buscarTodosLosCliente();
 
-		clientes.stream().forEach(cliente -> cliente.consumoMensual());
+		Object[] consumos = clientes.stream().map(cliente -> cliente.consumoMensual()).toArray();
 
 		viewModel.put("actualAdmin", req.session().attribute("admin"));
 		viewModel.put("clientes", clientes);
+		viewModel.put("consumos", consumos);
 		viewModel.put("punto", "..");
 		
-		return new ModelAndView(viewModel,"hogares.hbs");
+		return new ModelAndView(viewModel,"admin/hogares.hbs");
 		
 	}
 	
@@ -60,7 +66,7 @@ public class ControllerAdmin {
 		viewModel.put("dispositivos", dispos);
 		viewModel.put("actualAdmin", req.session().attribute("admin"));
 
-		return new ModelAndView(viewModel,"tablaDispositivos.hbs");
+		return new ModelAndView(viewModel,"admin/tablaDispositivos.hbs");
 		
 	}
 	
@@ -100,7 +106,7 @@ public class ControllerAdmin {
 		viewModel.put("actualAdmin", req.session().attribute("admin"));
 
 		
-		return new ModelAndView(viewModel,"agregardispositivo.hbs");
+		return new ModelAndView(viewModel,"admin/agregardispositivo.hbs");
 
 	}
 	
@@ -141,9 +147,111 @@ public class ControllerAdmin {
 			viewModel.put("Notminimo", true);
 			viewModel.put("Notmaximo", true);
 			
-			return new ModelAndView(viewModel,"agregardispositivo.hbs");
+			return new ModelAndView(viewModel,"admin/agregardispositivo.hbs");
 		}
 	}
+	
+	public static ModelAndView showReportes(Request req, Response res) {
+		
+		Map<String, Object> viewModel = new HashMap<>();
+		LocalDateTime fecha = LocalDateTime.now();
+		String fechaActual = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(fecha);
+		
+		List<Cliente> clientes = ClienteModel.getInstance().buscarTodosLosCliente();
+		List<Transformador> trafos = TransformadorModel.getInstance().buscarTodasLasTransformador();
+		
+		viewModel.put("actualAdmin", req.session().attribute("admin"));	
+		viewModel.put("trafos", trafos);
+		viewModel.put("clientes", clientes);
+		viewModel.put("punto", "..");
+		viewModel.put("fecha", fechaActual);
+		viewModel.put("actualAdmin", req.session().attribute("admin"));
+
+		return new ModelAndView(viewModel,"admin/reportes.hbs");
+		
+	}
+	
+	public static ModelAndView getReporteHogar(Request req, Response res) {
+		Map<String, Object> viewModel = new HashMap<>();
+		
+		Administrador admin = AdministradorModel.getInstance().buscarAdmin(req.session().attribute("admin"));
+		
+		LocalDate fechaInicio = LocalDate.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate fechaFin = LocalDate.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String inicio = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(fechaInicio);
+		String fin = DateTimeFormatter.ofPattern("dd/MM/yyyy",Locale.ENGLISH).format(fechaFin);
+		
+		if(req.queryParams("clientes").equals("todos")) {
+			
+			List<Cliente> clientes = ClienteModel.getInstance().buscarTodosLosCliente();
+			
+			Object[] consumos = clientes.stream().map(cliente -> 
+				admin.generarReportHogarXPeriodo(cliente, inicio.replace('-', '/'), fin.replace('-', '/'))).toArray();
+			
+			viewModel.put("clientes", clientes);
+			viewModel.put("consumos", consumos);
+			viewModel.put("todos", true);
+		}else {
+			
+			Cliente cliente = ClienteModel.getInstance().buscarCliente(req.queryParams("clientes"));
+			
+			Double consumo = admin.generarReportHogarXPeriodo(cliente, inicio.replace('-', '/'), fin.replace('-', '/'));
+			
+			viewModel.put("cliente", cliente);
+			viewModel.put("consumo", consumo);
+			
+		}
+		
+		viewModel.put("inicio", inicio);
+		viewModel.put("fin", fin);
+		viewModel.put("reportehogar", true);
+		viewModel.put("actualAdmin", req.session().attribute("admin"));
+		viewModel.put("header", "reporte de consumo por hogar");
+		
+		return new ModelAndView(viewModel,"admin/showreporte.hbs");
+	}
+	
+	public static ModelAndView getReporteDispositivo(Request req, Response res) {
+		Map<String, Object> viewModel = new HashMap<>();
+		
+		Administrador admin = AdministradorModel.getInstance().buscarAdmin(req.session().attribute("admin"));
+		LocalDate fechaInicio = LocalDate.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate fechaFin = LocalDate.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String inicio = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(fechaInicio);
+		String fin = DateTimeFormatter.ofPattern("dd/MM/yyyy",Locale.ENGLISH).format(fechaFin);
+		
+		List<Object[]> o = admin.generarReportePromedioXPeriodo(inicio.replace('-', '/'), fin.replace('-', '/'));
+		
+		List<String> tipos = new ArrayList<>();
+		List<Double> promedios = new ArrayList<>();
+				
+		for(Object[] lista : o){
+			tipos.add((String)lista[0]);
+			promedios.add((Double)lista[1]);
+		}
+		
+		viewModel.put("tipos", tipos);
+		viewModel.put("promedios", promedios);
+		viewModel.put("inicio", inicio);
+		viewModel.put("fin", fin);
+		viewModel.put("actualAdmin", req.session().attribute("admin"));
+		viewModel.put("header", "reporte promedio por tipo de dispositivo");
+		viewModel.put("reportedispo", true);
+		return new ModelAndView(viewModel,"admin/showreporte.hbs");
+		
+	}
+	
+	public static ModelAndView getReporteTrafo(Request req, Response res) {
+		Map<String, Object> viewModel = new HashMap<>();
+		
+		
+		viewModel.put("actualAdmin", req.session().attribute("admin"));
+		viewModel.put("header", "reporte de consumo por transformador");
+		viewModel.put("reportetrafo", true);
+		return new ModelAndView(viewModel,"admin/showreporte.hbs");
+	}
+	
+	
 	
 	public static boolean camposVacios(Request req) {
 		

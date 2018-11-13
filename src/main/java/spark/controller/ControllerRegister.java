@@ -14,7 +14,7 @@ public class ControllerRegister {
 		
 		Map<String,Object> viewModel = getDatosRegister(req);
 		
-		return new ModelAndView(viewModel,"register.hbs");
+		return new ModelAndView(viewModel,"login/register.hbs");
 		
 	}
 	
@@ -35,20 +35,20 @@ public class ControllerRegister {
 				ClienteModel.getInstance().agregar(cliente);
 				
 				viewModel.put("RegistroOK", true);
-				return new ModelAndView(viewModel,"home.hbs");
+				return new ModelAndView(viewModel,"home/home.hbs");
 				}else {
 					viewModel=getDatosRegister(req);
 					viewModel.put("ClienteExistente", true);
-					return new ModelAndView(viewModel,"register.hbs");
+					return new ModelAndView(viewModel,"login/register.hbs");
 				}
 			}else {
 				viewModel=getDatosRegister(req);
 				viewModel.put("ContraseniasDistintas", true);
-				return new ModelAndView(viewModel,"register.hbs");
+				return new ModelAndView(viewModel,"login/register.hbs");
 			}
 		}else {
 			viewModel = CamposVacios(req);
-			return new ModelAndView(viewModel,"register.hbs");
+			return new ModelAndView(viewModel,"login/register.hbs");
 		}
 		
 		

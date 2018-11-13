@@ -7,6 +7,8 @@ import proyectoDDSs.Transformador;
 
 public class TransformadorModel extends ModelHelperPersistencia{
 	
+	private static TransformadorModel instance = new TransformadorModel();
+	
 	public TransformadorModel() {
 		super();
 	}
@@ -26,5 +28,8 @@ public class TransformadorModel extends ModelHelperPersistencia{
 		return trafosJson;
 	}
 	
+	public static TransformadorModel getInstance() {
+		return instance;
+	}
 
 }

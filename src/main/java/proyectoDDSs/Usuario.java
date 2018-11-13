@@ -48,4 +48,8 @@ public abstract class Usuario {
 		return this.contrasenia;
 	}
 	
+	public void setUsuario(String usuario) {
+		this.usuario=usuario;
+	}
+	
 }

@@ -1,0 +1,85 @@
+<title>Reportes</title>
+{{#partial "contenido"}}
+
+<div class="float-left ml-5 pt-5">
+	<a href="/admin/home"><button type="button" class="btn btn-primary">Volver</button></a>
+</div>
+
+
+<div class="container">
+   
+   <div class="card mx-5">
+   	<h5 class="card-header primary-color white-text text-center py-2"><strong>Reporte de consumo por Hogar</strong></h5>
+	<form class="text-center" method="post" action="/admin/reportes/reportehogar" style="color: #757575;">
+ 	 <div class="row px-4"> 
+ 	 	<div class="md-form col-md-4 pt-4">
+ 	 	<select class="custom-select browser-default" name="clientes">
+      		<option value="">Seleccione un Hogar</option>
+      		<option value="todos">Todos los Hogares</option>
+      		{{#each clientes}}
+	      		<option value="{{usuario}}">Hogar de {{nombre}} {{apellido}}</option>
+      		{{/each}}
+		</select>
+ 	 	</div>
+ 		<div class="md-form col-md-4">
+     		<h5 class="text-left">Fecha Inicio</h5>
+  	 		<input type="date" class="form-control" name="start">
+		</div>
+		<div class="md-form col-md-4">
+			<h5 class="text-left">Fecha Fin: (Hasta {{fecha}})</h5>
+			<input type="date" class="form-control" name="end" max="{{fecha}}">
+		</div>
+	 </div>
+	 <button class="btn btn-primary float-right mr-4" type="submit">Ver Reporte</button>
+	</form>
+   </div>
+   
+   <div class="card mx-5">
+	<h5 class="card-header primary-color white-text text-center py-2"><strong>Reporte de consumo por tipo de Dispositivo (Inteligente - Estandar)</strong></h5>
+	<form class="text-center" method="post" action="/admin/reportes/reportepromedio" style="color: #757575;">
+ 	 <div class="row px-4"> 
+ 		<div class="md-form col-md-6">
+     		<h5 class="text-left">Fecha Inicio</h5>
+  	 		<input type="date" class="form-control" name="start">
+		</div>
+		<div class="md-form col-md-6">
+			<h5 class="text-left">Fecha Fin: (Hasta {{fecha}})</h5>
+			<input type="date" class="form-control" name="end" max={{fecha}}>
+		</div>
+	 </div>
+	 <button class="btn btn-primary float-right mr-4" type="submit">Ver Reporte</button>
+	</form>
+   </div>
+	
+   <div class="card mx-5">
+    <h5 class="card-header primary-color white-text text-center py-2"><strong>Reporte de consumo por Transformador</strong></h5>
+	<form class="text-center" method="post" action="/admin/reportes/reportetrafo" style="color: #757575;">
+ 	 <div class="row px-4"> 
+ 	 	<div class="md-form col-md-4 pt-4">
+ 	 	<select class="custom-select browser-default" name="transformadores">
+      		<option value="">Seleccione un Transformador</option>
+      		<option value="todos">Todos los Transformadores</option>
+      		{{#each trafos}}
+	      		<option value="{{id}}">Transformador {{id}}</option>
+      		{{/each}}
+		</select>
+ 	 	</div>
+ 		<div class="md-form col-md-4">
+     		<h5 class="text-left">Fecha Inicio</h5>
+  	 		<input type="date" class="form-control" name="start">
+		</div>
+		<div class="md-form col-md-4">
+			<h5 class="text-left">Fecha Fin: (Hasta {{fecha}})</h5>
+			<input type="date" class="form-control" name="end" max={{fecha}}>
+		</div>
+	 </div>
+	 <button class="btn btn-primary float-right mr-4" type="submit">Ver Reporte</button>
+	</form>
+   </div>
+   	
+	   
+	   
+   
+</div>
+{{/partial}}
+{{>plantilla.hbs}}

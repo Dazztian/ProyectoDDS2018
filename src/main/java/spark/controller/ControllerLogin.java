@@ -17,10 +17,10 @@ public class ControllerLogin {
 		if(ControllerLogin.userIsLoggedIn(req, res)||ControllerLogin.adminIsLoggedIn(req, res)) {
 			viewModel.put("actualUser", req.session().attribute("user"));
 			viewModel.put("actualAdmin", req.session().attribute("admin"));
-			return new ModelAndView(viewModel,"isLogin.hbs");
+			return new ModelAndView(viewModel,"login/isLogin.hbs");
 		}
 		
-		return new ModelAndView(viewModel, "login.hbs");
+		return new ModelAndView(viewModel, "login/login.hbs");
 		
 	}
 	
@@ -42,7 +42,7 @@ public class ControllerLogin {
 		
 		}else {
 			viewModel.put("AutenticacionFallida", true);
-			return new ModelAndView(viewModel,"login.hbs");
+			return new ModelAndView(viewModel,"login/login.hbs");
 		
 		}
 		
@@ -55,11 +55,11 @@ public class ControllerLogin {
 			req.session().removeAttribute("user");
         	req.session().removeAttribute("admin");
         	viewModel.put("LogOut", true);
-        	return new ModelAndView(viewModel,"home.hbs");
+        	return new ModelAndView(viewModel,"home/home.hbs");
 		}
 		
 		viewModel.put("InvalidLogOut", true);
-		return new ModelAndView(viewModel,"home.hbs");
+		return new ModelAndView(viewModel,"home/home.hbs");
 		
 	}
 	

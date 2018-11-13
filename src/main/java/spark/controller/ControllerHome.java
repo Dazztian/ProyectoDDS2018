@@ -12,7 +12,7 @@ public class ControllerHome {
 			viewModel.put("actualUser", req.session().attribute("user"));
 		else if(ControllerLogin.adminIsLoggedIn(req, res))
 			viewModel.put("actualAdmin", req.session().attribute("admin"));
-		return new ModelAndView(viewModel, "home.hbs");
+		return new ModelAndView(viewModel, "home/home.hbs");
 		
 		
 	}

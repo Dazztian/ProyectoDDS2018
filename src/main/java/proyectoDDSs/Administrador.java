@@ -92,7 +92,7 @@ public class Administrador extends Usuario {
 	
 		}
 		
-		public void generarReportePromedioXPeriodo(String fechaInicial, String fechaFinal) {
+		public List<Object[]> generarReportePromedioXPeriodo(String fechaInicial, String fechaFinal) {
 			
 			double resultado=0;
 			String tipo;
@@ -113,6 +113,7 @@ public class Administrador extends Usuario {
 				System.out.println("Promedio para " +tipo +" "+ resultado + " kw");
 			}
 			
+			return resultadoQuery;
 		}
 }
 				
