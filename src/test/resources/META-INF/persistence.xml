@@ -18,6 +18,7 @@
    		<class>proyectoDDSs.DispositivoInteligente</class>
    		<class>proyectoDDSs.DispositivoEstandar</class>
 		<class>proyectoDDSs.DispositivoPermitido</class>
+		<class>proyectoDDSs.DispositivoXCliente</class>
    		<class>proyectoDDSs.Log</class>
    		<class>proyectoDDSs.ModuloAdaptador</class>			
    		<class>proyectoDDSs.Regla</class>   		

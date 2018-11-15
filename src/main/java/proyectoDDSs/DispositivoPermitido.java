@@ -33,7 +33,7 @@ public class DispositivoPermitido {
 	@Column(name="consumoMaximo")
 	private double consumoMaximo;
 
-	@OneToMany(mappedBy="dispositivo_permitido",cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="dispositivo_permitido",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 	
 	//Getters
