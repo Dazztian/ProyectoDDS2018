@@ -25,7 +25,7 @@ import javax.persistence.Transient;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="Tipo_Dispositivo")
-@Table(name="dispositivos_cliente")
+@Table(name="dispositivo_cliente")
 public  class DispositivoXCliente implements java.io.Serializable{
 	
 	public DispositivoXCliente(int id, int id_cliente, int id_dispositivo) {
