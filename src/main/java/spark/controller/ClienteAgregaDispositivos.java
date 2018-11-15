@@ -1,4 +1,4 @@
-package spark.server;
+package spark.controller;
 
 import spark.*;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -29,21 +29,8 @@ public class ClienteAgregaDispositivos {
 
     public static void main(String[] args) {
 
-    	//ESTO ES EL CODIGO DE PRUEBA QUE YA SE FUNCIONA EN EL MAIN PERO ACA NO ANDA FUNCANNDO
-    	/*
-    	try {
-    	ModelHelperPersistencia m = new ModelHelperPersistencia();
-		DispositivoXCliente prueba= new DispositivoXCliente();
-		DispositivoModel dispoModel= new DispositivoModel();
-		DispositivoPermitido dispo1=dispoModel.existeDispoEnBDEquipo("40w");
-		Long idDispoEncontrado = dispo1.getId();
-		prueba.setId_cliente(1);
-		prueba.setId_dispositivo(idDispoEncontrado.intValue());
-		m.agregar(prueba);
-		}
-       	catch (Exception e) { e.printStackTrace(); }
-		*/
-		
+		Spark.port(4567);
+
     	ModelHelperPersistencia modelHelPersistencia = new ModelHelperPersistencia();
         File uploadDir = new File("upload");
         uploadDir.mkdir(); // create the upload directory if it doesn't exist
@@ -55,11 +42,6 @@ public class ClienteAgregaDispositivos {
         staticFiles.externalLocation("upload");
 
         Spark.get("/", ControllerPrueba::showInputFile, engine);
-//        "<form method='post' enctype='multipart/form-data'>" // note the enctype
-//        + "    <input type='file' name='uploaded_file' accept='.json'>" // make sure to call getPart using the same "name" in the post
-//        + "    <button>Upload JSON</button>"
-//        + "</form>"
-
 				
         post("/", (req, res) -> {
 
