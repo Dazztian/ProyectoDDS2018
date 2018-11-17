@@ -137,7 +137,6 @@ public class ControllerAdmin {
 		
 			res.redirect("/admin/tabladispositivos");
 			
-			System.out.println(dispo.toString());
 			return null;
 		}else {
 			
@@ -164,7 +163,8 @@ public class ControllerAdmin {
 		viewModel.put("trafos", trafos);
 		viewModel.put("clientes", clientes);
 		viewModel.put("punto", "..");
-		viewModel.put("fecha", fechaActual);
+		viewModel.put("fecha", fecha);
+		viewModel.put("fechaActual", fechaActual);
 		viewModel.put("actualAdmin", req.session().attribute("admin"));
 
 		return new ModelAndView(viewModel,"admin/reportes.hbs");

@@ -8,7 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-
+import modelsPersistencia.ClienteModel;
 import modelsPersistencia.DispositivoModel;
 import modelsPersistencia.ModelHelperPersistencia;
 
@@ -23,8 +23,6 @@ import static spark.Spark.*;
 
 public class ClienteAgregaDispositivos {
 	
-	
-
     public static void main(String[] args) {
 
     	//ESTO ES EL CODIGO DE PRUEBA QUE YA SE FUNCIONA EN EL MAIN PERO ACA NO ANDA FUNCANNDO
@@ -73,6 +71,9 @@ public class ClienteAgregaDispositivos {
                 
                 //Leo el json y se lo escribo al usuario                
                 
+        		Cliente cliente = ClienteModel.getInstance().buscarCliente(new Long(6));
+    			Dispositivo dispoCliente;
+    			
     			
         		JSONParser parser = new JSONParser();
                 try
@@ -85,20 +86,29 @@ public class ClienteAgregaDispositivos {
 			    			    String nombre = (String) dispo.get("nombre");//Lo que esta entre " " debe coincididr con el atributo del JSON
 			    			    String equipo = (String) dispo.get("equipo");
 		    			    	
-			    			    DispositivoPermitido dispo1=dispoModel.existeDispoEnBDEquipo(equipo);//Me tira un error y no me lo busca!!}
-			    			    System.out.println("esta es la id del dipoEncontrado " +dispo1.getId());
+			    			    DispositivoPermitido dispo1=dispoModel.existeDispoEnBDEquipo(equipo);
 			    			    
 			    			    if(dispo1!=null)//Agrego SOLO los dispositivos que estan permitidos
 			    			    {
+				    			    System.out.println("esta es la id del dipoEncontrado " +dispo1.getId());
+
 			    			    	Long idDispoEncontrado = dispo1.getId();
 			    			    	
-			    			    	DispositivoXCliente prueba= new DispositivoXCliente();
-			    			    	//se lo asocio al usuario de la sesion actual
-			    			    	prueba.setId_cliente(1);
-			    					prueba.setId_dispositivo(idDispoEncontrado.intValue());
-			    					
+			    			    	if(dispo1.getInteligente()) {
+			    			    	
+			    			    		dispoCliente = new DispositivoInteligente(dispo1.getNombre(), dispo1.getEquipo(), dispo1.getKwhConsumeXHora(),new Apagado(), dispo1.getConsumoMinimo(), dispo1.getConsumoMaximo());
+
+			    			    	}else {
+			    			    		
+			    			    		dispoCliente = new DispositivoEstandar(dispo1.getNombre(), dispo1.getEquipo(), dispo1.getKwhConsumeXHora(),5, dispo1.getConsumoMinimo(), dispo1.getConsumoMaximo());
+			    			    		
+			    			    	}
+			    			    	
+			    			    	dispoCliente.setCliente(cliente);
+			    			    	dispoCliente.setDispositivo(dispo1);
+			    			    	
 			    					System.out.println("El dispositivo esta permitido, se puede persistir");
-			    					modelHelPersistencia.agregar(prueba);							       	
+			    					modelHelPersistencia.agregar(dispoCliente);							       	
 			    				
 			    			    }
 			    			    else//Aca debería haber un mensajito que indique el error
