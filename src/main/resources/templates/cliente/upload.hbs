@@ -1,0 +1,13 @@
+<title>Upload Dispositivos</title>
+{{#partial "contenido"}}
+{{#if uploadOk}}
+	<h4 class="light-blue darken-1 text-center white-text my-2">Subida de archivo terminada</h4>
+{{/if}}
+<form method="post" action="/user/uploadDispositivos" enctype="multipart/form-data">
+ 		<input type='file' name="uploaded_file" accept=".json"> 
+		<button>Upload JSON</button>
+</form>
+
+
+{{/partial}}
+{{>plantilla.hbs}}

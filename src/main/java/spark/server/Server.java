@@ -1,5 +1,9 @@
 package spark.server;
 
+import static spark.Spark.staticFiles;
+
+import java.io.File;
+
 import javax.persistence.EntityManager;
 
 import modelsPersistencia.ModelHelperPersistencia;
@@ -15,11 +19,12 @@ public class Server {
 		Spark.port(9000);
 	
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
-		
 		EntityManager em = ModelHelperPersistencia.getEntityManager();
-		
 		Spark.staticFileLocation("/public");
 		
+		//Esto es para el tema del json de dispositivos
+        staticFiles.externalLocation("upload");
+
 		//Filtros para que no se pueda acceder a las paginas de usuario y admin sin loguearse
 		Spark.before("/user/*", (req, res)->{
 			if(req.session().attribute("user")==null) {
@@ -46,7 +51,8 @@ public class Server {
 		//Vistas del usuario, pueden cambiar
 		Spark.get("/user/home", ControllerUser::showUserHome, engine);
 		Spark.get("/user/estado", ControllerUser::showEstado, engine);
-//		Spark.get("/user/uploadDispositivos", ControllerUser::);
+		Spark.get("/user/uploadDispositivos", ControllerUser::showUploadDispositivos, engine);
+		Spark.post("/user/uploadDispositivos", ControllerUser::uploadDispositivos, engine);
 //		Spark.get("/user/simplex", route);
 //		Spark.get("/user/reglas-dispositivos", route);
 //		Spark.get("/user/consumos", route);
