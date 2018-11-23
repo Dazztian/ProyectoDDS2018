@@ -303,11 +303,30 @@ public class Cliente extends Usuario {
 		Object[] dispositivosSinHeladeras = dispositivos.stream().filter(elem -> elem.noEsHeladera()).toArray();
 		
 		for(int i = 0; i < dispositivosSinHeladeras.length; i++){
-			System.out.format("El consumo Maximo para el dispositivo %d es: \n", i); 
+			System.out.format("El consumo Maximo para el dispositivo %d es:", i); 
 			System.out.format(" %f \n ", (float) solucion.getPoint()[i]);
 			}
 		
 	}
+	
+	public String mostrarConsumoOptimoWeb() {
+		try {
+		PointValuePair solucion = this.consumoOptimo();
+		}
+		catch (Exception e) {
+			return "Su hogar no es optimizable \n";
+		}
+		String respuesta = "";
+		PointValuePair solucion = this.consumoOptimo();
+		Object[] dispositivosSinHeladeras = dispositivos.stream().filter(elem -> elem.noEsHeladera()).toArray();
+		
+		for(int i = 0; i < dispositivosSinHeladeras.length; i++){
+			respuesta = respuesta + "El consumo Maximo para el dispositivo " +  ((Dispositivo) dispositivosSinHeladeras[i]).getNombre() +" es: " + solucion.getPoint()[i] + " horas mensuales" + "\n"; 
+			}
+		return respuesta;
+		
+	}
+	
 	
 	public void cambiarConfigAccionConsumoOptimo(Estado unEstado) {
 		estadoParaSimplex = unEstado;

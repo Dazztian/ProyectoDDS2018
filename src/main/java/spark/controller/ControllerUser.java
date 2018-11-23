@@ -159,6 +159,64 @@ public class ControllerUser {
 		return new ModelAndView(viewModel,"cliente/upload.hbs");
 	}
 	
+	public static ModelAndView showSimplex (Request req, Response res) {
+		
+		Map<String,Object> viewModel = new HashMap<>();
+
+		viewModel.put("actualUser", req.session().attribute("user"));
+		viewModel.put("punto", "..");
+
+		
+		return new ModelAndView(viewModel,"cliente/simplex.hbs");
+	}
+	
+	public static ModelAndView simplex (Request req, Response res) {
+		
+		Cliente cliente = ClienteModel.getInstance().buscarCliente((String)req.session().attribute("user"));
+		
+		Map<String,Object> viewModel = new HashMap<>();
+		
+		viewModel.put("consumos", cliente.mostrarConsumoOptimoWeb());
+		viewModel.put("mostroConsumos", true);
+
+		viewModel.put("actualUser", req.session().attribute("user"));
+		viewModel.put("punto", "..");
+
+		
+		return new ModelAndView(viewModel,"cliente/simplex.hbs");
+	}
+	
+	public static ModelAndView simplexAutomatico (Request req, Response res) {
+		
+		Cliente cliente = ClienteModel.getInstance().buscarCliente((String)req.session().attribute("user"));
+		
+		Map<String,Object> viewModel = new HashMap<>();
+		
+		cliente.suscribirseAlSimplexAutomatico();
+		
+		viewModel.put("suscripcionOk", true);
+
+		viewModel.put("actualUser", req.session().attribute("user"));
+		viewModel.put("punto", "..");
+
+		
+		return new ModelAndView(viewModel,"cliente/simplex.hbs");
+	}
+	
+	public static ModelAndView ejecutarSimplex (Request req, Response res) {
+		Cliente cliente = ClienteModel.getInstance().buscarCliente((String)req.session().attribute("user"));
+		
+		Map<String,Object> viewModel = new HashMap<>();
+		
+		cliente.accionarSegunConsumoOptimo();
+
+		viewModel.put("actualUser", req.session().attribute("user"));
+		viewModel.put("punto", "..");
+
+		
+		return new ModelAndView(viewModel,"cliente/simplex.hbs");
+	}
+	
     // methods used for logging
     private static void logInfo(Request req, Path tempFile) throws IOException, ServletException {
         System.out.println("Uploaded file '" + getFileName(req.raw().getPart("uploaded_file")) + "' saved as '" + tempFile.toAbsolutePath() + "'");

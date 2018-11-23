@@ -1,0 +1,30 @@
+<title>Consumos Optimos</title>
+{{#partial "contenido"}}
+{{#if suscripcionOk}}
+	<h4 class="light-blue darken-1 text-center white-text my-2">Se ha suscrito a la Optimizacion Automatica</h4>
+{{/if}}
+
+<form method="post" action="/user/simplex/automatico" enctype="multipart/form-data">
+	<button>Suscribirse al Automatizador de Consumos</button>
+</form>
+
+<form method="post" action="/user/simplex/optimo" enctype="multipart/form-data">
+	<button>Mostrar Consumos Optimos</button>
+</form>
+
+{{consumos}}
+
+{{#if mostroConsumos}}
+	<a href="/user/home"><button type="button" class="btn btn-primary">Volver</button></a>
+	
+	<form method="post" action="/user/simplex/ejecutar" enctype="multipart/form-data">
+		<button>Apagar los excedidos</button>
+	</form>
+{{/if}}
+
+{{#if ejecutoOk}}
+	<h4 class="light-blue darken-1 text-center white-text my-2">Se realizo la accion</h4>
+{{/if}}
+
+{{/partial}}
+{{>plantilla.hbs}}

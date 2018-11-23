@@ -53,7 +53,10 @@ public class Server {
 		Spark.get("/user/estado", ControllerUser::showEstado, engine);
 		Spark.get("/user/uploadDispositivos", ControllerUser::showUploadDispositivos, engine);
 		Spark.post("/user/uploadDispositivos", ControllerUser::uploadDispositivos, engine);
-//		Spark.get("/user/simplex", route);
+		Spark.get("/user/simplex", ControllerUser::showSimplex, engine);
+		Spark.post("/user/simplex/automatico", ControllerUser::simplexAutomatico, engine);
+		Spark.post("/user/simplex/optimo", ControllerUser::simplex, engine);
+		Spark.post("/user/simplex/ejecutar", ControllerUser::ejecutarSimplex, engine);
 //		Spark.get("/user/reglas-dispositivos", route);
 //		Spark.get("/user/consumos", route);
 		
