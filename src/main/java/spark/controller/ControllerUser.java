@@ -197,7 +197,7 @@ public class ControllerUser {
 		viewModel.put("suscripcionOk", true);
 
 		viewModel.put("actualUser", req.session().attribute("user"));
-		viewModel.put("punto", "..");
+//		viewModel.put("punto", "..");
 
 		
 		return new ModelAndView(viewModel,"cliente/simplex.hbs");
@@ -211,7 +211,7 @@ public class ControllerUser {
 		cliente.accionarSegunConsumoOptimo();
 
 		viewModel.put("actualUser", req.session().attribute("user"));
-		viewModel.put("punto", "..");
+//		viewModel.put("punto", "..");
 
 		
 		return new ModelAndView(viewModel,"cliente/simplex.hbs");
