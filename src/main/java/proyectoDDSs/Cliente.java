@@ -169,7 +169,7 @@ public class Cliente extends Usuario {
 	          	  {
 			       	    JSONObject unDispo = (JSONObject) o;
 			       	    
-			       	    //�Es este el dispositivo que busco?
+			       	    //Es este el dispositivo que busco?
 			       	    String dispoTipo = (String) unDispo.get("tipo");
 			       	    
 			       	    if(dispoTipo.equals(tipoDispo))
@@ -235,7 +235,7 @@ public class Cliente extends Usuario {
 	public double consumoEnLaUltimaHora()
 	{
 		//Al cliente le calculo cuanto consume cada dispositivo sumo uno a uno su consumo y luego devuelvo el resultado,
-		//Se realiza el c�lculo suponiendo que est�n siempre funcionando.
+		//Se realiza el calculo suponiendo que est�n siempre funcionando.
 		return 
 				dispositivos.stream().
 				mapToDouble(dispositivo -> dispositivo.consumoEnLasUltimasNHoras(1)).sum();
@@ -245,7 +245,7 @@ public class Cliente extends Usuario {
 	public double consumoMensual()
 	{
 		//Al cliente le calculo cuanto consume cada dispositivo sumo uno a uno su consumo y luego devuelvo el resultado,
-		//Se realiza el c�lculo suponiendo que est�n siempre funcionando.
+		//Se realiza el calculo suponiendo que estan siempre funcionando.
 		return dispositivos.stream().
 				mapToDouble(dispositivo -> dispositivo.consumoMensual()).sum();
 	}

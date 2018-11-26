@@ -19,7 +19,7 @@ public class ParserZonasGeograficas {
         //Aca tambien hay que meter mano
         final java.lang.reflect.Type listType = new TypeToken<ArrayList<ZonaGeografica>>(){}.getType();
         return  new GsonBuilder().create().fromJson(json, listType);
-        //Me construirá un obj basado en el json que reciba
+        //Me construir un obj basado en el json que reciba
 
 }
 }

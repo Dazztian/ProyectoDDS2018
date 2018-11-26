@@ -18,7 +18,7 @@ public class ParserCategoria {
         final String json = new JsonFile(file.getAbsolutePath()).read();
         final java.lang.reflect.Type listType = new TypeToken<ArrayList<Categoria>>(){}.getType();
         return  new GsonBuilder().create().fromJson(json, listType);
-        //Me construirá un obj basado en el json que reciba
+        //Me construir un obj basado en el json que reciba
     }
 
 }

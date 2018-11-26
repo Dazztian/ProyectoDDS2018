@@ -82,12 +82,12 @@ public class ManageZonas {
 //	    return sessionFactory;
 //		}
 //		
-//		//Esto deberíamos ponerlo en una clase generica y luego importarlo
+//		//Esto deberiamos ponerlo en una clase generica y luego importarlo
 //		protected void closeSession() {
 //			//session is null but i don't understand why
 //  	        if ( session != null &&  session.isOpen() ) 
 //  	        {
-//  	        	//Esto estaría bueno arreglarlo
+//  	        	//Esto estaria bueno arreglarlo
 //	        	//session.close();
 //	        }
 //	    }
