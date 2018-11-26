@@ -8,26 +8,26 @@ values ('A', '3','Carlos', 'Carleto', 'unDomicilio', '44', '45', '4510010', '0',
 
 
 
-insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+insert into dispositivos_cliente(Tipo,id,id_cliente, id_dispositivo) 
 	values ('Inteligente', 1, 1,1); 
     
-insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+insert into dispositivos_cliente(Tipo,id,id_cliente, id_dispositivo) 
 	values ('Inteligente', 2, 1,2); 
     
-insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+insert into dispositivos_cliente(Tipo,id,id_cliente, id_dispositivo) 
 	values ('Estandar', 3, 1,3); 
 	
-insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+insert into dispositivos_cliente(Tipo,id,id_cliente, id_dispositivo) 
 	values ('Estandar', 4, 1,4); 
     
-insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+insert into dispositivos_cliente(Tipo,id,id_cliente, id_dispositivo) 
 	values ('Inteligente', 5, 2,1); 
     
-insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
+insert into dispositivos_cliente(Tipo,id,id_cliente, id_dispositivo) 
 	values ('Inteligente', 6, 2,2); 
 	
-insert into dispositivo_cliente(Tipo,id,id_cliente, id_dispositivo) 
-	values ('Estandar', 3, 2,3); 
+insert into dispositivos_cliente(Tipo,id,id_cliente, id_dispositivo) 
+	values ('Estandar', 7, 2,3); 
 	
 insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo) values (1, 20, 2/1/2018 , 1,'ENCENDIDO'); 
 insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo) values (2, 20, 2/1/2018 ,1,'ENCENDIDO');
@@ -44,14 +44,14 @@ insert into consumos(id,Consumo,Fecha, id_Dispositivo,Estado_Dispositivo) values
 --este select devuelve 105
 select sum(consumo) TotalConsumido
 	from usuarios u  
-		join dispositivo_cliente dc on (u.id = dc.id_cliente) 
+		join dispositivos_cliente dc on (u.id = dc.id_cliente) 
 		join consumos c on (c.id_dispositivo = dc.Id_DispoCliente)	
 	where u.id = 1 And c.fecha between 1/1/2018 and 4/1/2018
 	group by u.id
 	
 --este devuelve 15 para los inteligentes y 18,75  para los estandar
 select dc.Tipo_Dispositivo, avg(consumo) PromedioDeConsumo
-	from dispositivo_cliente dc 
+	from dispositivos_cliente dc 
 		join consumos c on (dc.Id_DispoCliente = c.id_dispositivo)
     where c.fecha between 1/1/2018 and 4/1/2018
     group by dc.Tipo_Dispositivo

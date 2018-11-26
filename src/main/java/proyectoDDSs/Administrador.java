@@ -80,7 +80,7 @@ public class Administrador extends Usuario {
 			Object resultadoQuery = 			
 					em.createNativeQuery("select sum(consumo) suma " +
 									"from usuarios u " +
-										"join dispositivo_cliente dc on (u.id = dc.id_cliente) " +
+										"join dispositivos_cliente dc on (u.id = dc.id_cliente) " +
 										"join consumos c on (c.id_dispositivo = dc.id_dispositivo) " +	
 									"where u.id = " + cliente.getId() + " and c.fecha between " + fechaInicio + " and " + fechaFinal + 
 									" group by u.id"
@@ -101,7 +101,7 @@ public class Administrador extends Usuario {
 			
 			List<Object[]> resultadoQuery = 
 					em.createNativeQuery("select dc.tipo, avg(consumo) PromedioDeConsumo\r\n" + 
-							"	from dispositivo_cliente dc \r\n" + 
+							"	from dispositivos_cliente dc \r\n" + 
 							"		join consumos c on (dc.id_dispositivo = c.id_dispositivo)\r\n" + 
 							"    where c.fecha between " + fechaInicial + 
 							" and " + fechaFinal + 
