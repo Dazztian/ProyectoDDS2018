@@ -1,1 +1,1 @@
-web: java -jar server.jar -Xms256m
+application-web: java -jar server.jar -Xms256m
