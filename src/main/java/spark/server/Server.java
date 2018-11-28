@@ -21,7 +21,7 @@ public class Server {
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		EntityManager em = ModelHelperPersistencia.getEntityManager();
 		Spark.staticFileLocation("/public");
-		
+		em.createNativeQuery("CREATE SCHEMA IF NOT EXISTS `entrega_persistencia` DEFAULT CHARACTER SET utf8 ");
 		//Esto es para el tema del json de dispositivos
         staticFiles.externalLocation("upload");
 
