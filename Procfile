@@ -1,1 +1,0 @@
-web: java -jar server.jar -Xms256m
