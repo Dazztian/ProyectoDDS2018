@@ -31,6 +31,11 @@ public class Log {
 		horaDeLaOperacion = LocalDateTime.now();
 		nombreEstado = unEstado.nombreEstado();
 	}
+	public Log (double unConsumo, Estado unEstado, LocalDateTime unaFecha) {
+		consumo = unConsumo;
+		horaDeLaOperacion = unaFecha;
+		nombreEstado = unEstado.nombreEstado();
+	}
 	
 	public double consumo() {
 		return consumo;

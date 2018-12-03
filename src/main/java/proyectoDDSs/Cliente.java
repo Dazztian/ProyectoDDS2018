@@ -157,48 +157,35 @@ public class Cliente extends Usuario {
 	
 	//---------------------------------------------------------------------------------VERSION ENTREGA2 DE AGREGAR DISPOSITIVO----------------------------------------------------------------------------------
 
-	public void agregarDispositivo( String tipoDispo)
-	{
-		 JSONParser parser = new JSONParser();
-	        try 
-	        {
-	        	JSONArray tablaDispositivos = (JSONArray) parser.parse(new FileReader("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\tablaDeDispositivos.json"));
-	        
-	        	//Todo lo que "cargue" del JSON lo guardo en o
-	        	for (Object o : tablaDispositivos)
-	          	  {
-			       	    JSONObject unDispo = (JSONObject) o;
-			       	    
-			       	    //Es este el dispositivo que busco?
-			       	    String dispoTipo = (String) unDispo.get("tipo");
-			       	    
-			       	    if(dispoTipo.equals(tipoDispo))
-			       	    {
-			       	    	String dispoNombre = (String) unDispo.get("equipo");
-			       	    	Boolean dispoInteligente = (Boolean) unDispo.get("inteligente");
-					       	Boolean dispoBajo_Consumo = (Boolean) unDispo.get("bajo_consumo");
-					       	double dispoConsumo = (double) unDispo.get("consumo");
-					       	double consumoMin = (double) unDispo.get("consumoMin");
-					       	double consumoMax = (double) unDispo.get("consumoMax");
-					       	
-					       	String dispoNombreCompleto = dispoNombre.concat(dispoTipo);
-			       	    	
-			       	    	if(dispoInteligente)
-			       	    	{			       	    		
-						       	DispositivoInteligente dispositivoEncontrado = new DispositivoInteligente(dispoNombre, dispoTipo, dispoConsumo, new Encendido(), consumoMin, consumoMax);
-						       	dispositivos.add(dispositivoEncontrado);
-						       	puntos +=15;
-			       	    	}
-			       	    	else
-			       	    	{
-			       	    		DispositivoEstandar dispositivoEncontrado = new DispositivoEstandar(dispoNombre, dispoTipo, dispoConsumo , 10, consumoMin, consumoMax);
-						       	dispositivos.add(dispositivoEncontrado);
-			       	    	}
-			       	    }
-			       	    
-			      }
-	   	    }
-	        	catch (Exception e) { e.printStackTrace(); }
+	public void agregarDispositivo(String equipo){
+		DispositivoModel dispoModel = new DispositivoModel();
+		DispositivoPermitido dispo1=dispoModel.existeDispoEnBDEquipo(equipo);
+		Dispositivo dispoCliente;
+	    
+	    if(dispo1!=null)//Agrego SOLO los dispositivos que estan permitidos
+	    {
+		    System.out.println("esta es la id del dipoEncontrado " +dispo1.getId());
+		    
+	    	if(dispo1.getInteligente()) {
+	    	
+	    		dispoCliente = new DispositivoInteligente(dispo1.getNombre(), dispo1.getEquipo(), dispo1.getKwhConsumeXHora(),new Apagado(), dispo1.getConsumoMinimo(), dispo1.getConsumoMaximo());
+
+	    	}else {
+	    		
+	    		dispoCliente = new DispositivoEstandar(dispo1.getNombre(), dispo1.getEquipo(), dispo1.getKwhConsumeXHora(),5, dispo1.getConsumoMinimo(), dispo1.getConsumoMaximo());
+	    		
+	    	}
+	    	
+	    	dispoCliente.setCliente(this);
+	    	dispoCliente.setDispositivo(dispo1);
+	    	dispositivos.add(dispoCliente);
+	    	
+			System.out.println("El dispositivo esta permitido, se puede persistir");			       	
+	    }
+	    else//Aca debería haber un mensajito que indique el error
+	    {
+	    	System.out.println("ERROR: DISPOSITIVO NO ADMITIDO POR EL SISTEMA");
+	    }
  }
 	
 	//---------------------------------------------------------------------------------VERSION ENTREGA2 DE AGREGAR DISPOSITIVO----------------------------------------------------------------------------------
