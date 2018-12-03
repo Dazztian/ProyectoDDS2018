@@ -23,7 +23,7 @@ public class Contexto {
 		
 		//Cargo las categorias, igual tiene un error porque el campo 'tipo' lo sube en null y el campo 'cargoVariable' en 0
 		
-		File archivoCategorias = new File("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\categorias.json"); 
+		File archivoCategorias = new File("../ProyectoDDS2018/src/main/java/proyectoDDSs/categorias.json"); 
 		try {
 		List<Categoria> listCategorias = new ParserCategoria().load(archivoCategorias);
 		
@@ -47,7 +47,7 @@ public class Contexto {
 		List<Transformador> trafosJSON = new ArrayList<Transformador>();
 		try {
 
-	      	JSONArray a = (JSONArray) parser.parse(new FileReader("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\transformadores.json"));		      	
+	      	JSONArray a = (JSONArray) parser.parse(new FileReader("../ProyectoDDS2018/src/main/java/proyectoDDSs/transformadores.json"));		      	
 	      	
 	      	 for (Object o : a){
 	      		 JSONObject transformador = (JSONObject) o;
@@ -101,7 +101,7 @@ public class Contexto {
 		DispositivoModel modelDispo = new DispositivoModel();
         try 
         {
-        	JSONArray tablaDispositivos = (JSONArray) parser.parse(new FileReader("..\\ProyectoDDS2018\\src\\main\\java\\proyectoDDSs\\dispositivosPermitidos.json"));
+        	JSONArray tablaDispositivos = (JSONArray) parser.parse(new FileReader("../ProyectoDDS2018/src/main/java/proyectoDDSs/dispositivosPermitidos.json"));
         
         	//Todo lo que "cargue" del JSON lo guardo en o
         	for (Object o : tablaDispositivos)
@@ -144,14 +144,14 @@ public class Contexto {
       //-----------------CARGAR DISPOSITIVOS DE CLIENTES---------------
       //-----------------CARGAR CONSUMOS-------------------------------
         pepe.getDispositivos().stream().filter(dispositivo -> dispositivo.esInteligente())
-        .forEach(dispositivo ->{ for(int i = 0; i < 30; i++) {
-        	for(int j = 0; j < 5; j++) {
+        .forEach(dispositivo ->{ for(int i = 0; i <= 30; i++) {
+        	for(int j = 0; j <= 5; j++) {
         		((DispositivoInteligente) dispositivo).guardarConsumo(LocalDateTime.now().minusHours(5-j).minusDays(30-i));
         	}
         }});
         rosa.getDispositivos().stream().filter(dispositivo -> dispositivo.esInteligente())
-        .forEach(dispositivo ->{ for(int i = 0; i < 30; i++) {
-        	for(int j = 0; j < 3; j++) {
+        .forEach(dispositivo ->{ for(int i = 0; i <= 30; i++) {
+        	for(int j = 0; j <= 3; j++) {
         		((DispositivoInteligente) dispositivo).guardarConsumo(LocalDateTime.now().minusHours(3-j).minusDays(30-i));
         	}
         }});
