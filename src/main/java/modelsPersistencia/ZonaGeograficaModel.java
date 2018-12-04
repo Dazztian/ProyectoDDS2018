@@ -2,6 +2,7 @@ package modelsPersistencia;
 import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import json.JsonUtils;
 import proyectoDDSs.ZonaGeografica;
 
 public class ZonaGeograficaModel extends ModelHelperPersistencia{
@@ -18,5 +19,11 @@ public class ZonaGeograficaModel extends ModelHelperPersistencia{
 		return super.buscarTodos(ZonaGeografica.class);
 	}
 	
+	public String obtenerZonas() {
+		List<ZonaGeografica> listaZonas = this.buscarTodasLasZonaGeografica();
+		String zonasJson = JsonUtils.toJson(listaZonas);
+		System.out.println(listaZonas);
+		return zonasJson;
+	}
 
 }

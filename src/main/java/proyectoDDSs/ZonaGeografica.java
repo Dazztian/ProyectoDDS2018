@@ -19,6 +19,8 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 	protected Double latitud;
 	@Expose @Column(name = "longitud")
 	protected Double longitud;
+	@Expose @Column(name = "radio")
+	protected int radio;
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
 	@JoinColumn(name="id_Zona",nullable=false)
@@ -45,12 +47,13 @@ public class ZonaGeografica extends BeanToJson<ZonaGeografica> {
 
 
 
-		public ZonaGeografica(int unId,String unNombre, Double unaLatitud,Double unaLongitud) {
+		public ZonaGeografica(int unId,String unNombre, Double unaLatitud,Double unaLongitud, int unRadio) {
 			this.id=unId;
 			this.nombre = unNombre;
 			this.latitud=unaLatitud;
 			this.longitud=unaLongitud;
 			this.trafos=new ArrayList<>();
+			this.radio= unRadio;
 		}
 		@Override
 		public ZonaGeografica getObj() {

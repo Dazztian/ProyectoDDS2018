@@ -65,8 +65,8 @@ public class CasoDePrueba4 {
 			System.out.println("Cantidad de trafos actuales: "+trafos.size());
 			
 			//Si la zona ya Existe en la bd, comentar esto xq va a tirar error. AUN ASI el codigo seguiria funcionando
-			zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2));
-			zonas.add(new ZonaGeografica(2, "zona2", 45.3, 2.56));
+			zonas.add(new ZonaGeografica(1, "zona1", 1.1, 2.2, 500));
+			zonas.add(new ZonaGeografica(2, "zona2", 45.3, 2.56, 500));
 			
 			//Logica para agregar un Trafo al JSON de entradas
 		     try {

@@ -39,8 +39,8 @@ public class Contexto {
 		//-----------------CARGAR ZONAS----------------------------------
 		List<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();	
 		
-		zonas.add(new ZonaGeografica(1, "zona1", -34.6609, -58.4584));
-		zonas.add(new ZonaGeografica(2, "zona2", -34.6372, -58.4788));
+		zonas.add(new ZonaGeografica(1, "zona1", -34.6609, -58.4584, 200));
+		zonas.add(new ZonaGeografica(2, "zona2", -34.6372, -58.4788, 200));
 		//-----------------CARGAR ZONAS----------------------------------
 		//-----------------CARGAR TRANSFORMADORES------------------------
 		JSONParser parser = new JSONParser();

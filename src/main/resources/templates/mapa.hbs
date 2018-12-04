@@ -40,15 +40,28 @@
 					}).addTo(mymap);
 					
 					var trafosJson = "{{jsonTrafos}}".replace(/&quot;/g, "\"");
+					var zonasJson = "{{jsonZonas}}".replace(/&quot;/g, "\"");
 					
 					
 					var trafos = JSON.parse(trafosJson);
+					var zonas = JSON.parse(zonasJson);
 					
 					for (var i = 0; i < trafos.length; i++){
 						var trafo = trafos[i];
 						var marker = L.marker([trafo.latitud, trafo.longitud]).addTo(mymap);
 						marker.bindPopup("<b>Transformador " +i + "</b><br>Consumo diario de " +trafo.consumoActual +" kw").openPopup();
 						}
+					
+					for (var i = 0; i < zonas.length; i++){
+						var zona = zonas[i];
+						var circle = L.circle([zona.latitud, zona.longitud], {
+						color: 'red',
+						fillColor: '#f03',
+						fillOpacity: 0.2,
+						radius: zona.radio
+						}).addTo(mymap);
+					}
+					
 		            </script>
 	</body>
 	
