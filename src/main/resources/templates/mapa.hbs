@@ -47,6 +47,7 @@
 					for (var i = 0; i < trafos.length; i++){
 						var trafo = trafos[i];
 						var marker = L.marker([trafo.latitud, trafo.longitud]).addTo(mymap);
+						marker.bindPopup("<b>Transformador " +i + "</b><br>Consumo de " +trafo.consumoActual).openPopup();
 						}
 					
 					var marker = L.marker([-34.65976, -58.46835]).addTo(mymap);
@@ -56,7 +57,7 @@
 						fillOpacity: 0.5,
 						radius: 500
 						}).addTo(mymap);
-					marker.bindPopup("<b>UTN Lugano</b><br>Entrada").openPopup();
+					marker.bindPopup("<b>UTN Lugano " +5 + "</b><br>Entrada").openPopup();
 					
 		            </script>
 	</body>
