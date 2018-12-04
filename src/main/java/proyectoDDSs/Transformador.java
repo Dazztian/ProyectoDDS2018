@@ -28,7 +28,7 @@ public class Transformador extends BeanToJson<Transformador> {
 	@Expose protected double latitud;
 	@Expose protected double longitud;
 	@Expose protected int zona;
-	@Transient protected double consumoActual;
+	@Expose @Transient protected double consumoActual;
 			
 			@OneToMany(cascade=CascadeType.ALL)
 			@JoinColumn(name="id_Transformador")
