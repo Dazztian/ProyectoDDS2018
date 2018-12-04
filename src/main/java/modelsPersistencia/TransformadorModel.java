@@ -38,8 +38,10 @@ public class TransformadorModel extends ModelHelperPersistencia{
 					"	from transformadores t join usuarios u on (u.id_Transformador = t.id)\r\n" + 
 					"		join dispositivos_cliente dc on (dc.id_cliente = u.id) \r\n" + 
 					"        join consumos c on (c.id_Dispositivo = dc.id)\r\n" + 
-					"	where t.id = " + trafoIndividual.getId()+ " and c.Fecha = " + LocalDate.now()+
-					" 	group by t.id").getSingleResult();
+					"	where t.id = " + trafoIndividual.getId() + 
+					" 			and c.Fecha between " + LocalDateTime.now() + " and "+ 
+					LocalDateTime.now().minusDays(1) +
+					 " group by t.id").getSingleResult();
 			
 			trafoIndividual.setConsumoActual(consumoActual);
 		}
