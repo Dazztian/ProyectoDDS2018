@@ -71,19 +71,19 @@ public class Administrador extends Usuario {
 		}
 		
 		//Reportes
-		public Double generarReportHogarXPeriodo(Cliente cliente, String fechaInicio, String fechaFinal) {
+		public Double generarReportHogarXPeriodo(Cliente cliente, LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
 
 			double resultado=0;
 			ModelHelperPersistencia mh = new ModelHelperPersistencia();
 			EntityManager em = mh.entityManager();
 			
 			Object resultadoQuery = 			
-					em.createNativeQuery("select sum(consumo) suma " +
-									"from usuarios u " +
-										"join dispositivos_cliente dc on (u.id = dc.id_cliente) " +
-										"join consumos c on (c.id = dc.id_dispositivo) " +	
-									"where u.id = " + cliente.getId() + " and c.fecha between " + fechaInicio + " and " + fechaFinal + 
-									" group by u.id"
+					em.createNativeQuery("select COALESCE(sum(consumo), 0)" +
+									"from Usuarios u " +
+										"join Dispositivos_Cliente dc on (u.id = dc.id_cliente) " +
+										"join Consumos c on (c.id = dc.id_dispositivo) " +	
+									"where u.id = " + cliente.getId() + " and c.fecha between '" + fechaInicio + "' and '" + fechaFinal + 
+									"'"
 									).getSingleResult();
 			
 			//System.out.println("Consumo total del hogar dado el periodo es de "+ resultadoQuery + " kw");
@@ -92,7 +92,7 @@ public class Administrador extends Usuario {
 	
 		}
 		
-		public List<Object[]> generarReportePromedioXPeriodo(String fechaInicial, String fechaFinal) {
+		public List<Object[]> generarReportePromedioXPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
 			
 			double resultado=0;
 			String tipo;
@@ -101,11 +101,11 @@ public class Administrador extends Usuario {
 			
 			List<Object[]> resultadoQuery = 
 					em.createNativeQuery("select dc.tipo, avg(consumo) PromedioDeConsumo\r\n" + 
-							"	from dispositivos_cliente dc \r\n" + 
-							"		join consumos c on (dc.id = c.id_dispositivo)\r\n" + 
-							"    where c.fecha between " + fechaInicial + 
-							" and " + fechaFinal + 
-							"    group by dc.tipo").getResultList();
+							"	from Dispositivos_Cliente dc \r\n" + 
+							"		join Consumos c on (dc.id = c.id_dispositivo)\r\n" + 
+							"    where c.fecha between '" + fechaInicial + 
+							"' and '" + fechaFinal + 
+							"'").getResultList();
 			
 			for(Object[] resultadoSingular : resultadoQuery) {
 				tipo = (String) resultadoSingular[0];
@@ -115,6 +115,26 @@ public class Administrador extends Usuario {
 			
 			return resultadoQuery;
 		}
+		
+		public Double generarReportTrafoXPeriodo(Transformador trafo, LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
+
+			double resultado=0;
+			ModelHelperPersistencia mh = new ModelHelperPersistencia();
+			EntityManager em = mh.entityManager();
+			
+			resultado=(Double) em.createNativeQuery("select COALESCE(sum(consumo), 0) \r\n" + 
+					"	from Transformadores t join Usuarios u on (u.id_Transformador = t.id)\r\n" + 
+					"		join Dispositivos_Cliente dc on (dc.id_cliente = u.id) \r\n" + 
+					"        join Consumos c on (c.id_Dispositivo = dc.id)\r\n" + 
+					"	where t.id = " + trafo.getId() + 
+					" 			and c.Fecha between '" + fechaInicio + "' and '"+ 
+								fechaFinal + "'").getSingleResult();
+			//System.out.println("Consumo total del hogar dado el periodo es de "+ resultadoQuery + " kw");
+			
+			return resultado;
+	
+		}
+		
 }
 				
 	

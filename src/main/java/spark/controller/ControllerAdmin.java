@@ -24,7 +24,7 @@ public class ControllerAdmin {
 		}
 		
 		Administrador admin;
-		if((admin = new AdministradorModel().buscarAdmin(username))==null) {
+		if((admin = AdministradorModel.getInstance().buscarAdmin(username))==null) {
 			return false;
 		}
 		
@@ -176,17 +176,18 @@ public class ControllerAdmin {
 		
 		Administrador admin = AdministradorModel.getInstance().buscarAdmin(req.session().attribute("admin"));
 		
-		LocalDate fechaInicio = LocalDate.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		LocalDate fechaFin = LocalDate.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String inicio = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(fechaInicio);
-		String fin = DateTimeFormatter.ofPattern("dd/MM/yyyy",Locale.ENGLISH).format(fechaFin);
+		LocalDateTime fechaInicio = LocalDateTime.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		LocalDateTime fechaFin = LocalDateTime.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+		String inicio = fechaInicio.toString();
+		String fin = fechaFin.toString();
 		
 		if(req.queryParams("clientes").equals("todos")) {
 			
 			List<Cliente> clientes = ClienteModel.getInstance().buscarTodosLosCliente();
 			
 			Object[] consumos = clientes.stream().map(cliente -> 
-				admin.generarReportHogarXPeriodo(cliente, inicio.replace('-', '/'), fin.replace('-', '/'))).toArray();
+				admin.generarReportHogarXPeriodo(cliente, fechaInicio, fechaFin)).toArray();
 			
 			viewModel.put("clientes", clientes);
 			viewModel.put("consumos", consumos);
@@ -195,7 +196,7 @@ public class ControllerAdmin {
 			
 			Cliente cliente = ClienteModel.getInstance().buscarCliente(req.queryParams("clientes"));
 			
-			Double consumo = admin.generarReportHogarXPeriodo(cliente, inicio.replace('-', '/'), fin.replace('-', '/'));
+			Double consumo = admin.generarReportHogarXPeriodo(cliente, fechaInicio, fechaFin);
 			
 			viewModel.put("cliente", cliente);
 			viewModel.put("consumo", consumo);
@@ -215,8 +216,8 @@ public class ControllerAdmin {
 		Map<String, Object> viewModel = new HashMap<>();
 		
 		Administrador admin = AdministradorModel.getInstance().buscarAdmin(req.session().attribute("admin"));
-		LocalDate fechaInicio = LocalDate.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		LocalDate fechaFin = LocalDate.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDateTime fechaInicio = LocalDateTime.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDateTime fechaFin = LocalDateTime.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String inicio = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(fechaInicio);
 		String fin = DateTimeFormatter.ofPattern("dd/MM/yyyy",Locale.ENGLISH).format(fechaFin);
 		
