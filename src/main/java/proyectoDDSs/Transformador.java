@@ -28,6 +28,7 @@ public class Transformador extends BeanToJson<Transformador> {
 	@Expose protected double latitud;
 	@Expose protected double longitud;
 	@Expose protected int zona;
+	@Transient protected double consumoActual;
 			
 			@OneToMany(cascade=CascadeType.ALL)
 			@JoinColumn(name="id_Transformador")
@@ -95,6 +96,12 @@ public class Transformador extends BeanToJson<Transformador> {
 		
 		public double consumoEnIntervalo(LocalDateTime fechaLimiteMaxima, LocalDateTime fechaLimiteMinima) {
 			return clientes.stream().mapToDouble(cliente -> cliente.consumoEnIntervalo(fechaLimiteMaxima, fechaLimiteMinima)).sum();
+		}
+
+
+		public void setConsumoActual(double unConsumo) {
+			// TODO Auto-generated method stub
+			this.consumoActual = unConsumo;
 		}
 		
 }
