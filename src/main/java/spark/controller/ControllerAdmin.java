@@ -176,11 +176,14 @@ public class ControllerAdmin {
 		
 		Administrador admin = AdministradorModel.getInstance().buscarAdmin(req.session().attribute("admin"));
 		
-		LocalDateTime fechaInicio = LocalDateTime.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-		LocalDateTime fechaFin = LocalDateTime.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
-		String inicio = fechaInicio.toString();
-		String fin = fechaFin.toString();
+		LocalDate fechaInicio_copia = LocalDate.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate fechaFin_copia = LocalDate.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		LocalDateTime fechaInicio = fechaInicio_copia.atStartOfDay();
+		LocalDateTime fechaFin = fechaFin_copia.atStartOfDay();
+		
+		String inicio = fechaInicio_copia.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
+		String fin = fechaFin_copia.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
 		
 		if(req.queryParams("clientes").equals("todos")) {
 			
@@ -214,14 +217,18 @@ public class ControllerAdmin {
 	
 	public static ModelAndView getReporteDispositivo(Request req, Response res) {
 		Map<String, Object> viewModel = new HashMap<>();
-		
 		Administrador admin = AdministradorModel.getInstance().buscarAdmin(req.session().attribute("admin"));
-		LocalDateTime fechaInicio = LocalDateTime.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		LocalDateTime fechaFin = LocalDateTime.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String inicio = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(fechaInicio);
-		String fin = DateTimeFormatter.ofPattern("dd/MM/yyyy",Locale.ENGLISH).format(fechaFin);
+
+		LocalDate fechaInicio_copia = LocalDate.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate fechaFin_copia = LocalDate.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		
-		List<Object[]> o = admin.generarReportePromedioXPeriodo(inicio.replace('-', '/'), fin.replace('-', '/'));
+		LocalDateTime fechaInicio = fechaInicio_copia.atStartOfDay();
+		LocalDateTime fechaFin = fechaFin_copia.atStartOfDay();
+		
+		String inicio = fechaInicio_copia.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
+		String fin = fechaFin_copia.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
+		
+		List<Object[]> o = admin.generarReportePromedioXPeriodo(fechaInicio, fechaFin);
 		
 		List<String> tipos = new ArrayList<>();
 		List<Double> promedios = new ArrayList<>();
@@ -244,8 +251,40 @@ public class ControllerAdmin {
 	
 	public static ModelAndView getReporteTrafo(Request req, Response res) {
 		Map<String, Object> viewModel = new HashMap<>();
+		Administrador admin = AdministradorModel.getInstance().buscarAdmin(req.session().attribute("admin"));
 		
+		LocalDate fechaInicio_copia = LocalDate.parse(req.queryParams("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate fechaFin_copia = LocalDate.parse(req.queryParams("end"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		
+		LocalDateTime fechaInicio = fechaInicio_copia.atStartOfDay();
+		LocalDateTime fechaFin = fechaFin_copia.atStartOfDay();
+		
+		String inicio = fechaInicio_copia.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
+		String fin = fechaFin_copia.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
+		
+		if(req.queryParams("transformadores").equals("todos")) {
+			
+			List<Transformador> trafos= TransformadorModel.getInstance().buscarTodasLasTransformador();
+			
+			Object[] consumos = trafos.stream().map(trafo -> 
+				admin.generarReportTrafoXPeriodo(trafo, fechaInicio, fechaFin)).toArray();
+			
+			viewModel.put("transformadores", trafos);
+			viewModel.put("consumos", consumos);
+			viewModel.put("todos", true);
+		}else {
+			
+			Transformador trafo = TransformadorModel.getInstance().buscarTransformador(Integer.parseInt(req.queryParams("transformadores")));
+			
+			Double consumo = admin.generarReportTrafoXPeriodo(trafo, fechaInicio, fechaFin);
+			
+			viewModel.put("transformador", trafo);
+			viewModel.put("consumo", consumo);
+			
+		}
+
+		viewModel.put("inicio", inicio);
+		viewModel.put("fin", fin);		
 		viewModel.put("actualAdmin", req.session().attribute("admin"));
 		viewModel.put("header", "reporte de consumo por transformador");
 		viewModel.put("reportetrafo", true);

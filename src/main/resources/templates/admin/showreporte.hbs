@@ -65,6 +65,26 @@
 			<th>Consumo Total</th>
 	  	</thead>
 	  	<tbody>
+	  	{{#if todos}}
+			{{#each transformadores}}
+				<tr>
+					<td>Transformador {{id}}</td>
+					<td>{{inicio}} - {{fin}}</td>
+					<td>
+					{{#with (lookup ../consumos @index)}}
+						{{this}}
+					{{/with}}
+					</td>
+				</tr>
+			{{/each}}
+		{{else}}
+			    <tr>
+					<td>{{transformador.id}}</td>
+					<td>{{inicio}} - {{fin}}</td>
+					<td>{{consumo}}</td>
+				</tr>
+		{{/if}}
+	  	
 	  	</tbody>	
 	{{/if}}
 		<div class="ml-1">
