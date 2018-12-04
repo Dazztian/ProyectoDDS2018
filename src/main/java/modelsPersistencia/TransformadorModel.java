@@ -35,9 +35,9 @@ public class TransformadorModel extends ModelHelperPersistencia{
 		for(Transformador trafoIndividual : trafos) {
 			double consumoActual = 0;
 			consumoActual = (Double) em.createNativeQuery("select COALESCE(sum(consumo), 0) \r\n" + 
-					"	from Transformadores t join usuarios u on (u.id_Transformador = t.id)\r\n" + 
-					"		join dispositivos_cliente dc on (dc.id_cliente = u.id) \r\n" + 
-					"        join consumos c on (c.id_Dispositivo = dc.id)\r\n" + 
+					"	from Transformadores t join Usuarios u on (u.id_Transformador = t.id)\r\n" + 
+					"		join Dispositivos_Cliente dc on (dc.id_cliente = u.id) \r\n" + 
+					"        join Consumos c on (c.id_Dispositivo = dc.id)\r\n" + 
 					"	where t.id = " + trafoIndividual.getId() + 
 					" 			and c.Fecha between '" + LocalDateTime.now().minusDays(2) + "' and '"+ 
 								LocalDateTime.now()+"'").getSingleResult();
