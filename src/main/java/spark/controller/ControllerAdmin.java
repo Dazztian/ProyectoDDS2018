@@ -228,18 +228,15 @@ public class ControllerAdmin {
 		String inicio = fechaInicio_copia.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
 		String fin = fechaFin_copia.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));;
 		
-		List<Object[]> o = admin.generarReportePromedioXPeriodo(fechaInicio, fechaFin);
+		Double consumo_inteligente = admin.generarReportePromedioXPeriodo(fechaInicio, fechaFin);
 		
-		List<String> tipos = new ArrayList<>();
-		List<Double> promedios = new ArrayList<>();
-				
-		for(Object[] lista : o){
-			tipos.add((String)lista[0]);
-			promedios.add((Double)lista[1]);
-		}
+		List<DispositivoEstandar> dispositivos_estandar = DispositivoModel.getInstance().buscarTodosLosEstandar();
 		
-		viewModel.put("tipos", tipos);
-		viewModel.put("promedios", promedios);
+		Double consumo_estandar = dispositivos_estandar.stream().mapToDouble
+					(dispo -> dispo.consumoPromedioEnIntervalo(fechaFin, fechaInicio)).sum();
+		
+		viewModel.put("consumo_inteligente", consumo_inteligente);
+		viewModel.put("consumo_estandar", consumo_estandar);
 		viewModel.put("inicio", inicio);
 		viewModel.put("fin", fin);
 		viewModel.put("actualAdmin", req.session().attribute("admin"));

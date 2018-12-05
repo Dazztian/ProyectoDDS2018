@@ -92,28 +92,28 @@ public class Administrador extends Usuario {
 	
 		}
 		
-		public List<Object[]> generarReportePromedioXPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		public Double generarReportePromedioXPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
 			
 			double resultado=0;
 			String tipo;
 			ModelHelperPersistencia mh = new ModelHelperPersistencia();
 			EntityManager em = mh.entityManager();
 			
-			List<Object[]> resultadoQuery = 
-					em.createNativeQuery("select dc.tipo, avg(consumo) PromedioDeConsumo\r\n" + 
+			resultado = (Double)
+					em.createNativeQuery("select COALESCE(avg(consumo), 0) PromedioDeConsumo\r\n" + 
 							"	from Dispositivos_Cliente dc \r\n" + 
 							"		join Consumos c on (dc.id = c.id_dispositivo)\r\n" + 
 							"    where c.fecha between '" + fechaInicial + 
 							"' and '" + fechaFinal + 
-							"'").getResultList();
+							"'").getSingleResult();
 			
-			for(Object[] resultadoSingular : resultadoQuery) {
+			/*for(Object[] resultadoSingular : resultadoQuery) {
 				tipo = (String) resultadoSingular[0];
 				resultado = (double) resultadoSingular[1];
 				System.out.println("Promedio para " +tipo +" "+ resultado + " kw");
-			}
+			}*/
 			
-			return resultadoQuery;
+			return resultado;
 		}
 		
 		public Double generarReportTrafoXPeriodo(Transformador trafo, LocalDateTime fechaInicio, LocalDateTime fechaFinal) {

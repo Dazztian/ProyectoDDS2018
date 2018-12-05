@@ -44,17 +44,16 @@
 			<th>Consumo Promedio</th>
 	  	</thead>
 	  	<tbody>
-	  	{{#each tipos}}
-			<tr>
-				<td>{{this}}</td>
+	  		<tr>
+				<td>Inteligente</td>
 				<td>{{inicio}} - {{fin}}</td>
-				<td>
-				{{#with (lookup ../promedios @index)}}
-					{{this}}
-				{{/with}}
-				</td>
+				<td>{{consumo_inteligente}}</td>
 			</tr>
-	  	{{/each}}
+			<tr>
+				<td>Estandar</td>
+				<td>{{inicio}} - {{fin}}</td>
+				<td>{{consumo_estandar}}</td>
+			</tr>
 	  	</tbody>
   	{{/if}}
 	

@@ -372,4 +372,8 @@ public class Cliente extends Usuario {
 		return this.numeroDocumento;
 	}
 
+	public Dispositivo[] getConsumoEstandar(){
+		return (Dispositivo[])this.dispositivos.stream().filter(dispositivo -> dispositivo.esInteligente()).toArray();
+	}
+	
 }

@@ -26,6 +26,10 @@ import proyectoDDSs.Dispositivo;
 			return super.buscarTodos(Dispositivo.class);
 		}
 		
+		public List<DispositivoEstandar> buscarTodosLosEstandar(){
+			return super.buscarTodos(DispositivoEstandar.class);
+		}
+		
 		public List<Regla> buscarReglas(List<Dispositivo> dispos){
 			
 			return (List<Regla>)dispos.stream().filter(dispo -> dispo.esInteligente()).map
