@@ -1,0 +1,43 @@
+<title>Estado del Hogar</title>
+{{#partial "contenido"}}
+
+	<div class="table-responsive">
+	<table class="table table-striped text-center">
+		<thead>
+			<th>Nombre</th>
+			<th>Equipo</th>
+			<th>Inteligente</th>
+			<th>Bajo Consumo</th>
+		</thead>
+		<tbody>
+			{{#each dispositivos}}
+				<tr>
+					<td>{{nombre}}</td>
+					<td>{{equipo}}</td>
+				{{#if inteligente}}	
+					<td>Si</td>
+				{{else}}
+					<td>No</td>
+				{{/if}}
+				{{#if bajoConsumo}}
+					<td>Si</td>
+				{{else}}
+					<td>No</td>
+				{{/if}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+	</div>
+	<div class="container  text-center">
+		<p class="font-weight-bold">Consumo mensual: {{consumo}}</p>
+	</div>
+	<div>
+		<a href="/cliente/home"><button type="button" class="btn btn-primary">Volver</button></a>
+	</div>
+
+
+
+
+{{/partial}}
+{{>plantilla.hbs}}

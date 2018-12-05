@@ -65,9 +65,9 @@ public class ControllerUser {
 		
 		viewModel.put("consumo", cliente.consumoMensual());
 		viewModel.put("dispositivos", cliente.getDispositivos());
-		viewModel.put("reglas", DispositivoModel.getInstance().buscarReglas(cliente.getDispositivos()));
+//		viewModel.put("reglas", DispositivoModel.getInstance().buscarReglas(cliente.getDispositivos()));
 		
-		return new ModelAndView(viewModel,"cliente/estadoHagar.hbs");
+		return new ModelAndView(viewModel,"cliente/estadoHogar.hbs");
 	}
 	
 	public static ModelAndView showUploadDispositivos(Request req, Response res) {
