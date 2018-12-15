@@ -428,7 +428,7 @@ public class Tests {
 	public void testConsumoTotalDeUnaZona() {
 		
 		ArrayList<ZonaGeografica> zonas = new ArrayList<ZonaGeografica>();
-		zonas.add(new ZonaGeografica(1, "zona1", 1.31, 2.13));
+		zonas.add(new ZonaGeografica(1, "zona1", 1.31, 2.13, 500));
 		
 		ArrayList<Transformador> trafos=new ArrayList<Transformador>();
 		

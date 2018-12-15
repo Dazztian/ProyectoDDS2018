@@ -5,7 +5,7 @@ import proyectoDDSs.Cliente;
 
 public class TestReporte {
 	// para poder correr esto primero hay que correr el scriptContextoReportes.txt desde mySql
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		
 		ClienteModel clienteHelper = new ClienteModel();
 		
@@ -23,6 +23,6 @@ public class TestReporte {
 		
 		admin.generarReportePromedioXPeriodo("1/1/2018" , "4/1/2018");
 
-	}
+	}*/
 
 }
